@@ -1,0 +1,90 @@
+/* OBSIDIAN DS — Typography Classes */
+/* Source: ds/CONTRACT.md — TextStyles (10 стилей) */
+/* Color is NOT set here — use semantic text tokens separately */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--size-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--text-default);
+  background: var(--surface-default);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DS/Heading/4xl */
+.ds-heading-4xl {
+  font-size: var(--size-4xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* DS/Heading/3xl */
+.ds-heading-3xl {
+  font-size: var(--size-3xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* DS/Heading/2xl */
+.ds-heading-2xl {
+  font-size: var(--size-2xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* DS/Heading/xl */
+.ds-heading-xl {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+/* DS/Heading/lg */
+.ds-heading-lg {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-base);
+}
+
+/* DS/Body/base */
+.ds-body-base {
+  font-size: var(--size-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-base);
+}
+
+/* DS/Body/sm */
+.ds-body-sm {
+  font-size: var(--size-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-base);
+}
+
+/* DS/Body/sm Medium */
+.ds-body-sm-medium {
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-base);
+}
+
+/* DS/Body/xs */
+.ds-body-xs {
+  font-size: var(--size-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--line-height-base);
+}
+
+/* DS/Label/xs */
+.ds-label-xs {
+  font-size: var(--size-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-base);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
