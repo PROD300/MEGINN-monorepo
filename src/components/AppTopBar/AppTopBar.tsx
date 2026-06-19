@@ -1,4 +1,6 @@
 import { Bell, OctagonAlert } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { profileStore, getInitials } from '../../data/profile'
 import styles from './AppTopBar.module.css'
 
 interface AppTopBarProps {
@@ -9,24 +11,31 @@ interface AppTopBarProps {
 }
 
 export function AppTopBar({
-  userName = 'James Harrington',
-  initials = 'JH',
+  userName,
+  initials,
   hasNotification = true,
   onStopAll,
 }: AppTopBarProps) {
+  const navigate = useNavigate()
+  const profile = profileStore.useStore()
+  const displayName = userName ?? profile.fullName
+  const displayInitials = initials ?? getInitials(profile.fullName)
+
   return (
     <header className={styles.topbar}>
-      <span className={styles.logo}>OBSIDIAN</span>
+      <span className={styles.logo} onClick={() => navigate('/portfolio')} style={{ cursor: 'pointer' }}>OBSIDIAN</span>
       <span className={styles.spacer} />
-      <button className={styles.stopBtn} onClick={onStopAll}>
+      <button className={styles.stopBtn} onClick={onStopAll ?? (() => navigate('/emergency-stop'))}>
         <OctagonAlert size={12} /> Stop All
       </button>
-      <span className={styles.notif}>
+      <button className={styles.notif} onClick={() => navigate('/notifications')}>
         <Bell size={18} />
         {hasNotification && <span className={styles.notifDot} />}
-      </span>
-      <span className={styles.userName}>{userName}</span>
-      <span className={styles.avatar}>{initials}</span>
+      </button>
+      <button className={styles.userMenu} onClick={() => navigate('/settings')}>
+        <span className={styles.userName}>{displayName}</span>
+        <span className={styles.avatar}>{displayInitials}</span>
+      </button>
     </header>
   )
 }

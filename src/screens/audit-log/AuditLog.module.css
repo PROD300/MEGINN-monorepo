@@ -1,0 +1,132 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-default);
+}
+
+.exportRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ─── FilterBar ─── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.selectWrapWide select {
+  width: 160px;
+}
+
+.selectWrap select {
+  width: 140px;
+}
+
+.inputWrap {
+  width: 140px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.eventsCount {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─── AuditTable ─── */
+.tableSection {
+  padding: var(--space-4) var(--space-6) 0;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.emptyState {
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--size-sm);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+/* ─── PaginationRow ─── */
+.paginationRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6) var(--space-8);
+  flex-shrink: 0;
+}
+
+.paginationLabel {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+.pageCtrl {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ─── Result cell colors ─── */
+.result_success {
+  color: var(--text-success);
+}
+
+.result_warning {
+  color: var(--text-warning);
+}
+
+.result_error {
+  color: var(--text-error);
+}

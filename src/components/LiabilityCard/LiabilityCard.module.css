@@ -6,6 +6,7 @@
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-2);
 }
 
@@ -14,7 +15,6 @@
   height: var(--space-5);
   color: var(--text-accent);
 }
-.icon.user { color: var(--text-muted); }
 
 .title {
   font-size: var(--size-lg);

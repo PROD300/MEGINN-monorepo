@@ -21,7 +21,7 @@ const typeIcons: Record<LiabilityType, ReactNode> = {
 export function LiabilityCard({ type, title, responsible, description, badge }: LiabilityCardProps) {
   return (
     <div className={styles.card}>
-      <span className={[styles.icon, type === 'user' ? styles.user : ''].join(' ')}>
+      <span className={styles.icon}>
         {typeIcons[type]}
       </span>
       <span className={styles.title}>{title}</span>

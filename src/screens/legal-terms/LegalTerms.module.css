@@ -1,0 +1,228 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--size-xs);
+}
+
+.breadcrumbAccent {
+  color: var(--text-accent);
+}
+
+.breadcrumbMuted {
+  color: var(--text-muted);
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-default);
+}
+
+/* ─── ContentArea ─── */
+.contentArea {
+  display: flex;
+  flex: 1;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.documentColumn {
+  flex: 1;
+  min-width: 0;
+}
+
+.documentCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.docTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.docMeta {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-default);
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sectionTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.sectionBody {
+  font-size: var(--size-sm);
+  color: var(--text-default);
+  line-height: var(--line-height-base);
+}
+
+/* ─── SideColumn ─── */
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.signatureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.cardTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.signerName,
+.signerMeta {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.checkboxInput {
+  appearance: none;
+  width: var(--space-4);
+  height: var(--space-4);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  margin: 0;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  position: relative;
+}
+
+.checkboxInput:checked {
+  background: var(--surface-action-primary);
+  border-color: var(--surface-action-primary);
+}
+
+.checkboxInput:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--text-on-accent, #fff);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxLabel {
+  font-size: var(--size-xs);
+  color: var(--text-default);
+}
+
+.signedNote {
+  font-size: var(--size-xs);
+  color: var(--text-success);
+  width: 100%;
+}
+
+.fullWidthBtn {
+  width: 100%;
+  justify-content: center;
+}
+
+.signNote {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  text-align: center;
+  width: 100%;
+}
+
+/* ─── WarningCard ─── */
+.warningCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: var(--bg-warning-subtle);
+  border: 1px solid var(--border-warning);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+.warnIcon {
+  color: var(--text-warning);
+  font-size: var(--size-sm);
+  flex-shrink: 0;
+}
+
+.warnText {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 0;
+}

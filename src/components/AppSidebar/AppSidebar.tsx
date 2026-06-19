@@ -1,4 +1,5 @@
 import { LayoutDashboard, RefreshCw, Scale, FileText, Settings, LogOut } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './AppSidebar.module.css'
 
 export type NavItemId = 'portfolio' | 'rebalancing' | 'liability' | 'audit' | 'settings'
@@ -9,29 +10,38 @@ interface AppSidebarProps {
 }
 
 const primaryNav = [
-  { id: 'portfolio' as NavItemId,    label: 'Portfolio',              Icon: LayoutDashboard },
-  { id: 'rebalancing' as NavItemId,  label: 'Rebalancing Rules',      Icon: RefreshCw },
-  { id: 'liability' as NavItemId,    label: 'Liability & Compliance', Icon: Scale },
-  { id: 'audit' as NavItemId,        label: 'Audit Log',              Icon: FileText },
-  { id: 'settings' as NavItemId,     label: 'Account Settings',       Icon: Settings },
+  { id: 'portfolio' as NavItemId,    label: 'Portfolio',              Icon: LayoutDashboard, route: '/portfolio' },
+  { id: 'rebalancing' as NavItemId,  label: 'Rebalancing Rules',      Icon: RefreshCw,        route: '/rebalancing-rules' },
+  { id: 'liability' as NavItemId,    label: 'Liability & Compliance', Icon: Scale,            route: '/liability-dashboard' },
+  { id: 'audit' as NavItemId,        label: 'Audit Log',              Icon: FileText,         route: '/audit-log' },
+  { id: 'settings' as NavItemId,     label: 'Account Settings',       Icon: Settings,         route: '/settings' },
 ]
 
 export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const activeId = active ?? primaryNav.find(item => item.route === location.pathname)?.id
+
+  function handleClick(item: typeof primaryNav[number]) {
+    onNavigate?.(item.id)
+    navigate(item.route)
+  }
+
   return (
     <nav className={styles.sidebar}>
-      {primaryNav.map(({ id, label, Icon }) => (
+      {primaryNav.map(item => (
         <button
-          key={id}
-          className={[styles.navItem, active === id ? styles.active : ''].join(' ')}
-          onClick={() => onNavigate?.(id)}
+          key={item.id}
+          className={[styles.navItem, activeId === item.id ? styles.active : ''].join(' ')}
+          onClick={() => handleClick(item)}
         >
-          <Icon size={16} />
-          {label}
+          <item.Icon size={16} />
+          {item.label}
         </button>
       ))}
       <div className={styles.divider} />
       <div className={styles.secondary}>
-        <button className={styles.navItem}>
+        <button className={styles.navItem} onClick={() => navigate('/login')}>
           <LogOut size={16} /> Exit
         </button>
       </div>
