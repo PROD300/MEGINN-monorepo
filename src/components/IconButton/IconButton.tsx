@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import styles from './IconButton.module.css'
 
 export type IconButtonState = 'default' | 'hover' | 'disabled'

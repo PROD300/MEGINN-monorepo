@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Zap, GitMerge, UserCheck } from 'lucide-react'
 import styles from './LiabilityCard.module.css'
 

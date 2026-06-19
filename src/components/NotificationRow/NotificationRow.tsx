@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import styles from './NotificationRow.module.css'
 
 export type NotificationStatus = 'success' | 'info' | 'warning'

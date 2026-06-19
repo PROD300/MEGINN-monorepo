@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { X } from 'lucide-react'
 import styles from './Modal.module.css'
 

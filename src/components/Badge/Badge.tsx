@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import styles from './Badge.module.css'
 
 export type BadgeVariant = 'success' | 'warning' | 'error' | 'info'

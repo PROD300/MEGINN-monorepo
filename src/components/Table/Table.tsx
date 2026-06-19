@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import styles from './Table.module.css'
 
 export type TableDensity = 'default' | 'compact'
