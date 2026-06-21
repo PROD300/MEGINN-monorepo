@@ -102,7 +102,7 @@ export function Portfolio() {
           <div className={styles.quickActions}>
             <Button variant="primary" size="md">Rebalance Now</Button>
             <Button variant="ghost" size="md">Add Asset</Button>
-            <Button variant="ghost" size="md" onClick={() => navigate('/cross-chain-bridge')}>Bridge Funds</Button>
+            <Button variant="ghost" size="md" onClick={() => navigate('/cross-chain-bridge')} data-track="bridge-funds-cta">Bridge Funds</Button>
             <Button variant="ghost" size="md">Download Report</Button>
           </div>
 
