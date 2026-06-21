@@ -15,8 +15,8 @@ export function Login() {
   function handleConnectWallet() {
     setPendingAction('wallet')
     setTimeout(() => {
-      showToast('success', 'Wallet connected — welcome back')
-      navigate('/portfolio')
+      showToast('success', 'Wallet connected')
+      navigate('/onboarding')
     }, 700)
   }
 
