@@ -102,7 +102,7 @@ export function LegalTerms() {
                   </span>
                 ) : (
                   <>
-                    <label className={styles.checkboxRow}>
+                    <label className={styles.checkboxRow} data-track="agreement-checkbox">
                       <input
                         type="checkbox"
                         className={styles.checkboxInput}
@@ -118,6 +118,7 @@ export function LegalTerms() {
                       disabled={!agreed || signing}
                       loading={signing}
                       onClick={handleSign}
+                      data-track="sign-agreement"
                     >
                       Sign Agreement
                     </Button>

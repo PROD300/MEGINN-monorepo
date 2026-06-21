@@ -56,7 +56,7 @@ export function NetworkError() {
             </div>
 
             <div className={styles.cta}>
-              <Button variant="primary" size="sm" className={styles.ctaButton}>Retry Connection</Button>
+              <Button variant="primary" size="sm" className={styles.ctaButton} data-track="retry-connection">Retry Connection</Button>
               <Button variant="primary" size="sm" className={styles.ctaButton} onClick={() => navigate('/settings')}>Go to Settings</Button>
             </div>
 

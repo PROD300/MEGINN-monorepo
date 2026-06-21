@@ -178,7 +178,7 @@ export function LiabilityDashboard() {
                   <span className={styles.cardMeta}>Automated trading is disabled until signed.</span>
                 </>
               )}
-              <Button variant="primary" size="sm" className={styles.fullWidthBtn} onClick={() => navigate('/legal-terms')}>View Agreement</Button>
+              <Button variant="primary" size="sm" className={styles.fullWidthBtn} onClick={() => navigate('/legal-terms')} data-track="view-agreement">View Agreement</Button>
             </div>
 
             <div className={styles.riskCard}>

@@ -284,7 +284,7 @@ export function RuleCreate() {
               </section>
 
               {gasLow && (
-                <div className={styles.gasBanner}>
+                <div className={styles.gasBanner} data-track="gas-reserve-low-banner">
                   <AlertTriangle size={14} className={styles.gasBannerIcon} />
                   <span>
                     Low gas reserve: ${gasReserve.balanceUsd} USD (minimum ${GAS_RESERVE_MINIMUM_USD} USD required to activate rules).
@@ -301,6 +301,7 @@ export function RuleCreate() {
                   onClick={() => handleSubmit(false)}
                   loading={pendingAction === 'activate'}
                   disabled={gasLow || pendingAction === 'draft'}
+                  data-track="save-activate-rule"
                 >
                   Save &amp; Activate Rule
                 </Button>
@@ -310,6 +311,7 @@ export function RuleCreate() {
                   onClick={() => handleSubmit(true)}
                   loading={pendingAction === 'draft'}
                   disabled={pendingAction === 'activate'}
+                  data-track="save-draft-rule"
                 >
                   Save as Draft
                 </Button>

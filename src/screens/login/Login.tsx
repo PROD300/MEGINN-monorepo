@@ -60,6 +60,7 @@ export function Login() {
             onClick={handleConnectWallet}
             loading={pendingAction === 'wallet'}
             disabled={pendingAction === 'email'}
+            data-track="connect-wallet"
           >
             Connect Wallet
           </Button>

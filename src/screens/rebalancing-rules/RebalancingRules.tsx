@@ -63,7 +63,7 @@ export function RebalancingRules() {
           {/* PageHeader */}
           <div className={styles.pageHeader}>
             <span className={styles.pageTitle}>Rebalancing Rules</span>
-            <Button variant="primary" size="md" onClick={() => navigate('/rule-create')}>+ Create Rule</Button>
+            <Button variant="primary" size="md" onClick={() => navigate('/rule-create')} data-track="create-rule-cta">+ Create Rule</Button>
           </div>
 
           {/* TabsBar */}
