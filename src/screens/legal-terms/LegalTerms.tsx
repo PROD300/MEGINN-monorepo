@@ -122,6 +122,9 @@ export function LegalTerms() {
                     >
                       Sign Agreement
                     </Button>
+                    {!agreed && (
+                      <span className={styles.signGate}>Check the box above to enable signing</span>
+                    )}
                     <span className={styles.signNote}>Once signed, automated trading will be enabled.</span>
                   </>
                 )}

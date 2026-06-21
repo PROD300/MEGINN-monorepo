@@ -196,6 +196,13 @@
   justify-content: center;
 }
 
+.signGate {
+  font-size: var(--size-xs);
+  color: var(--text-warning);
+  width: 100%;
+  text-align: center;
+}
+
 .signNote {
   font-size: var(--size-xs);
   color: var(--text-muted);
