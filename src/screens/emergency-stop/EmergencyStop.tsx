@@ -3,21 +3,31 @@ import { OctagonAlert } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { AppTopBar, AppSidebar, Button, Input } from '../../components'
 import { registerScreen } from '../registry'
-import { pauseAllRules } from '../../data/rules'
+import { rulesStore, pauseAllRules } from '../../data/rules'
+import { bridgeStore, cancelAllPendingBridges } from '../../data/bridge'
+import { gasReserveStore } from '../../data/gas'
 import { showToast } from '../../lib/toast'
+import { formatUsd } from '../../lib/format'
 import styles from './EmergencyStop.module.css'
 
 export function EmergencyStop() {
   const navigate = useNavigate()
+  const rules = rulesStore.useStore()
+  const bridges = bridgeStore.useStore()
+  const gasReserve = gasReserveStore.useStore()
   const [confirmText, setConfirmText] = useState('')
   const [stopping, setStopping] = useState(false)
   const canConfirm = confirmText === 'STOP'
+
+  const activeRulesCount = rules.filter(r => r.secondaryAction === 'Pause').length
+  const activeBridgeCount = bridges.filter(b => b.status === 'pending').length
 
   function handleStopAll() {
     setStopping(true)
     setTimeout(() => {
       pauseAllRules()
-      showToast('warning', 'All automated operations stopped. Rules paused.')
+      cancelAllPendingBridges()
+      showToast('warning', 'All automated operations stopped. Rules paused, pending bridges cancelled.')
       navigate('/portfolio')
     }, 800)
   }
@@ -52,15 +62,15 @@ export function EmergencyStop() {
                 <span className={styles.cardTitle}>Current Active Operations</span>
 
                 <div className={styles.impactRow}>
-                  <span className={styles.impactLabel}>Active rebalancing rules: 3</span>
-                  <span className={styles.impactValue}>→ Will be paused</span>
+                  <span className={styles.impactLabel}>Active rebalancing rules: {activeRulesCount}</span>
+                  <span className={styles.impactValue}>{activeRulesCount > 0 ? '→ Will be paused' : '— none running'}</span>
                 </div>
                 <div className={styles.impactRow}>
-                  <span className={styles.impactLabel}>Active bridge operations: 1</span>
-                  <span className={styles.impactValue}>→ Will be cancelled</span>
+                  <span className={styles.impactLabel}>Active bridge operations: {activeBridgeCount}</span>
+                  <span className={styles.impactValue}>{activeBridgeCount > 0 ? '→ Will be cancelled' : '— none in progress'}</span>
                 </div>
                 <div className={styles.impactRow}>
-                  <span className={styles.impactLabel}>Pending gas balance: 25 Gwei reserve</span>
+                  <span className={styles.impactLabel}>Gas reserve balance: {formatUsd(gasReserve.balanceUsd)}</span>
                   <span className={styles.impactValue}>→ Reserved</span>
                 </div>
 

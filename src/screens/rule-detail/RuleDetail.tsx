@@ -72,6 +72,9 @@ export function RuleDetail() {
             <div className={styles.titleRow}>
               <span className={styles.title}>{rule.name}</span>
               <Badge variant={isPaused ? 'warning' : 'success'}>{isPaused ? 'Paused' : 'Active'}</Badge>
+              {isPaused && (
+                <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate(`/transaction-error/${ruleId}`) }}>View failure details →</a>
+              )}
               <span className={styles.spacer} />
               <Button variant="primary" size="sm" onClick={() => navigate('/rule-create')}>Edit Rule</Button>
               <Button variant="primary" size="sm" onClick={handlePauseToggle}>{isPaused ? 'Resume Rule' : 'Pause Rule'}</Button>

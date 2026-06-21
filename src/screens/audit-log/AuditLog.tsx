@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { AppTopBar, AppSidebar, Button, Select, Input, Table } from '../../components'
 import { registerScreen } from '../registry'
+import { auditLogStore, type AuditRow } from '../../data/auditLog'
+import { showToast } from '../../lib/toast'
 import styles from './AuditLog.module.css'
 
 const typeOptions = [
@@ -33,29 +35,6 @@ const auditColumns = [
   },
 ]
 
-interface AuditRow {
-  timestamp: string
-  type: string
-  rule: string
-  asset: string
-  amount: string
-  network: string
-  provider: string
-  result: string
-  resultVariant: 'success' | 'warning' | 'error'
-}
-
-const auditRows: AuditRow[] = [
-  { timestamp: 'Jun 16 14:22', type: 'Rebalance', rule: 'ETH Balance Guard', asset: 'ETH→USDC', amount: '$4 200 000', network: 'Arbitrum', provider: 'Li.Fi', result: 'Success', resultVariant: 'success' },
-  { timestamp: 'Jun 16 11:08', type: 'Bridge', rule: 'RWA Cross-chain', asset: 'USDC', amount: '$2 100 000', network: 'ETH→ARB', provider: 'Li.Fi', result: 'Success', resultVariant: 'success' },
-  { timestamp: 'Jun 15 22:10', type: 'Rebalance', rule: 'ETH Balance Guard', asset: 'ETH→USDC', amount: '$5 100 000', network: 'Arbitrum', provider: 'Li.Fi', result: 'Success', resultVariant: 'success' },
-  { timestamp: 'Jun 15 19:55', type: 'Rule Paused', rule: 'USDT Ceiling', asset: '—', amount: '—', network: 'Arbitrum', provider: '—', result: 'Slippage 1.2%', resultVariant: 'warning' },
-  { timestamp: 'Jun 14 08:55', type: 'Rebalance', rule: 'ETH Balance Guard', asset: 'ETH→USDC', amount: '—', network: 'Arbitrum', provider: '—', result: 'Gas Too High', resultVariant: 'error' },
-  { timestamp: 'Jun 12 16:40', type: 'Rebalance', rule: 'ETH Balance Guard', asset: 'ETH→USDC', amount: '$4 700 000', network: 'Arbitrum', provider: 'Li.Fi', result: 'Success', resultVariant: 'success' },
-  { timestamp: 'Jun 10 09:15', type: 'Rebalance', rule: 'stETH Target', asset: 'stETH→ETH', amount: '$1 800 000', network: 'Ethereum', provider: '—', result: 'Success', resultVariant: 'success' },
-  { timestamp: 'Jun 05 12:00', type: 'System', rule: '—', asset: '—', amount: '—', network: '—', provider: '—', result: 'Account activated', resultVariant: 'success' },
-]
-
 function parseAuditDate(timestamp: string): Date {
   // "Jun 16 14:22" → "Jun 16 2026 14:22" so the JS Date parser handles it reliably
   const withYear = timestamp.replace(/^(\w+ \d+) (\d+:\d+)$/, '$1 2026 $2')
@@ -82,12 +61,89 @@ function applyFilters(rows: AuditRow[], filters: Filters): AuditRow[] {
   })
 }
 
+function exportFilename(ext: string) {
+  return `obsidian-audit-log-${new Date().toISOString().slice(0, 10)}.${ext}`
+}
+
+function downloadBlob(content: string, mime: string, filename: string) {
+  const blob = new Blob([content], { type: mime })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+}
+
+function rowsToCsv(rows: AuditRow[]) {
+  const header = ['Timestamp', 'Type', 'Rule', 'Asset', 'Amount', 'Network', 'Provider', 'Result']
+  const lines = [header.join(',')]
+  rows.forEach(r => {
+    lines.push([r.timestamp, r.type, r.rule, r.asset, r.amount, r.network, r.provider, r.result]
+      .map(v => `"${v.replace(/"/g, '""')}"`).join(','))
+  })
+  return lines.join('\n')
+}
+
+function rowsToPrintableHtml(rows: AuditRow[]) {
+  const body = rows.map(r => `<tr><td>${r.timestamp}</td><td>${r.type}</td><td>${r.rule}</td><td>${r.asset}</td><td>${r.amount}</td><td>${r.network}</td><td>${r.provider}</td><td>${r.result}</td></tr>`).join('')
+  return `<!doctype html><html><head><title>OBSIDIAN — Audit Log</title><style>
+    body { font-family: Arial, sans-serif; padding: 24px; color: #111; }
+    h1 { font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+    th { background: #f5f5f5; }
+  </style></head><body>
+    <h1>OBSIDIAN — Audit Log</h1>
+    <div>Generated: ${new Date().toLocaleString()} · ${rows.length} event${rows.length === 1 ? '' : 's'}</div>
+    <table><thead><tr><th>Timestamp</th><th>Type</th><th>Rule</th><th>Asset</th><th>Amount</th><th>Network</th><th>Provider</th><th>Result</th></tr></thead>
+    <tbody>${body}</tbody></table>
+  </body></html>`
+}
+
 export function AuditLog() {
+  const auditRows = auditLogStore.useStore()
   const [draft, setDraft] = useState<Filters>(emptyFilters)
   const [applied, setApplied] = useState<Filters>(emptyFilters)
+  const [exportingCsv, setExportingCsv] = useState(false)
+  const [exportingPdf, setExportingPdf] = useState(false)
 
-  const visibleRows = useMemo(() => applyFilters(auditRows, applied), [applied])
+  const visibleRows = useMemo(() => applyFilters(auditRows, applied), [auditRows, applied])
   const hasActiveFilters = applied.type || applied.status || applied.dateFrom || applied.dateTo
+
+  function handleExportCsv() {
+    if (visibleRows.length === 0) {
+      showToast('error', 'Nothing to export for the current filters')
+      return
+    }
+    setExportingCsv(true)
+    setTimeout(() => {
+      downloadBlob(rowsToCsv(visibleRows), 'text/csv;charset=utf-8;', exportFilename('csv'))
+      setExportingCsv(false)
+      showToast('success', `Exported ${visibleRows.length} event${visibleRows.length === 1 ? '' : 's'} to CSV`)
+    }, 400)
+  }
+
+  function handleExportPdf() {
+    if (visibleRows.length === 0) {
+      showToast('error', 'Nothing to export for the current filters')
+      return
+    }
+    setExportingPdf(true)
+    setTimeout(() => {
+      const printWindow = window.open('', '_blank')
+      if (printWindow) {
+        printWindow.document.write(rowsToPrintableHtml(visibleRows))
+        printWindow.document.close()
+        printWindow.focus()
+        printWindow.print()
+      }
+      setExportingPdf(false)
+      showToast('success', `Opened print view for ${visibleRows.length} event${visibleRows.length === 1 ? '' : 's'} — choose "Save as PDF"`)
+    }, 400)
+  }
 
   function updateDraft<K extends keyof Filters>(key: K, value: string) {
     setDraft(prev => ({ ...prev, [key]: value }))
@@ -105,8 +161,8 @@ export function AuditLog() {
           <div className={styles.pageHeader}>
             <span className={styles.pageTitle}>Audit Log</span>
             <div className={styles.exportRow}>
-              <Button variant="primary" size="sm">Export CSV</Button>
-              <Button variant="primary" size="sm">Export PDF</Button>
+              <Button variant="primary" size="sm" onClick={handleExportCsv} loading={exportingCsv}>Export CSV</Button>
+              <Button variant="primary" size="sm" onClick={handleExportPdf} loading={exportingPdf}>Export PDF</Button>
             </div>
           </div>
 

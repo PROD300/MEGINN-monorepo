@@ -103,6 +103,10 @@
   background: var(--surface-subtle);
 }
 
+.statusDotConnected {
+  background: var(--bg-success);
+}
+
 .statusLabelError {
   font-size: var(--size-sm);
   color: var(--text-error);
@@ -111,6 +115,11 @@
 .statusLabelUnknown {
   font-size: var(--size-sm);
   color: var(--text-muted);
+}
+
+.statusLabelConnected {
+  font-size: var(--size-sm);
+  color: var(--text-success);
 }
 
 /* ─── Troubleshooting ─── */

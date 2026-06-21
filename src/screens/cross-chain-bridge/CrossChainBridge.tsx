@@ -1,48 +1,97 @@
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Badge, Table } from '../../components'
+import { AppTopBar, AppSidebar, Badge, Table, Button } from '../../components'
 import { registerScreen } from '../registry'
+import { bridgeStore, completeBridge, isWithin24h, type BridgeOperation, type BridgeStatus } from '../../data/bridge'
+import { showToast } from '../../lib/toast'
+import { formatUsd } from '../../lib/format'
 import styles from './CrossChainBridge.module.css'
 
-const bridgeColumns = [
-  { key: 'asset', header: 'Asset' },
-  { key: 'allocation', header: 'Allocation' },
-  { key: 'value', header: 'Value' },
-]
-
-const bridgeRows = [
-  { asset: 'AAPL', allocation: '35%', value: '$42,000' },
-  { asset: 'MSFT', allocation: '28%', value: '$33,600' },
-] as Record<string, unknown>[]
-
-interface ProviderData {
-  name: string
-  statusLabel: string
-  statusVariant: 'success' | 'info'
-  avgTime: string
-  volume: string
+const statusBadge: Record<BridgeStatus, 'success' | 'warning' | 'error'> = {
+  pending: 'warning',
+  success: 'success',
+  failed: 'error',
 }
 
-const providers: ProviderData[] = [
-  { name: 'Li.Fi', statusLabel: 'Active – Primary', statusVariant: 'success', avgTime: 'Avg time: 42 sec avg', volume: 'Volume: $2.1M today' },
-  { name: 'Socket', statusLabel: 'Active – Fallback', statusVariant: 'info', avgTime: 'Avg time: 55 sec avg', volume: 'Volume: $0 today' },
-  { name: 'Across', statusLabel: 'Active – Fallback', statusVariant: 'info', avgTime: 'Avg time: 38 sec avg', volume: 'Volume: $0 today' },
+const statusLabel: Record<BridgeStatus, string> = {
+  pending: 'In progress',
+  success: 'Success',
+  failed: 'Failed',
+}
+
+interface ProviderMeta {
+  name: string
+  avgTime: string
+}
+
+const providerMeta: ProviderMeta[] = [
+  { name: 'Li.Fi', avgTime: 'Avg time: 42 sec avg' },
+  { name: 'Socket', avgTime: 'Avg time: 55 sec avg' },
+  { name: 'Across', avgTime: 'Avg time: 38 sec avg' },
 ]
 
-function BridgeProviderCard({ provider }: { provider: ProviderData }) {
+function BridgeProviderCard({ provider, volumeToday, isActive }: { provider: ProviderMeta; volumeToday: number; isActive: boolean }) {
   return (
     <div className={styles.providerCard}>
       <div className={styles.providerTop}>
         <span className={styles.providerName}>{provider.name}</span>
-        <Badge variant={provider.statusVariant}>{provider.statusLabel}</Badge>
+        <Badge variant={isActive ? 'success' : 'info'}>{isActive ? 'Active – Primary' : 'Active – Fallback'}</Badge>
       </div>
       <span className={styles.providerMeta}>{provider.avgTime}</span>
-      <span className={styles.providerMeta}>{provider.volume}</span>
+      <span className={styles.providerMeta}>Volume: {formatUsd(volumeToday)} today</span>
     </div>
   )
 }
 
 export function CrossChainBridge() {
   const navigate = useNavigate()
+  const operations = bridgeStore.useStore()
+
+  const activeOps = operations.filter(op => op.status === 'pending')
+  const historyOps = operations.filter(op => op.status !== 'pending')
+
+  const completedToday = historyOps.filter(op => isWithin24h(op.time))
+  const successToday = completedToday.filter(op => op.status === 'success')
+  const totalBridged24h = successToday.reduce((sum, op) => sum + op.amountUsd, 0)
+  const successRate = completedToday.length > 0
+    ? Math.round((successToday.length / completedToday.length) * 100)
+    : 100
+  const activeProvider = operations[0]?.provider ?? 'Li.Fi'
+
+  function volumeForProvider(provider: string) {
+    return successToday.filter(op => op.provider === provider).reduce((sum, op) => sum + op.amountUsd, 0)
+  }
+
+  function handleCompleteNow(op: BridgeOperation) {
+    completeBridge(op.id)
+    showToast('success', `${op.asset} bridge ${op.route} completed · ${formatUsd(op.amountUsd)}`)
+  }
+
+  const activeColumns = [
+    { key: 'asset', header: 'Asset' },
+    { key: 'route', header: 'Route' },
+    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => formatUsd(row.amountUsd as number) },
+    { key: 'provider', header: 'Provider' },
+    { key: 'time', header: 'Status', render: (row: Record<string, unknown>) => (
+      <span className={styles.inProgressCell}>
+        <Badge variant={statusBadge[row.status as BridgeStatus]}>{statusLabel[row.status as BridgeStatus]}</Badge>
+        <span className={styles.providerMeta}>{row.time as string}</span>
+      </span>
+    ) },
+    { key: 'action', header: '', render: (row: Record<string, unknown>) => (
+      <Button variant="ghost" size="sm" onClick={() => handleCompleteNow(row as unknown as BridgeOperation)}>Complete now</Button>
+    ) },
+  ]
+
+  const historyColumns = [
+    { key: 'asset', header: 'Asset' },
+    { key: 'route', header: 'Route' },
+    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => formatUsd(row.amountUsd as number) },
+    { key: 'provider', header: 'Provider' },
+    { key: 'time', header: 'Time' },
+    { key: 'status', header: 'Status', render: (row: Record<string, unknown>) => (
+      <Badge variant={statusBadge[row.status as BridgeStatus]}>{statusLabel[row.status as BridgeStatus]}</Badge>
+    ) },
+  ]
 
   return (
     <div className={styles.screen}>
@@ -73,8 +122,8 @@ export function CrossChainBridge() {
           <div className={styles.section}>
             <span className={styles.sectionTitle}>Bridge Providers</span>
             <div className={styles.providersRow}>
-              {providers.map(p => (
-                <BridgeProviderCard key={p.name} provider={p} />
+              {providerMeta.map(p => (
+                <BridgeProviderCard key={p.name} provider={p} volumeToday={volumeForProvider(p.name)} isActive={p.name === activeProvider} />
               ))}
             </div>
           </div>
@@ -83,7 +132,11 @@ export function CrossChainBridge() {
           <div className={styles.section}>
             <span className={styles.sectionTitle}>Active Bridges</span>
             <div className={styles.divider} />
-            <Table columns={bridgeColumns} rows={bridgeRows} />
+            {activeOps.length > 0 ? (
+              <Table columns={activeColumns} rows={activeOps as unknown as Record<string, unknown>[]} />
+            ) : (
+              <div className={styles.emptyState}>No bridges in progress.</div>
+            )}
           </div>
 
           {/* BridgeHistory */}
@@ -92,15 +145,18 @@ export function CrossChainBridge() {
               <span className={styles.sectionTitle}>Bridge History</span>
               <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View full audit log →</a>
             </div>
-            <Table columns={bridgeColumns} rows={bridgeRows} />
+            {historyOps.length > 0 ? (
+              <Table columns={historyColumns} rows={historyOps as unknown as Record<string, unknown>[]} />
+            ) : (
+              <div className={styles.emptyState}>No completed bridges yet.</div>
+            )}
           </div>
 
           {/* Footer */}
           <div className={styles.footer}>
-            <span>Total bridged (24h): $8 100 000</span>
-            <span>Avg bridge time: 41 sec</span>
-            <span>Success rate: 100%</span>
-            <span>Active provider: Li.Fi</span>
+            <span>Total bridged (24h): {formatUsd(totalBridged24h)}</span>
+            <span>Success rate: {successRate}%</span>
+            <span>Active provider: {activeProvider}</span>
           </div>
         </main>
       </div>

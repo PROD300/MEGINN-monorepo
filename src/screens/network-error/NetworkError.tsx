@@ -1,22 +1,50 @@
+import { useState } from 'react'
 import { WifiOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { AppTopBar, AppSidebar, Button } from '../../components'
 import { registerScreen } from '../registry'
+import { networkStatusStore, setAllConnected, type ConnectionStatus } from '../../data/network'
+import { showToast } from '../../lib/toast'
 import styles from './NetworkError.module.css'
 
-interface StatusRowData {
-  label: string
-  state: 'error' | 'unknown'
+const dotClass: Record<ConnectionStatus, string> = {
+  disconnected: styles.statusDotError,
+  unknown: styles.statusDotUnknown,
+  connected: styles.statusDotConnected,
 }
 
-const statusRows: StatusRowData[] = [
-  { label: 'Ethereum RPC — Disconnected', state: 'error' },
-  { label: 'Arbitrum RPC — Disconnected', state: 'error' },
-  { label: 'Bridge Provider (Li.Fi) — Unknown', state: 'unknown' },
-]
+const labelClass: Record<ConnectionStatus, string> = {
+  disconnected: styles.statusLabelError,
+  unknown: styles.statusLabelUnknown,
+  connected: styles.statusLabelConnected,
+}
+
+const statusSuffix: Record<ConnectionStatus, string> = {
+  disconnected: 'Disconnected',
+  unknown: 'Unknown',
+  connected: 'Connected',
+}
 
 export function NetworkError() {
   const navigate = useNavigate()
+  const connections = networkStatusStore.useStore()
+  const [retrying, setRetrying] = useState(false)
+  const [attempted, setAttempted] = useState(false)
+
+  function handleRetry() {
+    setRetrying(true)
+    setTimeout(() => {
+      setRetrying(false)
+      if (!attempted) {
+        setAttempted(true)
+        showToast('error', 'Still unable to reach Ethereum RPC. Retrying again may help after a brief outage.')
+        return
+      }
+      setAllConnected()
+      showToast('success', 'Reconnected to all networks')
+      navigate('/portfolio')
+    }, 900)
+  }
 
   return (
     <div className={styles.screen}>
@@ -37,10 +65,10 @@ export function NetworkError() {
 
             <div className={styles.networkStatus}>
               <span className={styles.statusHeading}>Connection Status</span>
-              {statusRows.map(row => (
-                <div key={row.label} className={styles.statusRow}>
-                  <span className={[styles.statusDot, row.state === 'error' ? styles.statusDotError : styles.statusDotUnknown].join(' ')} />
-                  <span className={row.state === 'error' ? styles.statusLabelError : styles.statusLabelUnknown}>{row.label}</span>
+              {connections.map(row => (
+                <div key={row.name} className={styles.statusRow}>
+                  <span className={[styles.statusDot, dotClass[row.status]].join(' ')} />
+                  <span className={labelClass[row.status]}>{row.name} — {statusSuffix[row.status]}</span>
                 </div>
               ))}
             </div>
@@ -56,11 +84,11 @@ export function NetworkError() {
             </div>
 
             <div className={styles.cta}>
-              <Button variant="primary" size="sm" className={styles.ctaButton} data-track="retry-connection">Retry Connection</Button>
-              <Button variant="primary" size="sm" className={styles.ctaButton} onClick={() => navigate('/settings')}>Go to Settings</Button>
+              <Button variant="primary" size="sm" className={styles.ctaButton} onClick={handleRetry} loading={retrying} disabled={retrying} data-track="retry-connection">Retry Connection</Button>
+              <Button variant="primary" size="sm" className={styles.ctaButton} onClick={() => navigate('/settings')} disabled={retrying}>Go to Settings</Button>
             </div>
 
-            <a href="#" className={styles.statusLink}>Check provider status →</a>
+            <a href="#" className={styles.statusLink} onClick={e => { e.preventDefault(); navigate('/cross-chain-bridge') }}>Check provider status →</a>
           </div>
         </main>
       </div>

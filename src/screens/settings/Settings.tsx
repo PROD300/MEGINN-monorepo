@@ -35,11 +35,14 @@ function validateProfile(profile: Profile): ProfileErrors {
   return errors
 }
 
+type SettingsTab = 'profile' | 'notifications' | 'security'
+
 export function Settings() {
   const savedProfile = profileStore.useStore()
   const [draft, setDraft] = useState<Profile>(savedProfile)
   const [errors, setErrors] = useState<ProfileErrors>({})
   const [saving, setSaving] = useState(false)
+  const [tab, setTab] = useState<SettingsTab>('profile')
 
   function updateDraft<K extends keyof Profile>(key: K, value: string) {
     setDraft(prev => ({ ...prev, [key]: value }))
@@ -80,13 +83,15 @@ export function Settings() {
 
           {/* SettingsTabs */}
           <div className={styles.tabsWrap}>
-            <Tabs tabs={settingsTabs} active="" onChange={() => {}} />
+            <Tabs tabs={settingsTabs} active={tab} onChange={value => setTab(value as SettingsTab)} />
           </div>
 
           {/* ContentArea */}
           <div className={styles.contentArea}>
+            {tab !== 'security' && (
             <div className={styles.profileColumn}>
               {/* ProfileCard */}
+              {tab === 'profile' && (
               <div className={styles.card}>
                 <span className={styles.cardTitle}>Profile</span>
                 <div className={styles.avatarRow}>
@@ -144,8 +149,10 @@ export function Settings() {
                   <Button variant="primary" size="sm" onClick={handleCancel} disabled={saving}>Cancel</Button>
                 </div>
               </div>
+              )}
 
               {/* NotificationsCard */}
+              {tab === 'notifications' && (
               <div className={styles.card}>
                 <span className={styles.cardTitle}>Notification Preferences</span>
                 {notificationToggles.map((t) => (
@@ -155,8 +162,11 @@ export function Settings() {
                   </div>
                 ))}
               </div>
+              )}
             </div>
+            )}
 
+            {tab === 'security' && (
             <div className={styles.dangerZoneCol}>
               {/* ConnectedWalletsCard */}
               <div className={styles.card}>
@@ -183,6 +193,7 @@ export function Settings() {
                 </Button>
               </div>
             </div>
+            )}
           </div>
         </main>
       </div>
