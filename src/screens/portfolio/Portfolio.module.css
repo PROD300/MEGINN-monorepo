@@ -80,6 +80,18 @@
   flex-shrink: 0;
 }
 
+.alertBannerSuccess {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 var(--space-4);
+  background: var(--bg-success-subtle);
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--size-xs);
+  color: var(--text-success);
+  flex-shrink: 0;
+}
+
 /* ─── Section ─── */
 .section {
   padding: var(--space-4) var(--space-4) 0;
@@ -132,4 +144,23 @@
   display: flex;
   flex-direction: column;
   margin-top: var(--space-2);
+}
+
+.emptyState {
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--size-sm);
+}
+
+.modalField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.modalLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
 }
