@@ -17,14 +17,18 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-width: 0;
 }
 
 .errorBody {
   display: flex;
   gap: var(--space-6);
-  padding: var(--space-6);
+  width: 100%;
+  max-width: 1880px;
+  padding: var(--space-8) var(--space-5);
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 /* ─── ErrorCardCol ─── */

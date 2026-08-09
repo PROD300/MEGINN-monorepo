@@ -16,9 +16,11 @@ export function TransactionError() {
       <div className={styles.screen}>
         <div className={styles.body}>
           <main className={styles.main}>
-            <div className={styles.errorCardCol}>
-              <span className={styles.errorTitle}>No failed transaction found</span>
-              <Button variant="primary" size="sm" onClick={() => navigate('/rebalancing-rules')}>Back to Rules</Button>
+            <div className={styles.errorBody}>
+              <div className={styles.errorCardCol}>
+                <span className={styles.errorTitle}>No failed transaction found</span>
+                <Button variant="primary" size="sm" onClick={() => navigate('/rebalancing-rules')}>Back to Rules</Button>
+              </div>
             </div>
           </main>
         </div>

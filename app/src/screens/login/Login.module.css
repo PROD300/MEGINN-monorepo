@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: var(--space-8) var(--space-5);
+  box-sizing: border-box;
   background: var(--surface-app-shell);
 }
 
@@ -12,6 +14,7 @@
   align-items: flex-start;
   gap: var(--space-6);
   width: 480px;
+  max-width: 100%;
   padding: var(--space-8);
   background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
   border: 1px solid var(--border-hairline);

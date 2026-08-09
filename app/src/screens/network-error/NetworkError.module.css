@@ -20,7 +20,7 @@
   justify-content: center;
   min-width: 0;
   background: var(--surface-app-shell);
-  padding: var(--space-8);
+  padding: var(--space-8) var(--space-5);
 }
 
 /* ─── ErrorCard ─── */

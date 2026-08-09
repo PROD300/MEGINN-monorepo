@@ -1,7 +1,10 @@
 .page {
   min-height: 100%;
+  max-width: 1880px;
+  margin: 0 auto;
   background: var(--surface-level-1);
-  padding: var(--space-8);
+  padding: var(--space-8) var(--space-5);
+  box-sizing: border-box;
 }
 
 .header {
