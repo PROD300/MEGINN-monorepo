@@ -2,24 +2,42 @@
 
 ## GitHub Repository
 
-- **URL:** https://github.com/PROD300/OBSIDIAN
+- **URL:** https://github.com/PROD300/OBSIDIAN-monorepo
 - **Branch:** main
-- **Content:** Full prototype — design system + 17 wired screens (navigation, mock data layer, forms, states & edge cases)
+- **Content:** Монорепо — документы проекта (briefs/prd/ia/ux/ds/research/landing/.claude) + `app/`
+  (полный прототип — дизайн-система + 17 экранов), история `app/` сохранена целиком через
+  `git subtree` при миграции 2026-08-10. Подробности миграции — `MONOREPO_MIGRATION.md`.
+- **Архив (замороженный, до миграции):**
+  - Старый app-only репозиторий: https://github.com/PROD300/OBSIDIAN
+  - Зеркало-бэкап: https://github.com/PROD300/OBSIDIAN-backup
+  - Оба не обновляются дальше, оставлены как есть на переходный период.
 
 ## Handoff
 
 First push: 2026-06-17  
 Pushed: React base (`app/`) — 80 files, node_modules excluded.
+Migrated to monorepo: 2026-08-10 (см. `MONOREPO_MIGRATION.md`).
 
 ## Deploy
 
 - **Путь:** готовый сервис — Vercel
-- **Живая ссылка:** https://obsidian-peach-sigma.vercel.app/
+- **Живая ссылка:** https://obsidian-monorepo.vercel.app/ (Vercel-проект собран из монорепо,
+  Root Directory = `app/`; технически подтверждено идентичен предыдущему проду —
+  побайтово одинаковый HTML-шелл и MD5 JS-бандла)
+- **Архивная ссылка (не обновляется дальше):** https://obsidian-peach-sigma.vercel.app/
 - **SPA-маршрутизация:** настроена через `app/vercel.json` (rewrite всех путей на `/index.html`), внутренние экраны открываются по прямой ссылке без 404
 - **Примечание:** у проекта есть второй авто-домен `obsidian-obsidian-team.vercel.app` — он всё ещё за стеной Vercel Authentication, не используйте его как публичную ссылку
+- Кастомного домена нет — используются автогенерируемые `*.vercel.app` ссылки
 - Авто-пересборка на каждый пуш в `main` (~2–3 мин)
 - Последний пуш: 2026-06-21 (коммит `a70c53f`) — Portfolio оживлён (allocation store, Rebalance Now, Add Asset, Download Report); подтверждено на проде
 - Пуш 2026-06-21 (коммит `195b637`) — оживлены Cross-Chain Bridge, Notifications, Emergency Stop, Audit Log export, Settings вкладки, Network Error, Transaction Error (live mock data, без статики)
+
+## ⚠️ Открытый follow-up после миграции
+
+`dashboard/app/config.js` помечен как сгенерированный директивой `/dashboard` («Руками не
+редактировать») и всё ещё указывает `prototypeUrl` на старую архивную ссылку
+(`obsidian-peach-sigma.vercel.app`). Не редактировался вручную при миграции — нужно
+перегенерировать через `/dashboard`, когда понадобится продолжить юзер-тесты на новом деплое.
 
 ## Дашборд юзер-тестов
 
