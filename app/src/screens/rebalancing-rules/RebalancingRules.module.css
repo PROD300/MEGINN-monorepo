@@ -56,8 +56,8 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-4);
-  border-bottom: 1px solid var(--border-default);
-  background: var(--surface-default);
+  border-bottom: 1px solid var(--border-hairline);
+  background: var(--surface-card-sheen), var(--surface-default);
   gap: var(--space-4);
   flex-wrap: wrap;
 }

@@ -82,8 +82,8 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3);
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
 }
 

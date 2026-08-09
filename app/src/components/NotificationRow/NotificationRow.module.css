@@ -3,8 +3,8 @@
   align-items: flex-start;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  background: var(--surface-elevated);
-  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-elevated);
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .dot {

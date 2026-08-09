@@ -1,16 +1,16 @@
 .card {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-float);
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .card:where([data-hover='true']):hover,
 .hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-md);
+  border-color: var(--accent-500);
+  box-shadow: var(--shadow-glow-accent);
 }
 
 .title {

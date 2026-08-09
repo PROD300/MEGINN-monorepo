@@ -32,10 +32,10 @@
   width: 100%;
   max-width: 560px;
   padding: var(--space-8);
-  background: var(--surface-default);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-float);
 }
 
 .iconWrap {

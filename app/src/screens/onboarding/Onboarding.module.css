@@ -88,10 +88,10 @@
   width: 100%;
   max-width: 640px;
   padding: var(--space-8);
-  background: var(--surface-default);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-float);
 }
 
 .stepCardNarrow {
@@ -173,7 +173,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
   overflow: hidden;
 }
@@ -184,7 +184,7 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-hairline);
   font-size: var(--size-sm);
 }
 

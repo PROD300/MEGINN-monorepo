@@ -89,9 +89,10 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: var(--surface-default);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
 }
 
 .cardTitle {
@@ -157,10 +158,10 @@
   gap: var(--space-4);
   width: 100%;
   padding: var(--space-6);
-  background: var(--surface-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
   border: 2px solid var(--border-error);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-glow-accent-strong);
 }
 
 .stopIcon {

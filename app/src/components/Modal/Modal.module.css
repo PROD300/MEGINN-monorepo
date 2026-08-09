@@ -9,12 +9,12 @@
 }
 
 .modal {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-lg);
   width: 480px;
   max-width: 90vw;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-float);
   display: flex;
   flex-direction: column;
 }

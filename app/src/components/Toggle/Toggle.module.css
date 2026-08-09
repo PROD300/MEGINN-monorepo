@@ -17,6 +17,7 @@
 
 .toggle.on {
   background: var(--surface-action-primary);
+  box-shadow: var(--shadow-glow-accent);
 }
 
 .toggle.on:hover {

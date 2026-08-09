@@ -95,7 +95,7 @@
   color: var(--text-muted);
   font-size: var(--size-sm);
   background: var(--surface-default);
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
 }
 
