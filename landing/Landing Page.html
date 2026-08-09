@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OBSIDIAN — Institutional Digital Asset Portfolio Automation</title>
+  <meta name="description" content="AI-native platform for Family Offices and Corporate Treasuries. Autonomous portfolio rebalancing with full legal coverage. Built for $10M+ AUM." />
+  <meta property="og:title" content="OBSIDIAN: Set your rules. We manage the rest." />
+  <meta property="og:description" content="Institutional portfolio automation for Family Offices and Corporate Treasuries. Ethereum & Arbitrum. Legal/Custodian Framework included." />
+
+  <link rel="stylesheet" href="ds/colors_and_type.css" />
+  <link rel="stylesheet" href="landing.css" />
+
+  <script>
+    window.__TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "hero": "dark",
+      "rhythm": "subtle",
+      "density": "standard",
+      "how": "demo"
+    }/*EDITMODE-END*/;
+  </script>
+</head>
+<body>
+
+<!-- ====================================================== HEADER -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand" aria-label="OBSIDIAN home">OBSIDIAN</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#trust">Security</a>
+      <a href="#who">Who It's For</a>
+    </nav>
+    <a href="#access" class="btn btn--pri btn--sm">Request Access</a>
+    <button class="nav__burger" aria-label="Open menu" id="navBurger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__mobile" id="navMobile" hidden>
+    <a href="#features">Features</a>
+    <a href="#trust">Security</a>
+    <a href="#who">Who It's For</a>
+    <a href="#access" class="btn btn--pri">Request Access</a>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ====================================================== S1 — HERO -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        Institutional Portfolio Automation
+      </div>
+      <h1 class="h1">
+        Your portfolio runs itself.<br />
+        <span class="h1__muted">You just review.</span>
+      </h1>
+      <p class="lede">
+        OBSIDIAN is an AI-native platform for Family Offices and Corporate
+        Treasuries that manages digital asset portfolios autonomously —
+        within your rules, with full legal coverage.
+      </p>
+      <div class="hero__cta">
+        <a href="#access" class="btn btn--pri btn--lg" data-evt="hero_cta_clicked">Request Early Access</a>
+        <a href="#how" class="btn btn--ghost-dark btn--lg">See How It Works ↓</a>
+      </div>
+      <ul class="hero__trust">
+        <li><span class="bullet">●</span> Built for $10M+ AUM</li>
+        <li><span class="bullet">●</span> Ethereum &amp; Arbitrum</li>
+        <li><span class="bullet">●</span> Legal/Custodian Framework</li>
+      </ul>
+    </div>
+
+    <!-- Dashboard preview -->
+    <div class="hero__viz" aria-hidden="true">
+      <div class="dash" id="dash">
+        <div class="dash__chrome">
+          <span class="dash__lights"><i></i><i></i><i></i></span>
+          <span class="dash__url"><span class="dot dot--ok"></span> obsidian.finance/portfolio</span>
+          <span class="dash__sync">Last sync: 2 min ago</span>
+        </div>
+        <div class="dash__body">
+          <div class="dash__row dash__row--head">
+            <div>
+              <div class="dash__eyebrow">Total AUM</div>
+              <div class="dash__big">$42,184,920</div>
+              <div class="dash__delta"><span class="pos">+ 1.84%</span> · 24h</div>
+            </div>
+            <div class="dash__badges">
+              <span class="chip"><span class="dot dot--ok"></span> Auto-rebalance ON</span>
+              <span class="chip chip--ghost">Li.Fi · 42 sec</span>
+            </div>
+          </div>
+
+          <table class="dash__tbl">
+            <thead>
+              <tr><td>Asset</td><td class="r">Allocation</td><td class="r">Target</td><td class="r">Value</td></tr>
+            </thead>
+            <tbody>
+              <tr data-row="0">
+                <td><span class="glyph">ETH</span><b>ETH</b> <span class="m">· Ethereum</span></td>
+                <td class="r">
+                  <span class="alloc">28.4%</span>
+                  <span class="bar"><i style="width:62%"></i></span>
+                </td>
+                <td class="r m">30%</td>
+                <td class="r">$11.98M</td>
+              </tr>
+              <tr data-row="1" class="dash__rebalanced">
+                <td><span class="glyph">USDC</span><b>USDC</b> <span class="m">· Stable</span></td>
+                <td class="r">
+                  <span class="alloc">21.6%</span>
+                  <span class="bar"><i style="width:48%"></i></span>
+                </td>
+                <td class="r m">20%</td>
+                <td class="r">$9.11M</td>
+              </tr>
+              <tr data-row="2">
+                <td><span class="glyph">RWA</span><b>RWA-T</b> <span class="m">· T-Bill</span></td>
+                <td class="r">
+                  <span class="alloc">35.0%</span>
+                  <span class="bar"><i style="width:78%"></i></span>
+                </td>
+                <td class="r m">35%</td>
+                <td class="r">$14.76M</td>
+              </tr>
+              <tr data-row="3">
+                <td><span class="glyph">WBT</span><b>WBTC</b> <span class="m">· BTC</span></td>
+                <td class="r">
+                  <span class="alloc">15.0%</span>
+                  <span class="bar"><i style="width:34%"></i></span>
+                </td>
+                <td class="r m">15%</td>
+                <td class="r">$6.33M</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="dash__activity">
+            <div class="activity-row activity-row--latest">
+              <span class="adot" style="background:var(--success-500)"></span>
+              <div>
+                <div class="atitle">Auto-rebalance: ETH → USDC</div>
+                <div class="ameta">Rule: <span class="mono">stable_floor &gt;= 20%</span> · gas $4.21 · 0x9a…f3c2</div>
+              </div>
+              <span class="pill pill--ok">Success</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- The floating "Rebalanced by AI" callout, hooks onto row 1 via JS -->
+        <div class="dash__callout" id="callout" hidden>
+          <span class="callout__pulse"></span>
+          Rebalanced by AI
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== S2 — PROBLEM -->
+<section class="section section--light" id="problem" data-screen-label="02 Problem">
+  <div class="container">
+    <div class="section__head">
+      <div class="ds-label">The Problem</div>
+      <h2 class="h2">The status quo is broken.</h2>
+      <p class="sub">Three operational realities every CIO and treasury manager already knows.</p>
+    </div>
+
+    <div class="cards-3">
+      <article class="pcard reveal">
+        <div class="pcard__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2h6"/></svg>
+        </div>
+        <h3 class="pcard__h">Manual management eats time.</h3>
+        <p class="pcard__b">You're approving every rebalance transaction manually. A $40M crypto allocation shouldn't require daily attention.</p>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="pcard__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-2 7a4 4 0 0 0 8 0L9 7"/><path d="M19 7l-2 7a4 4 0 0 0 8 0L23 7" transform="translate(-4 0)"/></svg>
+        </div>
+        <h3 class="pcard__h">Personal liability is unclear.</h3>
+        <p class="pcard__b">When an automated trade goes wrong — who is responsible? Most platforms leave that question unanswered.</p>
+      </article>
+
+      <article class="pcard reveal">
+        <div class="pcard__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><path d="M17 13v3a2 2 0 0 0 2 2h2"/></svg>
+        </div>
+        <h3 class="pcard__h">Five tools, zero coherence.</h3>
+        <p class="pcard__b">Ledger for custody, Excel for tracking, email for approvals, phone calls to the bank. Institutional management deserves better.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== S3 — HOW IT WORKS -->
+<section class="section section--subtle" id="how" data-screen-label="03 How It Works">
+  <div class="container">
+    <div class="section__head">
+      <div class="ds-label">How It Works</div>
+      <h2 class="h2">Institutional automation in three steps.</h2>
+      <p class="sub">Set up once. Then review what the system did, when you choose to.</p>
+    </div>
+
+    <!-- ============================================= variant A — live demo -->
+    <div class="howdemo" id="howdemo" data-active="0">
+      <nav class="howdemo__tabs" role="tablist" aria-label="How it works steps">
+        <button class="howtab is-active" role="tab" data-step="0">
+          <span class="howtab__no">01</span>
+          <span class="howtab__txt">
+            <span class="howtab__t">Set your rules</span>
+            <span class="howtab__s">Define allocation strategy</span>
+          </span>
+          <span class="howtab__bar"><i></i></span>
+        </button>
+        <button class="howtab" role="tab" data-step="1">
+          <span class="howtab__no">02</span>
+          <span class="howtab__txt">
+            <span class="howtab__t">OBSIDIAN runs it</span>
+            <span class="howtab__s">AI monitors 24/7</span>
+          </span>
+          <span class="howtab__bar"><i></i></span>
+        </button>
+        <button class="howtab" role="tab" data-step="2">
+          <span class="howtab__no">03</span>
+          <span class="howtab__txt">
+            <span class="howtab__t">You review, not manage</span>
+            <span class="howtab__s">One-click reports</span>
+          </span>
+          <span class="howtab__bar"><i></i></span>
+        </button>
+      </nav>
+
+      <div class="howdemo__stage">
+        <!-- Panel 1 — Rules editor -->
+        <article class="howpanel is-active" data-step="0" role="tabpanel" aria-labelledby="howtab-0">
+          <div class="howpanel__copy">
+            <div class="howpanel__eyebrow">Step 01 · Once</div>
+            <h3 class="howpanel__h">Tell OBSIDIAN how your capital should sit.</h3>
+            <p class="howpanel__b">Allocation targets, ceilings, floors, slippage tolerance, approval delegation. Signed once — by you and your custodian — and the rules are live.</p>
+            <ul class="howpanel__list">
+              <li><span class="ok">✓</span> Plain-language allocation policy</li>
+              <li><span class="ok">✓</span> Per-rule risk and slippage caps</li>
+              <li><span class="ok">✓</span> Counter-signed by custodian</li>
+            </ul>
+          </div>
+
+          <div class="howpanel__viz">
+            <div class="ruleed">
+              <div class="ruleed__chrome">
+                <span class="ruleed__dots"><i></i><i></i><i></i></span>
+                <span class="ruleed__file">allocation.policy</span>
+                <span class="ruleed__lang">·obsidian-dsl</span>
+              </div>
+              <pre class="ruleed__code"><span class="ln" style="--d:0ms"><span class="ln__n">1</span><span class="cmt">// Allocation policy — Carmichael FO</span></span><span class="ln" style="--d:280ms"><span class="ln__n">2</span><span class="kw">target</span>  RWA   <span class="op">=</span> <span class="num">50.0%</span></span><span class="ln" style="--d:520ms"><span class="ln__n">3</span><span class="kw">ceiling</span> ETH   <span class="op">≤</span> <span class="num">30.0%</span></span><span class="ln" style="--d:760ms"><span class="ln__n">4</span><span class="kw">floor</span>   USDC  <span class="op">≥</span> <span class="num">20.0%</span></span><span class="ln" style="--d:1000ms"><span class="ln__n">5</span><span class="kw">risk</span>    slippage <span class="op">≤</span> <span class="num">0.50%</span></span><span class="ln" style="--d:1240ms"><span class="ln__n">6</span><span class="kw">exec</span>    networks <span class="op">=</span> [<span class="str">ETH</span>, <span class="str">ARB</span>]</span><span class="ln" style="--d:1480ms"><span class="ln__n">7</span><span class="kw">delegate</span> approval <span class="op">=</span> <span class="str">CIO</span></span><span class="ln" style="--d:1720ms"><span class="ln__n">8</span><span class="cur">▎</span></span></pre>
+              <div class="ruleed__foot">
+                <span class="pill pill--ok pill--sm">✓ Signed</span>
+                <span class="ruleed__sig">Custodian: Anchorage Digital · 0x9a3f…f3c2</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Panel 2 — Monitor -->
+        <article class="howpanel" data-step="1" role="tabpanel" aria-labelledby="howtab-1">
+          <div class="howpanel__copy">
+            <div class="howpanel__eyebrow">Step 02 · Continuous</div>
+            <h3 class="howpanel__h">The system rebalances inside your rules.</h3>
+            <p class="howpanel__b">Markets move. Allocations drift. OBSIDIAN watches every block on both networks — when a threshold is crossed it executes, no approval required.</p>
+            <ul class="howpanel__list">
+              <li><span class="ok">✓</span> Block-level monitoring, every chain</li>
+              <li><span class="ok">✓</span> Slippage guard aborts unsafe trades</li>
+              <li><span class="ok">✓</span> Emergency Stop on every screen</li>
+            </ul>
+          </div>
+
+          <div class="howpanel__viz">
+            <div class="monitor">
+              <div class="monitor__head">
+                <div class="monitor__stat"><span class="monitor__lbl">Total AUM</span><span class="monitor__val mono">$42,184,920</span></div>
+                <div class="monitor__stat monitor__stat--warn"><span class="monitor__lbl">ETH alloc</span><span class="monitor__val mono"><span class="tick" data-from="30.8" data-to="29.6">30.8</span>%</span></div>
+                <div class="monitor__stat"><span class="monitor__lbl">Last action</span><span class="monitor__val">Just now</span></div>
+              </div>
+
+              <div class="monitor__pulse">
+                <span class="liveblob"></span>
+                <span>Monitoring · Ethereum · Arbitrum · last check <span class="mono">12s ago</span></span>
+              </div>
+
+              <div class="monitor__chart" aria-hidden="true">
+                <svg viewBox="0 0 320 80" preserveAspectRatio="none" width="100%" height="80">
+                  <defs>
+                    <linearGradient id="mfill" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#4F46E5" stop-opacity="0.20"/>
+                      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="mline" d="M0,50 L20,46 L40,52 L60,44 L80,48 L100,40 L120,42 L140,36 L160,40 L180,32 L200,38 L220,28 L240,34 L260,22 L280,26 L300,18 L320,22"
+                        fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/>
+                  <path class="mfill" d="M0,50 L20,46 L40,52 L60,44 L80,48 L100,40 L120,42 L140,36 L160,40 L180,32 L200,38 L220,28 L240,34 L260,22 L280,26 L300,18 L320,22 L320,80 L0,80 Z"
+                        fill="url(#mfill)"/>
+                  <circle class="mdot" cx="320" cy="22" r="3.5" fill="#4F46E5"/>
+                </svg>
+              </div>
+
+              <div class="monitor__events">
+                <div class="mevt mevt--rebalance">
+                  <span class="mevt__dot"></span>
+                  <div class="mevt__body">
+                    <div class="mevt__t">Auto-rebalance: <span class="mono">ETH → USDC</span></div>
+                    <div class="mevt__m">Rule <span class="mono">ceiling_ETH ≤ 30%</span> · gas $4.21 · <span class="mono">0x9a…f3c2</span></div>
+                  </div>
+                  <span class="pill pill--ok pill--sm">Success</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Panel 3 — Report -->
+        <article class="howpanel" data-step="2" role="tabpanel" aria-labelledby="howtab-2">
+          <div class="howpanel__copy">
+            <div class="howpanel__eyebrow">Step 03 · On demand</div>
+            <h3 class="howpanel__h">A board-ready report — generated in one click.</h3>
+            <p class="howpanel__b">Every automated action sits in the audit log. When the family council or board needs a quarterly view, the report is one click and forty seconds away.</p>
+            <ul class="howpanel__list">
+              <li><span class="ok">✓</span> Post-factum notification on each action</li>
+              <li><span class="ok">✓</span> PDF + CSV export, signed</li>
+              <li><span class="ok">✓</span> Format accepted by external auditors</li>
+            </ul>
+          </div>
+
+          <div class="howpanel__viz">
+            <div class="report">
+              <div class="report__head">
+                <div>
+                  <div class="report__lbl">Q3 2026 — Family Council</div>
+                  <div class="report__sub">42 days · Carmichael Family Office</div>
+                </div>
+                <span class="pill pill--ok pill--sm">Generated · 4 sec</span>
+              </div>
+              <div class="report__grid">
+                <div class="report__stat">
+                  <span class="report__k">Automated actions</span>
+                  <span class="report__v mono"><span class="tick" data-from="0" data-to="184">0</span></span>
+                </div>
+                <div class="report__stat">
+                  <span class="report__k">Volume rebalanced</span>
+                  <span class="report__v mono">$<span class="tick" data-from="0" data-to="1.24" data-decimals="2">0.00</span>M</span>
+                </div>
+                <div class="report__stat">
+                  <span class="report__k">Manual approvals</span>
+                  <span class="report__v mono"><span class="tick" data-from="0" data-to="0">0</span></span>
+                </div>
+                <div class="report__stat">
+                  <span class="report__k">Compliance flags</span>
+                  <span class="report__v mono"><span class="tick" data-from="0" data-to="0">0</span></span>
+                </div>
+              </div>
+              <div class="report__chart" aria-hidden="true">
+                <svg viewBox="0 0 320 60" preserveAspectRatio="none" width="100%" height="60">
+                  <path class="spark" d="M0,42 L24,40 L48,42 L72,38 L96,40 L120,34 L144,36 L168,28 L192,30 L216,24 L240,26 L264,18 L288,22 L312,14 L320,16"
+                        fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="report__actions">
+                <span class="btn btn--sec btn--sm">Download PDF</span>
+                <span class="btn btn--ghost btn--sm">Export CSV</span>
+                <span class="btn btn--ghost btn--sm">Send to council</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ============================================= variant B — vertical timeline -->
+    <ol class="howline" id="howline">
+      <li class="howline__step reveal">
+        <div class="howline__rail" aria-hidden="true">
+          <span class="howline__node"><span class="howline__n">01</span></span>
+        </div>
+        <div class="howline__body">
+          <div class="howline__eyebrow">Once</div>
+          <h3 class="howline__h">Set your rules.</h3>
+          <p class="howline__lede">Define your allocation strategy in plain language.</p>
+          <p class="howline__b">Tell OBSIDIAN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup, counter-signed by your custodian.</p>
+          <div class="howline__chips">
+            <span class="chip chip--ghost">Plain-language DSL</span>
+            <span class="chip chip--ghost">Slippage caps</span>
+            <span class="chip chip--ghost">Custodian counter-sign</span>
+          </div>
+        </div>
+      </li>
+      <li class="howline__step reveal">
+        <div class="howline__rail" aria-hidden="true">
+          <span class="howline__node"><span class="howline__n">02</span></span>
+        </div>
+        <div class="howline__body">
+          <div class="howline__eyebrow">Continuous</div>
+          <h3 class="howline__h">OBSIDIAN runs automatically.</h3>
+          <p class="howline__lede">AI monitors and rebalances 24/7.</p>
+          <p class="howline__b">The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed.</p>
+          <p class="howline__foot"><span class="bullet">●</span> Protected by <a href="#features">Emergency Stop</a> · Slippage guard aborts unsafe trades</p>
+        </div>
+      </li>
+      <li class="howline__step reveal">
+        <div class="howline__rail" aria-hidden="true">
+          <span class="howline__node"><span class="howline__n">03</span></span>
+        </div>
+        <div class="howline__body">
+          <div class="howline__eyebrow">On demand</div>
+          <h3 class="howline__h">You review, not manage.</h3>
+          <p class="howline__lede">Post-factum notifications and one-click reports.</p>
+          <p class="howline__b">Get notified after each automated action. Quarterly report for the family council or board — generated in one click.</p>
+        </div>
+      </li>
+      <div class="howline__progress" aria-hidden="true"><i id="howlineFill"></i></div>
+    </ol>
+
+    <!-- ============================================= variant C — simple cards (original) -->
+    <ol class="steps">
+      <li class="step reveal">
+        <div class="step__no">01</div>
+        <div class="step__line" aria-hidden="true"></div>
+        <h3 class="step__h">Set your rules.</h3>
+        <p class="step__lede">Define your allocation strategy.</p>
+        <p class="step__b">Tell OBSIDIAN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup.</p>
+      </li>
+      <li class="step reveal">
+        <div class="step__no">02</div>
+        <div class="step__line" aria-hidden="true"></div>
+        <h3 class="step__h">OBSIDIAN runs automatically.</h3>
+        <p class="step__lede">AI monitors and rebalances 24/7.</p>
+        <p class="step__b">The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed.</p>
+        <p class="step__foot"><span class="bullet">●</span> Protected by <a href="#features">Emergency Stop</a></p>
+      </li>
+      <li class="step reveal">
+        <div class="step__no">03</div>
+        <h3 class="step__h">You review, not manage.</h3>
+        <p class="step__lede">Post-factum notifications and one-click reports.</p>
+        <p class="step__b">Get notified after each automated action. Quarterly report for the family council or board — generated in one click.</p>
+      </li>
+    </ol>
+
+    <div class="section__foot">
+      <a href="#access" class="btn btn--sec" data-evt="demo_link_clicked">See the platform in action →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== S4 — FEATURES -->
+<section class="section section--light" id="features" data-screen-label="04 Features">
+  <div class="container">
+    <div class="section__head">
+      <div class="ds-label">Features</div>
+      <h2 class="h2">Built for institutional requirements.</h2>
+      <p class="sub">The capabilities your compliance and risk teams will ask about.</p>
+    </div>
+
+    <div class="features">
+      <article class="fcard reveal">
+        <div class="fcard__head">
+          <span class="fcard__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.6-7.2"/><path d="M21 3v6h-6"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">AI auto-rebalancing</h3>
+        <p class="fcard__b">Rule-based automation maintains your target allocation across Ethereum and Arbitrum — no transaction approval required.</p>
+      </article>
+
+      <article class="fcard fcard--hero reveal">
+        <div class="fcard__head">
+          <span class="fcard__id fcard__id--accent">Differentiator</span>
+          <span class="fcard__ic fcard__ic--accent">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">Legal &amp; custodian coverage</h3>
+        <p class="fcard__b">Explicit liability framework: OBSIDIAN's role, custodian's role, and your role — documented and signed before any automation runs.</p>
+        <div class="fcard__legal">
+          <div class="legal-row"><span class="legal-row__k">OBSIDIAN</span><span class="legal-row__v">Rule execution &amp; audit</span></div>
+          <div class="legal-row"><span class="legal-row__k">Custodian</span><span class="legal-row__v">Asset safekeeping</span></div>
+          <div class="legal-row"><span class="legal-row__k">You</span><span class="legal-row__v">Strategy &amp; approvals</span></div>
+        </div>
+      </article>
+
+      <article class="fcard reveal">
+        <div class="fcard__head">
+          <span class="fcard__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 0 0-8 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">Smart accounts &amp; RBAC</h3>
+        <p class="fcard__b">Role-based permissions: CIO, Operator, Auditor. Institutional-grade access control with hardware key support.</p>
+      </article>
+
+      <article class="fcard reveal">
+        <div class="fcard__head">
+          <span class="fcard__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">Immutable audit log</h3>
+        <p class="fcard__b">Every automated action is logged: timestamp, rule triggered, transaction hash, gas cost. Tamper-proof history for compliance teams.</p>
+      </article>
+
+      <article class="fcard reveal">
+        <div class="fcard__head">
+          <span class="fcard__ic fcard__ic--danger">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">Emergency Stop</h3>
+        <p class="fcard__b">One-click kill switch halts all automated processes instantly — available from every screen, 24/7.</p>
+      </article>
+
+      <article class="fcard reveal">
+        <div class="fcard__head">
+          <span class="fcard__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 1 0-7l3-3a5 5 0 0 1 7 7l-1.5 1.5"/><path d="M14 10a5 5 0 0 1 0 7l-3 3a5 5 0 0 1-7-7l1.5-1.5"/></svg>
+          </span>
+        </div>
+        <h3 class="fcard__h">Cross-chain bridge</h3>
+        <p class="fcard__b">Unified bridging between Ethereum and Arbitrum via Li.Fi/Socket. Auto-rebalancing works across both networks seamlessly.</p>
+      </article>
+    </div>
+
+    <div class="section__foot">
+      <a href="#access" class="btn btn--ghost" data-evt="demo_link_clicked">Book a demo to see every feature →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== S5 — TRUST -->
+<section class="section section--subtle" id="trust" data-screen-label="05 Trust">
+  <div class="container">
+    <div class="section__head">
+      <div class="ds-label">Security &amp; Compliance</div>
+      <h2 class="h2">Security and compliance at the foundation.</h2>
+      <p class="sub">Two axes, designed in from day one — not bolted on for audits.</p>
+    </div>
+
+    <div class="trust-cols">
+      <article class="tcol reveal">
+        <div class="tcol__head">
+          <span class="tcol__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z"/></svg>
+          </span>
+          <h3 class="tcol__h">Security</h3>
+        </div>
+        <ul class="tlist">
+          <li><span class="tlist__c">✓</span><div><b>Smart accounts with role-based access.</b><br /><span class="m">CIO, operator, auditor — distinct keys, distinct permissions.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Emergency Stop on every screen.</b><br /><span class="m">Halts all automated processes instantly. Always one click away.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Slippage guard on all automated trades.</b><br /><span class="m">Per-rule maximum. Trade aborts if execution exceeds tolerance.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Self-custody.</b><br /><span class="m">Your keys, your assets — always withdrawable, even if the UI is unavailable.</span></div></li>
+        </ul>
+      </article>
+
+      <article class="tcol reveal">
+        <div class="tcol__head">
+          <span class="tcol__ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5 11.2 13.7 15.5 9.4"/><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <h3 class="tcol__h">Compliance</h3>
+        </div>
+        <ul class="tlist">
+          <li><span class="tlist__c">✓</span><div><b>SOC 2 — ready architecture.</b><br /><span class="m">Controls and logging built for Type II evidence collection.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Immutable audit trail for every action.</b><br /><span class="m">Timestamp, rule, tx hash, gas — all signed, all exportable.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Legal/Custodian Liability Framework.</b><br /><span class="m">Signed on-platform before any automation runs.</span></div></li>
+          <li><span class="tlist__c">✓</span><div><b>Designed for board-level reporting.</b><br /><span class="m">Quarterly report formats your council and your auditors both accept.</span></div></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="quote">
+      <div class="quote__mark">“</div>
+      <p class="quote__t">Institutional DeFi engagement projected to grow from <b>24%</b> to <b>75%</b> by 2027. OBSIDIAN is infrastructure for what comes next.</p>
+      <div class="quote__src">— Source: Institutional Digital Asset Report, 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== S6 — WHO IT'S FOR -->
+<section class="section section--light" id="who" data-screen-label="06 Who">
+  <div class="container">
+    <div class="section__head">
+      <div class="ds-label">Who It's For</div>
+      <h2 class="h2">Made for the people who manage serious capital.</h2>
+      <p class="sub">Two profiles. If you recognise yourself, this is built for you.</p>
+    </div>
+
+    <div class="cards-2">
+      <article class="wcard reveal">
+        <div class="wcard__role">
+          <span class="ds-label">Persona 01</span>
+          <h3 class="wcard__h">Family Office CIO</h3>
+        </div>
+        <dl class="wcard__meta">
+          <div><dt>AUM</dt><dd>$100M – $2B total · $10M – $100M in digital assets</dd></div>
+          <div><dt>Use case</dt><dd>Set and forget allocation. Quarterly report for family council.</dd></div>
+          <div><dt>Time</dt><dd>&lt; 10 minutes per month</dd></div>
+        </dl>
+        <p class="wcard__q">"OBSIDIAN handles the execution. I handle the strategy."</p>
+      </article>
+
+      <article class="wcard reveal">
+        <div class="wcard__role">
+          <span class="ds-label">Persona 02</span>
+          <h3 class="wcard__h">Corporate Treasury Manager</h3>
+        </div>
+        <dl class="wcard__meta">
+          <div><dt>AUM</dt><dd>$20M – $100M in digital assets</dd></div>
+          <div><dt>Use case</dt><dd>Board-approved limits enforced automatically. Full compliance trail.</dd></div>
+          <div><dt>Time</dt><dd>Dashboard review 2 – 3× per week</dd></div>
+        </dl>
+        <p class="wcard__q">"Every automated transaction is logged and auditable. Exactly what the board requires."</p>
+      </article>
+    </div>
+
+    <p class="anti-pos">
+      <b>Not a fit:</b> retail investors, trading desks, yield farmers. OBSIDIAN is built for
+      governance-heavy institutional environments with $10M+ in digital assets.
+    </p>
+  </div>
+</section>
+
+<!-- ====================================================== S7 — ACCESS -->
+<section class="section section--dark" id="access" data-screen-label="07 Access">
+  <div class="container">
+    <div class="access">
+      <div class="access__copy">
+        <div class="ds-label" style="color:var(--accent-300)">Early Access · 2026 Q3</div>
+        <h2 class="h2 h2--inverse">Join institutional-grade portfolio automation.</h2>
+        <p class="sub sub--inverse">
+          OBSIDIAN is currently in closed early access. We onboard a limited number of
+          family offices and corporate treasuries per quarter.
+        </p>
+        <ul class="access__ticks">
+          <li><span class="bullet">●</span> Discovery call within 2 business days</li>
+          <li><span class="bullet">●</span> Custom Legal/Custodian Framework draft</li>
+          <li><span class="bullet">●</span> 30-day supervised onboarding</li>
+        </ul>
+        <p class="access__alt">
+          Prefer to talk first?
+          <a href="#" data-evt="demo_link_clicked" id="calendlyLink">Schedule a 30-min call →</a>
+        </p>
+      </div>
+
+      <form class="access__form" id="accessForm" novalidate>
+        <h3 class="form__h">Request Early Access</h3>
+        <div class="form__grid">
+          <label class="field">
+            <span class="field__label">Full name</span>
+            <input class="input" name="name" required placeholder="Alex Carmichael" />
+          </label>
+          <label class="field">
+            <span class="field__label">Work email</span>
+            <input class="input" type="email" name="email" required placeholder="alex@yourdomain.com" id="emailField" />
+            <span class="field__help" id="emailHelp">Use your corporate domain — we don't accept generic mailboxes.</span>
+          </label>
+          <label class="field">
+            <span class="field__label">Organization</span>
+            <input class="input" name="org" required placeholder="Carmichael Family Office" />
+          </label>
+          <label class="field">
+            <span class="field__label">AUM in digital assets</span>
+            <select class="select" name="aum" required id="aumField">
+              <option value="" disabled selected>Select range…</option>
+              <option value="1-10">$1M – $10M</option>
+              <option value="10-50">$10M – $50M</option>
+              <option value="50-200">$50M – $200M</option>
+              <option value="200+">$200M+</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit" class="btn btn--pri btn--lg btn--full">Request Early Access</button>
+        <p class="form__priv">
+          Your information is used solely to evaluate fit. We don't share it with third parties.
+        </p>
+
+        <div class="form__success" id="formSuccess" hidden>
+          <div class="form__success-ic">✓</div>
+          <h3>Request received.</h3>
+          <p>We'll be in touch within 2 business days. A confirmation has been sent to your inbox.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== FOOTER -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <div class="foot__mark">OBSIDIAN</div>
+        <p class="foot__tag">Institutional portfolio automation.</p>
+      </div>
+      <div class="foot__col">
+        <div class="foot__h">Platform</div>
+        <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#trust">Security</a>
+      </div>
+      <div class="foot__col">
+        <div class="foot__h">Company</div>
+        <a href="#">Contact</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <div class="foot__col">
+        <div class="foot__h">Legal</div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 OBSIDIAN. All rights reserved.</span>
+      <span>Smart Accounts secured by account abstraction. OBSIDIAN does not hold custody of user assets.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================== TWEAKS PANEL -->
+<aside class="tweaks" id="tweaks" hidden aria-label="Tweaks">
+  <header class="tweaks__h">
+    <div>
+      <div class="tweaks__t">Tweaks</div>
+      <div class="tweaks__s">Three knobs to reshape the page.</div>
+    </div>
+    <button class="tweaks__x" id="tweaksClose" aria-label="Close">×</button>
+  </header>
+
+  <section class="tweaks__sec">
+    <div class="tweaks__label">Hero theme</div>
+    <div class="tweaks__row" data-tweak-group="hero">
+      <button class="tweaks__opt" data-value="dark">
+        <span class="swatch swatch--dark"></span>
+        <span>Institutional<small>Dark, indigo accent</small></span>
+      </button>
+      <button class="tweaks__opt" data-value="light">
+        <span class="swatch swatch--light"></span>
+        <span>Editorial<small>Light, slate accent</small></span>
+      </button>
+    </div>
+  </section>
+
+  <section class="tweaks__sec">
+    <div class="tweaks__label">Section rhythm</div>
+    <div class="tweaks__row tweaks__row--three" data-tweak-group="rhythm">
+      <button class="tweaks__opt tweaks__opt--vert" data-value="subtle">
+        <span class="vmini vmini--subtle"><i></i><i></i><i></i></span>
+        <span>Subtle</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="editorial">
+        <span class="vmini vmini--editorial"><i></i><i></i><i></i></span>
+        <span>Editorial</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="bold">
+        <span class="vmini vmini--bold"><i></i><i></i><i></i></span>
+        <span>Bold islands</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="tweaks__sec">
+    <div class="tweaks__label">How It Works</div>
+    <div class="tweaks__row tweaks__row--three" data-tweak-group="how">
+      <button class="tweaks__opt tweaks__opt--vert" data-value="demo">
+        <span class="hmini hmini--demo"><i></i><i></i><i></i></span>
+        <span>Live demo</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="timeline">
+        <span class="hmini hmini--timeline"><i></i><i></i><i></i></span>
+        <span>Timeline</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="cards">
+        <span class="hmini hmini--cards"><i></i><i></i><i></i></span>
+        <span>Cards</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="tweaks__sec">
+    <div class="tweaks__label">Density</div>
+    <div class="tweaks__row tweaks__row--three" data-tweak-group="density">
+      <button class="tweaks__opt tweaks__opt--vert" data-value="compact">
+        <span class="dmini dmini--compact"></span>
+        <span>Compact</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="standard">
+        <span class="dmini dmini--standard"></span>
+        <span>Standard</span>
+      </button>
+      <button class="tweaks__opt tweaks__opt--vert" data-value="spacious">
+        <span class="dmini dmini--spacious"></span>
+        <span>Spacious</span>
+      </button>
+    </div>
+  </section>
+</aside>
+
+<script src="landing.js"></script>
+</body>
+</html>

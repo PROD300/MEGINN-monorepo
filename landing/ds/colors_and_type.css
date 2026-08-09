@@ -1,0 +1,152 @@
+/* ============================================================
+   OBSIDIAN Design System — Tokens
+   Source: Foundation-Tokens (Figma, v1.0 · 2026-05-05)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ------------------------------------------------------------
+     LAYER 1 — PRIMITIVE TOKENS
+     ------------------------------------------------------------ */
+
+  /* Accent — Deep Indigo (single accent ramp) */
+  --accent-50:  #EEF2FF;
+  --accent-100: #E0E7FF;
+  --accent-300: #A5B4FC;
+  --accent-500: #4F46E5;  /* primary action */
+  --accent-700: #3730A3;  /* primary action hover */
+  --accent-900: #1E1B4B;
+
+  /* Gray — Cool (9-step) */
+  --gray-00:  #FFFFFF;
+  --gray-50:  #F8FAFC;    /* page background */
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-500: #64748B;    /* muted text */
+  --gray-700: #334155;
+  --gray-900: #0F172A;    /* primary text + dark chrome */
+  --gray-950: #020617;
+
+  /* Functional */
+  --success-500: #10B981;
+  --warning-500: #F59E0B;
+  --error-500:   #EF4444;
+  --info-500:    #3B82F6;
+
+  /* Status backgrounds (10% tints, used on banners + toasts) */
+  --bg-success: rgba(16, 185, 129, 0.10);
+  --bg-warning: rgba(245, 158, 11, 0.10);
+  --bg-error:   rgba(239,  68,  68, 0.10);
+  --bg-info:    rgba( 59, 130, 246, 0.10);
+
+  /* Spacing scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii */
+  --radius-none: 0;
+  --radius-sm:   4px;     /* tags, small chips */
+  --radius-md:   8px;     /* inputs, buttons, icon buttons */
+  --radius-lg:  16px;     /* cards, modals, large surfaces */
+  --radius-pill: 9999px;  /* status pills */
+
+  /* Shadows — 3 levels */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 41, 0.08);
+  --shadow-md: 0 4px 6px 0 rgba(15, 23, 41, 0.10), 0 1px 3px 0 rgba(15, 23, 41, 0.06);
+  --shadow-lg: 0 10px 15px 0 rgba(15, 23, 41, 0.10), 0 4px 6px 0 rgba(15, 23, 41, 0.05);
+
+  /* ------------------------------------------------------------
+     LAYER 2 — SEMANTIC TOKENS
+     ------------------------------------------------------------ */
+
+  /* Surfaces */
+  --surface-default:               var(--gray-50);   /* app background (page-level) */
+  --surface-subtle:                var(--gray-50);   /* section bg, alternating */
+  --surface-elevated:              var(--gray-00);   /* cards, modals */
+  --surface-level-1:               var(--gray-50);   /* body / page background */
+  --surface-level-2:               var(--gray-100);  /* sidebar / nav rail */
+  --surface-level-3:               var(--gray-200);  /* dividers, input borders */
+  --surface-level-4:               var(--gray-300);  /* disabled, inactive tabs */
+  --surface-action-primary:        var(--accent-500);
+  --surface-action-primary-hover:  var(--accent-700);
+  --surface-action-ghost-hover:    var(--accent-50);
+  --surface-dark:                  var(--gray-900);  /* alias → surface-app-shell */
+  --surface-app-shell:             var(--gray-900);  /* TopBar + Sidebar background */
+
+  /* Text */
+  --text-default:        var(--gray-900);
+  --text-muted:          var(--gray-500);
+  --text-disabled:       var(--gray-300);
+  --text-on-action:      var(--gray-00);
+  --text-on-dark:        var(--gray-00);
+  --text-on-dark-muted:  var(--gray-300);
+  --text-on-dark-brand:  var(--accent-300);
+  --text-nav-active:     var(--gray-00);    /* active nav item on dark bg */
+  --text-nav-item:       var(--gray-300);   /* inactive nav item on dark bg */
+  --text-on-dark-accent: var(--accent-300); /* accent on dark bg (alias → text-on-dark-brand) */
+  --text-error:          var(--error-500);
+  --text-warning:        var(--warning-500);
+  --text-success:        var(--success-500);
+  --text-accent:         var(--accent-500);
+
+  /* Borders */
+  --border-default:    var(--gray-200);
+  --border-strong:     var(--gray-300);
+  --border-focus:      var(--accent-500);
+  --border-error:      var(--error-500);
+  --border-warning:    var(--warning-500);
+  --border-dark:       var(--gray-700);  /* sidebar dividers (alias → border-app-shell) */
+  --border-app-shell:  var(--gray-700);  /* dividers inside AppShell */
+
+  /* ------------------------------------------------------------
+     TYPOGRAPHY — Inter
+     ------------------------------------------------------------ */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Type scale (size · weight · line-height) */
+  --h-3xl-size:  32px; --h-3xl-weight: 600; --h-3xl-lh: 1.25;
+  --h-2xl-size:  24px; --h-2xl-weight: 600; --h-2xl-lh: 1.30;
+  --h-xl-size:   20px; --h-xl-weight:  600; --h-xl-lh:  1.40;
+  --h-lg-size:   18px; --h-lg-weight:  500; --h-lg-lh:  1.50;
+  --body-size:   16px; --body-weight:  400; --body-lh:  1.50;
+  --body-sm-size:14px; --body-sm-weight:400; --body-sm-lh:1.50;
+  --body-xs-size:12px; --body-xs-weight:400; --body-xs-lh:1.50;
+  --label-xs-size:12px;--label-xs-weight:500;--label-xs-ls:0.05em;
+}
+
+/* ------------------------------------------------------------
+   Base
+   ------------------------------------------------------------ */
+html, body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: var(--text-default);
+  background: var(--surface-default);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11'; /* Inter tabular figures off; subtle alts */
+}
+
+/* Semantic typography classes */
+.ds-h-3xl  { font-family: var(--font-sans); font-size: var(--h-3xl-size); font-weight: var(--h-3xl-weight); line-height: var(--h-3xl-lh); color: var(--text-default); letter-spacing: -0.01em; }
+.ds-h-2xl  { font-family: var(--font-sans); font-size: var(--h-2xl-size); font-weight: var(--h-2xl-weight); line-height: var(--h-2xl-lh); color: var(--text-default); letter-spacing: -0.005em; }
+.ds-h-xl   { font-family: var(--font-sans); font-size: var(--h-xl-size);  font-weight: var(--h-xl-weight);  line-height: var(--h-xl-lh);  color: var(--text-default); }
+.ds-h-lg   { font-family: var(--font-sans); font-size: var(--h-lg-size);  font-weight: var(--h-lg-weight);  line-height: var(--h-lg-lh);  color: var(--text-default); }
+.ds-body   { font-family: var(--font-sans); font-size: var(--body-size);  font-weight: 400; line-height: var(--body-lh);  color: var(--text-default); }
+.ds-body-sm{ font-family: var(--font-sans); font-size: var(--body-sm-size);font-weight: 400; line-height: var(--body-sm-lh);color: var(--text-default); }
+.ds-body-xs{ font-family: var(--font-sans); font-size: var(--body-xs-size);font-weight: 400; line-height: var(--body-xs-lh);color: var(--text-muted); }
+.ds-label  { font-family: var(--font-sans); font-size: var(--label-xs-size); font-weight: var(--label-xs-weight); letter-spacing: var(--label-xs-ls); text-transform: uppercase; color: var(--text-muted); }
+.ds-mono   { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Utility */
+.ds-tabular { font-variant-numeric: tabular-nums; }

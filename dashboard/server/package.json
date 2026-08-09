@@ -1,0 +1,13 @@
+{
+  "name": "user-testing-collector",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Мини-бэкенд сбора событий юзер-тестов (без зависимостей)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

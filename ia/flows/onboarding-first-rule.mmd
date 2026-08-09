@@ -1,0 +1,47 @@
+flowchart TD
+    Login[Login] -->|успешная авторизация| Onboarding[Onboarding\nшаг 1: выбор сети]
+    Login -->|неверные данные| Login
+
+    Onboarding --> SmartAccountSetup[SmartAccountSetup\nшаг 2: роли и разрешения]
+    SmartAccountSetup --> LegalTerms[LegalTerms\nшаг 3: подписание соглашения]
+    LegalTerms -->|соглашение подписано| Portfolio[Portfolio\nпервый вход, пустой дашборд]
+    Portfolio -->|CTA: создать первое правило| RuleCreate[RuleCreate]
+
+    RuleCreate -->|Save & Activate| ValidationGate{Validation\nсохранение правила}
+
+    %% ── Validation save-time ──────────────────────────────────────────
+    ValidationGate -->|конфликт правил:\nтот же актив + сеть,\nпороговые значения\nперекрываются с Rule N| ErrConflict[ValidationError\nКонфликт правил\n\nRuleCreate показывает:\nкакое правило конфликтует,\nгде пересечение порогов]
+
+    ErrConflict -->|пользователь изменил\nусловие / порог| RuleCreate
+    ErrConflict -->|сохранить с предупреждением\noverride| RuleActive
+
+    ValidationGate -->|форма валидна\nконфликтов нет| RuleActive[Rule Active\nстатус: Active\nF20 Bridge: подключён]
+
+    %% ── Первое исполнение ─────────────────────────────────────────────
+    RuleActive --> RebalancingRules[RebalancingRules\nправило в списке — Active]
+    RebalancingRules -->|порог достигнут\nтриггер срабатывает| ExecCheck{Исполнение\nF21 + F20}
+
+    %% ── Execution-time errors ─────────────────────────────────────────
+    ExecCheck -->|недостаток ликвидности\nв пуле на момент сделки:\nswap size > доступная ликвидность| ErrLiquidity[TransactionError\n❌ Недостаток ликвидности\n\nПравило → Paused\nSlippage Guard активирован\nCIO получает push-уведомление]
+
+    ExecCheck -->|фактический slippage\nпревысил tolerance\nвключая bridge fee F20| ErrSlippage[TransactionError\n❌ Превышение лимита Slippage\n\nПравило → Paused\nSlippage Guard активирован\nCIO получает push-уведомление]
+
+    ExecCheck -->|сделка исполнена\nв рамках допусков| Notifications[Notifications\n✓ Автосделка выполнена\npost-factum уведомление]
+
+    %% ── Recovery ──────────────────────────────────────────────────────
+    ErrLiquidity --> RuleDetail[RuleDetail\nCIO видит: причину паузы\n\nДействия:\n→ Уменьшить размер позиции / порог\n→ Увеличить slippage tolerance\n→ Возобновить или отключить правило]
+
+    ErrSlippage --> RuleDetail
+
+    RuleDetail -->|правило скорректировано\nи возобновлено| RebalancingRules
+
+    %% ── Стили ────────────────────────────────────────────────────────
+    classDef core fill:#C8F7C5,stroke:#2E8B3E
+    classDef error fill:#FFD6D6,stroke:#CC4444
+    classDef decision fill:#D6EAF8,stroke:#2E86C1
+    classDef state fill:#FEF9E7,stroke:#D4AC0D
+
+    class Login,Onboarding,SmartAccountSetup,LegalTerms,Portfolio,RuleCreate,RebalancingRules,Notifications core
+    class ErrConflict,ErrLiquidity,ErrSlippage error
+    class ValidationGate,ExecCheck decision
+    class RuleActive,RuleDetail state

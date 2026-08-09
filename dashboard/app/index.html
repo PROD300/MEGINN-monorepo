@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дашборд юзер-тестов</title>
+<link rel="stylesheet" href="ds.css">
+<style>
+  :root{
+    --paper:#f2f4ee; --card:#fff; --ink:#17191d; --muted:#5f656d; --faint:#9aa0a8;
+    --line:rgba(20,24,28,.10); --line-soft:rgba(20,24,28,.06);
+    --lime:#d3f23e; --dark:#15171b; --soft:#edf0e8; --soft2:#e4e8dd; --sidebar:#fbfcf9;
+    --good:#1f8f53; --goodbg:#e7f4ec; --warn:#c43d2e; --warnbg:#fbe9e6;
+    --amber:#a76d05; --amberbg:#f8efd8; --info:#2e6bb0; --infobg:#e9f1fa;
+    --r:14px; --r-lg:18px; --r-sm:10px;
+    --sh:0 1px 2px rgba(16,24,16,.05), 0 6px 22px rgba(16,24,16,.05);
+    --sh-sm:0 1px 2px rgba(16,24,16,.05);
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+  .num{font-variant-numeric:tabular-nums} .muted{color:var(--muted)} .faint{color:var(--faint)}
+  button{font:inherit;cursor:pointer}
+
+  /* ── app shell ── */
+  .app{display:flex;min-height:100vh}
+  .sidebar{flex:0 0 240px;background:var(--sidebar);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:20px 14px}
+  .brand{padding:6px 10px 18px;display:flex;flex-direction:column;gap:3px}
+  .brand .bt{font-size:15px;font-weight:700;letter-spacing:-.02em}
+  .brand .bs{font-size:11.5px;color:var(--faint)}
+  .navgroup{margin-top:14px}
+  .navgroup .gl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);padding:0 10px 7px}
+  .nav-i{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:transparent;color:var(--muted);font-size:14px;font-weight:500;padding:9px 10px;border-radius:var(--r-sm);transition:background .12s,color .12s}
+  .nav-i:hover{background:var(--soft);color:var(--ink)}
+  .nav-i.on{background:var(--ink);color:#fff}
+  .nav-i .ic{width:17px;height:17px;flex:0 0 auto;opacity:.9}
+  .nav-i .ct{margin-left:auto;font-size:11px;font-weight:700;color:var(--faint);font-variant-numeric:tabular-nums}
+  .nav-i.on .ct{color:rgba(255,255,255,.55)}
+  .nav-i.warn .ct{color:var(--warn)}
+  .side-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+  .live{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:2px 10px}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--goodbg);flex:0 0 auto}
+  .live.stale .dot{background:var(--amber);box-shadow:0 0 0 3px var(--amberbg)}
+  .live.off{color:var(--warn)} .live.off .dot{background:var(--warn);box-shadow:0 0 0 3px var(--warnbg)}
+  .freshline{font-size:11px;color:var(--faint);padding:0 10px;line-height:1.4}
+  .roundsel-w{display:flex;flex-direction:column;gap:4px;padding:0 10px}
+  .roundsel-w[hidden]{display:none}
+  .roundsel-w>span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+  select.sel.rs{width:100%;font-size:12.5px;padding:7px 30px 7px 11px}
+  .side-foot .rnd{font-size:11.5px;color:var(--faint);padding:0 10px}
+  .btn{font-size:13px;font-weight:600;padding:9px 13px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card);color:var(--ink);transition:border-color .12s}
+  .btn:hover{border-color:rgba(20,24,28,.28)} .btn.primary{background:var(--lime);border-color:transparent;color:#1a1d12} .btn.ghost{background:transparent}
+  .btn.block{width:100%}
+
+  .main{flex:1 1 auto;min-width:0;overflow:auto;height:100vh}
+  .view{max-width:1080px;margin:0 auto;padding:34px 38px 90px}
+  @keyframes viewIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  .view{animation:viewIn .22s ease}
+  .vhead{margin-bottom:22px}
+  .vhead h1{font-size:var(--fs-xl);font-weight:var(--fw-b);letter-spacing:-.025em;margin:0}
+  .vhead .vsub{font-size:13.5px;color:var(--muted);margin:5px 0 0;max-width:680px}
+  .vhead .vact{margin-top:0}
+  .vrow{display:flex;align-items:flex-start;gap:16px}
+  .vrow .vact{margin-left:auto;display:flex;gap:8px;flex-shrink:0}
+
+  .sec{margin:30px 0 14px}
+  .sec-t{font-size:var(--fs-lg);font-weight:var(--fw-sb);letter-spacing:-.01em;margin:0}
+  .sec-s{font-size:var(--fs-sm);color:var(--muted);margin:3px 0 0}
+  .card{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);box-shadow:var(--sh);padding:22px 24px}
+  .grid{display:grid;gap:16px}
+  .cols-4{grid-template-columns:repeat(4,1fr)} .cols-3{grid-template-columns:repeat(3,1fr)} .cols-2{grid-template-columns:1fr 1fr}
+  .empty{color:var(--muted);font-size:14px;padding:8px 2px}
+  .err{background:var(--warnbg);border:1px solid #f3c4b8;color:#a33;padding:14px 16px;border-radius:var(--r);font-size:14px}
+  .footnote{color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.55}
+
+  /* flow picker */
+  .fpick{display:inline-flex;background:var(--soft);border-radius:var(--r-sm);padding:3px;gap:2px;flex-wrap:wrap}
+  .fpick button{border:0;background:transparent;padding:8px 14px;font-size:13px;font-weight:600;border-radius:8px;color:var(--muted)}
+  .fpick button.on{background:var(--card);box-shadow:var(--sh-sm);color:var(--ink)}
+  .fpick button .pn{margin-left:7px;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+  /* overview summary cards */
+  .ov-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .ov-card{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);box-shadow:var(--sh);padding:18px 20px;text-align:left;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:border-color .12s,transform .12s}
+  .ov-card:hover{border-color:rgba(20,24,28,.22);transform:translateY(-1px)}
+  .ov-card .ck{font-size:12px;font-weight:600;color:var(--muted)}
+  .ov-card .cn{font-size:30px;font-weight:700;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+  .ov-card .cd{font-size:12px;color:var(--faint)}
+  .ov-card .mini{height:6px;background:var(--soft);border-radius:4px;overflow:hidden;margin-top:4px}
+  .ov-card .mini i{display:block;height:100%;border-radius:4px}
+  .ovh{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .ovh b{color:var(--ink);font-weight:600}
+
+  /* hero (before/after) */
+  .hero{background:var(--dark);border-radius:var(--r-lg);padding:22px 24px;color:#fff;box-shadow:var(--sh)}
+  .hero-top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .hero-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--lime)}
+  .hero-base{margin-left:auto;font-size:12px;color:rgba(255,255,255,.45)}
+  .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .hm .hl{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:9px}
+  .hm .hv{font-size:var(--fs-2xl);font-weight:var(--fw-b);letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+  .hm .delta{font-size:12px;font-weight:700}
+  .hm .delta.good{color:#86e09a} .hm .delta.bad{color:#f29486} .hm .delta.flat{color:rgba(255,255,255,.4)}
+  .hm .was{font-size:12px;color:rgba(255,255,255,.42);margin-top:8px}
+  .hintcard{background:var(--infobg);border:1px solid #cfe0f2;color:#23527a;border-radius:var(--r);padding:15px 18px;font-size:13.5px;line-height:1.5}
+
+  /* KPI */
+  .kpi{display:flex;flex-direction:column}
+  .kpi .lab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:12px}
+  .kpi .n{font-size:var(--fs-3xl);font-weight:var(--fw-b);letter-spacing:-.025em;line-height:1;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px}
+  .kpi .n .of{font-size:16px;color:var(--muted);font-weight:600}
+  .kpi .supp{font-size:12px;color:var(--muted);margin-top:11px;font-variant-numeric:tabular-nums}
+  .conftag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .conftag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.8}
+  .conf-low{background:var(--warnbg);color:var(--warn)} .conf-med{background:var(--amberbg);color:var(--amber)} .conf-high{background:var(--goodbg);color:var(--good)}
+  .ci-bar{height:5px;background:var(--soft);border-radius:3px;position:relative;margin-top:10px;overflow:hidden}
+  .ci-bar .rng{position:absolute;height:100%;background:rgba(20,24,28,.22);border-radius:3px}
+  .alert{display:flex;gap:11px;align-items:flex-start;background:var(--amberbg);border:1px solid #f0dcae;color:#7a4e07;border-radius:var(--r);padding:14px 17px;font-size:13.5px;line-height:1.45;margin-top:16px}
+  .alert .ai{font-size:15px}
+
+  /* funnel */
+  .fn-scn{font-size:12.5px;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .fn-scn .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+  .fn-scn code{background:var(--soft);padding:3px 9px;border-radius:7px;color:var(--ink);font-size:12px;font-family:var(--mono)}
+  .fstep{margin:16px 0}.fstep:first-of-type{margin-top:0}
+  .fh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+  .fh .nm{font-weight:600;font-size:14px} .fh .nm .i{color:var(--faint);font-weight:600;margin-right:7px}
+  .fh .rt{color:var(--muted);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ftrack{height:30px;background:var(--soft);border-radius:8px;overflow:hidden}
+  .ffill{height:100%;background:var(--ink);color:#fff;display:flex;align-items:center;padding:0 13px;font-size:12.5px;font-weight:700;border-radius:8px;min-width:44px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .ffill.big{background:var(--warn)}
+  .fmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;align-items:center}
+  .fmeta .drop{color:var(--warn);font-weight:700;font-size:12px;background:var(--warnbg);padding:2px 9px;border-radius:999px}
+  .fmeta .ctx{font-size:12px;color:var(--muted)} .fmeta .dev{font-size:12px;color:var(--faint)}
+
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+  .tbl th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);font-weight:700;padding:0 12px 12px}
+  .tbl th.r,.tbl td.r{text-align:right}
+  .tbl td{padding:13px 12px;border-top:1px solid var(--line-soft);vertical-align:middle;font-variant-numeric:tabular-nums}
+  .tbl tr:hover td{background:var(--soft)}
+  .tbl .scr{font-family:var(--mono);font-size:12.5px;background:var(--soft);padding:3px 9px;border-radius:7px;color:var(--ink)}
+  .scrn{display:inline-flex;flex-direction:column;line-height:1.25;vertical-align:middle}
+  .scrn.inline{flex-direction:row;align-items:baseline;gap:7px}
+  .scrl{font-weight:600} .scrs{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-bottom:12px}
+  .legend .sw{display:inline-flex;align-items:center;gap:6px} .legend .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .filterbar{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px}
+  .filtgroup{display:flex;flex-direction:column;gap:6px}
+  .filtgroup .gl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint)}
+  select.sel{font:inherit;font-size:13px;font-weight:600;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);color:var(--ink)}
+  .roundbar{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--faint);padding:0 10px}
+  .roundbar a,.rnd a{color:var(--info);cursor:pointer;text-decoration:underline}
+  .scenlist .ov-card{width:100%}
+  .ev-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;background:transparent;padding:10px;border-radius:var(--r-sm);cursor:pointer}
+  .ev-row:hover{background:var(--soft)} .ev-row+.ev-row{border-top:1px solid var(--line-soft)}
+  .ev-mark{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex:0 0 auto}
+  .ev-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .ev-when{font-size:var(--fs-sm);font-weight:var(--fw-sb)}
+  .ev-dev{font-size:var(--fs-2xs);color:var(--faint);font-family:var(--mono)}
+  .ev-row .ed{flex:0 0 auto;text-align:right;font-size:var(--fs-xs);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .fscore{display:inline-flex;align-items:center;gap:10px;justify-content:flex-end}
+  .fscore .bar{height:7px;width:84px;background:var(--soft);border-radius:4px;overflow:hidden}
+  .fscore .bar i{display:block;height:100%;border-radius:4px}
+  .fscore b{min-width:24px;text-align:right}
+
+  /* bars */
+  .row{display:flex;align-items:center;gap:14px;margin:11px 0;font-size:13.5px}.row:first-child{margin-top:0}
+  .row .lbl{flex:0 0 240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .lbl .ok{color:var(--good);font-weight:700;margin-right:4px}
+  .row .track{flex:1;height:10px;background:var(--soft);border-radius:5px;overflow:hidden}
+  .row .fill{height:100%;background:var(--soft2);border-radius:5px}.row .fill.correct{background:var(--good)}
+  .row .val{flex:0 0 40px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  .fc-headline{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+  .fc-headline .n{font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fc-headline .lab{font-size:13px;color:var(--muted)}
+
+  /* sessions list (rows open drawer) */
+  .srow{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:0;background:transparent;padding:12px 10px;border-radius:var(--r-sm);cursor:pointer;transition:background .12s}
+  .srow:hover{background:var(--soft)}
+  .srow+.srow{border-top:1px solid var(--line-soft)}
+  .srow .fr{flex:0 0 42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;font-variant-numeric:tabular-nums}
+  .srow .when{font-weight:600;font-size:13.5px;min-width:112px}
+  .srow .facts{color:var(--muted);font-size:12.5px;flex:1;min-width:120px}
+  .srow .dev{color:var(--faint);font-size:12px;white-space:nowrap}
+  .srow .chev{color:var(--faint);font-size:14px}
+  .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600;margin-left:6px;white-space:nowrap}
+  .badge.warn{background:var(--warnbg);color:var(--warn)} .badge.ok{background:var(--soft);color:var(--muted)}
+
+  /* timeline (in drawer) */
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{display:grid;grid-template-columns:24px 1fr auto;gap:13px;align-items:start;padding:11px 0;border-bottom:1px dashed var(--line-soft)}
+  .tl li:last-child{border-bottom:0}
+  .tl .idx{width:23px;height:23px;border-radius:50%;background:var(--soft);color:var(--muted);font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+  .tl .scr{font-weight:600;font-size:13.5px;font-family:var(--mono)}
+  .tl .at{color:var(--faint);font-size:11.5px;display:block;margin-top:3px}
+  .tl .sigs{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
+  .sig{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:999px}
+  .tl .dur{text-align:right;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}.tl .dur .clk{color:var(--faint);margin-left:9px}
+
+  /* findings list + cards */
+  .frow{width:100%;text-align:left;border:0;background:var(--card);border:1px solid var(--line-soft);box-shadow:var(--sh-sm);border-radius:var(--r);padding:15px 18px;margin-bottom:11px;cursor:pointer;transition:border-color .12s}
+  .frow:hover{border-color:rgba(20,24,28,.22)}
+  .frow .ft{display:flex;align-items:center;gap:9px}
+  .frow .title{font-weight:700;font-size:14.5px;letter-spacing:-.01em;flex:1}
+  .frow .pri{font-size:11px;font-weight:700;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .frow .ev{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .sev{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+  .sev-catastrophe{background:var(--warnbg);color:var(--warn)} .sev-major{background:var(--amberbg);color:var(--amber)} .sev-minor,.sev-cosmetic{background:var(--soft);color:var(--muted)}
+  .reco{background:var(--soft);border-radius:var(--r-sm);padding:12px 14px;font-size:13px;line-height:1.5}
+  .reco .r{display:flex;gap:8px}.reco .r+.r{margin-top:7px}.reco .rk{flex:0 0 120px;color:var(--muted);font-weight:600}.reco .rv{color:var(--ink)}
+  .loc{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.loc .lk{font-size:11px;color:var(--faint)}
+  .loc code{background:var(--soft);padding:3px 8px;border-radius:6px;color:var(--ink);font-family:var(--mono);font-size:11.5px}
+
+  /* hypothesis verdict cards */
+  .hcard{border:1px solid var(--line-soft);border-radius:var(--r);padding:16px 18px;margin-bottom:11px;box-shadow:var(--sh-sm);background:var(--card)}
+  .hc-top{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+  .hc-title{font-weight:600;font-size:14.5px;letter-spacing:-.01em;flex:1;min-width:200px}
+  .hc-flow{font-size:11.5px;font-weight:600;color:var(--muted);background:var(--soft);padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .verdict{font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+  .verdict::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .vd-yes{background:var(--goodbg);color:var(--good)} .vd-no{background:var(--warnbg);color:var(--warn)} .vd-nodata{background:var(--soft);color:var(--muted)} .vd-incon{background:var(--amberbg);color:var(--amber)}
+  .hcbar2{margin-top:14px}
+  .hcb-fr{position:relative;height:18px}
+  .hcb-fact{position:absolute;bottom:0;transform:translateX(-50%);font-size:var(--fs-2xs);font-weight:var(--fw-b);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .hcb-rail{position:relative;height:12px;background:var(--soft);border-radius:6px}
+  .hcb-zone{position:absolute;top:0;height:100%;background:var(--goodbg)}
+  .hcb-zone.r{border-radius:0 6px 6px 0} .hcb-zone.l{border-radius:6px 0 0 6px}
+  .hcb-ci{position:absolute;top:3px;height:6px;border-radius:3px;opacity:.5}
+  .hcb-dot{position:absolute;top:0;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 2.5px var(--card)}
+  .hcb-th{position:absolute;top:-4px;height:20px;width:2px;background:var(--ink)}
+  .hcb-gr{position:relative;height:15px;margin-top:7px}
+  .hcb-goal{position:absolute;top:0;transform:translateX(-50%);font-size:var(--fs-2xs);font-weight:var(--fw-b);color:var(--ink);white-space:nowrap}
+  .hcb-end{position:absolute;top:0;font-size:var(--fs-2xs);color:var(--faint)}
+  .hc-meas{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:13px;font-variant-numeric:tabular-nums}
+  .hc-pred{color:var(--muted)} .hc-fact{color:var(--ink);font-weight:600}
+  .hc-note{margin-top:8px;font-size:12px;color:var(--faint)}
+  .hc-why{margin-top:10px;font-size:12.5px;color:var(--ink);background:var(--warnbg);padding:9px 13px;border-radius:var(--r-sm)}
+  .hc-why-k{color:var(--warn);font-weight:700}
+  .grouplbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin:22px 0 11px}
+  .grouplbl:first-child{margin-top:0}
+
+  /* drawer */
+  .scrim{position:fixed;inset:0;background:rgba(16,20,16,.28);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100vh;width:460px;max-width:92vw;background:var(--card);box-shadow:-12px 0 40px rgba(16,24,16,.16);transform:translateX(100%);transition:transform .26s cubic-bezier(.22,.61,.36,1);z-index:41;display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .dwhead{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 16px;border-bottom:1px solid var(--line-soft)}
+  .dwhead .dt{font-size:16px;font-weight:700;letter-spacing:-.01em}
+  .dwhead .ds{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .dwclose{margin-left:auto;border:0;background:var(--soft);width:30px;height:30px;border-radius:8px;font-size:16px;color:var(--muted);flex:0 0 auto}
+  .dwclose:hover{background:var(--soft2)}
+  .dwback{border:0;background:var(--soft);width:30px;height:30px;border-radius:8px;font-size:18px;color:var(--muted);flex:0 0 auto;cursor:pointer;line-height:1}
+  .dwback:hover{background:var(--soft2);color:var(--ink)}
+  .dwbody{padding:18px 22px 28px;overflow:auto;overflow-x:hidden}
+  .dwseg{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:16px}
+  .dwseg b{color:var(--ink);font-weight:600}
+  .exitline{margin:16px 0 0;font-size:12.5px;color:var(--muted);background:var(--warnbg);padding:10px 13px;border-radius:var(--r-sm)}
+  textarea{width:100%;min-height:230px;font:12.5px/1.55 var(--mono);padding:14px;border:1px solid var(--line);border-radius:var(--r);background:#fbfcf9;resize:vertical;color:var(--ink)}
+  .seg{display:inline-flex;background:var(--soft);border-radius:var(--r-sm);padding:3px;gap:2px;margin-bottom:13px}
+  .seg button{border:0;background:transparent;padding:6px 14px;font-size:12.5px;border-radius:7px;color:var(--muted)}
+  .seg button.on{background:var(--card);box-shadow:var(--sh-sm);color:var(--ink)}
+  .dwact{margin-top:13px;display:flex;gap:9px}
+  @media(prefers-reduced-motion:reduce){.view{animation:none}.drawer{transition:none}.scrim{transition:none}}
+
+  /* ── нормализация по дизайн-системе (ds.css): все теги одного размера, ровный селект ── */
+  .sev,.conftag,.verdict,.badge,.sig,.hc-flow{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);font-weight:var(--fw-b);line-height:1;padding:4px 9px;border-radius:var(--r-pill);white-space:nowrap}
+  .conftag::before,.verdict::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.85;flex:0 0 auto}
+  .badge{margin-left:6px}
+  .pri,.frow .pri,.find .pri{font-size:var(--fs-2xs);font-weight:var(--fw-b);color:var(--faint);font-variant-numeric:tabular-nums}
+  select.sel{appearance:none;-webkit-appearance:none;padding:9px 36px 9px 13px;line-height:1.2;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%235f656d' stroke-width='1.6'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:12px}
+  .dwseg{flex-wrap:wrap}
+  .dwbody .hcard,.dwbody .reco{max-width:100%}
+  .emptybox{text-align:center;padding:44px 24px;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .emptybox .em-ic{width:42px;height:42px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--faint)}
+  .emptybox .em-t{font-size:var(--fs-lg);font-weight:var(--fw-sb)}
+  .emptybox .em-h{font-size:var(--fs-sm);color:var(--muted);max-width:400px;line-height:1.5}
+  .emptybox .ds-btn{margin-top:6px}
+
+  /* ── мобильный топбар (скрыт на десктопе) ── */
+  .topbar{display:none;position:sticky;top:0;z-index:30;align-items:center;gap:10px;padding:9px 12px;
+    background:rgba(251,252,249,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .tb-btn{border:0;background:transparent;font-size:19px;width:38px;height:38px;border-radius:10px;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;cursor:pointer}
+  .tb-btn:active,.tb-btn:hover{background:var(--soft)}
+  .tb-title{font-weight:700;font-size:16px;letter-spacing:-.02em;flex:1;text-align:center}
+
+  /* ── мобильная раскладка ── */
+  @media(max-width:768px){
+    .topbar{display:flex}
+    .sidebar{position:fixed;left:0;top:0;height:100vh;width:284px;flex-basis:auto;z-index:60;
+      transform:translateX(-100%);transition:transform .26s cubic-bezier(.22,.61,.36,1);box-shadow:10px 0 44px rgba(16,24,16,.20)}
+    .sidebar.open{transform:none}
+    .view{padding:18px 15px 56px}
+    .vrow{flex-direction:column}
+    .vrow .vact{margin-left:0;width:100%}
+    .grid.cols-4{grid-template-columns:1fr 1fr}
+    .grid.cols-3,.grid.cols-2{grid-template-columns:1fr}
+    .ov-cards{grid-template-columns:1fr}
+    .hero{padding:18px 18px}
+    .hero-grid{grid-template-columns:1fr 1fr;gap:16px}
+    .drawer{width:100vw;max-width:100vw}
+    .card{overflow-x:auto}
+    .tbl,.ds-table{min-width:480px}
+    .filterbar{gap:14px}
+    .ovh{gap:9px 14px}
+    .fpick{flex-wrap:wrap}
+  }
+  @media(prefers-reduced-motion:reduce){.sidebar{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="bt">Юзер-тесты</div><div class="bs">дашборд прототипа</div></div>
+    <nav id="nav"></nav>
+    <div class="side-foot">
+      <div class="live" id="liveind"><span class="dot"></span><span class="lt">сбор подключён</span></div>
+      <div class="freshline" id="freshline"></div>
+      <label class="roundsel-w" id="roundselw" hidden><span>Смотрю</span><select class="sel rs" id="roundsel"><option value="current">Текущий раунд</option><option value="all">Весь тест</option></select></label>
+      <div class="rnd" id="roundline"></div>
+      <button class="btn ghost block" id="refresh">↻ Обновить</button>
+      <button class="btn ghost block" id="setBaseline">Зафиксировать раунд</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button class="tb-btn" id="navToggle" aria-label="Открыть меню">☰</button>
+      <div class="tb-title" id="tbTitle">Обзор</div>
+      <button class="tb-btn" id="tbRefresh" aria-label="Обновить">↻</button>
+    </header>
+    <div id="view" class="view"></div>
+  </main>
+</div>
+<div class="scrim" id="navscrim"></div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true"></aside>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const el=(t,p={},...k)=>{const n=document.createElement(t);for(const key in p){if(key==="class")n.className=p[key];else if(key==="html")n.innerHTML=p[key];else n[key]=p[key];}for(const c of k)n.append(c&&c.nodeType?c:document.createTextNode(c==null?"":c));return n;};
+const fmtMs=(ms)=>ms>=1000?(ms/1000).toFixed(ms<10000?1:0)+" с":(ms||0)+" мс";
+const clock=(iso)=>new Date(iso).toLocaleTimeString("ru-RU");
+const stamp=(iso)=>{const d=new Date(iso);return d.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"})+" "+d.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});};
+const pct=(x)=>Math.round(x*100)+"%";
+function awCI(x,n){if(!n)return null;const z=1.96,na=n+z*z,pa=(x+z*z/2)/na,m=z*Math.sqrt(pa*(1-pa)/na);return{lo:Math.max(0,pa-m),hi:Math.min(1,pa+m)};}
+function confLevel(h,n){if(!n||n<3||h<=1)return"low";if(n<5)return"medium";return"high";}
+function confTag(l){const m={low:["conf-low","низкая дост."],medium:["conf-med","средняя дост."],high:["conf-high","высокая дост."]};const[c,t]=m[l]||m.low;return el("span",{class:"conftag "+c},t);}
+const ICON={overview:'<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>',
+ hyp:'<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h4M6.5 2v4L3 12.5A1 1 0 0 0 3.9 14h8.2a1 1 0 0 0 .9-1.5L9.5 6V2"/></svg>',
+ flow:'<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h12l-4.5 5.5V13L6.5 11V8.5L2 3Z"/></svg>',
+ sess:'<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="3.5" cy="4" r="1.2"/><circle cx="3.5" cy="12" r="1.2"/><path d="M7 4h7M7 12h7M7 8h7" stroke-width="1.6"/></svg>',
+ find:'<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 2v12M3.5 3h8l-1.5 2.5L11.5 8h-8"/></svg>'};
+
+let CFG={},ENDPOINT="",KEY="",FLOWS=[],CURFLOW=0,SCREENS={},PROTO="";
+let FUNNEL=[],GOAL=null,FC=null;
+function prettify(s){if(!s)return s;const seg=String(s).replace(/^\//,"").split("/").pop().replace(/[-_]/g," ");return seg?seg.charAt(0).toUpperCase()+seg.slice(1):String(s);}
+function scrLabel(s){return SCREENS[s]||prettify(s);}
+function scrNode(s,inline){const lab=scrLabel(s);const n=el("span",{class:inline?"scrn inline":"scrn"},el("span",{class:"scrl"},lab));if(lab!==s)n.append(el("span",{class:"scrs"},s));return n;}
+function initCfg(){CFG=window.DASHBOARD_CONFIG||{};ENDPOINT=(CFG.endpoint||"").replace(/\/+$/,"");KEY=CFG.key||"";SCREENS=CFG.screens||{};PROTO=(CFG.prototypeUrl||"").trim();
+  if(/ngrok/i.test(ENDPOINT)&&!window.__nf){window.__nf=1;const _f=window.fetch.bind(window);window.fetch=(u,o)=>{o=o||{};o.headers=Object.assign({"ngrok-skip-browser-warning":"1"},o.headers||{});return _f(u,o);};}
+  if(Array.isArray(CFG.flows)&&CFG.flows.length)FLOWS=CFG.flows.map(f=>({id:f.id||null,name:f.name,funnel:Array.isArray(f.funnel)?f.funnel:[],goal:f.goal||(f.funnel&&f.funnel.length?f.funnel[f.funnel.length-1]:null),fc:f.firstClick||null}));
+  else if(Array.isArray(CFG.funnel)&&CFG.funnel.length)FLOWS=[{id:CFG.id||null,name:CFG.name||"Основной сценарий",funnel:CFG.funnel,goal:CFG.goal||CFG.funnel[CFG.funnel.length-1],fc:CFG.firstClick||null}];
+  else FLOWS=[];}
+function flowByName(n){return FLOWS.find(f=>f.name===n)||null;}
+function testLink(f){if(!PROTO||!f||!f.id)return null;const base=PROTO.replace(/\/+$/,"");const sep=base.includes("?")?"&":"?";return base+sep+"ut_task="+encodeURIComponent(f.id);}
+function statsURLFor(f){const p=new URLSearchParams();if(f.funnel.length)p.set("funnel",f.funnel.join(","));if(f.goal)p.set("goal",f.goal);if(f.fc&&f.fc.target)p.set("fc",(f.fc.screen||f.funnel[0]||"")+"::"+f.fc.target);if(f.name)p.set("flow",f.name);if(f.id)p.set("task",f.id);p.set("round",VIEWROUND||"current");if(KEY)p.set("key",KEY);return ENDPOINT+"/stats?"+p.toString();}
+function keyQ(){return KEY?"?key="+encodeURIComponent(KEY):"";}
+function flowStatsByName(n){const fd=FLOWDATA.find(x=>x.flow.name===n);return fd?fd.stats:null;}
+
+const SIG={rage:["#fbe9e6","#c43d2e","rage-клик"],dead:["#f8efd8","#a76d05","dead-клик"],quickback:["#f8efd8","#a76d05","быстрый возврат"],uturn:["#edf0e8","#5f656d","разворот"],thrash:["#fbe9e6","#c43d2e","метание"],hesitation:["#e9f1fa","#2e6bb0","заминка"],repeated:["#edf0e8","#5f656d","повторные клики"]};
+function sigChip(s){const[bg,fg,lab]=SIG[s]||["#edf0e8","#5f656d",s];return el("span",{class:"sig",style:`background:${bg};color:${fg}`},lab);}
+function frColor(s){return s>=60?"#c43d2e":s>=35?"#a76d05":s>=15?"#9aa0a8":"#1f8f53";}
+const SEV_LABEL={catastrophe:"катастрофа",major:"серьёзная",minor:"незначительная",cosmetic:"косметическая"};
+function sevLabel(s){return SEV_LABEL[s]||s;}
+
+let HYPS=[],BASE=null,SEG_DEV="all",SEG_PROB="all",SEG_HYP="all",FLOWDATA=[],VIEW="overview",VIEWROUND="current",DATAMETA=null;
+
+async function load(){
+  const v=$("#view");const rb=$("#refresh");
+  if(!ENDPOINT||!FLOWS.length){v.innerHTML="";v.append(el("div",{class:"err"},"Дашборд ещё не подключён. Запусти директиву directive_dashboard."));return;}
+  if(rb){rb.disabled=true;rb.textContent="Обновляю…";}
+  v.innerHTML="<p class='empty'>Загружаю…</p>";
+  try{
+    FLOWDATA=await Promise.all(FLOWS.map(async f=>({flow:f,stats:await(await fetch(statsURLFor(f))).json()})));
+    try{HYPS=await(await fetch(ENDPOINT+"/hypotheses"+keyQ())).json();}catch{HYPS=[];}
+    try{BASE=await(await fetch(ENDPOINT+"/baseline"+keyQ())).json();}catch{BASE=null;}
+    DATAMETA=(FLOWDATA[0]&&FLOWDATA[0].stats&&FLOWDATA[0].stats.dataMeta)||null;
+    if(CURFLOW>=FLOWDATA.length)CURFLOW=0;
+    renderNav();renderRoundLine();renderRoundSel();renderStatus(true);renderView();
+  }catch(e){v.innerHTML="";v.append(el("div",{class:"err"},"Не удалось получить данные с "+ENDPOINT+"/stats. Проверь, что сбор запущен."));renderStatus(false);}
+  finally{if(rb){rb.disabled=false;rb.textContent="↻ Обновить";}}
+}
+function curStats(){return FLOWDATA[CURFLOW]?FLOWDATA[CURFLOW].stats:null;}
+function curFlow(){return FLOWDATA[CURFLOW]?FLOWDATA[CURFLOW].flow:null;}
+
+// ── навигация ──
+const NAV=[["overview","Обзор","overview"],["hypotheses","Гипотезы","hyp"],["flows","Сценарии","flow"],["sessions","Сессии","sess"],["findings","Находки","find"]];
+function hypCounts(){let no=0,yes=0,incon=0,nd=0;(HYPS||[]).forEach(h=>{const e=evalHypothesis(h,flowStatsByName(h.flow));if(e.verdict==="no")no++;else if(e.verdict==="yes")yes++;else if(e.verdict==="incon")incon++;else nd++;});return{no,yes,incon,nd};}
+function renderNav(){
+  const nav=$("#nav");nav.innerHTML="";
+  const hc=hypCounts();
+  const grp=el("div",{class:"navgroup"});
+  NAV.forEach(([id,label,icon])=>{
+    const b=el("button",{class:"nav-i"+(VIEW===id?" on":"")+(id==="hypotheses"&&hc.no?" warn":"")},el("span",{class:"ic",html:ICON[icon]}),label);
+    if(id==="hypotheses"&&(HYPS||[]).length)b.append(el("span",{class:"ct"},(hc.no?hc.no+" ✗":"✓")));
+    if(id==="findings"){const f=curStats();const n=f&&f.findings?f.findings.length:0;if(n)b.append(el("span",{class:"ct"},String(n)));}
+    b.setAttribute("aria-current",VIEW===id?"page":"false");
+    b.onclick=()=>setView(id);grp.append(b);
+  });
+  nav.append(grp);
+}
+function renderRoundLine(){const s=curStats();const r=s&&s.round;const box=$("#roundline");box.innerHTML="";
+  if(!r){box.textContent="";return;}
+  const respN=s.totals?s.totals.testers:0;
+  if(VIEWROUND==="all"){box.append(el("span",{},"весь тест · "+respN+" респ."));return;}
+  box.append(el("span",{},(r.count?"раунд "+r.count:"раунд не начат")+(s.totals?" · "+respN+" респ.":"")));
+  if(r.count){const a=el("a",{},"отменить");a.onclick=undoRound;box.append(el("span",{}," · "),a);}}
+function renderRoundSel(){const w=$("#roundselw"),sel=$("#roundsel");if(!w||!sel)return;const s=curStats();const cnt=s&&s.round?s.round.count:0;
+  if(!cnt){w.hidden=true;VIEWROUND="current";return;}
+  w.hidden=false;sel.value=VIEWROUND;sel.onchange=()=>{VIEWROUND=sel.value;load();};}
+function renderStatus(ok){const li=$("#liveind");if(!li)return;li.classList.remove("off","stale");const lt=li.querySelector(".lt"),fl=$("#freshline");
+  if(!ok){li.classList.add("off");if(lt)lt.textContent="нет связи с сервером";if(fl)fl.textContent="проверь, что сбор запущен";return;}
+  const m=DATAMETA;
+  if(!m||!m.lastEventAt){if(lt)lt.textContent="сбор подключён";if(fl)fl.textContent="событий пока нет — открой ссылку прототипа";return;}
+  const ageMs=Date.now()-new Date(m.lastEventAt).getTime();
+  if(ageMs<5*60*1000){if(lt)lt.textContent="идёт сбор";}else{li.classList.add("stale");if(lt)lt.textContent="сбор подключён";}
+  let f="последнее событие: "+stamp(m.lastEventAt);if(m.internalExcluded)f+=" · "+m.internalExcluded+" внутр. исключены";if(fl)fl.textContent=f;}
+function setView(v){VIEW=v;renderNav();renderView();$(".main").scrollTo(0,0);
+  const lbl=(NAV.find(n=>n[0]===v)||[])[1]||"";const tt=$("#tbTitle");if(tt)tt.textContent=lbl;
+  closeNav();}
+function openNav(){$(".sidebar").classList.add("open");$("#navscrim").classList.add("open");}
+function closeNav(){$(".sidebar").classList.remove("open");$("#navscrim").classList.remove("open");}
+
+function renderView(){
+  const v=$("#view");v.innerHTML="";
+  // пере-анимировать
+  v.classList.remove("view");void v.offsetWidth;v.classList.add("view");
+  if(VIEW==="overview")return viewOverview(v);
+  if(VIEW==="hypotheses")return viewHypotheses(v);
+  if(VIEW==="flows")return viewFlows(v);
+  if(VIEW==="sessions")return viewSessions(v);
+  if(VIEW==="findings")return viewFindings(v);
+}
+function vhead(title,sub,actions){const h=el("div",{class:"vhead vrow"},el("div",{},el("h1",{},title),sub?el("div",{class:"vsub"},sub):""));if(actions)h.append(el("div",{class:"vact"},...actions));return h;}
+function sec(t,s){return el("div",{class:"sec"},el("div",{class:"sec-t"},t),s?el("div",{class:"sec-s"},s):"");}
+function emptyState(title,hint,actLabel,actFn,icon){
+  const box=el("div",{class:"emptybox"},el("div",{class:"em-ic"},icon||"◔"),el("div",{class:"em-t"},title),hint?el("div",{class:"em-h"},hint):"");
+  if(actLabel){const b=el("button",{class:"ds-btn"},actLabel);b.onclick=actFn;box.append(b);}
+  return el("div",{class:"card"},box);
+}
+/* ════════ ОБЗОР ════════ */
+function viewOverview(v){
+  v.append(vhead("Обзор","Сводка по всему раунду: гипотезы, сценарии и где болит. Отсюда проваливаешься в детали."));
+  const s0=curStats();
+  if(!FLOWDATA.length){v.append(emptyState("Сценарии не настроены","Директива directive_dashboard прописывает сценарии проекта в config.js — вручную ничего вводить не нужно."));return;}
+  // статус-строка
+  const totT=FLOWDATA.reduce((a,fd)=>Math.max(a,fd.stats.totals?fd.stats.totals.testers:0),0);
+  const r=s0&&s0.round;
+  if(!totT){
+    const hasAny=DATAMETA&&DATAMETA.totalEvents>0,rr=s0&&s0.round;
+    if(hasAny&&VIEWROUND==="current"&&rr&&rr.count)
+      v.append(emptyState("Новый раунд пока пуст","Раунд зафиксирован — счётчики обнулились под следующую итерацию. Раздай ссылку прототипа новым респондентам, либо посмотри накопленное за весь тест.","Смотреть весь тест",()=>{VIEWROUND="all";load();},"↻"));
+    else
+      v.append(emptyState("Пока нет данных теста","Открой живую ссылку прототипа, пройди сценарий и дай её паре респондентов — потом нажми «Обновить». Здесь появятся гипотезы, воронки и находки.","↻ Обновить",load));
+    v.append(footnote());return;}
+  const scopeWord=VIEWROUND==="all"?"всему тесту":"текущему раунду";
+  v.append(el("div",{class:"ovh"},el("span",{},(VIEWROUND==="all"?"Просмотр: ":"Раунд: "),el("b",{},VIEWROUND==="all"?"весь тест":(r&&r.count?String(r.count):"не начат"))),el("span",{},"Респондентов: ",el("b",{},String(totT))),el("span",{},"Сценариев: ",el("b",{},String(FLOWDATA.length))),DATAMETA&&DATAMETA.lastEventAt?el("span",{},"Последнее событие: ",el("b",{},stamp(DATAMETA.lastEventAt))):"",el("span",{class:"faint"},"числа ниже — по "+scopeWord+", все сценарии")));
+  // before/after
+  const b0=FLOWDATA[0]&&baselineFor(FLOWDATA[0].flow.name);
+  if(b0){v.append(sec("Цикл итерации","было → стало по сценарию «"+FLOWDATA[0].flow.name+"»"));v.append(renderHero(kpisFor(FLOWDATA[0].stats),funnelOf(FLOWDATA[0].stats),b0));}
+  // гипотезы — сводка
+  const hc=hypCounts();
+  v.append(sec("Гипотезы","подтвердились по результату теста"));
+  const hg=el("div",{class:"ov-cards"});
+  const need=hc.incon+hc.nd,hn=Math.max(1,(HYPS||[]).length);
+  hg.append(ovCard("Не подтвердились",String(hc.no),"результат отрицательный",hc.no?"var(--warn)":"var(--faint)",hc.no/hn,()=>setView("hypotheses")));
+  hg.append(ovCard("Нужен ещё тест",String(need),"неоднозначно / мало данных",need?"var(--amber)":"var(--faint)",need/hn,()=>setView("hypotheses")));
+  hg.append(ovCard("Подтвердились",String(hc.yes),"гипотеза сработала","var(--good)",hc.yes/hn,()=>setView("hypotheses")));
+  v.append(hg);
+  // флоу — сводка
+  v.append(sec("Сценарии","как каждый показал себя — клик открывает разбор"));
+  const fg=el("div",{class:"ov-cards"});
+  FLOWDATA.forEach((fd,i)=>{const sm=fd.stats.successMetric;const succ=sm&&sm.total?sm.hits/sm.total:0;
+    const bigDrop=(funnelOf(fd.stats)||[]).reduce((m,f,j)=>j&&f.dropFromPrev>m?f.dropFromPrev:m,0);
+    const c=el("button",{class:"ov-card"},el("div",{class:"ck"},fd.flow.name),
+      el("div",{class:"cn"},sm?(sm.hits+" из "+sm.total):"—"),
+      el("div",{class:"cd"},"выполнили сценарий"+(bigDrop?" · крупнейший отвал "+bigDrop+"%":"")),
+      el("div",{class:"mini"},el("i",{style:`width:${Math.round(succ*100)}%;background:${frColor(100-Math.round(succ*100))}`})));
+    c.onclick=()=>{CURFLOW=i;setView("flows");};fg.append(c);});
+  v.append(fg);
+  v.append(footnote());
+}
+function ovCard(k,n,d,color,frac,onClick){const c=el("button",{class:"ov-card"},el("div",{class:"ck"},k),el("div",{class:"cn",style:"color:"+color},n),el("div",{class:"cd"},d),el("div",{class:"mini"},el("i",{style:`width:${Math.round((frac||0)*100)}%;background:${color}`})));c.onclick=onClick;return c;}
+
+/* ════════ ГИПОТЕЗЫ ════════ */
+function viewHypotheses(v){
+  v.append(vhead("Гипотезы","Каждая привязана к сценарию и измеримому исходу — вердикт по результату теста. «Разобрать» показывает респондентов за цифрой."));
+  const list=HYPS||[];
+  if(!list.length){v.append(emptyState("Гипотез пока нет","Сформулируй гипотезу под сценарий — с измеримым исходом и порогом. Директива подтянет их из проекта, и здесь появится вердикт по тесту."));return;}
+  const ev=list.map(h=>({h,st:flowStatsByName(h.flow)||curStats(),e:evalHypothesis(h,flowStatsByName(h.flow)||curStats())}));
+  const cnt={all:ev.length,yes:ev.filter(x=>x.e.verdict==="yes").length,no:ev.filter(x=>x.e.verdict==="no").length,check:ev.filter(x=>x.e.verdict==="incon"||x.e.verdict==="nodata").length};
+  const bar=el("div",{class:"filtgroup",style:"margin-bottom:18px"},el("span",{class:"gl"},"Вердикт"));
+  const pick=el("div",{class:"fpick"});
+  [["all","Все"],["yes","Подтвердились"],["no","Не подтвердились"],["check","На проверке"]].forEach(([id,label])=>{
+    const b=el("button",{class:SEG_HYP===id?"on":""},label,el("span",{class:"pn"},String(cnt[id])));b.onclick=()=>{SEG_HYP=id;renderView();};pick.append(b);});
+  bar.append(pick);v.append(bar);
+  const groups=[["no","Не подтвердились"],["incon","Нужен ещё тест"],["nodata","Недостаточно данных"],["yes","Подтвердились"]];
+  const visible=SEG_HYP==="all"?["no","incon","nodata","yes"]:SEG_HYP==="check"?["incon","nodata"]:[SEG_HYP];
+  const showHeaders=SEG_HYP==="all"||SEG_HYP==="check";let any=false;
+  groups.forEach(([key,label])=>{if(!visible.includes(key))return;const items=ev.filter(x=>x.e.verdict===key);if(!items.length)return;any=true;
+    if(showHeaders)v.append(el("div",{class:"grouplbl"},label+" · "+items.length));
+    items.forEach(({h,st,e})=>v.append(renderHypCard(h,st,e)));});
+  if(!any)v.append(el("div",{class:"card"},el("div",{class:"empty"},"Нет гипотез в этой категории.")));
+  v.append(footnote());
+}
+
+function testLinkCard(f,S){
+  const link=testLink(f),attr=S&&S.attribution;
+  const card=el("div",{class:"card",style:"padding:16px 18px;display:flex;flex-direction:column;gap:11px;margin-bottom:16px"});
+  card.append(el("div",{},el("div",{style:"font-weight:600;font-size:14px"},"Ссылка для теста"),
+    el("div",{class:"sec-s",style:"margin-top:2px"},"Дай её респонденту — весь его проход привяжется к сценарию «"+f.name+"» автоматически, без угадывания.")));
+  if(link){const row=el("div",{style:"display:flex;gap:8px;align-items:center;flex-wrap:wrap"});
+    row.append(el("code",{class:"ds-code",style:"flex:1;min-width:220px;overflow-x:auto;white-space:nowrap;padding:10px 12px;font-size:12px"},link));
+    row.append(copyBtn("Скопировать",()=>link));card.append(row);}
+  else card.append(el("div",{class:"hintcard",style:"font-size:12.5px"},"Адрес прототипа задаётся в config (директива подставляет его при деплое). После этого здесь появится готовая ссылка с меткой «"+(f.id||"id сценария")+"»."));
+  if(attr){const tag=attr.mode==="tag";card.append(el("div",{style:"display:flex;align-items:center;gap:8px;font-size:var(--fs-2xs);color:var(--muted)"},
+    el("span",{class:"ds-tag "+(tag?"good":"muted")},tag?"привязка по метке":"привязка по входу"),
+    el("span",{},tag?"сессии размечены ссылкой — точная привязка":"пока по входу в первый экран; раздай ссылку выше — станет точно")));}
+  return card;
+}
+
+/* ════════ ВОРОНКИ (флоу) ════════ */
+function viewFlows(v){
+  const fd=FLOWDATA[CURFLOW];
+  v.append(vhead("Сценарии","Разбор сценария: воронка, экраны, первый клик. Сценарий — это юзер-флоу, который ты собрал и отдал на тест."));
+  if(FLOWDATA.length>1)v.append(el("div",{class:"filtgroup",style:"margin-bottom:18px"},el("span",{class:"gl"},"Сценарий"),flowDropdown(()=>{renderNav();renderView();})));
+  const S=fd?fd.stats:null;
+  if(fd)v.append(testLinkCard(fd.flow,S));
+  if(!S||!S.totals){v.append(emptyState("По этому сценарию нет данных","Открой ссылку для теста выше, пройди сценарий и дай её респондентам — появятся воронка, здоровье экранов и первый клик.","↻ Обновить",load));return;}
+  const k=kpisFor(S),fn=funnelOf(S);let bigI=-1,big=0;if(fn)fn.forEach((f,i)=>{if(i&&f.dropFromPrev>big){big=f.dropFromPrev;bigI=i;}});
+  const bF=baselineFor(fd.flow.name);if(bF){v.append(renderHero(k,fn,bF));}
+  v.append(sec("Сводка","сценарий «"+fd.flow.name+"»"));
+  v.append(renderKPIs(k,S));
+  if(S.deviceGap){const g=S.deviceGap;v.append(el("div",{class:"alert"},el("span",{class:"ai"},"⚠"),el("span",{},el("b",{},(g.worse==="mobile"?"Мобайл":"Десктоп")+" проседает на "+g.gap+" п.п. "),"— разрыв в доходимости между устройствами.")));}
+  v.append(sec("Воронка сценария","где и почему отваливаются"));
+  v.append(renderFunnel(fn,bigI,k.total,S));
+  v.append(sec("Здоровье экранов","балл трения 0–100 — где больнее"));
+  v.append(renderScreenHealth(S));
+  if(S.firstClick){v.append(sec("Первый клик","верный первый шаг ≈ 2–3× выше шанс успеха (NN/g)"));v.append(renderFirstClick(S));}
+}
+
+/* ════════ СЕССИИ ════════ */
+function viewSessions(v){
+  const fd=FLOWDATA[CURFLOW];
+  v.append(vhead("Сессии","Каждая — путь респондента по сценарию. Клик открывает мини-replay."));
+  const S=fd?fd.stats:null;
+  v.append(renderSessionFilters((S&&S.sessions)||[]));
+  if(!S||!S.totals){v.append(emptyState("Сессий пока нет","Открой живую ссылку и пройди сценарий — каждая сессия станет мини-replay здесь.","↻ Обновить",load));return;}
+  v.append(frictionLegend());
+  const list=filterSessions(S.sessions||[]);
+  const CAP=80;
+  if(list.length)v.append(el("p",{class:"sec-s",style:"margin:0 0 12px"},"Сессий под фильтрами: "+list.length+(list.length>CAP?" · показаны первые "+CAP+" по убыванию трения":"")));
+  const card=el("div",{class:"card"});
+  if(!list.length)card.append(el("div",{class:"empty"},"Нет сессий под эти фильтры."));
+  list.slice(0,CAP).forEach(s=>{
+    const row=el("button",{class:"srow"},
+      el("span",{class:"fr",title:"балл трения "+s.frictionScore,style:`background:${frColor(s.frictionScore)}`},String(s.frictionScore)),
+      el("span",{class:"when"},stamp(s.startedAt)),
+      el("span",{class:"facts"},fmtMs(s.durationMs)+" · "+(s.screens||[]).length+" экр. · "+s.clicks+" клик."+(s.success===true?" · дошёл":s.success===false?" · не дошёл":"")),
+      el("span",{class:"dev"},[s.device&&s.device.browser,s.device&&s.device.os].filter(x=>x&&x!=="—").join(" / ")||"—"),
+      ...((s.flags||[]).length?s.flags.slice(0,2).map(f=>el("span",{class:"badge warn"},f)):[el("span",{class:"badge ok"},"ок")]),
+      el("span",{class:"chev"},"›"));
+    row.onclick=()=>openSession(s);card.append(row);
+  });
+  if(list.length>CAP)card.append(el("div",{class:"empty",style:"text-align:center;border-top:1px solid var(--line-soft);margin-top:6px;padding-top:14px"},"…и ещё "+(list.length-CAP)+". Сузь фильтрами по устройству или типу проблемы."));
+  v.append(card);
+}
+function openSession(s,onBack){
+  const body=el("div",{class:"dwbody"});
+  body.append(el("div",{class:"dwseg"},
+    el("span",{},"трение ",el("b",{},String(s.frictionScore))),
+    el("span",{},"длит. ",el("b",{},fmtMs(s.durationMs))),
+    el("span",{},"экраны ",el("b",{},String((s.screens||[]).length))),
+    el("span",{},"клики ",el("b",{},String(s.clicks))),
+    s.lostness!=null?el("span",{},"потерянность ",el("b",{},String(s.lostness))):""));
+  if((s.flags||[]).length)body.append(el("div",{style:"margin-bottom:14px;display:flex;gap:6px;flex-wrap:wrap"},...s.flags.map(f=>el("span",{class:"badge warn"},f))));
+  const tl=el("ul",{class:"tl"});
+  (s.timeline||[]).forEach((step,i)=>{const mid=el("span",{},el("span",{class:"scr"},scrLabel(step.screen)),el("span",{class:"at"},step.screen+" · вошёл "+clock(step.at)));
+    if((step.signals||[]).length)mid.append(el("span",{class:"sigs"},...step.signals.map(sigChip)));
+    tl.append(el("li",{},el("span",{class:"idx"},String(i+1)),mid,el("span",{class:"dur"},fmtMs(step.ms),el("span",{class:"clk"},step.clicks+(step.clicks===1?" клик":" клик.")))));});
+  if(!(s.timeline||[]).length)tl.append(el("li",{},el("span",{}),el("span",{class:"muted"},"нет шагов"),el("span",{})));
+  body.append(tl);
+  if(s.success===false&&s.exit&&s.exit.screen)body.append(el("div",{class:"exitline"},"Вышел на «"+scrLabel(s.exit.screen)+"»"+(s.exit.lastClick?", последний клик: "+s.exit.lastClick:"")+"."));
+  openDrawer(stamp(s.startedAt),[s.device&&s.device.browser,s.device&&s.device.os].filter(x=>x&&x!=="—").join(" / ")+" · "+(s.success===true?"дошёл до цели":s.success===false?"не дошёл":""),body,onBack);
+}
+
+/* ════════ НАХОДКИ ════════ */
+function viewFindings(v){
+  const fd=FLOWDATA[CURFLOW];
+  v.append(vhead("Находки","Проблемы, которые тест выявил в сценарии: где уходят, где трение. Каждую отдаёшь агенту как задачу — с доказательством из теста и критерием для ретеста. Сам фикс предлагает и вносит агент, не дашборд.",[el("button",{class:"btn primary",onclick:openBrief},"Все находки → задание")]));
+  if(FLOWDATA.length>1)v.append(el("div",{class:"filtgroup",style:"margin-bottom:14px"},el("span",{class:"gl"},"Сценарий"),flowDropdown(()=>renderView())));
+  const S=fd?fd.stats:null;const F=(S&&S.findings)||[];
+  if(!F.length){v.append(emptyState("Находок нет","Сигналов трения и отвалов не нашлось — либо сценарий проходят чисто, либо сессий пока мало для выводов.",null,null,"✓"));return;}
+  F.forEach(f=>{const row=el("button",{class:"frow"},
+    el("div",{class:"ft"},el("span",{class:"sev sev-"+f.severity},sevLabel(f.severity)),confTag(f.confidence),el("span",{class:"title"},f.title),el("span",{class:"pri"},"P "+f.priority)),
+    el("div",{class:"ev"},f.evidence));
+    row.onclick=()=>openFinding(f);v.append(row);});
+}
+function openFinding(f){
+  const body=el("div",{class:"dwbody"});
+  body.append(el("div",{style:"display:flex;gap:9px;align-items:center;margin-bottom:13px;flex-wrap:wrap"},el("span",{class:"sev sev-"+f.severity},sevLabel(f.severity)),confTag(f.confidence),el("span",{class:"pri",style:"font-size:var(--fs-2xs);font-weight:700;color:var(--faint)"},"приоритет "+f.priority)));
+  const loc=el("div",{class:"loc",style:"margin:0 0 14px"});if(f.screen){loc.append(el("span",{class:"lk"},"экран"),el("code",{title:f.screen},scrLabel(f.screen)));}if(f.element){loc.append(el("span",{class:"lk"},"элемент"),el("code",{},f.element));}if(loc.childNodes.length)body.append(loc);
+  body.append(el("div",{class:"reco"},
+    el("div",{class:"r"},el("span",{class:"rk"},"Что показал тест"),el("span",{class:"rv"},f.evidence)),
+    el("div",{class:"r"},el("span",{class:"rk"},"Как поймём, что починили"),el("span",{class:"rv"},f.success_criterion)),
+    el("div",{class:"r"},el("span",{class:"rk"},"Куда копать (необяз.)"),el("span",{class:"rv"},f.fix_hypothesis))));
+  body.append(el("p",{class:"muted",style:"font-size:var(--fs-2xs);margin:13px 0 0;line-height:1.5"},"Агенту копируется проблема + доказательство из теста + критерий для ретеста. Конкретную правку он предлагает и вносит сам."));
+  body.append(el("div",{class:"dwact"},copyBtn("Передать агенту",()=>findingMd(f))));
+  openDrawer(f.title,"Находка · "+(MEAS_FLOW(f)||""),body);
+}
+function MEAS_FLOW(f){const fd=FLOWDATA[CURFLOW];return fd?fd.flow.name:"";}
+function findingMd(f){return [
+  "# Проблема из юзер-теста: "+f.title,
+  "- Где: "+(f.screen?("экран "+f.screen):"—")+(f.element?(", элемент "+f.element):""),
+  "- Что показал тест: "+f.evidence,
+  "- Как понять, что починили (ретест): "+f.success_criterion,
+  "- Возможное направление (необязательно, предложи своё): "+f.fix_hypothesis,
+  "",
+  "Предложи план правки и внеси изменения. Я передеплою и перепроверю по критерию выше."
+].join("\n");}
+
+/* ════════ drawer ════════ */
+function openDrawer(title,subtitle,bodyNode,onBack){
+  const d=$("#drawer");d.innerHTML="";
+  const head=el("div",{class:"dwhead"});
+  if(onBack){const bk=el("button",{class:"dwback",title:"Назад к списку"},"←");bk.onclick=onBack;head.append(bk);}
+  const close=el("button",{class:"dwclose"},"✕");close.onclick=closeDrawer;
+  head.append(el("div",{},el("div",{class:"dt"},title),subtitle?el("div",{class:"ds"},subtitle):""),close);
+  d.append(head,bodyNode);
+  d.classList.add("open");$("#scrim").classList.add("open");
+}
+function closeDrawer(){$("#drawer").classList.remove("open");$("#scrim").classList.remove("open");}
+$("#scrim").addEventListener("click",closeDrawer);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer();});
+
+/* ════════ брифинг ════════ */
+function openBrief(){
+  const S=curStats();const ta=el("textarea",{readOnly:true});let mode="md";
+  const bMd=el("button",{class:"on"},"Markdown"),bJson=el("button",{},"JSON");
+  bMd.onclick=()=>{mode="md";ta.value=buildBriefMd(S);bMd.classList.add("on");bJson.classList.remove("on");};
+  bJson.onclick=()=>{mode="json";ta.value=buildBriefJson(S);bJson.classList.add("on");bMd.classList.remove("on");};
+  ta.value=buildBriefMd(S);
+  const body=el("div",{class:"dwbody"},el("p",{class:"muted",style:"margin:0 0 13px;font-size:13px;line-height:1.5"},"Все находки сценария одним заданием: проблемы с доказательствами из теста и критериями для ретеста. Вставь в Claude Code — агент предложит и внесёт правки, ты передеплоишь и перетестируешь."),
+    el("div",{class:"seg"},bMd,bJson),ta,
+    el("div",{class:"dwact"},copyBtn("Скопировать",()=>ta.value),el("button",{class:"btn ghost",onclick:()=>downloadFile(ta.value,mode==="md"?"findings.md":"findings.json")},"Скачать")));
+  openDrawer("Задание агенту · все находки",(curFlow()?curFlow().name:""),body);
+}
+function buildBriefMd(S){const F=(S&&S.findings)||[],t=(S&&S.totals)||{},sm=S&&S.successMetric;const L=["# Находки юзабилити-теста — задача агенту",""];
+  L.push(`Сценарий «${curFlow()?curFlow().name:""}», ${t.testers||0} респондентов${sm?`, доходимость ${sm.hits}/${sm.total}`:""}. Ниже — проблемы, которые тест выявил, с доказательствами и критериями ретеста. Предложи и внеси правки; конкретные решения — за тобой. Малая выборка: чини частые проблемы, не длинный хвост.`);
+  L.push("","Сначала покажи план, потом меняй. После правок я передеплою и прогоню ретест по критериям.","");
+  F.forEach((f,i)=>{L.push(`## ${i+1}. ${f.title} (приоритет ${f.priority}, ${f.severity})`);if(f.screen)L.push(`- Где: \`${f.screen}\`${f.element?`, элемент \`${f.element}\``:""}`);L.push(`- Что показал тест: ${f.evidence}`);L.push(`- Как проверить (ретест): ${f.success_criterion}`);L.push(`- Возможное направление (необязательно): ${f.fix_hypothesis}`,"");});
+  return L.join("\n");}
+function buildBriefJson(S){return JSON.stringify({flow:curFlow()?curFlow().name:null,totals:S&&S.totals,findings:((S&&S.findings)||[]).map(f=>({id:f.id,screen:f.screen,element:f.element,severity:f.severity,priority:f.priority,evidence:f.evidence,fix_hypothesis:f.fix_hypothesis,success_criterion:f.success_criterion}))},null,2);}
+function downloadFile(text,name){const b=new Blob([text],{type:"text/plain"});const a=el("a",{href:URL.createObjectURL(b),download:name});document.body.append(a);a.click();a.remove();}
+function copyBtn(label,getText){const b=el("button",{class:"btn primary"},label);b.onclick=()=>{try{navigator.clipboard&&navigator.clipboard.writeText(getText());}catch(e){}const o=b.textContent;b.textContent="Скопировано ✓";b.disabled=true;setTimeout(()=>{b.textContent=o;b.disabled=false;},1600);};return b;}
+
+/* ════════ переиспользуемые компоненты ════════ */
+function kpisFor(S){const sessions=S.sessions||[];const withGoal=sessions.filter(s=>s.success!=null);const succ=withGoal.filter(s=>s.success===true).length;
+  const sm=S.successMetric;const ttt=S.timeOnTask;
+  return{succ:sm?sm.hits:succ,goalN:sm?sm.total:withGoal.length,ci:sm?sm.ci:null,conf:sm?sm.conf:"low",
+    tttMed:ttt?ttt.median:0,tttN:ttt?ttt.n:0,
+    lostAvg:S.lostness?S.lostness.avg:null,lost:S.lostness?S.lostness.lost:0,lostN:S.lostness?S.lostness.total:0,
+    problems:S.totals?S.totals.problemTesters:0,total:S.totals?S.totals.testers:0};}
+function funnelOf(S){return S.funnel||null;}
+
+function baselineFor(name){if(!BASE)return null;if(BASE.success||BASE.drop)return (FLOWDATA[0]&&name===FLOWDATA[0].flow.name)?BASE:null;return BASE[name]||null;}
+function renderHero(k,fn,base){
+  const big=(fn||[]).reduce((m,f,i)=>i&&f.dropFromPrev>m?f.dropFromPrev:m,0);
+  if(!base)return el("div",{class:"hintcard"},"База ещё не зафиксирована. Прогони тест и нажми «Зафиксировать раунд» — после правок агента увидишь, что сдвинулось.");
+  const succNow=k.goalN?k.succ/k.goalN:0,succWas=base.success&&base.success.total?base.success.hits/base.success.total:0,wasDrop=base.drop?base.drop.pct:0;
+  const grid=el("div",{class:"hero-grid"});
+  grid.append(heroMetric("Доходят до цели",pct(succNow),Math.round((succNow-succWas)*100),"п.п.",false,"было "+pct(succWas)));
+  grid.append(heroMetric("Крупнейший отвал",big+"%",big-wasDrop,"п.п.",true,"было "+wasDrop+"%"));
+  grid.append(heroMetric("Ср. потерянность",k.lostAvg==null?"—":String(k.lostAvg),k.lostAvg==null?0:+(k.lostAvg-(base.lostAvg||0)).toFixed(2),"",true,"было "+(base.lostAvg!=null?base.lostAvg:"—")));
+  grid.append(heroMetric("Проблемных",String(k.problems),k.problems-(base.problems||0),"",true,"было "+(base.problems!=null?base.problems:"—")));
+  return el("div",{class:"hero"},el("div",{class:"hero-top"},el("span",{class:"hero-eyebrow"},"Цикл итерации"),el("span",{class:"hero-base"},"база от "+(base.at?stamp(base.at):"—"))),grid);
+}
+function heroMetric(label,value,delta,unit,lowerBetter,wasStr){let cls="flat",ar="→",txt="";if(delta>0.0001){ar="↑";cls=lowerBetter?"bad":"good";txt="+"+(unit?delta+" "+unit:delta);}else if(delta<-0.0001){ar="↓";cls=lowerBetter?"good":"bad";txt=(unit?delta+" "+unit:delta);}return el("div",{class:"hm"},el("div",{class:"hl"},label),el("div",{class:"hv"},value,el("span",{class:"delta "+cls},ar+(txt?" "+txt:""))),el("div",{class:"was"},wasStr));}
+
+function flowDropdown(onPick){const sel=el("select",{class:"sel"});FLOWDATA.forEach((fd,i)=>{const o=el("option",{value:String(i)},fd.flow.name);if(i===CURFLOW)o.selected=true;sel.append(o);});sel.onchange=()=>{CURFLOW=+sel.value;onPick&&onPick();};return sel;}
+function isLost(s){return s.lostness!=null&&s.lostness>=0.5;}
+function isFriction(s){return (s.flags||[]).some(f=>/rage|dead|возврат/.test(f))||s.frictionScore>=35;}
+function renderSessionFilters(all){
+  const bar=el("div",{class:"filterbar"});
+  if(FLOWDATA.length>1){const g=el("div",{class:"filtgroup"},el("span",{class:"gl"},"Сценарий"),flowDropdown(()=>{SEG_DEV="all";SEG_PROB="all";renderView();}));bar.append(g);}
+  const mk=(label,opts,cur,set)=>{const g=el("div",{class:"filtgroup"},el("span",{class:"gl"},label));const p=el("div",{class:"fpick"});opts.forEach(([id,l,n])=>{const b=el("button",{class:cur===id?"on":""},l,n!=null?el("span",{class:"pn"},String(n)):"");b.onclick=()=>{set(id);renderView();};p.append(b);});g.append(p);return g;};
+  bar.append(mk("Устройство",[["all","Все"],["desktop","Десктоп"],["mobile","Мобайл"]],SEG_DEV,v=>SEG_DEV=v));
+  bar.append(mk("Проблема",[["all","Все"],["lost","Заблудились",all.filter(isLost).length],["friction","Фрустрация",all.filter(isFriction).length],["dropped","Не дошли",all.filter(s=>s.success===false).length]],SEG_PROB,v=>SEG_PROB=v));
+  return bar;}
+function frictionLegend(){return el("div",{class:"legend"},el("span",{},el("b",{},"Балл трения 0–100"),": rage / dead-клики · возвраты · метание · заминки"),el("span",{class:"sw"},el("span",{class:"dot",style:"background:#1f8f53"}),"чисто"),el("span",{class:"sw"},el("span",{class:"dot",style:"background:#a76d05"}),"трение"),el("span",{class:"sw"},el("span",{class:"dot",style:"background:#c43d2e"}),"сильное"));}
+function filterSessions(all){return all.filter(s=>{if(SEG_DEV!=="all"&&s.device.type!==SEG_DEV)return false;if(SEG_PROB==="lost"&&!isLost(s))return false;if(SEG_PROB==="friction"&&!isFriction(s))return false;if(SEG_PROB==="dropped"&&s.success!==false)return false;return true;});}
+
+function renderKPIs(k,S){const g=el("div",{class:"grid cols-4"});const ci=k.ci,cl=k.conf||confLevel(k.succ,k.goalN);
+  const c1=el("div",{class:"card kpi"},el("div",{class:"lab"},"Доходят до цели"),el("div",{class:"n"},String(k.succ),el("span",{class:"of"},"из "+k.goalN),confTag(cl)),el("div",{class:"supp"},ci?("дов. "+pct(ci.lo)+"–"+pct(ci.hi)):"—"));if(ci)c1.append(el("div",{class:"ci-bar"},el("div",{class:"rng",style:`left:${ci.lo*100}%;width:${(ci.hi-ci.lo)*100}%`})));g.append(c1);
+  g.append(el("div",{class:"card kpi"},el("div",{class:"lab"},"Время до цели"),el("div",{class:"n"},k.tttN?fmtMs(k.tttMed):"—"),el("div",{class:"supp"},"медиана · n="+k.tttN)));
+  g.append(el("div",{class:"card kpi"},el("div",{class:"lab"},"Потерянность"),el("div",{class:"n"},k.lostAvg==null?"—":String(k.lostAvg)),el("div",{class:"supp"},(k.lost||0)+" из "+k.lostN+" заблудились")));
+  g.append(el("div",{class:"card kpi"},el("div",{class:"lab"},"Проблемных"),el("div",{class:"n"},String(k.problems),el("span",{class:"of"},"из "+k.total)),el("div",{class:"supp"},"есть сигнал трения")));
+  return g;}
+function renderFunnel(fn,bigI,N,S){const card=el("div",{class:"card"});if(!fn||!fn.length){card.append(el("div",{class:"empty"},"Воронка не задана."));return card;}
+  card.append(el("div",{class:"fn-scn"},el("span",{class:"tag"},"Сценарий"),...fn.flatMap((s,i)=>i?[el("span",{class:"faint"},"→"),el("code",{title:s.step},scrLabel(s.step))]:[el("code",{title:s.step},scrLabel(s.step))])));
+  const top=fn[0].reached||0;fn.forEach((s,i)=>{const p=top?Math.round(s.reached/top*100):0;const step=el("div",{class:"fstep"});
+    step.append(el("div",{class:"fh"},el("span",{class:"nm"},el("span",{class:"i"},(i+1)),scrNode(s.step,true)),el("span",{class:"rt"},s.reached+" из "+N+" дошли"+(s.ci?" · дов. "+pct(s.ci.lo)+"–"+pct(s.ci.hi):""))));
+    step.append(el("div",{class:"ftrack"},el("div",{class:"ffill"+(i===bigI?" big":""),style:`width:${Math.max(p,5)}%`},p+"%")));
+    const meta=el("div",{class:"fmeta"});if(i&&s.dropFromPrev)meta.append(el("span",{class:"drop"},"↓ "+s.dropFromPrev+"%"+(i===bigI?" крупнейший":"")));
+    if(i&&s.exitClicks&&s.exitClicks.length)meta.append(el("span",{class:"ctx"},"уходят после: "+s.exitClicks.map(([x,v])=>x+" ("+v+")").join(", ")));
+    if(s.byDevice)meta.append(el("span",{class:"dev"},"десктоп "+s.byDevice.desktop.reached+"/"+s.byDevice.desktop.total+" · мобайл "+s.byDevice.mobile.reached+"/"+s.byDevice.mobile.total));
+    if(meta.childNodes.length)step.append(meta);card.append(step);});return card;}
+function renderScreenHealth(S){const sh=S.screenHealth||[];const card=el("div",{class:"card"});if(!sh.length){card.append(el("div",{class:"empty"},"Нет данных по экранам."));return card;}
+  const t=el("table",{class:"tbl"});t.append(el("thead",{},el("tr",{},el("th",{},"Экран"),el("th",{class:"r"},"Трение"),el("th",{class:"r"},"Dead-клики"),el("th",{class:"r"},"Rage-клики"),el("th",{class:"r"},"Выходы"),el("th",{class:"r"},"Медиана"))));
+  const tb=el("tbody");sh.forEach(s=>tb.append(el("tr",{},el("td",{},scrNode(s.screen)),el("td",{class:"r"},el("span",{class:"fscore"},el("span",{class:"bar"},el("i",{style:`width:${s.frictionScore}%;background:${frColor(s.frictionScore)}`})),el("b",{},String(s.frictionScore)))),el("td",{class:"r"},String(s.dead||0)),el("td",{class:"r"},String(s.rage||0)),el("td",{class:"r"},String(s.exits||0)),el("td",{class:"r"},fmtMs(s.medianDwell||0)))));t.append(tb);card.append(t);return card;}
+function renderFirstClick(S){const fc=S.firstClick;const card=el("div",{class:"card"});if(fc.hits!=null){const ci=fc.ci;card.append(el("div",{class:"fc-headline"},el("span",{class:"n"},fc.hits+" из "+fc.total),el("span",{class:"lab"},"верный первый клик"+(ci?" · дов. "+pct(ci.lo)+"–"+pct(ci.hi):"")+" · цель: "+((curFlow().fc&&curFlow().fc.target)||"—"))));}
+  const max=fc.dist&&fc.dist.length?fc.dist[0][1]:1;(fc.dist||[]).forEach(([t,v])=>{const correct=curFlow().fc&&t===curFlow().fc.target;card.append(el("div",{class:"row"},el("div",{class:"lbl",title:t},correct?el("span",{class:"ok"},"✓"):"",t),el("div",{class:"track"},el("div",{class:"fill"+(correct?" correct":""),style:`width:${Math.round(v/max*100)}%`})),el("div",{class:"val"},String(v))));});return card;}
+
+/* ── гипотезы: вердикт ── */
+const MEASURE_LABEL={completion:"завершение сценария",firstclick:"верный первый клик",dropoff:"отвал на шаге",lostness:"средняя потерянность"};
+function opSym(op){return op==="<="?"≤":op===">="?"≥":op;}
+function fmtMeasure(v,kind){return kind==="num"?(+v).toFixed(2):pct(v);}
+function evalHypothesis(h,st){const m=h.measure||"completion",t=h.target||{op:">=",value:0.7};let actual=null,ci=null,n=0,hits=null,kind="prop",stepName=h.step,prevStep=null;
+  if(!st)return{verdict:"nodata",m,t,kind,stepName};
+  if(m==="completion"&&st.successMetric){actual=st.successMetric.total?st.successMetric.hits/st.successMetric.total:0;ci=st.successMetric.ci;n=st.successMetric.total;hits=st.successMetric.hits;}
+  else if(m==="firstclick"&&st.firstClick&&st.firstClick.hits!=null){actual=st.firstClick.total?st.firstClick.hits/st.firstClick.total:0;ci=st.firstClick.ci;n=st.firstClick.total;hits=st.firstClick.hits;}
+  else if(m==="dropoff"){const fn=st.funnel||[];const i=fn.findIndex(x=>x.step===h.step);if(i>0){const prev=fn[i-1].reached,reached=fn[i].reached,drop=Math.max(0,prev-reached);actual=prev?drop/prev:0;n=prev;hits=drop;ci=awCI(drop,prev);prevStep=fn[i-1].step;}}
+  else if(m==="lostness"&&st.lostness){actual=st.lostness.avg;n=st.lostness.total;kind="num";}
+  if(actual==null)return{verdict:"nodata",m,t,kind,stepName,prevStep};
+  if(n<3)return{verdict:"nodata",m,t,actual,n,hits,kind,stepName,prevStep};
+  const meets=t.op===">="?actual>=t.value:actual<=t.value;
+  let confStrong,refStrong;
+  if(ci){if(t.op===">="){confStrong=ci.lo>=t.value;refStrong=ci.hi<t.value;}else{confStrong=ci.hi<=t.value;refStrong=ci.lo>t.value;}}
+  else{confStrong=meets;refStrong=!meets;}
+  const verdict=confStrong?"yes":refStrong?"no":"incon";
+  return{verdict,meets,actual,ci,n,hits,kind,m,t,stepName,prevStep,noCI:!ci};}
+// прошёл ли респондент именно по МЕТРИКЕ гипотезы (true/false/null — не относится)
+function testerPass(t,e){
+  if(e.m==="completion")return t.success===true;
+  if(e.m==="firstclick")return t.firstClick?(t.firstClick.hit===true):null;
+  if(e.m==="dropoff"){const sc=t.screens||[];const reached=sc.includes(e.stepName);const reachedPrev=e.prevStep?sc.includes(e.prevStep):true;return reachedPrev?reached:null;}
+  if(e.m==="lostness")return t.lostness==null?null:(t.lostness<0.5);
+  return t.success===true;}
+function hcBar(e){if(e.kind!=="prop"||e.actual==null)return null;
+  const v=Math.max(0,Math.min(100,e.t.value*100)),p=Math.max(0,Math.min(100,e.actual*100));
+  const lo=e.ci?Math.max(0,e.ci.lo*100):p,hi=e.ci?Math.min(100,e.ci.hi*100):p;
+  const col=e.verdict==="yes"?"var(--good)":e.verdict==="no"?"var(--warn)":"var(--amber)";
+  const ge=e.t.op===">=",zoneL=ge?v:0,zoneW=ge?(100-v):v,cl=x=>Math.max(8,Math.min(92,x));
+  const factLab="вы тут · "+Math.round(p)+"%"+(e.hits!=null&&e.n?" ("+e.hits+" из "+e.n+")":"");
+  const rail=el("div",{class:"hcb-rail"},
+    el("div",{class:"hcb-zone "+(ge?"r":"l"),style:`left:${zoneL}%;width:${zoneW}%`}),
+    e.ci?el("div",{class:"hcb-ci",style:`left:${lo}%;width:${Math.max(2,hi-lo)}%;background:${col}`}):"",
+    el("div",{class:"hcb-dot",style:`left:${p}%;background:${col}`}),
+    el("div",{class:"hcb-th",style:`left:${v}%`}));
+  return el("div",{class:"hcbar2"},
+    el("div",{class:"hcb-fr"},el("span",{class:"hcb-fact",style:`left:${cl(p)}%;color:${col}`},factLab)),
+    rail,
+    el("div",{class:"hcb-gr"},
+      el("span",{class:"hcb-goal",style:`left:${cl(v)}%`},"цель "+opSym(e.t.op)+" "+Math.round(v)+"%")));}
+function relevantFinding(e,st){const F=(st&&st.findings)||[];if(!F.length)return null;
+  if(e.m==="dropoff")return F.find(f=>f.type==="drop-off"&&(f.screen===e.prevStep||f.title.includes(scrLabel(e.stepName))))||F.find(f=>f.type==="drop-off")||null;
+  if(e.m==="firstclick")return F.find(f=>f.type==="first-click-miss")||null;
+  if(e.m==="lostness")return F.find(f=>f.type==="lostness")||null;
+  if(e.m==="completion")return F.find(f=>f.severity==="catastrophe")||F.find(f=>f.type==="drop-off")||F[0]||null;
+  return F[0]||null;}
+function renderHypCard(h,st,e){const c=el("div",{class:"hcard"});let badge,bcls,note="";
+  const band=e.ci?("светлая полоса — разброс из-за выборки"+(e.n?" ("+e.n+" чел.)":"")):null;
+  if(e.verdict==="nodata"){badge="Недостаточно данных";bcls="vd-nodata";note=e.n?("n="+e.n+" — мало для вывода (нужно ≥3 респондента)"):"нет данных по этому сценарию — прогони тест";}
+  else if(e.verdict==="yes"){badge="Подтвердилась";bcls="vd-yes";note=(band?band+". Она целиком на нужной стороне цели":"результат на нужной стороне цели")+(e.noCI?" (по точке, без разброса)":"")+".";}
+  else if(e.verdict==="no"){badge="Не подтвердилась";bcls="vd-no";note=(band?band+". Даже её лучший край не дотягивает до цели":"результат не дотягивает до цели")+(e.noCI?" (по точке)":"")+" → отрицательно.";}
+  else{badge="Нужен ещё тест";bcls="vd-incon";note=(band?band+" задевает обе стороны цели — однозначного вывода пока нет":"данных мало для однозначного вывода")+". Добери респондентов или поменяй что-то конкретное и перепроверь.";}
+  const head=el("div",{class:"hc-top"},el("span",{class:"verdict "+bcls},badge),el("span",{class:"hc-title"},h.text));if(h.flow)head.append(el("span",{class:"hc-flow"},h.flow));c.append(head);
+  const hasBar=e.kind==="prop"&&e.actual!=null;
+  const ml=MEASURE_LABEL[e.m]||e.m,stepStr=e.m==="dropoff"&&e.stepName?(" перед «"+scrLabel(e.stepName)+"»"):"";
+  const measRow=el("div",{class:"hc-meas"},el("span",{class:"hc-pred"},"предсказывали: "+ml+stepStr+" "+opSym(e.t.op)+" "+fmtMeasure(e.t.value,e.kind)));
+  if(!hasBar&&e.actual!=null)measRow.append(el("span",{class:"hc-fact"},"по факту: "+fmtMeasure(e.actual,e.kind)+(e.hits!=null&&e.n?" ("+e.hits+" из "+e.n+")":"")));
+  c.append(measRow);
+  const bar=hcBar(e);if(bar)c.append(bar);
+  if(note)c.append(el("div",{class:"hc-note"},note));
+  if(e.verdict==="no"||e.verdict==="incon"){const rf=relevantFinding(e,st);if(rf)c.append(el("div",{class:"hc-why"},el("span",{class:"hc-why-k"},"вероятная причина: "),rf.title));}
+  const act=el("div",{style:"margin-top:12px;display:flex;gap:9px;flex-wrap:wrap"});
+  const rb=el("button",{class:"btn ghost"},"Разобрать → респонденты и сессии");rb.onclick=()=>openHypEvidence(h,st,e);act.append(rb);
+  if(e.verdict==="incon"||e.verdict==="nodata"){const fl=flowByName(h.flow),link=fl&&testLink(fl);if(link)act.append(copyBtn("Собрать ещё → ссылка теста",()=>link));}
+  c.append(act);
+  return c;}
+function openHypEvidence(h,st,e){
+  const body=el("div",{class:"dwbody"});
+  const vlabel=e.verdict==="yes"?"подтвердилась":e.verdict==="no"?"не подтвердилась":e.verdict==="incon"?"нужен ещё тест":"мало данных";
+  body.append(el("div",{class:"dwseg"},el("span",{},"метрика ",el("b",{},MEASURE_LABEL[e.m]||e.m)),el("span",{},"предсказывал ",el("b",{},opSym(e.t.op)+" "+fmtMeasure(e.t.value,e.kind)))));
+  const bar=hcBar(e);if(bar)body.append(bar);
+  const testers=(st&&st.testers)||[];
+  // считаем по метрике гипотезы
+  const judged=testers.map(t=>({t,p:testerPass(t,e)})).filter(x=>x.p!==null);
+  const pass=judged.filter(x=>x.p).length;
+  const metricWord=e.m==="dropoff"?"прошли шаг":e.m==="firstclick"?"верный первый клик":e.m==="lostness"?"не заблудились":"выполнили сценарий";
+  body.append(el("div",{class:"grouplbl"},metricWord+": "+pass+" из "+judged.length));
+  if(!judged.length)body.append(el("div",{class:"empty"},"Нет релевантных сессий по этому сценарию."));
+  judged.forEach(({t,p})=>{const row=el("button",{class:"ev-row"},
+    el("span",{class:"ev-mark"+(p?"":" no"),style:"background:"+(p?"#1f8f53":"#c43d2e")},p?"✓":"✕"),
+    el("div",{class:"ev-main"},el("div",{class:"ev-when"},stamp(t.startedAt)),el("div",{class:"ev-dev"},[t.device.browser,t.device.os].filter(x=>x&&x!=="—").join(" / "))),
+    el("span",{class:"ed"},"трение "+t.frictionScore+(t.lostness!=null?" · потер. "+t.lostness:"")));
+    row.onclick=()=>{const s=(t.sessions&&t.sessions[0])||null;if(s)openSession(s,()=>openHypEvidence(h,st,e));};body.append(row);});
+  openDrawer("Гипотеза: "+vlabel,h.text,body);}
+
+function footnote(){return el("p",{class:"footnote"},"Малая выборка надёжно ловит частые проблемы, но не длинный хвост (n=5 ≈ 91% самых частых — NN/g, MeasuringU). Поэтому counts + доверительный интервал, а не голый процент; уверенно опровергаем, подтверждаем предварительно.");}
+
+async function setBaseline(){const anyData=FLOWDATA.some(fd=>fd.stats&&fd.stats.totals&&fd.stats.totals.testers);if(!anyData)return;
+  if(!window.confirm("Зафиксировать раунд?\n\nТекущие метрики по всем сценариям станут точкой отсчёта (сравнение «было → стало»), и начнётся новый раунд — следующие сессии пойдут в него. Прошлые останутся в истории.\n\nОтменить можно ссылкой «отменить» рядом с номером раунда."))return;
+  const at=new Date().toISOString(),map={};
+  FLOWDATA.forEach(fd=>{const S=fd.stats;if(!S||!S.totals||!S.totals.testers)return;const k=kpisFor(S),fn=funnelOf(S);const big=(fn||[]).reduce((m,f,i)=>i&&f.dropFromPrev>m?f.dropFromPrev:m,0);
+    map[fd.flow.name]={at,success:{hits:k.succ,total:k.goalN},drop:{pct:big},lostAvg:k.lostAvg,problems:k.problems};});
+  try{await fetch(ENDPOINT+"/baseline"+keyQ(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(map)});
+    await fetch(ENDPOINT+"/rounds"+keyQ(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({snapshot:map})});
+    VIEWROUND="current";await load();}catch(e){}}
+async function undoRound(){if(!window.confirm("Отменить последнюю фиксацию раунда? Сессии этого раунда снова сольются с предыдущими, отсчёт вернётся как было."))return;
+  try{const r=await(await fetch(ENDPOINT+"/rounds"+keyQ(),{method:"DELETE"})).json();const snap=(r&&r.prevSnapshot)||null;
+    await fetch(ENDPOINT+"/baseline"+keyQ(),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(snap)});BASE=snap;VIEWROUND="current";await load();}catch(e){}}
+
+$("#refresh").addEventListener("click",load);
+$("#setBaseline").addEventListener("click",setBaseline);
+$("#navToggle").addEventListener("click",openNav);
+$("#navscrim").addEventListener("click",closeNav);
+$("#tbRefresh").addEventListener("click",load);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeNav();});
+(function boot(){const s=document.createElement("script");s.src="config.js?t="+Date.now();s.onload=()=>{initCfg();load();};s.onerror=()=>{window.__noconfig=true;initCfg();load();};document.head.appendChild(s);})();
+</script>
+</body>
+</html>
