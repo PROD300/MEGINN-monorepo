@@ -46,7 +46,6 @@
 .primary:hover:not(:disabled) {
   background: var(--surface-action-primary-hover);
   border-color: var(--surface-action-primary-hover);
-  box-shadow: var(--shadow-glow-accent-strong);
 }
 .primary:disabled {
   box-shadow: none;
