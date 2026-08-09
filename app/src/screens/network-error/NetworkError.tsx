@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { WifiOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { TopNav, Button } from '../../components'
+import { Button } from '../../components'
 import { registerScreen } from '../registry'
 import { networkStatusStore, setAllConnected, type ConnectionStatus } from '../../data/network'
 import { showToast } from '../../lib/toast'
@@ -48,8 +48,6 @@ export function NetworkError() {
 
   return (
     <div className={styles.screen}>
-      <TopNav active="portfolio" />
-
       <div className={styles.body}>
         <main className={styles.main}>
           <div className={styles.errorCard}>

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { TopNav, Button } from '../../components'
+import { Button } from '../../components'
 import { registerScreen } from '../registry'
 import styles from './NotFound.module.css'
 
@@ -8,8 +8,6 @@ export function NotFound() {
 
   return (
     <div className={styles.screen}>
-      <TopNav />
-
       <div className={styles.body}>
         <main className={styles.main}>
           <div className={styles.card}>

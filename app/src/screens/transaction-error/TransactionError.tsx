@@ -1,6 +1,6 @@
 import { AlertTriangle, PauseCircle } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { TopNav, Badge, Button, ActivityRow } from '../../components'
+import { Badge, Button, ActivityRow } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore } from '../../data/rules'
 import styles from './TransactionError.module.css'
@@ -14,7 +14,6 @@ export function TransactionError() {
   if (!rule) {
     return (
       <div className={styles.screen}>
-        <TopNav active="liability" />
         <div className={styles.body}>
           <main className={styles.main}>
             <div className={styles.errorCardCol}>
@@ -39,8 +38,6 @@ export function TransactionError() {
 
   return (
     <div className={styles.screen}>
-      <TopNav active="liability" />
-
       <div className={styles.body}>
         <main className={styles.main}>
           <div className={styles.errorBody}>
