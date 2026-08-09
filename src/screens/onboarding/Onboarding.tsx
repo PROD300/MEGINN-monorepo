@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ShieldCheck, Users, ClipboardCheck, Check } from 'lucide-react'
-import { TopNav, Button, RoleRow, Badge } from '../../components'
+import { Button, RoleRow, Badge } from '../../components'
 import { registerScreen } from '../registry'
 import { showToast } from '../../lib/toast'
 import styles from './Onboarding.module.css'
@@ -76,8 +76,6 @@ export function Onboarding() {
 
   return (
     <div className={styles.screen}>
-      <TopNav />
-
       <div className={styles.body}>
         {/* StepIndicator */}
         <div className={styles.stepIndicator}>
@@ -96,7 +94,7 @@ export function Onboarding() {
 
         {/* StepCard */}
         {step === 1 && (
-          <div className={styles.stepCard}>
+          <div className={[styles.stepCard, styles.stepCardNarrow].join(' ')}>
             <div className={styles.stepHeader}>
               <ShieldCheck size={32} className={styles.icon} />
               <span className={styles.stepTitle}>Connect Smart Account</span>
@@ -132,7 +130,7 @@ export function Onboarding() {
         )}
 
         {step === 2 && (
-          <div className={styles.stepCard}>
+          <div className={[styles.stepCard, styles.stepCardNarrow].join(' ')}>
             <div className={styles.stepHeader}>
               <Users size={32} className={styles.icon} />
               <span className={styles.stepTitle}>Set Up Roles &amp; Permissions</span>
@@ -166,7 +164,7 @@ export function Onboarding() {
         )}
 
         {step === 3 && (
-          <div className={styles.stepCard}>
+          <div className={[styles.stepCard, styles.stepCardNarrow].join(' ')}>
             <div className={styles.stepHeader}>
               <ClipboardCheck size={32} className={styles.icon} />
               <span className={styles.stepTitle}>Review &amp; Activate</span>
