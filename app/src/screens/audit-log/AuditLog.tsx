@@ -174,10 +174,10 @@ export function AuditLog() {
               <Select options={statusOptions} placeholder="All Statuses" value={draft.status} onChange={e => updateDraft('status', e.target.value)} />
             </div>
             <div className={styles.inputWrap}>
-              <Input type="date" placeholder="Date from" value={draft.dateFrom} onChange={e => updateDraft('dateFrom', e.target.value)} />
+              <Input type="date" lang="en" placeholder="Date from" value={draft.dateFrom} onChange={e => updateDraft('dateFrom', e.target.value)} />
             </div>
             <div className={styles.inputWrap}>
-              <Input type="date" placeholder="Date to" value={draft.dateTo} onChange={e => updateDraft('dateTo', e.target.value)} />
+              <Input type="date" lang="en" placeholder="Date to" value={draft.dateTo} onChange={e => updateDraft('dateTo', e.target.value)} />
             </div>
             <Button variant="primary" size="sm" onClick={() => setApplied(draft)}>Apply</Button>
             {hasActiveFilters && (

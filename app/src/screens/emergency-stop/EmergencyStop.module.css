@@ -49,6 +49,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
+  width: 100%;
+  max-width: 1880px;
   padding: var(--space-3) var(--space-5);
   background: var(--bg-error-subtle);
   border-top: 1px solid var(--border-error);
