@@ -1,0 +1,217 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-default);
+}
+
+/* ─── InfoBanner ─── */
+.infoBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: var(--bg-info-subtle);
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.infoIcon {
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+
+/* ─── Section ─── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.secTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+/* ─── WalletsSection ─── */
+.walletList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.walletRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.walletIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.walletMid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.walletName {
+  font-size: var(--size-sm);
+  color: var(--text-default);
+}
+
+.walletMeta {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.walletAddress {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.walletActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.addWalletRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: var(--size-sm);
+}
+
+.addWalletIcon {
+  color: var(--text-muted);
+}
+
+/* ─── RolesSection ─── */
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ─── SecuritySection ─── */
+.secSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-6) var(--space-8);
+  flex-shrink: 0;
+}
+
+.secRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.secRowIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.secRowLabel {
+  flex: 1;
+  font-size: var(--size-sm);
+  color: var(--text-default);
+  min-width: 0;
+}
+
+.secRowText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.secRowCaption {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.secInputWrap {
+  flex-shrink: 0;
+  width: 140px;
+}
+
+.secCta {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-4);
+}
+
+/* ─── Add Role Modal ─── */
+.modalField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.modalLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}

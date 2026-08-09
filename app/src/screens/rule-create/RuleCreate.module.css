@@ -1,0 +1,273 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-default);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: var(--space-1);
+  font-size: var(--size-xs);
+}
+
+.breadcrumbAccent {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+
+.breadcrumbMuted {
+  color: var(--text-muted);
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-default);
+}
+
+/* ─── ContentArea ─── */
+.contentArea {
+  display: flex;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  align-items: flex-start;
+}
+
+.formColumn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.sectionTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.fieldLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.fieldNarrow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 240px;
+}
+
+.fieldWide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 240px;
+}
+
+.fieldFull {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+}
+
+.fieldGrow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.assetNetworkRow {
+  display: flex;
+  gap: var(--space-4);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.selectFill {
+  width: 100%;
+}
+
+.conditionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.conditionLabel {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.smallInput {
+  width: 80px;
+}
+
+.helperText {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.fieldError {
+  font-size: var(--size-xs);
+  color: var(--text-error);
+}
+
+.sellRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.sellLabel {
+  font-size: var(--size-sm);
+  color: var(--text-default);
+  white-space: nowrap;
+}
+
+.crossChainBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--bg-info-subtle);
+  border-left: 3px solid var(--border-focus);
+  width: 100%;
+}
+
+.crossChainTitle {
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.crossChainSubtitle {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.safeRow {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* ─── GasBanner ─── */
+.gasBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--bg-warning-subtle);
+  border: 1px solid var(--border-warning);
+  border-radius: var(--radius-md);
+  color: var(--text-warning);
+  font-size: var(--size-xs);
+  margin-top: var(--space-4);
+}
+
+.gasBannerIcon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── CTARow ─── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-default);
+}
+
+/* ─── PreviewColumn ─── */
+.previewColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.previewContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+.previewRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-1) 0;
+  font-size: var(--size-xs);
+}
+
+.previewLabel {
+  color: var(--text-muted);
+}
+
+.previewValue {
+  color: var(--text-default);
+  text-align: right;
+}
+
+.previewValueSuccess {
+  color: var(--text-success);
+  text-align: right;
+}
+
+.estimatedImpactCard {
+  width: 100%;
+}
+
+.summaryCard {
+  width: 100%;
+}

@@ -1,0 +1,133 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--surface-default);
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-default);
+}
+
+/* ─── RulesList ─── */
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.emptyState {
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--size-sm);
+}
+
+.ruleCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-default);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.ruleCardCrossChain {
+  border-left: 3px solid var(--border-focus);
+}
+
+.ruleLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.ruleName {
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.ruleDescription {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.ruleNetwork {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.ruleRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.ruleLastTriggered {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ruleActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--size-sm);
+}
+
+.actionEdit {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+
+.actionSecondary {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+/* ─── FooterStats ─── */
+.footerStats {
+  display: flex;
+  gap: var(--space-8);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-subtle);
+  border-top: 1px solid var(--border-default);
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}

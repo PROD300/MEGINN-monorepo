@@ -1,0 +1,213 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-12) var(--space-4);
+}
+
+/* ─── StepIndicator ─── */
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.stepCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-default);
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.stepCircleActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-action-primary);
+  font-size: var(--size-xs);
+  color: var(--text-on-action);
+}
+
+.stepLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.stepLabelActive {
+  font-size: var(--size-xs);
+  color: var(--text-accent);
+  white-space: nowrap;
+}
+
+.connector {
+  flex: 1;
+  height: 1px;
+  background: var(--border-default);
+}
+
+.stepCaption {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+/* ─── StepCard ─── */
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 640px;
+  padding: var(--space-8);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.stepCardNarrow {
+  max-width: 480px;
+}
+
+.stepHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: center;
+}
+
+.icon {
+  color: var(--text-accent);
+  flex-shrink: 0;
+}
+
+.stepTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+  color: var(--text-default);
+}
+
+.stepSubtitle {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+.infoBanner {
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--bg-info-subtle);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-md);
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.walletConnectRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+  display: flex;
+}
+
+.walletHint {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.stepCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ─── Step 2: Permissions ─── */
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+/* ─── Step 3: Review ─── */
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.reviewRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--size-sm);
+}
+
+.reviewRow:last-child {
+  border-bottom: none;
+}
+
+.reviewLabel {
+  color: var(--text-muted);
+}
+
+.reviewValue {
+  color: var(--text-default);
+  font-weight: var(--weight-medium);
+}
+
+.successBanner {
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--bg-success-subtle);
+  border: 1px solid var(--border-default);
+  border-left: 3px solid var(--bg-success);
+  border-radius: var(--radius-md);
+  font-size: var(--size-xs);
+  color: var(--text-success);
+}

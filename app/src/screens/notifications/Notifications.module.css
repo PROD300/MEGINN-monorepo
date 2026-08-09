@@ -1,0 +1,59 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+/* ─── Body ─── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-default);
+}
+
+/* ─── FilterTabs ─── */
+.tabsWrap {
+  padding: 0 var(--space-6);
+  background: var(--surface-elevated);
+  border-bottom: 1px solid var(--border-default);
+  flex-shrink: 0;
+}
+
+/* ─── NotificationList ─── */
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.emptyState {
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--size-sm);
+}

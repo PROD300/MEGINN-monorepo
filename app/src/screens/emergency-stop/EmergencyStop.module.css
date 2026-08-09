@@ -1,0 +1,213 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface-level-1);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ─── PageHeader ─── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  flex-shrink: 0;
+}
+
+.icon {
+  color: var(--text-error);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+  color: var(--text-default);
+}
+
+/* ─── WarningBanner ─── */
+.warningBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: var(--bg-error-subtle);
+  border-top: 1px solid var(--border-error);
+  border-bottom: 1px solid var(--border-error);
+  flex-shrink: 0;
+}
+
+.warningIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-error);
+  flex-shrink: 0;
+}
+
+.warningText {
+  flex: 1;
+  font-size: var(--size-sm);
+  color: var(--text-error);
+}
+
+/* ─── StopContentArea ─── */
+.contentArea {
+  display: flex;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* ─── ImpactColumn ─── */
+.impactColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1 1 480px;
+  min-width: 0;
+}
+
+.statusCard,
+.recoveryCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.cardTitle {
+  font-size: var(--size-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-default);
+}
+
+.impactRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--size-base);
+}
+
+.impactLabel {
+  color: var(--text-default);
+}
+
+.impactValue {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-default);
+}
+
+.cardFootnote {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+.recoveryIntro {
+  font-size: var(--size-sm);
+  color: var(--text-default);
+}
+
+.recoveryStep {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+.recoveryNote {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+}
+
+/* ─── ConfirmColumn ─── */
+.confirmColumn {
+  display: flex;
+  flex: 1 1 360px;
+  max-width: 400px;
+}
+
+.confirmCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-6);
+  background: var(--surface-default);
+  border: 2px solid var(--border-error);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.stopIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--bg-error);
+  color: var(--text-on-action);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.confirmTitle {
+  font-size: var(--size-xl);
+  font-weight: var(--weight-semibold);
+  line-height: 1.4;
+  color: var(--text-error);
+  text-align: center;
+}
+
+.confirmSubtitle {
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.confirmDivider {
+  height: 1px;
+  width: 100%;
+  background: var(--border-default);
+}
+
+.confirmInput {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.confirmInputLabel {
+  font-size: var(--size-xs);
+  color: var(--text-muted);
+}
+
+.fullWidth {
+  width: 100%;
+  display: flex;
+}

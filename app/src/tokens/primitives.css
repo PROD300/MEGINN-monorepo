@@ -1,0 +1,83 @@
+/* OBSIDIAN DS — Primitive Tokens */
+/* Source: ds/foundation.md — Слой 1 */
+
+:root {
+  /* === Accent ("Ice Blue" pilot) — promoted from Portfolio draft to global,
+     2026-08-09. Replaces the Sky-blue version from the first dark-theme pass —
+     that one is gone now, this single-hue (~247°) purple-blue ramp is the
+     real accent everywhere. === */
+  --accent-50:  #F0EEFF;
+  --accent-100: #DEDAFF;
+  --accent-300: #9C8DFA;
+  --accent-500: #4B34F5;
+  --accent-700: #2E1FB8;
+  --accent-900: #180F5C;
+
+  /* === Neutrals (Cool Gray) === */
+  --gray-00:  #FFFFFF;
+  --gray-50:  #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-500: #64748B;
+  --gray-700: #334155;
+  --gray-900: #0F172A;
+  --gray-950: #020617;
+
+  /* === Functional — converge on the accent per approval notes: warning =
+     accent contrast tone, success/error = same glowing accent as Stop All.
+     Promoted from Portfolio draft to global, 2026-08-09. === */
+  --success-500: #4B34F5;
+  --warning-500: #9C8DFA;
+  --error-500:   #4B34F5;
+  --info-500:    #38BDF8;
+
+  /* === Typography === */
+  /* Rebrand 2026-08-09: Inter → Geist + Geist Mono, approved — see
+     HANDOFF_COWORK_TYPOGRAPHY_2026-08-09.md for rationale and sourcing. */
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --size-xs:   12px;
+  --size-sm:   14px;
+  --size-base: 16px;
+  --size-lg:   18px;
+  --size-xl:   20px;
+  --size-2xl:  24px;
+  --size-3xl:  32px;
+  --size-4xl:  48px;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --line-height-base:  1.5;
+  --line-height-tight: 1.25;
+  --letter-spacing-tight: -0.02em;
+
+  /* === Radii === */
+  --radius-none: 0px;
+  --radius-sm:   4px;
+  --radius-md:   4px; /* was 8px — unified to sharp institutional radius, 2026-08-09 */
+  --radius-lg:   16px;
+  --radius-pill: 9999px;
+
+  /* === Spacing === */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.10), 0 4px 6px rgba(15, 23, 42, 0.05);
+  --shadow-float: 0 24px 48px -24px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 0 22px 2px rgba(75, 52, 245, 0.22);
+  --shadow-glow-accent:        0 0 10px 1px rgba(75, 52, 245, 0.55), 0 0 28px 6px rgba(75, 52, 245, 0.25);
+  --shadow-glow-accent-strong: 0 0 14px 2px rgba(75, 52, 245, 0.8),  0 0 40px 10px rgba(75, 52, 245, 0.4);
+}
