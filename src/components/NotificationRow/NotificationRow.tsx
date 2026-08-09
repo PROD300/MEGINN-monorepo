@@ -19,7 +19,7 @@ export function NotificationRow({ status, title, description, time, badge }: Not
         <span className={styles.title}>{title}</span>
         <span className={styles.description}>{description}</span>
         <div className={styles.meta}>
-          <span>{time}</span>
+          <span className="ds-numeric">{time}</span>
           {badge}
         </div>
       </div>

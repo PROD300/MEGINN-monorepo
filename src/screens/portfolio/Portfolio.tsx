@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, StatCard, ActivityRow, Table, Button, Modal, Input, Select } from '../../components'
+import { TopNav, StatCard, ActivityRow, Table, Button, Modal, Input, Select } from '../../components'
 import { registerScreen } from '../registry'
 import { allocationStore, activityStore, getTotalAUM, rebalanceNow, addAsset } from '../../data/portfolio'
 import { rulesStore, getRuleById } from '../../data/rules'
@@ -10,8 +10,8 @@ import styles from './Portfolio.module.css'
 
 const allocationColumns = [
   { key: 'asset', header: 'Asset' },
-  { key: 'allocation', header: 'Allocation' },
-  { key: 'value', header: 'Value' },
+  { key: 'allocation', header: 'Allocation', render: (row: Record<string, unknown>) => <span className={styles.mono}>{String(row.allocation)}</span> },
+  { key: 'value', header: 'Value', render: (row: Record<string, unknown>) => <span className={styles.mono}>{String(row.value)}</span> },
 ]
 
 const assetOptions = [
@@ -130,92 +130,86 @@ export function Portfolio() {
     setAssetErrors({})
   }
 
+  const onTarget = ethOverBy <= 0.05
+
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="portfolio" />
 
       <div className={styles.body}>
-        <AppSidebar active="portfolio" />
-
         <main className={styles.main}>
-          {/* StatusBar */}
-          <div className={styles.statusBar}>
-            <div className={styles.statusLeft}>
-              <span className={styles.statusItem}>● ETH — Connected</span>
-              <span className={styles.statusItem}>● Arbitrum — Connected</span>
-              <span className={styles.statusItemAccent}>● Bridge — Active (Li.Fi · avg 42 sec)</span>
+          {/* Bento grid — asymmetric, Asset Allocation as the large central tile */}
+          <div className={styles.bento}>
+            <div className={styles.tileStat1}>
+              <StatCard variant="neutral" label="Total AUM" value={formatUsd(totalAUM)} subtitle="across 2 networks" />
             </div>
-            <span className={styles.statusSync}>Last sync: 2 min ago</span>
-          </div>
-
-          {/* StatsRow */}
-          <div className={styles.statsRow}>
-            <StatCard
-              variant="neutral"
-              label="Total AUM"
-              value={formatUsd(totalAUM)}
-              subtitle="across 2 networks"
-            />
-            <StatCard
-              variant="success"
-              label="Active Rules"
-              value={String(activeRulesCount)}
-              subtitle="auto-rebalancing enabled"
-            />
-            <StatCard
-              variant="neutral"
-              label="Last Rebalance"
-              value={lastRebalanceActivity?.time ?? '—'}
-              subtitle={lastRebalanceFlow ?? 'No rebalances yet'}
-            />
-          </div>
-
-          {/* AlertBanner */}
-          {ethOverBy > 0.05 ? (
-            <div className={styles.alertBanner}>
-              ⚠&nbsp;&nbsp;Next rebalance trigger: ETH allocation +{formatPct(ethOverBy)} above target
+            <div className={styles.tileStat2}>
+              <StatCard variant="success" label="Active Rules" value={String(activeRulesCount)} subtitle="auto-rebalancing enabled" />
             </div>
-          ) : (
-            <div className={styles.alertBannerSuccess}>
-              ✓&nbsp;&nbsp;All allocations within target
+            <div className={styles.tileStat3}>
+              <StatCard variant="neutral" label="Last Rebalance" value={lastRebalanceActivity?.time ?? '—'} subtitle={lastRebalanceFlow ?? 'No rebalances yet'} />
             </div>
-          )}
-
-          {/* Asset Allocation */}
-          <div className={styles.section}>
-            <div className={styles.secHeader}>
-              <span className={styles.secTitle}>Asset Allocation</span>
+            <div className={styles.tileStat4}>
+              <StatCard
+                variant={onTarget ? 'success' : 'warning'}
+                label="Rebalance Trigger"
+                value={onTarget ? 'On target' : `+${formatPct(ethOverBy)}`}
+                subtitle={onTarget ? 'All allocations within target' : 'ETH allocation above target'}
+              />
             </div>
-            <div className={styles.divider} />
-            {allocationRows.length > 0 ? (
-              <Table columns={allocationColumns} rows={allocationRows} />
-            ) : (
-              <div className={styles.emptyState}>No assets in portfolio yet.</div>
-            )}
-          </div>
 
-          {/* QuickActions */}
-          <div className={styles.quickActions}>
-            <Button variant="primary" size="md" onClick={handleRebalanceNow} loading={rebalancing}>Rebalance Now</Button>
-            <Button variant="ghost" size="md" onClick={() => setModalOpen(true)}>Add Asset</Button>
-            <Button variant="ghost" size="md" onClick={() => navigate('/cross-chain-bridge')} data-track="bridge-funds-cta">Bridge Funds</Button>
-            <Button variant="ghost" size="md" onClick={handleDownloadReport} loading={downloading}>Download Report</Button>
-          </div>
-
-          {/* Recent Activity */}
-          <div className={styles.activitySection}>
-            <div className={styles.secHeader}>
-              <span className={styles.secTitle}>Recent Automation Activity</span>
-              <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View full audit log →</a>
+            <div className={[styles.tile, styles.tileAllocation].join(' ')}>
+              <div className={styles.secHeader}>
+                <span className={styles.secTitle}>Asset Allocation</span>
+              </div>
+              <div className={styles.tableWrap}>
+                {allocationRows.length > 0 ? (
+                  <Table columns={allocationColumns} rows={allocationRows} />
+                ) : (
+                  <div className={styles.emptyState}>No assets in portfolio yet.</div>
+                )}
+              </div>
             </div>
-            <div className={styles.activityList}>
-              {activity.length > 0 ? (
-                activity.slice(0, 6).map(item => (
-                  <ActivityRow key={item.id} status={item.status} description={item.description} time={item.time} statusLabel={item.statusLabel} />
-                ))
-              ) : (
-                <div className={styles.emptyState}>No automation activity yet.</div>
-              )}
+
+            <div className={[styles.tile, styles.tileNetwork].join(' ')}>
+              <div className={styles.secHeader}>
+                <span className={styles.secTitle}>Network Status</span>
+                <span className={styles.statusSync}>2 min ago</span>
+              </div>
+              <div className={styles.networkList}>
+                <span className={styles.statusItem}>● ETH — Connected</span>
+                <span className={styles.statusItem}>● Arbitrum — Connected</span>
+                <span className={styles.statusItemAccent}>● Bridge — Active (Li.Fi · avg 42 sec)</span>
+              </div>
+            </div>
+
+            <div className={[styles.tile, styles.tileActivity].join(' ')}>
+              <div className={styles.secHeader}>
+                <span className={styles.secTitle}>Recent Activity</span>
+                <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View log →</a>
+              </div>
+              <div className={styles.activityList}>
+                {activity.length > 0 ? (
+                  activity.slice(0, 6).map(item => (
+                    <ActivityRow key={item.id} status={item.status} description={item.description} time={item.time} statusLabel={item.statusLabel} />
+                  ))
+                ) : (
+                  <div className={styles.emptyState}>No automation activity yet.</div>
+                )}
+              </div>
+            </div>
+
+            <div className={[styles.tile, styles.tileActions].join(' ')}>
+              <div className={styles.quickActions}>
+                <button className={styles.primaryCta} onClick={handleRebalanceNow} disabled={rebalancing}>
+                  {rebalancing ? 'Rebalancing…' : 'Rebalance Now'}
+                </button>
+                <button className={styles.linkAction} onClick={() => setModalOpen(true)}>Add Asset</button>
+                <button className={styles.linkAction} onClick={() => navigate('/cross-chain-bridge')} data-track="bridge-funds-cta">Bridge Funds</button>
+                <button className={styles.linkAction} onClick={handleDownloadReport} disabled={downloading}>
+                  {downloading ? 'Preparing…' : 'Download Report'}
+                </button>
+              </div>
             </div>
           </div>
         </main>

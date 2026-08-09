@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Badge, Table, Button } from '../../components'
+import { TopNav, Badge, Table, Button } from '../../components'
 import { registerScreen } from '../registry'
 import { bridgeStore, completeBridge, isWithin24h, type BridgeOperation, type BridgeStatus } from '../../data/bridge'
 import { showToast } from '../../lib/toast'
@@ -67,14 +67,14 @@ export function CrossChainBridge() {
   }
 
   const activeColumns = [
-    { key: 'asset', header: 'Asset' },
+    { key: 'asset', header: 'Asset', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.asset)}</span> },
     { key: 'route', header: 'Route' },
-    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => formatUsd(row.amountUsd as number) },
+    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => <span className="ds-numeric">{formatUsd(row.amountUsd as number)}</span> },
     { key: 'provider', header: 'Provider' },
     { key: 'time', header: 'Status', render: (row: Record<string, unknown>) => (
       <span className={styles.inProgressCell}>
         <Badge variant={statusBadge[row.status as BridgeStatus]}>{statusLabel[row.status as BridgeStatus]}</Badge>
-        <span className={styles.providerMeta}>{row.time as string}</span>
+        <span className={`${styles.providerMeta} ds-numeric`}>{row.time as string}</span>
       </span>
     ) },
     { key: 'action', header: '', render: (row: Record<string, unknown>) => (
@@ -83,11 +83,11 @@ export function CrossChainBridge() {
   ]
 
   const historyColumns = [
-    { key: 'asset', header: 'Asset' },
+    { key: 'asset', header: 'Asset', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.asset)}</span> },
     { key: 'route', header: 'Route' },
-    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => formatUsd(row.amountUsd as number) },
+    { key: 'amountUsd', header: 'Amount', render: (row: Record<string, unknown>) => <span className="ds-numeric">{formatUsd(row.amountUsd as number)}</span> },
     { key: 'provider', header: 'Provider' },
-    { key: 'time', header: 'Time' },
+    { key: 'time', header: 'Time', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.time)}</span> },
     { key: 'status', header: 'Status', render: (row: Record<string, unknown>) => (
       <Badge variant={statusBadge[row.status as BridgeStatus]}>{statusLabel[row.status as BridgeStatus]}</Badge>
     ) },
@@ -95,11 +95,9 @@ export function CrossChainBridge() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="rebalancing" />
 
       <div className={styles.body}>
-        <AppSidebar active="rebalancing" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

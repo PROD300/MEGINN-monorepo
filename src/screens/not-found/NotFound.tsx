@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Button } from '../../components'
+import { TopNav, Button } from '../../components'
 import { registerScreen } from '../registry'
 import styles from './NotFound.module.css'
 
@@ -8,11 +8,9 @@ export function NotFound() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav />
 
       <div className={styles.body}>
-        <AppSidebar />
-
         <main className={styles.main}>
           <div className={styles.card}>
             <span className={styles.code}>404</span>

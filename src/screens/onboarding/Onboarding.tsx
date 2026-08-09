@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ShieldCheck, Users, ClipboardCheck, Check } from 'lucide-react'
-import { AppTopBar, Button, RoleRow, Badge } from '../../components'
+import { TopNav, Button, RoleRow, Badge } from '../../components'
 import { registerScreen } from '../registry'
 import { showToast } from '../../lib/toast'
 import styles from './Onboarding.module.css'
@@ -76,7 +76,7 @@ export function Onboarding() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav />
 
       <div className={styles.body}>
         {/* StepIndicator */}

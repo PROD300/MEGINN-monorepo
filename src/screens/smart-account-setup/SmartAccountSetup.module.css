@@ -115,6 +115,11 @@
   color: var(--text-muted);
 }
 
+.walletAddress {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
 .walletActions {
   display: flex;
   align-items: center;

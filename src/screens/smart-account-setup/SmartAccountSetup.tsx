@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Wallet, HardDrive, Plus, ShieldCheck, Fingerprint } from 'lucide-react'
-import { AppTopBar, AppSidebar, Button, Badge, RoleRow, Input, Select, Toggle, Modal } from '../../components'
+import { TopNav, Button, Badge, RoleRow, Input, Select, Toggle, Modal } from '../../components'
 import { registerScreen } from '../registry'
 import { rolesStore, addRole, roleAddressExists } from '../../data/roles'
 import { securityStore, saveSecuritySettings } from '../../data/security'
@@ -89,11 +89,9 @@ export function SmartAccountSetup() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="settings" />
 
       <div className={styles.body}>
-        <AppSidebar active="settings" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>
@@ -121,7 +119,7 @@ export function SmartAccountSetup() {
                   </span>
                   <div className={styles.walletMid}>
                     <span className={styles.walletName}>{w.name}</span>
-                    <span className={styles.walletMeta}>{w.address}</span>
+                    <span className={[styles.walletMeta, styles.walletAddress].join(' ')}>{w.address}</span>
                     <span className={styles.walletMeta}>{w.networks}</span>
                   </div>
                   <div className={styles.walletActions}>

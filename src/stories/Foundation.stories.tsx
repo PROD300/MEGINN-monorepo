@@ -114,7 +114,8 @@ function FoundationPage() {
       </Section>
 
       <Section title="Typography Scale">
-        <Row name="font-sans"          value="Inter" />
+        <Row name="font-sans"          value="Geist" />
+        <Row name="font-mono"          value="Geist Mono" />
         <Row name="size-xs"            value="12px" />
         <Row name="size-sm"            value="14px" />
         <Row name="size-base"          value="16px" />

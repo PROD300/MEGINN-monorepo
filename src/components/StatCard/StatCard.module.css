@@ -1,8 +1,8 @@
 .card {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-float);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
@@ -32,11 +32,13 @@
 }
 
 .value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
   font-size: var(--size-2xl);
   font-weight: var(--weight-semibold);
   color: var(--text-default);
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-tight);
+  letter-spacing: 0;
 }
 
 .subtitle {

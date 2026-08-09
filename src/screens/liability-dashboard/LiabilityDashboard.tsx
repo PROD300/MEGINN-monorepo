@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, StatCard, LiabilityCard, Badge, Button, Table } from '../../components'
+import { TopNav, StatCard, LiabilityCard, Badge, Button, Table } from '../../components'
 import { registerScreen } from '../registry'
 import { agreementStore } from '../../data/agreement'
 import { profileStore } from '../../data/profile'
@@ -8,14 +8,14 @@ import { showToast } from '../../lib/toast'
 import styles from './LiabilityDashboard.module.css'
 
 const riskColumns = [
-  { key: 'asset', header: 'Asset' },
-  { key: 'allocation', header: 'Allocation' },
-  { key: 'target', header: 'Target' },
+  { key: 'asset', header: 'Asset', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.asset)}</span> },
+  { key: 'allocation', header: 'Allocation', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.allocation)}</span> },
+  { key: 'target', header: 'Target', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.target)}</span> },
   {
     key: 'deviation',
     header: 'Deviation',
     render: (row: Record<string, unknown>) => (
-      <span className={row.risk === 'Medium' ? styles.warningText : styles.successText}>
+      <span className={`ds-numeric ${row.risk === 'Medium' ? styles.warningText : styles.successText}`}>
         {String(row.deviation)}
       </span>
     ),
@@ -91,11 +91,9 @@ export function LiabilityDashboard() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="liability" />
 
       <div className={styles.body}>
-        <AppSidebar active="liability" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

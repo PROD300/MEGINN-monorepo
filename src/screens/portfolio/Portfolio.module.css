@@ -1,8 +1,14 @@
 .screen {
+  /* Accent palette, functional colors, and the neon-glow system (border-hairline,
+     shadow-float, shadow-glow-accent, surface-card-grid fade) all promoted to
+     primitives.css / semantics.css as the sitewide default, 2026-08-09 — no
+     longer scoped here. */
+
   display: flex;
   flex-direction: column;
   height: 100%;
   background: var(--surface-level-1);
+  color: var(--text-default);
 }
 
 /* ─── Body ─── */
@@ -20,89 +26,81 @@
   min-width: 0;
 }
 
-/* ─── StatusBar ─── */
-.statusBar {
+/* ─── Bento grid — top margin now comes straight after TopNav ───
+   12-col base grid so the right column can be a clean 1/3 (cols 9-12)
+   against a 2/3 left side (cols 1-8), while the top stat row still
+   divides evenly into 4 equal cards (3 cols each). flex:1 + the 1fr
+   row lets the grid stretch to fill the viewport height instead of
+   leaving empty space below the actions bar. */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* row1 (stats) +1/3, row2 (Network Status) x2, row4 (actions bar) x2 —
+     measured naturals were 108px / 164px / 75px */
+  grid-template-rows: 144px 328px 1fr 150px;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 1880px;
+  margin: var(--space-8) auto 0;
+  padding: 0 var(--space-5) var(--space-8);
+  flex: 1;
+  min-height: 0;
+}
+
+.tileStat1 { grid-column: 1 / 4;   grid-row: 1; display: flex; }
+.tileStat2 { grid-column: 4 / 7;   grid-row: 1; display: flex; }
+.tileStat3 { grid-column: 7 / 10;  grid-row: 1; display: flex; }
+.tileStat4 { grid-column: 10 / 13; grid-row: 1; display: flex; }
+
+/* StatCard is a shared component (also used on Liability & Compliance) — stretch
+   it to fill the taller row via its wrapper instead of editing the component. */
+.tileStat1 > *, .tileStat2 > *, .tileStat3 > *, .tileStat4 > * {
+  flex: 1;
+}
+
+.tileAllocation { grid-column: 1 / 9;   grid-row: 2 / 4; display: flex; flex-direction: column; }
+.tileNetwork    { grid-column: 9 / 13;  grid-row: 2;     display: flex; flex-direction: column; }
+.tileActivity   { grid-column: 9 / 13;  grid-row: 3 / 5; display: flex; flex-direction: column; min-height: 0; }
+.tileActions    { grid-column: 1 / 9;   grid-row: 4; }
+
+/* ─── Network Status tile content (moved off the old top-of-page strip) ─── */
+.networkList {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  padding: 0 var(--space-4);
-  background: var(--surface-level-2);
-  border-bottom: 1px solid var(--border-default);
-  font-size: var(--size-xs);
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
 }
 
-.statusLeft {
-  display: flex;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-.statusItem {
-  color: var(--text-success);
-  white-space: nowrap;
-}
-
+.statusItem,
 .statusItemAccent {
-  color: var(--text-accent);
+  color: var(--accent-300);
   white-space: nowrap;
+  font-size: var(--size-sm);
 }
 
 .statusSync {
   color: var(--text-muted);
   white-space: nowrap;
-}
-
-/* ─── StatsRow ─── */
-.statsRow {
-  display: flex;
-  gap: var(--space-4);
-  padding: var(--space-4);
-  flex-shrink: 0;
-}
-
-.statsRow > * {
-  flex: 1;
-  min-width: 0;
-}
-
-/* ─── AlertBanner ─── */
-.alertBanner {
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 var(--space-4);
-  background: var(--bg-warning-subtle);
-  border-bottom: 1px solid var(--border-warning);
   font-size: var(--size-xs);
-  color: var(--text-warning);
-  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
-.alertBannerSuccess {
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 var(--space-4);
-  background: var(--bg-success-subtle);
-  border-bottom: 1px solid var(--border-default);
-  font-size: var(--size-xs);
-  color: var(--text-success);
-  flex-shrink: 0;
-}
-
-/* ─── Section ─── */
-.section {
-  padding: var(--space-4) var(--space-4) 0;
-  flex-shrink: 0;
+/* Shared "floating tile" card frame — same treatment as StatCard, built locally
+   so we don't have to touch the shared component files for this draft. */
+.tile {
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  padding: var(--space-5);
 }
 
 .secHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: var(--space-2);
+  padding-bottom: var(--space-3);
 }
 
 .secTitle {
@@ -113,37 +111,79 @@
 
 .secLink {
   font-size: var(--size-sm);
-  color: var(--text-accent);
+  color: var(--accent-300);
   text-decoration: none;
+  transition: text-shadow 0.15s;
+}
+.secLink:hover {
+  text-shadow: 0 0 8px rgba(75, 52, 245, 0.9), 0 0 20px rgba(75, 52, 245, 0.5);
 }
 
-.divider {
-  height: 1px;
-  background: var(--border-default);
-  margin-bottom: 0;
+.tableWrap {
+  flex: 1;
 }
 
-/* ─── QuickActions ─── */
+/* ─── QuickActions — now its own bento tile, no more edge-to-edge bar ─── */
 .quickActions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-subtle);
-  border-top: 1px solid var(--border-default);
-  flex-shrink: 0;
+  gap: var(--space-6);
 }
+
+.primaryCta {
+  font-family: var(--font-sans);
+  font-size: var(--size-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.01em;
+  color: var(--gray-00);
+  background: var(--accent-500);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-5);
+  cursor: pointer;
+  box-shadow: var(--shadow-glow-accent);
+  transition: box-shadow 0.15s, opacity 0.15s;
+}
+.primaryCta:hover { box-shadow: var(--shadow-glow-accent-strong); }
+.primaryCta:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+.linkAction {
+  font-family: var(--font-sans);
+  font-size: var(--size-sm);
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  padding: var(--space-1) 0;
+  cursor: pointer;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+.linkAction:hover {
+  color: var(--accent-300);
+  text-shadow: 0 0 8px rgba(75, 52, 245, 0.9), 0 0 20px rgba(75, 52, 245, 0.5);
+}
+.linkAction:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ─── RecentActivity ─── */
-.activitySection {
-  padding: var(--space-4) var(--space-4) var(--space-8);
-  flex-shrink: 0;
-}
-
 .activityList {
   display: flex;
   flex-direction: column;
-  margin-top: var(--space-2);
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ActivityRow is a shared component (also used on TransactionError), so we
+   don't touch its own CSS module for a draft-only tweak — reach its root by
+   the CSS-module class-name fragment instead. +25% vertical padding: 12px → 15px. */
+.activityList :global([class*="_row_"]) {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
 .emptyState {

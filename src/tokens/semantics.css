@@ -4,43 +4,45 @@
 
 :root {
   /* === Surfaces === */
-  --surface-default:               var(--gray-50);
-  --surface-subtle:                var(--gray-50);
-  --surface-elevated:              var(--gray-00);
+  /* Dark base promoted from Portfolio pilot to sitewide default, approved 2026-08-09 */
+  --surface-default:               var(--gray-950);
+  --surface-subtle:                var(--gray-900);
+  --surface-elevated:              var(--gray-900);
   --surface-action-primary:        var(--accent-500);
   --surface-action-primary-hover:  var(--accent-700);
-  --surface-action-ghost-hover:    var(--accent-50);
+  --surface-action-ghost-hover:    var(--accent-900);
 
   /* === Surface Levels === */
-  --surface-level-1: var(--gray-50);
-  --surface-level-2: var(--gray-100);
-  --surface-level-3: var(--gray-200);
-  --surface-level-4: var(--gray-300);
+  --surface-level-1: var(--gray-950);
+  --surface-level-2: var(--gray-900);
+  --surface-level-3: var(--gray-700);
+  --surface-level-4: var(--gray-500);
 
   /* === AppShell (dark TopBar + Sidebar) === */
-  --surface-app-shell:    var(--gray-900);
+  --surface-app-shell:    var(--gray-950);
   --text-nav-item:        var(--gray-300);
   --text-nav-active:      var(--gray-00);
   --text-on-dark-accent:  var(--accent-300);
   --border-app-shell:     var(--gray-700);
 
   /* === Text === */
-  --text-default:   var(--gray-900);
-  --text-muted:     var(--gray-500);
-  --text-disabled:  var(--gray-300);
+  --text-default:   var(--gray-00);
+  --text-muted:     var(--gray-300);
+  --text-disabled:  var(--gray-700);
   --text-on-action: var(--gray-00);
   --text-on-dark:   var(--gray-00);
   --text-error:     var(--error-500);
   --text-warning:   var(--warning-500);
   --text-success:   var(--success-500);
-  --text-accent:    var(--accent-500);
+  --text-accent:    var(--accent-300);
 
   /* === Borders === */
-  --border-default: var(--gray-200);
-  --border-strong:  var(--gray-300);
+  --border-default: var(--gray-700);
+  --border-strong:  var(--gray-500);
   --border-focus:   var(--accent-500);
   --border-error:   var(--error-500);
   --border-warning: var(--warning-500);
+  --border-hairline: rgba(75, 52, 245, 0.32); /* glass-edge stroke for floating cards — accent-tinted, promoted 2026-08-09 */
 
   /* === Status backgrounds (solid) === */
   --bg-success: var(--success-500);
@@ -49,13 +51,23 @@
   --bg-info:    var(--info-500);
 
   /* === Status backgrounds (subtle @ 10% opacity) === */
-  --bg-success-subtle: rgba(16, 185, 129, 0.10);
-  --bg-warning-subtle: rgba(245, 158, 11, 0.10);
-  --bg-error-subtle:   rgba(239, 68,  68, 0.10);
-  --bg-info-subtle:    rgba(59, 130, 246, 0.10);
+  --bg-success-subtle: rgba(75, 52, 245, 0.10);
+  --bg-warning-subtle: rgba(75, 52, 245, 0.10);
+  --bg-error-subtle:   rgba(75, 52, 245, 0.10);
+  --bg-info-subtle:    rgba(56, 189, 248, 0.10);
 
   /* === Extended accent aliases === */
   --surface-accent:   var(--accent-500);
   --surface-positive: var(--success-500);
   --surface-warning:  var(--warning-500);
+
+  /* === Floating card treatment (Key Visual reference, approved 2026-08-09) ===
+     Grid now fades to the card's own background near the edges (radial layer
+     on top) so it never collides with border-hairline — promoted from the
+     Portfolio draft together with the rest of the glow system. */
+  --surface-card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 55%);
+  --surface-card-grid:
+    radial-gradient(ellipse 88% 88% at center, transparent 45%, var(--surface-elevated) 100%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 24px);
 }

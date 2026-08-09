@@ -1,14 +1,17 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
   overflow: hidden;
   font-size: var(--size-sm);
 }
 
 .thead tr {
-  background: var(--surface-level-2);
+  background: transparent;
+  border-bottom: 1px solid var(--border-hairline);
 }
 
 .th {
@@ -33,13 +36,13 @@
 }
 
 .tbody tr {
-  background: var(--surface-elevated);
-  border-top: 1px solid var(--border-default);
+  background: transparent;
+  border-top: 1px solid var(--border-hairline);
   transition: background 0.1s;
 }
 
 .tbody tr:hover {
-  background: var(--surface-action-ghost-hover);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .td {

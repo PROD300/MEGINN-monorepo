@@ -3,8 +3,8 @@
   flex-direction: column;
   gap: var(--space-1);
   padding: var(--space-3) var(--space-4);
-  background: var(--surface-elevated);
-  border-bottom: 1px solid var(--border-default);
+  background: var(--surface-card-sheen), var(--surface-elevated);
+  border-bottom: 1px solid var(--border-hairline);
   position: relative;
 }
 
@@ -26,7 +26,7 @@
   font-size: var(--size-xs);
 }
 
-.time { color: var(--text-muted); }
+.time { color: var(--text-muted); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .status.success { color: var(--text-success); }
 .status.warning { color: var(--text-warning); }
 .status.info    { color: var(--text-accent); }

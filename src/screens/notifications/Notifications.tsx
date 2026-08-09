@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AppTopBar, AppSidebar, Button, Badge, Tabs, NotificationRow } from '../../components'
+import { TopNav, Button, Badge, Tabs, NotificationRow } from '../../components'
 import { registerScreen } from '../registry'
 import { notificationsStore, markAllRead, markRead, getUnreadCount, type NotificationCategory } from '../../data/notifications'
 import { showToast } from '../../lib/toast'
@@ -26,11 +26,9 @@ export function Notifications() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="settings" />
 
       <div className={styles.body}>
-        <AppSidebar active="settings" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

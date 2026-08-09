@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { AppTopBar, AppSidebar, Button, Select, Input, Table } from '../../components'
+import { TopNav, Button, Select, Input, Table } from '../../components'
 import { registerScreen } from '../registry'
 import { auditLogStore, type AuditRow } from '../../data/auditLog'
 import { showToast } from '../../lib/toast'
@@ -19,11 +19,11 @@ const statusOptions = [
 ]
 
 const auditColumns = [
-  { key: 'timestamp', header: 'Timestamp' },
+  { key: 'timestamp', header: 'Timestamp', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.timestamp)}</span> },
   { key: 'type', header: 'Type' },
   { key: 'rule', header: 'Rule' },
   { key: 'asset', header: 'Asset' },
-  { key: 'amount', header: 'Amount' },
+  { key: 'amount', header: 'Amount', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.amount)}</span> },
   { key: 'network', header: 'Network' },
   { key: 'provider', header: 'Provider' },
   {
@@ -151,11 +151,9 @@ export function AuditLog() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="audit" />
 
       <div className={styles.body}>
-        <AppSidebar active="audit" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

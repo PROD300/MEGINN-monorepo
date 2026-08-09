@@ -1,16 +1,16 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Badge, Button, Card, Table } from '../../components'
+import { TopNav, Badge, Button, Card, Table } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore, toggleRulePause } from '../../data/rules'
 import { showToast } from '../../lib/toast'
 import styles from './RuleDetail.module.css'
 
 const historyColumns = [
-  { key: 'timestamp', header: 'Timestamp' },
-  { key: 'triggeredAt', header: 'Triggered At' },
+  { key: 'timestamp', header: 'Timestamp', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.timestamp)}</span> },
+  { key: 'triggeredAt', header: 'Triggered At', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.triggeredAt)}</span> },
   { key: 'action', header: 'Action' },
-  { key: 'amount', header: 'Amount' },
-  { key: 'gas', header: 'Gas' },
+  { key: 'amount', header: 'Amount', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.amount)}</span> },
+  { key: 'gas', header: 'Gas', render: (row: Record<string, unknown>) => <span className="ds-numeric">{String(row.gas)}</span> },
   { key: 'result', header: 'Result' },
 ]
 
@@ -31,9 +31,8 @@ export function RuleDetail() {
   if (!rule) {
     return (
       <div className={styles.screen}>
-        <AppTopBar />
+        <TopNav active="rebalancing" />
         <div className={styles.body}>
-          <AppSidebar active="rebalancing" />
           <main className={styles.main}>
             <div className={styles.pageHeader}>
               <span className={styles.title}>Rule not found</span>
@@ -56,11 +55,9 @@ export function RuleDetail() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="rebalancing" />
 
       <div className={styles.body}>
-        <AppSidebar active="rebalancing" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

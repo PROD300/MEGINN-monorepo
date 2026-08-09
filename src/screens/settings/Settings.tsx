@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AppTopBar, AppSidebar, Tabs, Badge, Input, Select, Button, Toggle } from '../../components'
+import { TopNav, Tabs, Badge, Input, Select, Button, Toggle } from '../../components'
 import { registerScreen } from '../registry'
 import { profileStore, saveProfile, type Profile } from '../../data/profile'
 import { showToast } from '../../lib/toast'
@@ -70,11 +70,9 @@ export function Settings() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="settings" />
 
       <div className={styles.body}>
-        <AppSidebar active="settings" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

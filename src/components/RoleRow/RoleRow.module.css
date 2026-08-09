@@ -44,7 +44,8 @@
 .address {
   font-size: var(--size-xs);
   color: var(--text-muted);
-  font-family: monospace;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
 .right {

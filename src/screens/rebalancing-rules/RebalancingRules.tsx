@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Tabs, Badge, Button } from '../../components'
+import { TopNav, Tabs, Badge, Button } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore, toggleRulePause, type Rule } from '../../data/rules'
 import { showToast } from '../../lib/toast'
@@ -54,11 +54,9 @@ export function RebalancingRules() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="rebalancing" />
 
       <div className={styles.body}>
-        <AppSidebar active="rebalancing" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

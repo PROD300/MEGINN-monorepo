@@ -10,8 +10,7 @@ import { Table } from '../components/Table/Table'
 import { Toast } from '../components/Toast/Toast'
 import { StatCard } from '../components/StatCard/StatCard'
 import { ActivityRow } from '../components/ActivityRow/ActivityRow'
-import { AppTopBar } from '../components/AppTopBar/AppTopBar'
-import { AppSidebar, type NavItemId } from '../components/AppSidebar/AppSidebar'
+import { TopNav, type NavItemId } from '../components/TopNav/TopNav'
 
 // ─── Sandbox: Modal Form ───────────────────────────────────────────────────────
 
@@ -119,7 +118,6 @@ function FormSandbox() {
 // ─── Sandbox: Navigation ──────────────────────────────────────────────────────
 
 function NavigationSandbox() {
-  const [active, setActive] = useState<NavItemId>('portfolio')
   const [tab, setTab] = useState('overview')
 
   const tabs = [
@@ -130,10 +128,9 @@ function NavigationSandbox() {
   ]
 
   return (
-    <div style={{ display: 'flex', height: 500, overflow: 'hidden', border: '1px solid var(--border-default)', borderRadius: 8 }}>
-      <AppSidebar active={active} onNavigate={setActive} />
+    <div style={{ display: 'flex', flexDirection: 'column', height: 500, overflow: 'hidden', border: '1px solid var(--border-default)', borderRadius: 8 }}>
+      <TopNav active={'portfolio' as NavItemId} userName="James Harrington" initials="JH" hasNotification />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-        <AppTopBar userName="James Harrington" initials="JH" hasNotification />
         <div style={{ padding: '16px 24px', flex: 1, background: 'var(--surface-level-1)', overflow: 'auto' }}>
           <Tabs tabs={tabs} active={tab} onChange={setTab} />
           <div style={{ marginTop: 16, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -229,7 +226,7 @@ export const Form: Story = {
   render: () => <FormSandbox />,
 }
 
-/** Navigation — AppTopBar + AppSidebar + Tabs + StatCard в одном контексте. */
+/** Navigation — TopNav + Tabs + StatCard в одном контексте. */
 export const Navigation: Story = {
   render: () => <NavigationSandbox />,
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Badge, Button } from '../../components'
+import { TopNav, Badge, Button } from '../../components'
 import { registerScreen } from '../registry'
 import { agreementStore, signAgreement } from '../../data/agreement'
 import { profileStore } from '../../data/profile'
@@ -49,11 +49,9 @@ export function LegalTerms() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="liability" />
 
       <div className={styles.body}>
-        <AppSidebar active="liability" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

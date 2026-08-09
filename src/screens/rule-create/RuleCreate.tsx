@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AlertTriangle } from 'lucide-react'
-import { AppTopBar, AppSidebar, Input, Select, Button, Card } from '../../components'
+import { TopNav, Input, Select, Button, Card } from '../../components'
 import { registerScreen } from '../registry'
 import { addRule, ruleNameExists } from '../../data/rules'
 import { gasReserveStore, isGasReserveLow, GAS_RESERVE_MINIMUM_USD } from '../../data/gas'
@@ -152,11 +152,9 @@ export function RuleCreate() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="rebalancing" />
 
       <div className={styles.body}>
-        <AppSidebar active="rebalancing" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { OctagonAlert } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Button, Input } from '../../components'
+import { TopNav, Button, Input } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore, pauseAllRules } from '../../data/rules'
 import { bridgeStore, cancelAllPendingBridges } from '../../data/bridge'
@@ -34,11 +34,9 @@ export function EmergencyStop() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="settings" />
 
       <div className={styles.body}>
-        <AppSidebar active="settings" />
-
         <main className={styles.main}>
           {/* PageHeader */}
           <div className={styles.pageHeader}>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   Button, Input, Card, Modal, Badge, IconButton, Select, Tabs, Toast, Table,
   StatCard, ActivityRow, NotificationRow, RoleRow, LiabilityCard,
-  AppTopBar, AppSidebar,
+  TopNav,
 } from './components'
 import { Settings, Search, RefreshCw } from 'lucide-react'
 
@@ -70,20 +70,15 @@ const tableRows = [
 export function Showcase() {
   const [modalOpen, setModalOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('profile')
-  const [activeNav, setActiveNav] = useState<'portfolio' | 'rebalancing' | 'liability' | 'audit' | 'settings'>('portfolio')
   const [inputVal, setInputVal] = useState('')
 
   return (
     <div style={{ fontFamily: 'var(--font-sans)', background: 'var(--surface-subtle)', minHeight: '100vh' }}>
 
       {/* AppShell preview */}
-      <section style={{ marginBottom: 0 }}>
-        <AppTopBar />
-      </section>
+      <TopNav active="portfolio" />
 
       <div style={{ display: 'flex' }}>
-        <AppSidebar active={activeNav} onNavigate={setActiveNav} />
-
         <main style={{ flex: 1, padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
 
           {/* ── Section: Palette ─────────────────────── */}

@@ -5,7 +5,7 @@
   font-size: var(--size-xs);
   font-weight: var(--weight-medium);
   padding: 2px var(--space-2);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   color: var(--text-on-action);
   white-space: nowrap;
 }

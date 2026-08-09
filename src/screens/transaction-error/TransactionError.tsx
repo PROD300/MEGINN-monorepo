@@ -1,6 +1,6 @@
 import { AlertTriangle, PauseCircle } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AppTopBar, AppSidebar, Badge, Button, ActivityRow } from '../../components'
+import { TopNav, Badge, Button, ActivityRow } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore } from '../../data/rules'
 import styles from './TransactionError.module.css'
@@ -14,9 +14,8 @@ export function TransactionError() {
   if (!rule) {
     return (
       <div className={styles.screen}>
-        <AppTopBar />
+        <TopNav active="liability" />
         <div className={styles.body}>
-          <AppSidebar active="liability" />
           <main className={styles.main}>
             <div className={styles.errorCardCol}>
               <span className={styles.errorTitle}>No failed transaction found</span>
@@ -40,11 +39,9 @@ export function TransactionError() {
 
   return (
     <div className={styles.screen}>
-      <AppTopBar />
+      <TopNav active="liability" />
 
       <div className={styles.body}>
-        <AppSidebar active="liability" />
-
         <main className={styles.main}>
           <div className={styles.errorBody}>
             {/* ErrorCardCol */}
