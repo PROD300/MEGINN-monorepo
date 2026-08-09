@@ -23,15 +23,13 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .pageTitle {
@@ -43,13 +41,11 @@
 
 /* ─── RiskStatusRow ─── */
 .statsRow {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-4);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-4) var(--space-5);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .statsRow > * {
@@ -59,14 +55,12 @@
 
 /* ─── Section ─── */
 .section {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-4) var(--space-5);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .secTitle {
@@ -88,14 +82,12 @@
 
 /* ─── AgreementStatusSection ─── */
 .agreementSection {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-4);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-4) var(--space-5) var(--space-8);
   flex-wrap: wrap;
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .agreementCard,

@@ -23,15 +23,13 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .pageTitle {
@@ -42,24 +40,20 @@
 
 /* ─── FilterTabs ─── */
 .tabsWrap {
-  width: 100%;
-  max-width: 1880px;
+  composes: pageBlock from '../../tokens/layout.module.css';
   padding: 0 var(--space-5);
   background: var(--surface-elevated);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 /* ─── NotificationList ─── */
 .list {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 1880px;
   padding-bottom: var(--space-8);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .emptyState {

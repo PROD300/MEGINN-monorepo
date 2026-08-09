@@ -22,13 +22,11 @@
 }
 
 .errorBody {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-6);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5);
   flex-wrap: wrap;
-  box-sizing: border-box;
 }
 
 /* ─── NotFoundWrap — "no rule found" fallback, centered like NotFound/NetworkError ─── */

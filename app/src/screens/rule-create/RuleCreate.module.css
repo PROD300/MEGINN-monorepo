@@ -23,11 +23,10 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-3);
   background: var(--surface-default);
   border-bottom: 1px solid var(--border-default);
@@ -57,10 +56,9 @@
 
 /* ─── ContentArea ─── */
 .contentArea {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-6);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-6) var(--space-5) var(--space-8);
   align-items: flex-start;
 }

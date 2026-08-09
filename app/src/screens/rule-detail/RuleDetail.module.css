@@ -22,11 +22,10 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
@@ -67,10 +66,9 @@
 
 /* ─── RuleOverviewSection ─── */
 .overviewSection {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-4);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-4) var(--space-5);
   flex-shrink: 0;
   flex-wrap: wrap;
@@ -126,8 +124,7 @@
 
 /* ─── ExecutionHistorySection ─── */
 .historySection {
-  width: 100%;
-  max-width: 1880px;
+  composes: pageBlock from '../../tokens/layout.module.css';
   padding: var(--space-4) var(--space-5);
   flex-shrink: 0;
   overflow-x: auto;
@@ -154,10 +151,9 @@
 
 /* ─── FooterStats ─── */
 .footerStats {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-3) var(--space-5) var(--space-8);
   font-size: var(--size-sm);
   color: var(--text-muted);

@@ -23,15 +23,13 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .pageTitle {
@@ -48,17 +46,15 @@
 
 /* ─── FilterBar ─── */
 .filterBar {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-3) var(--space-5);
   background: var(--surface-subtle);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
   flex-wrap: wrap;
-  box-sizing: border-box;
 }
 
 .filterLabel {
@@ -76,7 +72,7 @@
 }
 
 .inputWrap {
-  width: 140px;
+  width: 168px;
 }
 
 .spacer {
@@ -91,12 +87,10 @@
 
 /* ─── AuditTable ─── */
 .tableSection {
-  width: 100%;
-  max-width: 1880px;
+  composes: pageBlock from '../../tokens/layout.module.css';
   padding: var(--space-4) var(--space-5) 0;
   flex-shrink: 0;
   overflow-x: auto;
-  box-sizing: border-box;
 }
 
 .emptyState {
@@ -111,14 +105,12 @@
 
 /* ─── PaginationRow ─── */
 .paginationRow {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-4) var(--space-5) var(--space-8);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 .paginationLabel {

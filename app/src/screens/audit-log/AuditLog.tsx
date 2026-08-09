@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { TopNav, Button, Select, Input, Table } from '../../components'
+import { TopNav, Button, Select, DatePicker, Table } from '../../components'
 import { registerScreen } from '../registry'
 import { auditLogStore, type AuditRow } from '../../data/auditLog'
 import { showToast } from '../../lib/toast'
@@ -174,10 +174,10 @@ export function AuditLog() {
               <Select options={statusOptions} placeholder="All Statuses" value={draft.status} onChange={e => updateDraft('status', e.target.value)} />
             </div>
             <div className={styles.inputWrap}>
-              <Input type="date" lang="en" placeholder="Date from" value={draft.dateFrom} onChange={e => updateDraft('dateFrom', e.target.value)} />
+              <DatePicker placeholder="Date from" value={draft.dateFrom} onChange={v => updateDraft('dateFrom', v)} />
             </div>
             <div className={styles.inputWrap}>
-              <Input type="date" lang="en" placeholder="Date to" value={draft.dateTo} onChange={e => updateDraft('dateTo', e.target.value)} />
+              <DatePicker placeholder="Date to" value={draft.dateTo} onChange={v => updateDraft('dateTo', v)} />
             </div>
             <Button variant="primary" size="sm" onClick={() => setApplied(draft)}>Apply</Button>
             {hasActiveFilters && (

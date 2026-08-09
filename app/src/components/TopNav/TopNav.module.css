@@ -1,7 +1,5 @@
 .topnavWrap {
-  width: 100%;
-  max-width: 1880px;
-  margin: 0 auto;
+  composes: pageBlock from '../../tokens/layout.module.css';
   padding: var(--space-8) var(--space-5) 0;
   flex-shrink: 0;
 }

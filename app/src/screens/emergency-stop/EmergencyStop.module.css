@@ -22,11 +22,10 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   flex-shrink: 0;
 }
@@ -45,12 +44,11 @@
 
 /* ─── WarningBanner ─── */
 .warningBanner {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-3) var(--space-5);
   background: var(--bg-error-subtle);
   border-top: 1px solid var(--border-error);
@@ -74,10 +72,9 @@
 
 /* ─── StopContentArea ─── */
 .contentArea {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-6);
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-6) var(--space-5) var(--space-8);
   flex-wrap: wrap;
 }

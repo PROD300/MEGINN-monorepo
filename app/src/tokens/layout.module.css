@@ -1,0 +1,12 @@
+/* OBSIDIAN DS — Shared page-layout composition */
+/* Every top-level content block on a screen (page header, content area,
+   filter bars, footers, etc.) composes this so the page's max-width and
+   centering stay identical everywhere by construction, not by copy-paste
+   across screen CSS modules. */
+
+.pageBlock {
+  width: 100%;
+  max-width: 1880px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}

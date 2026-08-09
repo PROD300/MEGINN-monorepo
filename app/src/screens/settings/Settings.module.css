@@ -23,10 +23,9 @@
 
 /* ─── PageHeader ─── */
 .pageHeader {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-8) var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
@@ -40,24 +39,20 @@
 
 /* ─── SettingsTabs ─── */
 .tabsWrap {
-  width: 100%;
-  max-width: 1880px;
+  composes: pageBlock from '../../tokens/layout.module.css';
   padding: 0 var(--space-5);
   background: var(--surface-elevated);
   border-bottom: 1px solid var(--border-default);
   flex-shrink: 0;
-  box-sizing: border-box;
 }
 
 /* ─── ContentArea ─── */
 .contentArea {
+  composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   gap: var(--space-6);
   align-items: flex-start;
-  width: 100%;
-  max-width: 1880px;
   padding: var(--space-6) var(--space-5) var(--space-8);
-  box-sizing: border-box;
 }
 
 .profileColumn {
