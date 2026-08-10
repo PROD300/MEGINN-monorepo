@@ -117,44 +117,52 @@ export function CrossChainBridge() {
           </Banner>
 
           {/* BridgeProviders */}
-          <div className={styles.section}>
-            <span className={styles.sectionTitle}>Bridge Providers</span>
-            <div className={styles.providersRow}>
-              {providerMeta.map(p => (
-                <BridgeProviderCard key={p.name} provider={p} volumeToday={volumeForProvider(p.name)} isActive={p.name === activeProvider} />
-              ))}
+          <div className={styles.sectionWrap}>
+            <div className={styles.section}>
+              <span className={styles.sectionTitle}>Bridge Providers</span>
+              <div className={styles.providersRow}>
+                {providerMeta.map(p => (
+                  <BridgeProviderCard key={p.name} provider={p} volumeToday={volumeForProvider(p.name)} isActive={p.name === activeProvider} />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* ActiveBridges */}
-          <div className={styles.section}>
-            <span className={styles.sectionTitle}>Active Bridges</span>
-            <div className={styles.divider} />
-            {activeOps.length > 0 ? (
-              <Table columns={activeColumns} rows={activeOps as unknown as Record<string, unknown>[]} />
-            ) : (
-              <div className={styles.emptyState}>No bridges in progress.</div>
-            )}
+          <div className={styles.sectionWrap}>
+            <div className={styles.section}>
+              <span className={styles.sectionTitle}>Active Bridges</span>
+              <div className={styles.divider} />
+              {activeOps.length > 0 ? (
+                <Table columns={activeColumns} rows={activeOps as unknown as Record<string, unknown>[]} />
+              ) : (
+                <div className={styles.emptyState}>No bridges in progress.</div>
+              )}
+            </div>
           </div>
 
           {/* BridgeHistory */}
-          <div className={styles.section}>
-            <div className={styles.secHeader}>
-              <span className={styles.sectionTitle}>Bridge History</span>
-              <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View full audit log →</a>
+          <div className={styles.sectionWrap}>
+            <div className={styles.section}>
+              <div className={styles.secHeader}>
+                <span className={styles.sectionTitle}>Bridge History</span>
+                <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View full audit log →</a>
+              </div>
+              {historyOps.length > 0 ? (
+                <Table columns={historyColumns} rows={historyOps as unknown as Record<string, unknown>[]} />
+              ) : (
+                <div className={styles.emptyState}>No completed bridges yet.</div>
+              )}
             </div>
-            {historyOps.length > 0 ? (
-              <Table columns={historyColumns} rows={historyOps as unknown as Record<string, unknown>[]} />
-            ) : (
-              <div className={styles.emptyState}>No completed bridges yet.</div>
-            )}
           </div>
 
           {/* Footer */}
-          <div className={styles.footer}>
-            <span>Total bridged (24h): {formatUsd(totalBridged24h)}</span>
-            <span>Success rate: {successRate}%</span>
-            <span>Active provider: {activeProvider}</span>
+          <div className={styles.footerWrap}>
+            <div className={styles.footer}>
+              <span>Total bridged (24h): {formatUsd(totalBridged24h)}</span>
+              <span>Success rate: {successRate}%</span>
+              <span>Active provider: {activeProvider}</span>
+            </div>
           </div>
         </main>
       </div>

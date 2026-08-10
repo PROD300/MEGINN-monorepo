@@ -42,16 +42,18 @@ export function Notifications() {
 
           {/* FilterTabs */}
           <div className={styles.tabsWrap}>
-            <Tabs
-              tabs={[
-                { label: `All (${countFor('all')})`, value: 'all' },
-                { label: `Rebalancing (${countFor('rebalancing')})`, value: 'rebalancing' },
-                { label: `Compliance (${countFor('compliance')})`, value: 'compliance' },
-                { label: `System (${countFor('system')})`, value: 'system' },
-              ]}
-              active={tab}
-              onChange={value => setTab(value as Category)}
-            />
+            <div className={styles.tabsInner}>
+              <Tabs
+                tabs={[
+                  { label: `All (${countFor('all')})`, value: 'all' },
+                  { label: `Rebalancing (${countFor('rebalancing')})`, value: 'rebalancing' },
+                  { label: `Compliance (${countFor('compliance')})`, value: 'compliance' },
+                  { label: `System (${countFor('system')})`, value: 'system' },
+                ]}
+                active={tab}
+                onChange={value => setTab(value as Category)}
+              />
+            </div>
           </div>
 
           {/* NotificationList */}

@@ -42,12 +42,18 @@
 }
 
 /* ─── SettingsTabs ─── */
+/* Two-layer, same pattern as pageHeader/Banner: background+border-bottom
+   need to sit inset by space-5 to align with TopNav, not on the raw
+   pageBlock box. */
 .tabsWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
   padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.tabsInner {
   background: var(--surface-elevated);
   border-bottom: 1px solid var(--border-default);
-  flex-shrink: 0;
 }
 
 /* ─── ContentArea ─── */

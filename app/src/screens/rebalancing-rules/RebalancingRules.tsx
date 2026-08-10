@@ -67,17 +67,19 @@ export function RebalancingRules() {
           </div>
 
           {/* TabsBar */}
-          <Tabs
-            tabs={[
-              { label: `All (${rules.length})`, value: 'all' },
-              { label: `Active (${activeCount})`, value: 'active' },
-              { label: `Paused (${pausedCount})`, value: 'paused' },
-              { label: 'Error (0)', value: 'error' },
-              { label: `Cross-chain (${crossChainCount})`, value: 'cross-chain' },
-            ]}
-            active={tab}
-            onChange={value => setTab(value as TabValue)}
-          />
+          <div className={styles.tabsWrap}>
+            <Tabs
+              tabs={[
+                { label: `All (${rules.length})`, value: 'all' },
+                { label: `Active (${activeCount})`, value: 'active' },
+                { label: `Paused (${pausedCount})`, value: 'paused' },
+                { label: 'Error (0)', value: 'error' },
+                { label: `Cross-chain (${crossChainCount})`, value: 'cross-chain' },
+              ]}
+              active={tab}
+              onChange={value => setTab(value as TabValue)}
+            />
+          </div>
 
           {/* RulesList */}
           <div className={styles.rulesList}>

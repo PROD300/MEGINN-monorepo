@@ -43,6 +43,19 @@
   color: var(--text-default);
 }
 
+/* ─── TabsBar ─── */
+/* Tabs has no width of its own — as a direct child of .main (align-items:
+   center) it hugs its content and centers instead of stretching, so both
+   the tab row and the shelf line under it were shorter than the page
+   content column. A plain (non-flex) pageBlock-composed wrapper puts it
+   back in normal block flow, where it fills the available width like
+   everything else. */
+.tabsWrap {
+  composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
 /* ─── RulesList ─── */
 .rulesList {
   composes: pageBlock from '../../tokens/layout.module.css';

@@ -83,7 +83,9 @@ export function Settings() {
 
           {/* SettingsTabs */}
           <div className={styles.tabsWrap}>
-            <Tabs tabs={settingsTabs} active={tab} onChange={value => setTab(value as SettingsTab)} />
+            <div className={styles.tabsInner}>
+              <Tabs tabs={settingsTabs} active={tab} onChange={value => setTab(value as SettingsTab)} />
+            </div>
           </div>
 
           {/* ContentArea */}
