@@ -22,14 +22,22 @@
 }
 
 /* ─── PageHeader ─── */
-.pageHeader {
+/* Two-layer, same pattern as TopNav/Banner: the border-bottom divider needs to
+   sit inset by space-5 to align with TopNav, but a single pageBlock-composed
+   box with padding puts the divider at the pageBlock edge while the title
+   text (pushed in by the padding) ends up narrower than the line under it. */
+.pageHeaderWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.pageHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-8) var(--space-5) var(--space-4);
+  padding: var(--space-8) 0 var(--space-4);
   border-bottom: 1px solid var(--border-default);
-  flex-shrink: 0;
 }
 
 .pageTitle {

@@ -45,15 +45,22 @@
 }
 
 /* ─── FilterBar ─── */
-.filterBar {
+/* Two-layer, same pattern as TopNav/Banner: the background + border-bottom
+   need to sit inset by space-5 to align with TopNav — a single pageBlock-
+   composed box with padding puts them at the pageBlock edge instead. */
+.filterBarWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.filterBar {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
   background: var(--surface-subtle);
   border-bottom: 1px solid var(--border-default);
-  flex-shrink: 0;
   flex-wrap: wrap;
 }
 

@@ -96,11 +96,13 @@ export function LiabilityDashboard() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <span className={styles.pageTitle}>Liability &amp; Compliance</span>
-            <Button variant="primary" size="sm" onClick={handleDownloadReport} loading={downloading}>
-              Download Report
-            </Button>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <span className={styles.pageTitle}>Liability &amp; Compliance</span>
+              <Button variant="primary" size="sm" onClick={handleDownloadReport} loading={downloading}>
+                Download Report
+              </Button>
+            </div>
           </div>
 
           {/* RiskStatusRow */}

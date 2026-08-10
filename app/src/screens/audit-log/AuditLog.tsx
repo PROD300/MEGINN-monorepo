@@ -165,26 +165,28 @@ export function AuditLog() {
           </div>
 
           {/* FilterBar */}
-          <div className={styles.filterBar}>
-            <span className={styles.filterLabel}>Filter:</span>
-            <div className={styles.selectWrapWide}>
-              <Select options={typeOptions} placeholder="All Types" value={draft.type} onChange={e => updateDraft('type', e.target.value)} />
+          <div className={styles.filterBarWrap}>
+            <div className={styles.filterBar}>
+              <span className={styles.filterLabel}>Filter:</span>
+              <div className={styles.selectWrapWide}>
+                <Select options={typeOptions} placeholder="All Types" value={draft.type} onChange={e => updateDraft('type', e.target.value)} />
+              </div>
+              <div className={styles.selectWrap}>
+                <Select options={statusOptions} placeholder="All Statuses" value={draft.status} onChange={e => updateDraft('status', e.target.value)} />
+              </div>
+              <div className={styles.inputWrap}>
+                <DatePicker placeholder="Date from" value={draft.dateFrom} onChange={v => updateDraft('dateFrom', v)} />
+              </div>
+              <div className={styles.inputWrap}>
+                <DatePicker placeholder="Date to" value={draft.dateTo} onChange={v => updateDraft('dateTo', v)} />
+              </div>
+              <Button variant="primary" size="sm" onClick={() => setApplied(draft)}>Apply</Button>
+              {hasActiveFilters && (
+                <Button variant="ghost" size="sm" onClick={() => { setDraft(emptyFilters); setApplied(emptyFilters) }}>Clear</Button>
+              )}
+              <span className={styles.spacer} />
+              <span className={styles.eventsCount}>{visibleRows.length} event{visibleRows.length === 1 ? '' : 's'}</span>
             </div>
-            <div className={styles.selectWrap}>
-              <Select options={statusOptions} placeholder="All Statuses" value={draft.status} onChange={e => updateDraft('status', e.target.value)} />
-            </div>
-            <div className={styles.inputWrap}>
-              <DatePicker placeholder="Date from" value={draft.dateFrom} onChange={v => updateDraft('dateFrom', v)} />
-            </div>
-            <div className={styles.inputWrap}>
-              <DatePicker placeholder="Date to" value={draft.dateTo} onChange={v => updateDraft('dateTo', v)} />
-            </div>
-            <Button variant="primary" size="sm" onClick={() => setApplied(draft)}>Apply</Button>
-            {hasActiveFilters && (
-              <Button variant="ghost" size="sm" onClick={() => { setDraft(emptyFilters); setApplied(emptyFilters) }}>Clear</Button>
-            )}
-            <span className={styles.spacer} />
-            <span className={styles.eventsCount}>{visibleRows.length} event{visibleRows.length === 1 ? '' : 's'}</span>
           </div>
 
           {/* AuditTable */}
