@@ -115,7 +115,7 @@ UI Kit — требует отдельного обновления, не вхо
 - surface-action-primary       → accent-500
 - surface-action-primary-hover → accent-700
 - surface-action-ghost-hover   → accent-50
-- surface-hover                → gray-300      ← добавлено 2026-08-10, ховер-фон для текстовых кнопок: Button (primary/secondary/ghost), TopNav (Stop All, user-меню), Portfolio primaryCta. Icon-only кнопки (IconButton, TopNav icon-кнопки) — hover на паузе, прорабатывается отдельно
+- surface-hover                → gray-300      ← добавлено 2026-08-10, ховер-фон для текстовых кнопок: Button (primary/secondary/ghost), TopNav Stop All, Portfolio primaryCta. TopNav icon-кнопки (Bell/Exit) hover решён иначе — см. accent-300 в разделе «Текст» ниже, не через surface-hover. IconButton (shared-компонент) — hover всё ещё на паузе. TopNav user-меню — откачено на прежний hover (пользователь оценил старую версию выше), не входит в это правило
 
 ### Текст
 
@@ -163,6 +163,7 @@ UI Kit — требует отдельного обновления, не вхо
 - text-nav-active     → gray-00    ← активный пункт навигации на тёмном фоне (= text-on-dark)
 - text-on-dark-accent → accent-300 ← акцентный цвет на тёмном фоне (= text-on-dark-brand)
 - border-app-shell    → gray-700   ← разделители внутри AppShell (= border-dark)
+- TopNav icon-кнопки (Bell/Exit) hover → `accent-300` напрямую (не через семантический токен) — фон не меняется, только цвет иконки, 2026-08-10
 
 ## Слой 3 — компонентные токены
 
