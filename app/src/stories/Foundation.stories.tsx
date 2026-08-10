@@ -85,13 +85,13 @@ function FoundationPage() {
         Primitive Tokens (Global)
       </h1>
 
-      <Section title="Accent — Indigo">
-        <Swatch name="accent-50"  value="#EEF2FF" />
-        <Swatch name="accent-100" value="#E0E7FF" />
-        <Swatch name="accent-300" value="#A5B4FC" />
-        <Swatch name="accent-500" value="#4F46E5" />
-        <Swatch name="accent-700" value="#3730A3" />
-        <Swatch name="accent-900" value="#1E1B4B" />
+      <Section title="Accent — Indigo (rebrand 2026-08-09/10, was #4F46E5 ramp)">
+        <Swatch name="accent-50"  value="#F0EEFF" />
+        <Swatch name="accent-100" value="#DEDAFF" />
+        <Swatch name="accent-300" value="#9C8DFA" />
+        <Swatch name="accent-500" value="#4B34F5" />
+        <Swatch name="accent-700" value="#2E1FB8" />
+        <Swatch name="accent-900" value="#180F5C" />
       </Section>
 
       <Section title="Neutrals — Cool Gray">
@@ -106,11 +106,11 @@ function FoundationPage() {
         <Swatch name="gray-950" value="#020617" />
       </Section>
 
-      <Section title="Functional">
-        <Swatch name="success-500" value="#10B981" />
-        <Swatch name="warning-500" value="#F59E0B" />
-        <Swatch name="error-500"   value="#EF4444" />
-        <Swatch name="info-500"    value="#3B82F6" />
+      <Section title="Functional — converged on the single accent, 2026-08-10 (status reads by icon/copy, not hue)">
+        <Swatch name="success-500" value="#4B34F5" />
+        <Swatch name="warning-500" value="#4B34F5" />
+        <Swatch name="error-500"   value="#4B34F5" />
+        <Swatch name="info-500"    value="#4B34F5" />
       </Section>
 
       <Section title="Typography Scale">
@@ -136,7 +136,7 @@ function FoundationPage() {
       <Section title="Radii">
         <Row name="radius-none" value="0px" />
         <Row name="radius-sm"   value="4px" />
-        <Row name="radius-md"   value="8px" />
+        <Row name="radius-md"   value="4px (was 8px — unified to sharp institutional radius, 2026-08-09)" />
         <Row name="radius-lg"   value="16px" />
       </Section>
 
@@ -155,6 +155,8 @@ function FoundationPage() {
         <Row name="shadow-sm" value="0 1px 2px rgba(15,23,42,.08)" />
         <Row name="shadow-md" value="0 4px 6px rgba(15,23,42,.10), 0 1px 3px rgba(15,23,42,.06)" />
         <Row name="shadow-lg" value="0 10px 15px rgba(15,23,42,.10), 0 4px 6px rgba(15,23,42,.05)" />
+        <Row name="shadow-float" value="0 24px 48px -24px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05)" />
+        <Row name="shadow-glow-accent" value="none — deprecated 2026-08-10, kept as a token so nothing breaks" />
       </Section>
 
       {/* ── SEMANTIC ─── */}
@@ -162,55 +164,61 @@ function FoundationPage() {
         Semantic Tokens
       </h1>
 
-      <Section title="Surfaces">
-        <SemanticRow name="surface-default"              prim="gray-50"       value="#F8FAFC" />
-        <SemanticRow name="surface-subtle"               prim="gray-50"       value="#F8FAFC" />
-        <SemanticRow name="surface-elevated"             prim="gray-00"       value="#FFFFFF" />
-        <SemanticRow name="surface-level-1"              prim="gray-50"       value="#F8FAFC" />
-        <SemanticRow name="surface-level-2"              prim="gray-100"      value="#F1F5F9" />
-        <SemanticRow name="surface-level-3"              prim="gray-200"      value="#E2E8F0" />
-        <SemanticRow name="surface-level-4"              prim="gray-300"      value="#CBD5E1" />
-        <SemanticRow name="surface-action-primary"       prim="accent-500"    value="#4F46E5" />
-        <SemanticRow name="surface-action-primary-hover" prim="accent-700"    value="#3730A3" />
-        <SemanticRow name="surface-action-ghost-hover"   prim="accent-50"     value="#EEF2FF" />
+      <Section title="Surfaces — dark by default, promoted from Portfolio pilot 2026-08-09">
+        <SemanticRow name="surface-default"              prim="gray-950"      value="#020617" />
+        <SemanticRow name="surface-subtle"               prim="gray-900"      value="#0F172A" />
+        <SemanticRow name="surface-elevated"              prim="gray-900"      value="#0F172A" />
+        <SemanticRow name="surface-level-1"              prim="gray-950"      value="#020617" />
+        <SemanticRow name="surface-level-2"              prim="gray-900"      value="#0F172A" />
+        <SemanticRow name="surface-level-3"              prim="gray-700"      value="#334155" />
+        <SemanticRow name="surface-level-4"              prim="gray-500"      value="#64748B" />
+        <SemanticRow name="surface-action-primary"       prim="accent-500"    value="#4B34F5" />
+        <SemanticRow name="surface-action-primary-hover" prim="accent-700"    value="#2E1FB8" />
+        <SemanticRow name="surface-action-ghost-hover"   prim="accent-900"    value="#180F5C" />
+        <SemanticRow name="surface-hover"                prim="gray-300"      value="#CBD5E1" />
       </Section>
 
       <Section title="Text">
-        <SemanticRow name="text-default"      prim="gray-900"    value="#0F172A" />
-        <SemanticRow name="text-muted"        prim="gray-500"    value="#64748B" />
-        <SemanticRow name="text-disabled"     prim="gray-300"    value="#CBD5E1" />
+        <SemanticRow name="text-default"      prim="gray-00"     value="#FFFFFF" />
+        <SemanticRow name="text-muted"        prim="gray-300"    value="#CBD5E1" />
+        <SemanticRow name="text-subtle"       prim="gray-500"    value="#64748B" />
+        <SemanticRow name="text-disabled"     prim="gray-700"    value="#334155" />
         <SemanticRow name="text-on-action"    prim="gray-00"     value="#FFFFFF" />
         <SemanticRow name="text-on-dark"      prim="gray-00"     value="#FFFFFF" />
-        <SemanticRow name="text-error"        prim="error-500"   value="#EF4444" />
-        <SemanticRow name="text-warning"      prim="warning-500" value="#F59E0B" />
-        <SemanticRow name="text-success"      prim="success-500" value="#10B981" />
-        <SemanticRow name="text-accent"       prim="accent-500"  value="#4F46E5" />
+        <SemanticRow name="text-error"        prim="error-500"   value="#4B34F5" />
+        <SemanticRow name="text-warning"      prim="warning-500" value="#4B34F5" />
+        <SemanticRow name="text-success"      prim="success-500" value="#4B34F5" />
+        <SemanticRow name="text-info"         prim="info-500"    value="#4B34F5" />
+        <SemanticRow name="text-accent"       prim="accent-300"  value="#9C8DFA" />
+        <SemanticRow name="text-accent-hover" prim="accent-700"  value="#2E1FB8" />
       </Section>
 
       <Section title="Borders">
-        <SemanticRow name="border-default" prim="gray-200"    value="#E2E8F0" />
-        <SemanticRow name="border-strong"  prim="gray-300"    value="#CBD5E1" />
-        <SemanticRow name="border-focus"   prim="accent-500"  value="#4F46E5" />
-        <SemanticRow name="border-error"   prim="error-500"   value="#EF4444" />
-        <SemanticRow name="border-warning" prim="warning-500" value="#F59E0B" />
+        <SemanticRow name="border-default"  prim="gray-700"    value="#334155" />
+        <SemanticRow name="border-strong"   prim="gray-500"    value="#64748B" />
+        <SemanticRow name="border-focus"    prim="accent-500"  value="#4B34F5" />
+        <SemanticRow name="border-error"    prim="error-500"   value="#4B34F5" />
+        <SemanticRow name="border-warning"  prim="warning-500" value="#4B34F5" />
+        <SemanticRow name="border-info"     prim="info-500"    value="#4B34F5" />
+        <SemanticRow name="border-hairline" prim="transparent" value="removed 2026-08-10 — card border is gone, kept as a token" />
       </Section>
 
       <Section title="Status Backgrounds">
-        <SemanticRow name="bg-success"        prim="success-500"     value="#10B981" />
-        <SemanticRow name="bg-warning"        prim="warning-500"     value="#F59E0B" />
-        <SemanticRow name="bg-error"          prim="error-500"       value="#EF4444" />
-        <SemanticRow name="bg-info"           prim="info-500"        value="#3B82F6" />
-        <SemanticRow name="bg-success-subtle" prim="success-500 10%" value="rgba(16,185,129,.10)" />
-        <SemanticRow name="bg-warning-subtle" prim="warning-500 10%" value="rgba(245,158,11,.10)" />
-        <SemanticRow name="bg-error-subtle"   prim="error-500 10%"   value="rgba(239,68,68,.10)" />
-        <SemanticRow name="bg-info-subtle"    prim="info-500 10%"    value="rgba(59,130,246,.10)" />
+        <SemanticRow name="bg-success"        prim="success-500"     value="#4B34F5" />
+        <SemanticRow name="bg-warning"        prim="warning-500"     value="#4B34F5" />
+        <SemanticRow name="bg-error"          prim="error-500"       value="#4B34F5" />
+        <SemanticRow name="bg-info"           prim="info-500"        value="#4B34F5" />
+        <SemanticRow name="bg-success-subtle" prim="accent 10%" value="rgba(75,52,245,.10)" />
+        <SemanticRow name="bg-warning-subtle" prim="accent 10%" value="rgba(75,52,245,.10)" />
+        <SemanticRow name="bg-error-subtle"   prim="accent 10%"   value="rgba(75,52,245,.10)" />
+        <SemanticRow name="bg-info-subtle"    prim="accent 10%"    value="rgba(75,52,245,.10)" />
       </Section>
 
       <Section title="AppShell">
-        <SemanticRow name="surface-app-shell"   prim="gray-900"    value="#0F172A" />
+        <SemanticRow name="surface-app-shell"   prim="gray-950"    value="#020617" />
         <SemanticRow name="text-nav-item"       prim="gray-300"    value="#CBD5E1" />
         <SemanticRow name="text-nav-active"     prim="gray-00"     value="#FFFFFF" />
-        <SemanticRow name="text-on-dark-accent" prim="accent-300"  value="#A5B4FC" />
+        <SemanticRow name="text-on-dark-accent" prim="accent-300"  value="#9C8DFA" />
         <SemanticRow name="border-app-shell"    prim="gray-700"    value="#334155" />
       </Section>
 

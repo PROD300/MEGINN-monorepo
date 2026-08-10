@@ -8,15 +8,20 @@
 
 ### Палитра
 
-**Акцент (Indigo) — доверие без retail-blue:**
-- accent-50  = #EEF2FF
-- accent-100 = #E0E7FF
-- accent-300 = #A5B4FC
-- accent-500 = #4F46E5   ← основной акцент
-- accent-700 = #3730A3
-- accent-900 = #1E1B4B
+**Акцент («Ice Blue» pilot, промоут в глобальный токен 2026-08-09) — доверие без retail-blue:**
+- accent-50  = #F0EEFF
+- accent-100 = #DEDAFF
+- accent-300 = #9C8DFA
+- accent-500 = #4B34F5   ← основной акцент
+- accent-700 = #2E1FB8
+- accent-900 = #180F5C
 
-**Нейтралы (Cool Gray — 9 ступеней):**
+Обновлено 2026-08-09/10 — было #4F46E5 (весь ряд сдвинут на новую, более
+насыщенную индиго-фиолетовую шкалу, ~247°). Старое значение больше нигде
+в коде не используется — если встретится `#4F46E5` или соседние hex этого
+ряда, это баг/остаток старого ребрендинга.
+
+**Нейтралы (Cool Gray — 9 ступеней), без изменений:**
 - gray-00  = #FFFFFF
 - gray-50  = #F8FAFC
 - gray-100 = #F1F5F9
@@ -40,9 +45,14 @@
 2026-08-09 (частичная конвергенция success/error), полностью унифицировано
 2026-08-10 вместе с компонентом Banner (см. `ds/components.md`).
 
-⚠ Остальная часть этого файла (Слой 2 ниже, поверхности, тени) документирует
-светлую тему до ребрендинга 2026-08-09 и не соответствует текущему тёмному
-UI Kit — требует отдельного обновления, не входящего в эту правку.
+**Тени — 3 базовых уровня + accent-glow (deprecated):**
+- shadow-sm = 0 1px 2px rgba(15,23,42,0.08)
+- shadow-md = 0 4px 6px rgba(15,23,42,0.10), 0 1px 3px rgba(15,23,42,0.06)
+- shadow-lg = 0 10px 15px rgba(15,23,42,0.10), 0 4px 6px rgba(15,23,42,0.05)
+- shadow-float = 0 24px 48px -24px rgba(0,0,0,0.55), inset 0 1px 0 0 rgba(255,255,255,0.05) — добавлен с тёмным ребрендингом, для «плавающих» элементов (модалки, floating callout)
+- shadow-glow-accent / shadow-glow-accent-strong = **`none`, deprecated 2026-08-10** — раньше акцентное неоновое свечение вокруг карточек/кнопок при hover/tilt, признано «устаревшим» и обнулено в коде (`app/src/tokens/primitives.css`), токен оставлен только чтобы не ломать существующие ссылки. Не использовать в новых компонентах.
+
+⚠ Этот файл проверен и синхронизирован с кодом 2026-08-11 (см. `app/src/tokens/primitives.css`, `semantics.css`). Слой 2 ниже полностью переписан под текущий тёмный UI Kit (было: светлая тема до ребрендинга 2026-08-09).
 
 ### Типографика
 
@@ -78,8 +88,10 @@ UI Kit — требует отдельного обновления, не вхо
 
 - radius-none = 0
 - radius-sm   = 4
-- radius-md   = 8
+- radius-md   = 4   ← было 8, унифицировано на острый институциональный радиус, 2026-08-09
 - radius-lg   = 16
+
+Карточки/панели (StatCard, BridgeProviderCard, RoleRow, LiabilityCard и т.п.) используют `radius-md` — см. `ds/components.md`.
 
 ### Отступы
 
@@ -93,72 +105,66 @@ UI Kit — требует отдельного обновления, не вхо
 - space-12 = 48
 - space-16 = 64
 
-### Тени
-
-- shadow-sm = 0 1px 2px rgba(15,23,42,0.08)
-- shadow-md = 0 4px 6px rgba(15,23,42,0.10), 0 1px 3px rgba(15,23,42,0.06)
-- shadow-lg = 0 10px 15px rgba(15,23,42,0.10), 0 4px 6px rgba(15,23,42,0.05)
-
 ---
 
 ## Слой 2 — смысловые токены
 
+**Тёмная тема по умолчанию, промоут из Portfolio-пилота на весь продукт, 2026-08-09.** Всё ниже — актуальное состояние `app/src/tokens/semantics.css`, ранее (до этой правки) этот раздел ошибочно документировал светлую тему допребрендинга — расхождение устранено 2026-08-11.
+
 ### Поверхности
 
-- surface-default              → gray-50       ← фон страницы / app background
-- surface-subtle               → gray-50       ← фон секций (alternating)
-- surface-elevated             → gray-00       ← карточки поверх subtle (shadow-sm)
-- surface-level-1              → gray-50       ← body / page background
-- surface-level-2              → gray-100      ← sidebar / nav rail
-- surface-level-3              → gray-200      ← dividers, input borders
-- surface-level-4              → gray-300      ← disabled, inactive tabs
+- surface-default              → gray-950      ← фон страницы / app background (было gray-50 — светлая тема, устарело)
+- surface-subtle               → gray-900
+- surface-elevated             → gray-900      ← карточки/модалки (было gray-00 + shadow-sm — теперь плоская поверхность на тёмном, без тени по умолчанию)
+- surface-level-1              → gray-950
+- surface-level-2              → gray-900
+- surface-level-3              → gray-700
+- surface-level-4              → gray-500
 - surface-action-primary       → accent-500
 - surface-action-primary-hover → accent-700
-- surface-action-ghost-hover   → accent-50
+- surface-action-ghost-hover   → accent-900    ← было accent-50 (светлый тинт) — на тёмном фоне тинт берётся из тёмного конца шкалы
 - surface-hover                → gray-300      ← добавлено 2026-08-10, ховер-фон для текстовых кнопок: Button (primary/secondary/ghost), TopNav Stop All, Portfolio primaryCta. TopNav icon-кнопки (Bell/Exit) hover решён иначе — см. accent-300 в разделе «Текст» ниже, не через surface-hover. IconButton (shared-компонент) — hover всё ещё на паузе. TopNav user-меню — откачено на прежний hover (пользователь оценил старую версию выше), не входит в это правило
+- surface-card-sheen           → linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 55%) ← добавлено 2026-08-10, верхний блик только на Table rows/header и RuleCard rows, НЕ на карточках-контейнерах (те плоские — см. border-hairline ниже)
 
 ### Текст
 
-- text-default      → gray-900
-- text-muted        → gray-500
-- text-disabled     → gray-300
+- text-default      → gray-00       ← было gray-900 (тёмный текст на светлом) — устарело
+- text-muted        → gray-300      ← было gray-500
+- text-subtle       → gray-500      ← добавлено 2026-08-11, приглушённый hint-текст на плоской тёмной поверхности (Onboarding infoBanner/successBanner, после того как фон/обводку убрали), более приглушённый чем text-muted. Выбран через контраст: 3.75:1 vs surface-elevated, gray-700 (1.72:1) отклонён
+- text-disabled     → gray-700      ← было gray-300
 - text-on-action    → gray-00
 - text-on-dark      → gray-00
 - text-error        → error-500
 - text-warning      → warning-500
 - text-success      → success-500
-- text-accent       → accent-500
+- text-info         → info-500      ← добавлено 2026-08-10, было пропущено при первой конвергенции функциональных цветов
+- text-accent       → accent-300    ← было accent-500 (недостаточный контраст на тёмном фоне)
 - text-accent-hover → accent-700      ← добавлено 2026-08-10, hover-текст для текстовых кнопок (primary/secondary/ghost) — правило: hover = surface-hover фон + text-accent-hover текст. Icon-only кнопки пока не входят, см. surface-hover выше
 
 ### Обводки
 
-- border-default    → gray-200
-- border-strong     → gray-300
+- border-default    → gray-700      ← было gray-200 (светлая тема)
+- border-strong     → gray-500      ← было gray-300
 - border-focus      → accent-500
 - border-error      → error-500
 - border-warning    → warning-500
+- border-info       → info-500      ← добавлено 2026-08-10, симметрично text-info
+- border-hairline   → прозрачный (transparent) — обводка карточек убрана 2026-08-10 («went flat»), токен оставлен как заглушка, чтобы не переписывать все точки использования. Figma (`Foundation-Tokens`, переменная `border-hairline`) приведена в соответствие 2026-08-11 (было полупрозрачный акцент 32%, теперь тоже transparent — код источник истины по правилу Daria).
 
-### Состояния и статусы (для risk-индикаторов)
+### Статусы / risk-индикаторы
 
 - bg-success        → success-500
 - bg-warning        → warning-500
 - bg-error          → error-500
 - bg-info           → info-500
-- bg-success-subtle → success-500 @ 10% opacity   ← ✓ создана 2026-05-05 (grow_ui_kit)
-- bg-warning-subtle → warning-500 @ 10% opacity   ← ✓ создана 2026-05-05
-- bg-error-subtle   → error-500   @ 10% opacity   ← ✓ создана 2026-05-05
-- bg-info-subtle    → info-500    @ 10% opacity    ← ✓ создана 2026-05-05
-
-### Компонентные поверхности (нейтральные уровни)
-
-- surface-level-1   → gray-50    ← body background
-- surface-level-2   → gray-100   ← sidebar / nav rail
-- surface-level-3   → gray-200   ← dividers, input borders
-- surface-level-4   → gray-300   ← disabled, inactive tabs
+- bg-success-subtle → success-500 @ 10% opacity   ← с 2026-08-10 фактически равен accent @ 10% (все четыре *-subtle сведены к одному тинту, см. Слой 1 → Функциональные)
+- bg-warning-subtle → warning-500 @ 10% opacity
+- bg-error-subtle   → error-500   @ 10% opacity
+- bg-info-subtle    → info-500    @ 10% opacity
 
 ### AppShell (добавлено 2026-05-06 — final_screens)
 
-- surface-app-shell   → gray-900   ← тёмный фон TopBar и Sidebar (= surface-dark)
+- surface-app-shell   → gray-950   ← было задокументировано как gray-900, код (`semantics.css`) фактически gray-950 — поправлено 2026-08-11. Тёмный фон TopBar и Sidebar (= surface-dark)
 - text-nav-item       → gray-300   ← неактивный пункт навигации на тёмном фоне (= text-on-dark-muted)
 - text-nav-active     → gray-00    ← активный пункт навигации на тёмном фоне (= text-on-dark)
 - text-on-dark-accent → accent-300 ← акцентный цвет на тёмном фоне (= text-on-dark-brand)
@@ -173,4 +179,4 @@ UI Kit — требует отдельного обновления, не вхо
 
 **Figma-файл:** https://www.figma.com/design/PcpLlKJqePv7h5acIUEgfd/Obsidian-MCP  
 **Страница:** Foundation (18:2) → фрейм «Foundation-Tokens» (35:2)  
-**Дата:** 2026-05-05 | **Версия:** 1.0 (starter)
+**Дата:** 2026-08-11 | **Версия:** 1.1 — синхронизировано с кодом и с Figma-фреймом (accent-ramp, radius-md, единый функциональный акцент, тёмный Слой 2, добавлены text-info/border-info, исправлены 2 прибитых старых hex на фрейме `Functional Colors`)

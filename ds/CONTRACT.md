@@ -20,7 +20,7 @@
 
 1. **Компоненты — только из UI-кита.** При сборке экрана агент берёт инстансы компонентов со страницы Components (26:2). На старте: Button, Input, Card, Modal, Navbar, IconButton, Badge. Не рисует новые фреймы с нуля под конкретный экран.
 
-2. **Цвета — только через Semantic Variables.** Никаких `fills = SOLID #4F46E5`. Только `setBoundVariable("fills", "surface-action-primary")`. Если в коде получился прибитый hex — это баг, переделывается через Variable.
+2. **Цвета — только через Semantic Variables.** Никаких `fills = SOLID #4B34F5`. Только `setBoundVariable("fills", "surface-action-primary")`. Если в коде получился прибитый hex — это баг, переделывается через Variable.
 
 3. **Типографика — через Variables и стили.** Все text-узлы обязаны иметь `textStyleId` из коллекции `DS/*`. Прибитый `fontSize` в text-узле — баг.
 

@@ -96,13 +96,16 @@
   --radius-lg:  16px;     /* cards, modals, large surfaces */
   --radius-pill: 9999px;  /* status pills */
 
-  /* Shadows — 3 base levels + accent glow set (added with the
-     rebrand, used sparingly for floating/hero elements) */
+  /* Shadows — 3 base levels. Accent-glow deprecated to `none` in the
+     app 2026-08-10 (app/src/tokens/primitives.css) — synced here
+     2026-08-11. Landing no longer references either glow token
+     anywhere (removed per Daria's "no neon glow" hero/card passes),
+     kept only so nothing breaks if something aliases them later. */
   --shadow-sm: 0 1px 2px 0 rgba(15, 23, 41, 0.08);
   --shadow-md: 0 4px 6px 0 rgba(15, 23, 41, 0.10), 0 1px 3px 0 rgba(15, 23, 41, 0.06);
   --shadow-lg: 0 10px 15px 0 rgba(15, 23, 41, 0.10), 0 4px 6px 0 rgba(15, 23, 41, 0.05);
-  --shadow-glow-accent:        0 0 10px 1px rgba(75, 52, 245, 0.55), 0 0 28px 6px rgba(75, 52, 245, 0.25);
-  --shadow-glow-accent-strong: 0 0 14px 2px rgba(75, 52, 245, 0.8),  0 0 40px 10px rgba(75, 52, 245, 0.4);
+  --shadow-glow-accent:        none;
+  --shadow-glow-accent-strong: none;
 
   /* ------------------------------------------------------------
      LAYER 2 — SEMANTIC TOKENS
