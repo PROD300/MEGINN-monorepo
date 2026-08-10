@@ -224,6 +224,13 @@
     });
   }
 
+  /* 3g. Problem-section cards (S2) — removed per Daria: no more
+     cursor-spotlight/shadow on hover. Icons removed too (she's
+     generating animated 3D icon assets separately); once those land,
+     wire their hover-triggered animation here — .pcard already fires
+     :hover with a thin accent border, so a plain CSS/JS hook on
+     .pcard:hover (or mouseenter/mouseleave) is all that's needed. */
+
   /* ----- 4. Form -----
      [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
      This block is a portfolio/demo prototype, not a production

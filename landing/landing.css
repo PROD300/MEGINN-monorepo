@@ -479,22 +479,22 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 @media (max-width: 960px) { .cards-3 { grid-template-columns: 1fr; } }
 
 .pcard {
+  position: relative;
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md); /* was radius-lg (16px) — card/panel components use radius-md (4px) per ds/components.md */
   padding: 32px 28px;
-  transition: border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
+  transition: border-color 200ms ease-out, transform 200ms ease-out;
 }
 .section--subtle .pcard { background: var(--gray-00); }
-.pcard:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
-.pcard__icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: var(--accent-50);
-  color: var(--accent-500);
-  display: inline-flex; align-items: center; justify-content: center;
-  margin-bottom: 28px;
+/* Hover: thin accent hairline only — no shadow, no glow, no spotlight
+   (all removed per Daria). Once the animated 3D icon assets land, they
+   carry the hover "interest" instead of card-level chrome. */
+.pcard:hover {
+  border-color: rgba(75, 52, 245, 0.45);
+  transform: translateY(-1px);
 }
+
 .pcard__h {
   font: 600 20px/1.35 var(--font-sans);
   letter-spacing: -0.01em;
@@ -505,6 +505,9 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
   font: 400 15px/1.55 var(--font-sans);
   color: var(--text-muted);
   margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcard { transition: none; }
 }
 
 /* ============================================================ S3 — How It Works */
@@ -1674,7 +1677,6 @@ html[data-rhythm="editorial"] .wcard:hover {
 html[data-rhythm="editorial"] .cards-3,
 html[data-rhythm="editorial"] .features,
 html[data-rhythm="editorial"] .cards-2 { gap: 56px; }
-html[data-rhythm="editorial"] .pcard__icon { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 20px; }
 html[data-rhythm="editorial"] .fcard--hero { background: var(--gray-50); padding: 28px; border-radius: var(--radius-lg); }
 html[data-rhythm="editorial"] .tcol { padding: 0; }
 html[data-rhythm="editorial"] .tcol__head { padding-bottom: 24px; }
@@ -1707,10 +1709,6 @@ html[data-rhythm="bold"] #trust .tcol:hover {
 html[data-rhythm="bold"] #problem .pcard__h,
 html[data-rhythm="bold"] #trust .tcol__h { color: var(--gray-00); }
 html[data-rhythm="bold"] #problem .pcard__b { color: var(--gray-300); }
-html[data-rhythm="bold"] #problem .pcard__icon {
-  background: rgba(79,70,229,0.15);
-  color: var(--accent-300);
-}
 html[data-rhythm="bold"] #trust .tcol__ic {
   background: rgba(79,70,229,0.15);
   color: var(--accent-300);
@@ -1747,7 +1745,6 @@ html[data-density="compact"] .h2 { font-size: 36px; }
 html[data-density="compact"] .section__head { margin-bottom: 48px; }
 html[data-density="compact"] .pcard,
 html[data-density="compact"] .fcard { padding: 22px 22px 24px; }
-html[data-density="compact"] .pcard__icon { margin-bottom: 18px; }
 
 @media (max-width: 1024px) {
   html[data-density="spacious"] .h1 { font-size: 60px; }
