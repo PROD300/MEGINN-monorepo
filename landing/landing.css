@@ -100,7 +100,7 @@ a { color: inherit; text-decoration: none; }
   transition: background 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out, transform 150ms ease-out;
   white-space: nowrap;
 }
-.btn--sm  { height: 34px; padding: 0 14px; font-size: 13px; border-radius: 6px; }
+.btn--sm  { height: 34px; padding: 0 14px; font-size: 13px; border-radius: var(--radius-md); }
 .btn--lg  { height: 48px; padding: 0 22px; font-size: 15px; }
 .btn--full { width: 100%; }
 
@@ -495,6 +495,30 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
   transform: translateY(-1px);
 }
 
+/* 3D icon video — static on frame 0 by default, plays on card hover
+   (landing.js §3g). WebM+alpha primary / MP4 fallback baked on white
+   to match the card, so it reads seamlessly in both cases. Sized up +
+   zoom-in on hover per Daria (was 72px, felt too small as the card's
+   hero visual). */
+.pcard__icon3d {
+  display: block;
+  width: 176px;
+  height: 176px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  margin-left: -12px; /* optically re-align the bigger asset with the text below */
+  pointer-events: none;
+  transform: scale(1);
+  transition: transform 320ms cubic-bezier(.2,.8,.2,1);
+}
+.pcard:hover .pcard__icon3d {
+  transform: scale(1.12);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcard__icon3d { transition: none; }
+  .pcard:hover .pcard__icon3d { transform: none; }
+}
+
 .pcard__h {
   font: 600 20px/1.35 var(--font-sans);
   letter-spacing: -0.01em;
@@ -537,7 +561,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   gap: 12px;
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
@@ -665,7 +689,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 /* --- Rules editor visual --- */
 .ruleed {
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--gray-950);
   color: var(--gray-00);
   overflow: hidden;
@@ -735,7 +759,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 /* --- Monitor visual --- */
 .monitor {
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--gray-00);
   padding: 20px;
   box-shadow: var(--shadow-sm);
@@ -804,7 +828,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   padding: 12px 14px;
   background: var(--bg-success);
   border: 1px solid rgba(16,185,129,0.20);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   opacity: 0; transform: translateY(8px);
 }
 .howpanel[data-step="1"].is-active .mevt--rebalance {
@@ -825,7 +849,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 /* --- Report visual --- */
 .report {
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--gray-00);
   padding: 20px;
   box-shadow: var(--shadow-sm);
@@ -855,7 +879,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   display: flex; flex-direction: column; gap: 4px;
   padding: 12px 14px;
   background: var(--gray-50);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 .report__k {
   font: 500 10px/1 var(--font-sans);
@@ -963,7 +987,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   color: var(--text-default);
   background: var(--gray-100);
   padding: 1px 6px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   font-size: 13px;
 }
 .howline__chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1048,7 +1072,7 @@ html[data-how="cards"] .steps {
   color: var(--text-muted);
   margin: 0;
 }
-.step__b .mono { color: var(--text-default); background: var(--gray-100); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+.step__b .mono { color: var(--text-default); background: var(--gray-100); padding: 1px 6px; border-radius: var(--radius-md); font-size: 13px; }
 .step__foot {
   margin-top: 16px;
   font: 400 12px/1 var(--font-sans);
@@ -1071,7 +1095,7 @@ html[data-how="cards"] .steps {
 .fcard {
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 28px 28px 32px;
   transition: border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
   position: relative;
@@ -1153,7 +1177,7 @@ html[data-how="cards"] .steps {
 .tcol {
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 36px 36px;
 }
 .tcol__head {
@@ -1193,7 +1217,7 @@ html[data-how="cards"] .steps {
   margin-top: 48px;
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 28px 36px;
   position: relative;
 }
@@ -1229,7 +1253,7 @@ html[data-how="cards"] .steps {
 .wcard {
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 40px;
   display: flex; flex-direction: column;
 }
@@ -1322,7 +1346,7 @@ html[data-how="cards"] .steps {
 .access__form {
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 32px 32px 28px;
   color: var(--text-default);
   box-shadow: 0 20px 50px -20px rgba(0,0,0,0.4);
@@ -1383,7 +1407,7 @@ html[data-how="cards"] .steps {
 .form__success {
   position: absolute; inset: 0;
   background: var(--gray-00);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
   padding: 32px;
@@ -1488,7 +1512,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   background: var(--gray-900);
   color: var(--gray-00);
   border: 1px solid var(--border-dark);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
   z-index: 9999;
   font-family: var(--font-sans);
@@ -1538,7 +1562,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   padding: 10px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   color: var(--gray-00);
   cursor: pointer;
   text-align: left;
@@ -1677,7 +1701,7 @@ html[data-rhythm="editorial"] .wcard:hover {
 html[data-rhythm="editorial"] .cards-3,
 html[data-rhythm="editorial"] .features,
 html[data-rhythm="editorial"] .cards-2 { gap: 56px; }
-html[data-rhythm="editorial"] .fcard--hero { background: var(--gray-50); padding: 28px; border-radius: var(--radius-lg); }
+html[data-rhythm="editorial"] .fcard--hero { background: var(--gray-50); padding: 28px; border-radius: var(--radius-md); }
 html[data-rhythm="editorial"] .tcol { padding: 0; }
 html[data-rhythm="editorial"] .tcol__head { padding-bottom: 24px; }
 html[data-rhythm="editorial"] .quote { background: var(--gray-50); }

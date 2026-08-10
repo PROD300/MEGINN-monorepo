@@ -224,12 +224,25 @@
     });
   }
 
-  /* 3g. Problem-section cards (S2) — removed per Daria: no more
-     cursor-spotlight/shadow on hover. Icons removed too (she's
-     generating animated 3D icon assets separately); once those land,
-     wire their hover-triggered animation here — .pcard already fires
-     :hover with a thin accent border, so a plain CSS/JS hook on
-     .pcard:hover (or mouseenter/mouseleave) is all that's needed. */
+  /* 3g. Problem-section cards (S2) — 3D icon videos (.pcard__icon3d):
+     paused on frame 0 by default (static), play while the card is
+     hovered, pause + rewind to frame 0 on mouseleave. No spotlight/
+     shadow on the card itself anymore (removed per Daria) — the video
+     is the only hover "interest" now. Runs regardless of hasHover so
+     touch users still get the static first frame; only the hover
+     play/pause wiring is skipped without a real pointer. */
+  document.querySelectorAll('.pcard').forEach(function (card) {
+    var vid = card.querySelector('.pcard__icon3d');
+    if (!vid) return;
+    vid.currentTime = 0;
+    if (hasHover) {
+      card.addEventListener('mouseenter', function () { vid.play(); });
+      card.addEventListener('mouseleave', function () {
+        vid.pause();
+        vid.currentTime = 0;
+      });
+    }
+  });
 
   /* ----- 4. Form -----
      [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
