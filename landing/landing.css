@@ -447,7 +447,7 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 .bar > i {
   position: absolute; left: 0; top: 0; bottom: 0;
   background: var(--accent-500); border-radius: var(--radius-pill);
-  transition: width 900ms cubic-bezier(.2,.8,.2,1);
+  transition: width 2000ms cubic-bezier(.2,.8,.2,1);
 }
 @media (prefers-reduced-motion: reduce) {
   .bar > i { transition: none; }
@@ -1227,7 +1227,6 @@ html[data-how="cards"] .steps {
   margin-top: 48px;
   background: var(--gray-00);
   border: 1px solid var(--border-default);
-  border-left: 3px solid var(--accent-500);
   border-radius: 12px;
   padding: 28px 36px;
   position: relative;

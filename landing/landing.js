@@ -21,6 +21,7 @@
       var prefix = el.dataset.prefix || '';
       var suffix = el.dataset.suffix || '';
       var thousands = el.dataset.thousands === 'true';
+      var dur = parseInt(el.dataset.duration || '1400', 10);
 
       function format(v) {
         var s = dec ? v.toFixed(dec) : Math.round(v).toString();
@@ -33,7 +34,6 @@
       }
 
       if (from === to) { el.textContent = format(to); return; }
-      var dur = 1400;
       var t0 = performance.now();
       function step(now) {
         var p = Math.min(1, (now - t0) / dur);
@@ -350,7 +350,7 @@
   if (howdemo) {
     var tabs = Array.prototype.slice.call(howdemo.querySelectorAll('.howtab'));
     var panels = Array.prototype.slice.call(howdemo.querySelectorAll('.howpanel'));
-    var DURATION = 8000;
+    var DURATION = 4000; // halved per Daria's request, was 8000
     var active = 0;
     var raf = null;
     var startTs = 0;
