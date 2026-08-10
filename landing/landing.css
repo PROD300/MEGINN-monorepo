@@ -1288,9 +1288,6 @@ html[data-how="cards"] .steps {
   letter-spacing: -0.005em;
   color: var(--text-default);
   margin: 0;
-  position: relative;
-  padding-left: 14px;
-  border-left: 2px solid var(--accent-500);
   text-wrap: balance;
 }
 .anti-pos {
@@ -1413,6 +1410,7 @@ html[data-how="cards"] .steps {
   padding: 32px;
   animation: fade-in 240ms ease-out;
 }
+.form__success[hidden] { display: none; } /* bug fix: the class-level display:flex above was overriding the native [hidden] attribute, so the success state showed permanently regardless of JS toggling .hidden */
 .form__success-ic {
   width: 56px; height: 56px;
   border-radius: 50%;
