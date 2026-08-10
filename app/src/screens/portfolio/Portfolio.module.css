@@ -1,8 +1,8 @@
 .screen {
-  /* Accent palette, functional colors, and the neon-glow system (border-hairline,
-     shadow-float, shadow-glow-accent, surface-card-grid fade) all promoted to
-     primitives.css / semantics.css as the sitewide default, 2026-08-09 — no
-     longer scoped here. */
+  /* Accent palette and functional colors promoted to primitives.css /
+     semantics.css as the sitewide default, 2026-08-09 — no longer scoped
+     here. The neon-glow layer (shadow-glow-accent, surface-card-grid, and
+     the text-shadow/box-shadow glows on hover) was removed 2026-08-10. */
 
   display: flex;
   flex-direction: column;
@@ -119,10 +119,6 @@
   font-size: var(--size-sm);
   color: var(--accent-300);
   text-decoration: none;
-  transition: text-shadow 0.15s;
-}
-.secLink:hover {
-  text-shadow: 0 0 8px rgba(75, 52, 245, 0.9), 0 0 20px rgba(75, 52, 245, 0.5);
 }
 
 .tableWrap {
@@ -161,11 +157,10 @@
   border: none;
   padding: var(--space-1) 0;
   cursor: pointer;
-  transition: color 0.15s, text-shadow 0.15s;
+  transition: color 0.15s;
 }
 .linkAction:hover {
   color: var(--accent-300);
-  text-shadow: 0 0 8px rgba(75, 52, 245, 0.9), 0 0 20px rgba(75, 52, 245, 0.5);
 }
 .linkAction:disabled { opacity: 0.5; cursor: not-allowed; }
 

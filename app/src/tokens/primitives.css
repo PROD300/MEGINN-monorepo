@@ -78,7 +78,9 @@
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
   --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.10), 0 1px 3px rgba(15, 23, 42, 0.06);
   --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.10), 0 4px 6px rgba(15, 23, 42, 0.05);
-  --shadow-float: 0 24px 48px -24px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 0 22px 2px rgba(75, 52, 245, 0.22);
-  --shadow-glow-accent:        0 0 10px 1px rgba(75, 52, 245, 0.55), 0 0 28px 6px rgba(75, 52, 245, 0.25);
-  --shadow-glow-accent-strong: 0 0 14px 2px rgba(75, 52, 245, 0.8),  0 0 40px 10px rgba(75, 52, 245, 0.4);
+  /* Neon accent glow layer removed 2026-08-10 (outdated) — plain elevation +
+     glass-edge highlight, no accent-colored halo. */
+  --shadow-float: 0 24px 48px -24px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --shadow-glow-accent:        none; /* deprecated 2026-08-10, kept as a token so nothing breaks */
+  --shadow-glow-accent-strong: none; /* deprecated 2026-08-10, kept as a token so nothing breaks */
 }
