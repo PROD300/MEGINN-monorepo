@@ -37,6 +37,7 @@
   --text-success:   var(--success-500);
   --text-info:      var(--info-500);
   --text-accent:    var(--accent-300);
+  --text-accent-hover: var(--accent-700); /* secondary/ghost/icon-button text on hover — surface-hover (gray-300) is a light bg, accent-300 loses contrast there */
 
   /* === Borders === */
   --border-default: var(--gray-700);

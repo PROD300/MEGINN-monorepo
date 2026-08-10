@@ -12,9 +12,7 @@
   transition: background 0.15s, border-color 0.15s;
 }
 
-.iconBtn:hover {
-  background: var(--surface-hover);
-}
+/* Hover state paused for now — TBD. */
 
 .iconBtn:disabled {
   opacity: 0.4;

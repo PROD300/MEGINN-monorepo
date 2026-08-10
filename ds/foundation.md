@@ -115,6 +115,7 @@ UI Kit — требует отдельного обновления, не вхо
 - surface-action-primary       → accent-500
 - surface-action-primary-hover → accent-700
 - surface-action-ghost-hover   → accent-50
+- surface-hover                → gray-300      ← добавлено 2026-08-10, ховер-фон для текстовых кнопок: Button (primary/secondary/ghost), TopNav (Stop All, user-меню), Portfolio primaryCta. Icon-only кнопки (IconButton, TopNav icon-кнопки) — hover на паузе, прорабатывается отдельно
 
 ### Текст
 
@@ -127,6 +128,7 @@ UI Kit — требует отдельного обновления, не вхо
 - text-warning      → warning-500
 - text-success      → success-500
 - text-accent       → accent-500
+- text-accent-hover → accent-700      ← добавлено 2026-08-10, hover-текст для текстовых кнопок (primary/secondary/ghost) — правило: hover = surface-hover фон + text-accent-hover текст. Icon-only кнопки пока не входят, см. surface-hover выше
 
 ### Обводки
 

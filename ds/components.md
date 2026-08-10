@@ -12,9 +12,9 @@
 - **Node ID:** `45:8`
 - **Тип:** ComponentSet (36 вариантов)
 - **Матрица:** `Type=primary|secondary|ghost` × `State=default|hover|disabled|loading` × `Size=sm|md|lg`
-- **Fills:** primary → `surface-action-primary` / hover → `surface-action-primary-hover` | secondary/ghost hover → `surface-action-ghost-hover`
+- **Fills:** primary default → `surface-action-primary` / hover → `surface-hover` | secondary/ghost default → transparent / hover → `surface-hover` (обновлено 2026-08-10, было `surface-action-primary-hover`/`surface-action-ghost-hover`)
 - **Border:** secondary → `border-default` / hover → `border-strong`
-- **Text:** `DS/Body/sm Medium` (md/lg) · `DS/Body/xs` (sm) | primary → `text-on-action` | others → `text-accent`
+- **Text:** `DS/Body/sm Medium` (md/lg) · `DS/Body/xs` (sm) | default: primary → `text-on-action` · secondary/ghost → `text-accent` | hover (все три варианта, universal rule 2026-08-10): → `text-accent-hover`, контраст на светлом `surface-hover`
 - **Radius:** `radius-md`
 - **Padding:** sm: space-3 H / space-1 V · md: space-4 H / space-2 V · lg: space-6 H / space-3 V
 - **disabled:** opacity 0.4 · **loading:** текст скрыт, loader rect 12px
@@ -64,7 +64,7 @@
 - **Node ID:** `92:6`
 - **Тип:** ComponentSet (3 варианта)
 - **Матрица:** `State=default|hover|disabled`
-- **Fill:** default → `surface-action-ghost-hover` · hover → `surface-level-2`
+- **Fill:** default → `surface-action-ghost-hover` · hover — **на паузе 2026-08-10**, прорабатывается отдельно (была `surface-level-2`, затем пробовали `surface-hover` + `text-accent-hover`, откатили)
 - **Border:** `border-default` · **disabled:** opacity 0.4
 - **Radius:** `radius-md` · **Size:** 36×36px
 - **Status:** unused в текущих экранах; кандидат на применение в следующей итерации (toolbar actions, inline icon actions)
