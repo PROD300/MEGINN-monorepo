@@ -212,12 +212,12 @@
       setTimeout(function () {
         callout.hidden = true;
         row.classList.remove('is-on');
-      }, 2800);
+      }, 2100); // was 2800 — sped up along with the faster cycle below
     }
 
     setTimeout(function () {
       playScenario();
-      setInterval(playScenario, 6000);
+      setInterval(playScenario, 4500); // was 6000 — per Daria, callout moves between rows a bit faster
     }, 1400);
     window.addEventListener('resize', function () {
       if (activeRow && !callout.hidden) positionCallout(activeRow);
