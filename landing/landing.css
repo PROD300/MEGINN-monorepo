@@ -333,21 +333,17 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
   background: var(--gray-950);
   color: var(--dash-text);
   border: 1px solid var(--dash-border);
-  border-radius: var(--radius-lg);
-  box-shadow: none; /* flat/matte at rest — no floating-card depth */
+  border-radius: var(--radius-md); /* card/panel components use radius-md per ds/components.md — sharp, not radius-lg */
+  box-shadow: none; /* flat/matte at rest and while tilting — no glow, no floating-card depth */
   overflow: hidden;
   transform: translateZ(0);
   position: relative;
-  transition: transform 420ms cubic-bezier(.2,.8,.2,1), box-shadow 420ms ease-out;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
   will-change: transform;
 }
-/* JS applies rotateX/rotateY inline on mousemove (see landing.js
-   §Hero interactions). A soft glow only while actively tilting —
-   the only moment this card has any depth — keeps the resting
-   state fully flat per the app's own matte surfaces. */
-.dash.is-tilting {
-  box-shadow: var(--shadow-glow-accent, 0 0 20px 2px rgba(75, 52, 245, 0.20));
-}
+/* JS still applies rotateX/rotateY inline on mousemove (see landing.js
+   §Hero interactions) and toggles .is-tilting — kept as a hook, but it
+   no longer carries any visual styling (no glow on hover/tilt). */
 @media (prefers-reduced-motion: reduce) {
   .dash { transition: none; }
 }
@@ -410,33 +406,9 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 .dash__tbl tbody tr:last-child td { border-bottom: none; }
 .dash__tbl .r { text-align: right; }
 .dash__tbl b { font-weight: 600; }
-.glyph {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: var(--dash-chip-bg);
-  border: 1px solid var(--dash-border);
-  font: 600 8.5px/1 var(--font-mono);
-  margin-right: 8px;
-  vertical-align: middle;
-  letter-spacing: -0.02em;
-  color: var(--dash-text-muted);
-}
-.bar {
-  display: inline-block; width: 56px; height: 4px;
-  background: var(--dash-track-bg);
-  border-radius: var(--radius-pill);
-  position: relative; vertical-align: middle;
-  margin-left: 8px;
-}
-.bar > i {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  background: var(--accent-500); border-radius: var(--radius-pill);
-  transition: width 2500ms cubic-bezier(.2,.8,.2,1);
-}
-@media (prefers-reduced-motion: reduce) {
-  .bar > i { transition: none; }
-}
+/* .glyph (round per-asset letter mark) and .bar (allocation progress bar)
+   removed per Daria — minimalist pass, no icon marks or bars next to
+   allocation %, table reads as plain numeric rows. */
 .alloc { font-variant-numeric: tabular-nums; }
 
 /* Rebalanced row — persistent heatmap tint from --row-tint (set inline per <tr>, scaled to allocation weight), brightened while is-on is active */
@@ -459,7 +431,7 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 .dash__activity {
   margin: 14px -24px -20px;
   padding: 14px 24px;
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent; /* same surface as the card — only the divider marks the footer */
   border-top: 1px solid var(--dash-border);
 }
 .activity-row { display: flex; align-items: center; gap: 12px; }
@@ -478,7 +450,7 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 6px 10px 6px 8px;
-  border-radius: 6px;
+  border-radius: var(--radius-md); /* was hardcoded 6px — now the DS sharp radius (4px) */
   display: inline-flex; align-items: center; gap: 8px;
   box-shadow: 0 8px 24px -4px rgba(75, 52, 245, 0.5);
   animation: callout-in 480ms cubic-bezier(.2,.7,.3,1.1);

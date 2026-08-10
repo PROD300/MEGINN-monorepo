@@ -107,17 +107,15 @@
   var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var hasHover = !!(window.matchMedia && window.matchMedia('(hover: hover)').matches);
 
-  /* 3a/3b. Entrance choreography, then kick tick numbers + bars
-     once the hero card has faded in. */
+  /* 3a/3b. Entrance choreography, then kick tick numbers
+     once the hero card has faded in. (Allocation bars removed
+     per Daria's minimalist pass — nothing left to kick off there.) */
   var heroRevealEls = Array.prototype.slice.call(document.querySelectorAll('.hero__reveal'));
   if (heroRevealEls.length) {
     setTimeout(function () {
       heroRevealEls.forEach(function (el) { el.classList.add('is-in'); });
       if (dash) {
         runTicks(dash);
-        dash.querySelectorAll('.bar > i[data-target-width]').forEach(function (bar) {
-          requestAnimationFrame(function () { bar.style.width = bar.dataset.targetWidth; });
-        });
       }
     }, 80);
   }
