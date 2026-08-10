@@ -1,4 +1,4 @@
-import { toastStore } from '../../lib/toast'
+import { toastStore, dismissToast } from '../../lib/toast'
 import { Toast } from '../Toast/Toast'
 import styles from './ToastContainer.module.css'
 
@@ -8,9 +8,11 @@ export function ToastContainer() {
   if (toasts.length === 0) return null
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => toasts.forEach(t => dismissToast(t.id))}>
       {toasts.map(t => (
-        <Toast key={t.id} variant={t.variant}>{t.message}</Toast>
+        <div key={t.id} onClick={e => e.stopPropagation()}>
+          <Toast variant={t.variant}>{t.message}</Toast>
+        </div>
       ))}
     </div>
   )
