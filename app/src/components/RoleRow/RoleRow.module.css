@@ -1,9 +1,12 @@
+/* Flat, static, single-tone — 2026-08-11. Was a sheen gradient over
+   surface-elevated; kept just the darkest point of that gradient
+   (surface-elevated itself, no highlight layer). */
 .row {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3);
-  background: var(--surface-card-sheen), var(--surface-elevated);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
 }

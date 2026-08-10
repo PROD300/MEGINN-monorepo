@@ -64,7 +64,7 @@
 
 .stepLabelActive {
   font-size: var(--size-xs);
-  color: var(--text-accent);
+  color: var(--text-on-action);
   white-space: nowrap;
 }
 
@@ -127,11 +127,8 @@
 .infoBanner {
   width: 100%;
   padding: var(--space-3);
-  background: var(--bg-info-subtle);
-  border: 1px solid var(--border-focus);
-  border-radius: var(--radius-md);
   font-size: var(--size-xs);
-  color: var(--text-muted);
+  color: var(--text-subtle);
 }
 
 .walletConnectRow {
@@ -161,11 +158,28 @@
 }
 
 /* ─── Step 2: Permissions ─── */
+/* Connected list, divider lines instead of gapped cards — matches the
+   reviewList pattern on step 3. RoleRow is a shared component (also used
+   on SmartAccountSetup), so its own border/radius is overridden here via
+   the generated class-name fragment rather than editing RoleRow.module.css
+   itself — this stays scoped to Onboarding step 2 only. */
 .roleList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
   width: 100%;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.roleList :global([class*="_row_"]) {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.roleList :global([class*="_row_"]):last-child {
+  border-bottom: none;
 }
 
 /* ─── Step 3: Review ─── */
@@ -204,10 +218,6 @@
 .successBanner {
   width: 100%;
   padding: var(--space-3);
-  background: var(--bg-success-subtle);
-  border: 1px solid var(--border-default);
-  border-left: 3px solid var(--bg-success);
-  border-radius: var(--radius-md);
   font-size: var(--size-xs);
-  color: var(--text-success);
+  color: var(--text-subtle);
 }

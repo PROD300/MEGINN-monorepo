@@ -73,9 +73,10 @@
 - **Node ID:** `45:45`
 - **Тип:** ComponentSet (4 варианта)
 - **Варианты:** `Variant=success` · `Variant=warning` · `Variant=error` · `Variant=info`
-- **Fills:** bg-success / bg-warning / bg-error / bg-info
-- **Text:** `DS/Label/xs`, `text-on-action`
-- **Radius:** `radius-lg` (pill)
+- **Обновлено 2026-08-11 — outline pill, лёгкое начертание:** заливка убрана, border `0.5px solid rgba(75,52,245,0.5)` (тоньше и приглушённее, чем чистый `text-info`), текст `text-info` на `weight-regular` (было `weight-medium`) — «тонкие, невесомые» по прямому запросу Daria. `radius-pill` (было `radius-lg`, но не полная пилюля). Все 4 варианта визуально идентичны — статус читается по копирайту, не по цвету. Цвет прошёл 2 итерации: `accent-900` (~1.1–1.2:1 на тёмных поверхностях — нечитаемо) → `text-info`/`info-500` (~2.6–3.0:1, подтверждено Daria).
+- **Fills:** нет (было bg-success/warning/error/info до 2026-08-11)
+- **Text:** `DS/Label/xs` на `weight-regular` (было `weight-medium`), цвет `text-info` (было `text-on-action`)
+- **Radius:** `radius-pill`
 - **Padding:** 8px H / 2px V
 
 ---

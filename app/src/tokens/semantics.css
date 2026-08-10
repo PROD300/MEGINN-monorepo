@@ -29,6 +29,7 @@
   /* === Text === */
   --text-default:   var(--gray-00);
   --text-muted:     var(--gray-300);
+  --text-subtle:    var(--gray-500); /* added 2026-08-11 — more subdued than text-muted, for de-emphasized hint text on plain dark surfaces. 3.75:1 vs surface-elevated (gray-700 measured 1.72:1, rejected) */
   --text-disabled:  var(--gray-700);
   --text-on-action: var(--gray-00);
   --text-on-dark:   var(--gray-00);
