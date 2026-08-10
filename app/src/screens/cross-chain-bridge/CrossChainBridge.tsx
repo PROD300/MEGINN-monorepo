@@ -61,6 +61,9 @@ export function CrossChainBridge() {
     return successToday.filter(op => op.provider === provider).reduce((sum, op) => sum + op.amountUsd, 0)
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // "Complete now" would normally be a bridge-provider completion webhook
+  // (Li.Fi/Socket/Across). Here it just flips local mock state instantly.
   function handleCompleteNow(op: BridgeOperation) {
     completeBridge(op.id)
     showToast('success', `${op.asset} bridge ${op.route} completed · ${formatUsd(op.amountUsd)}`)

@@ -113,6 +113,9 @@ export function AuditLog() {
   const visibleRows = useMemo(() => applyFilters(auditRows, applied), [auditRows, applied])
   const hasActiveFilters = applied.type || applied.status || applied.dateFrom || applied.dateTo
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Export handlers below produce a real CSV / print view client-side, but
+  // the rows come from the mock audit trail in data/auditLog.ts, not a backend.
   function handleExportCsv() {
     if (visibleRows.length === 0) {
       showToast('error', 'Nothing to export for the current filters')

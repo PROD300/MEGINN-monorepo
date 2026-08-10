@@ -31,6 +31,9 @@ const riskColumns = [
   },
 ]
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Represents live portfolio risk/deviation data, normally computed from
+// the indexer against target allocations. Hardcoded seed rows here.
 const riskRows = [
   { asset: 'USDC', allocation: '43.1%', target: '45%', deviation: '-1.9%', risk: 'Low' },
   { asset: 'ETH', allocation: '32%', target: '30%', deviation: '+2.0%', risk: 'Medium' },
@@ -44,6 +47,9 @@ export function LiabilityDashboard() {
   const profile = profileStore.useStore()
   const [downloading, setDownloading] = useState(false)
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Real CSV download, but built entirely from mock state above (agreement,
+  // profile, riskRows) — no backend compliance-reporting service involved.
   function handleDownloadReport() {
     setDownloading(true)
     setTimeout(() => {

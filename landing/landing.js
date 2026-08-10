@@ -88,7 +88,16 @@
     window.addEventListener('resize', position);
   }
 
-  /* ----- 4. Form ----- */
+  /* ----- 4. Form -----
+     [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+     This block is a portfolio/demo prototype, not a production
+     integration. It implements the full client-side UX (focus
+     tracking, validation, corporate-email check, success state)
+     that a real product needs, but intentionally does NOT send
+     data anywhere — no fetch/XHR, no CRM, no webhook. Kept in
+     code as the logical shape of what "Request Early Access"
+     should do end-to-end; see landing_tz.md §7 for the intended
+     real backend (Typeform/Tally/custom endpoint → Notion/Airtable). */
   var form = document.getElementById('accessForm');
   var emailField = document.getElementById('emailField');
   var emailHelp = document.getElementById('emailHelp');
@@ -155,7 +164,15 @@
     });
   }
 
-  /* ----- 5. Track helper (console + dataLayer if present) ----- */
+  /* ----- 5. Track helper (console + dataLayer if present) -----
+     [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+     Stands in for real analytics (Mixpanel/Segment/GA4 per
+     landing_tz.md §9). Fires into window.dataLayer if something
+     external happens to be listening, otherwise just logs to the
+     console — no real event ingestion. The event names/props
+     here ARE the intended analytics contract (landing_viewed,
+     hero_cta_clicked, form_submitted, etc.), just not connected
+     to a live collector in this prototype. */
   function track(name, props) {
     try {
       if (window.dataLayer) window.dataLayer.push({ event: name, props: props || {} });
@@ -172,12 +189,17 @@
   /* ----- 6. Landing view event ----- */
   track('landing_viewed');
 
-  /* ----- 7. Calendly placeholder ----- */
+  /* ----- 7. Calendly placeholder -----
+     [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+     Represents the "Prefer to talk first?" booking flow. No real
+     Calendly embed here — intentionally, this is a demo prototype
+     with no scheduling backend. Real integration target noted
+     inline below and in landing_tz.md §5 (S7 Access). */
   var cal = document.getElementById('calendlyLink');
   if (cal) {
     cal.addEventListener('click', function (e) {
       e.preventDefault();
-      alert('Calendly popup would open here — integrate calendly.com/obsidian-team/30min');
+      alert('[Logical schema] Calendly popup would open here — integrate calendly.com/obsidian-team/30min');
     });
   }
 

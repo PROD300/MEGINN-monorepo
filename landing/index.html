@@ -22,6 +22,17 @@
 </head>
 <body>
 
+<!-- ============================================================
+     [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+     This whole page is a portfolio/demo prototype: interactive
+     UI states, animations and client-side validation are real;
+     anything that implies a backend (form submission → CRM,
+     analytics via data-evt attributes below, Calendly booking)
+     is a logical placeholder only, kept in code to show the
+     intended product behavior. See landing_tz.md for the full
+     spec and landing.js for where each placeholder lives.
+     ============================================================ -->
+
 <!-- ====================================================== HEADER -->
 <header class="nav" id="nav">
   <div class="nav__inner">
@@ -296,15 +307,15 @@
                 <svg viewBox="0 0 320 80" preserveAspectRatio="none" width="100%" height="80">
                   <defs>
                     <linearGradient id="mfill" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0" stop-color="#4F46E5" stop-opacity="0.20"/>
-                      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+                      <stop offset="0" stop-color="var(--accent-500)" stop-opacity="0.20"/>
+                      <stop offset="1" stop-color="var(--accent-500)" stop-opacity="0"/>
                     </linearGradient>
                   </defs>
                   <path class="mline" d="M0,50 L20,46 L40,52 L60,44 L80,48 L100,40 L120,42 L140,36 L160,40 L180,32 L200,38 L220,28 L240,34 L260,22 L280,26 L300,18 L320,22"
-                        fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/>
+                        fill="none" stroke="var(--accent-500)" stroke-width="1.8" stroke-linecap="round"/>
                   <path class="mfill" d="M0,50 L20,46 L40,52 L60,44 L80,48 L100,40 L120,42 L140,36 L160,40 L180,32 L200,38 L220,28 L240,34 L260,22 L280,26 L300,18 L320,22 L320,80 L0,80 Z"
                         fill="url(#mfill)"/>
-                  <circle class="mdot" cx="320" cy="22" r="3.5" fill="#4F46E5"/>
+                  <circle class="mdot" cx="320" cy="22" r="3.5" fill="var(--accent-500)"/>
                 </svg>
               </div>
 
@@ -365,7 +376,7 @@
               <div class="report__chart" aria-hidden="true">
                 <svg viewBox="0 0 320 60" preserveAspectRatio="none" width="100%" height="60">
                   <path class="spark" d="M0,42 L24,40 L48,42 L72,38 L96,40 L120,34 L144,36 L168,28 L192,30 L216,24 L240,26 L264,18 L288,22 L312,14 L320,16"
-                        fill="none" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/>
+                        fill="none" stroke="var(--accent-500)" stroke-width="1.8" stroke-linecap="round"/>
                 </svg>
               </div>
               <div class="report__actions">
@@ -652,6 +663,10 @@
         </p>
       </div>
 
+      <!-- [LOGICAL SCHEMA — NOT WIRED TO A BACKEND] Full client-side
+           validation/success UX is real; submission is not — see
+           landing.js §4 and landing_tz.md §7 for the intended
+           production flow. Portfolio/demo prototype only. -->
       <form class="access__form" id="accessForm" novalidate>
         <h3 class="form__h">Request Early Access</h3>
         <div class="form__grid">

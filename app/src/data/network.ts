@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents live RPC/bridge-provider connection status. In production
+   this would come from actually pinging Ethereum/Arbitrum RPC endpoints
+   and Li.Fi; here it's static seed data flipped by setAllConnected(). */
+
 export type ConnectionStatus = 'connected' | 'disconnected' | 'unknown'
 
 export interface NetworkConnection {

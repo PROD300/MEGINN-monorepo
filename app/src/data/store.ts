@@ -1,5 +1,9 @@
 import { useSyncExternalStore } from 'react'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Generic in-memory pub-sub used by every store in data/*.ts. In a real
+   product this state would live behind an API/indexer/RPC; here it's just
+   a module-level variable that resets on page reload. */
 export function createStore<T>(initial: T) {
   let state = initial
   const listeners = new Set<() => void>()

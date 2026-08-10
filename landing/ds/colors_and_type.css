@@ -1,24 +1,49 @@
 /* ============================================================
-   OBSIDIAN Design System — Tokens
-   Source: Foundation-Tokens (Figma, v1.0 · 2026-05-05)
+   OBSIDIAN Design System — Tokens (Landing mirror)
+   Source of truth: app/src/tokens/primitives.css + semantics.css
+                     + typography.css (ds/foundation.md, ds/CONTRACT.md)
+   Synced: 2026-08-10 — accent ramp, functional colors, font
+   (Geist), radius-md all changed upstream in the app rebrand
+   (2026-08-09/10). This file mirrors those PRIMITIVE values so
+   landing and app share one brand system.
+
+   Semantic tokens below are intentionally NOT a 1:1 copy of the
+   app's semantics.css. The app went fully dark-by-default
+   (surface-default → gray-950, text-default → gray-00). Landing
+   keeps its own light-page structure (light body, dark Hero/
+   Access sections via .section--dark) — copying the app's dark
+   semantics here would make body text white-on-white in the
+   light sections. So: primitives/font/radius/shadows are synced
+   exactly; semantic surface/text/border mappings stay light-page
+   appropriate, same as before. Flag to Daria if this should
+   change.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Geist via Google Fonts CDN — PROTOTYPE-ONLY exception, see
+   HANDOFF_COWORK_TYPOGRAPHY_2026-08-09.md. This CDN build ships
+   without font-feature-settings, so tabular-nums (used on the
+   hero mock dashboard numbers) will not be perfectly stable.
+   For a production build, self-host instead: copy
+   app/src/assets/fonts/Geist-Variable.woff2 and
+   GeistMono-Variable.woff2 into landing/ds/fonts/ and swap this
+   @import for local @font-face rules (same pattern as
+   app/src/tokens/typography.css). */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
 
 :root {
   /* ------------------------------------------------------------
      LAYER 1 — PRIMITIVE TOKENS
      ------------------------------------------------------------ */
 
-  /* Accent — Deep Indigo (single accent ramp) */
-  --accent-50:  #EEF2FF;
-  --accent-100: #E0E7FF;
-  --accent-300: #A5B4FC;
-  --accent-500: #4F46E5;  /* primary action */
-  --accent-700: #3730A3;  /* primary action hover */
-  --accent-900: #1E1B4B;
+  /* Accent — synced to app's "Ice Blue" pilot ramp, 2026-08-09/10 */
+  --accent-50:  #F0EEFF;
+  --accent-100: #DEDAFF;
+  --accent-300: #9C8DFA;
+  --accent-500: #4B34F5;  /* primary action */
+  --accent-700: #2E1FB8;  /* primary action hover */
+  --accent-900: #180F5C;
 
-  /* Gray — Cool (9-step) */
+  /* Gray — Cool (9-step), unchanged */
   --gray-00:  #FFFFFF;
   --gray-50:  #F8FAFC;    /* page background */
   --gray-100: #F1F5F9;
@@ -29,17 +54,20 @@
   --gray-900: #0F172A;    /* primary text + dark chrome */
   --gray-950: #020617;
 
-  /* Functional */
-  --success-500: #10B981;
-  --warning-500: #F59E0B;
-  --error-500:   #EF4444;
-  --info-500:    #3B82F6;
+  /* Functional — converged on the single accent, 2026-08-10.
+     Status is read by icon + copy, not by hue, across the whole
+     product now. See ds/foundation.md. */
+  --success-500: #4B34F5;
+  --warning-500: #4B34F5;
+  --error-500:   #4B34F5;
+  --info-500:    #4B34F5;
 
-  /* Status backgrounds (10% tints, used on banners + toasts) */
-  --bg-success: rgba(16, 185, 129, 0.10);
-  --bg-warning: rgba(245, 158, 11, 0.10);
-  --bg-error:   rgba(239,  68,  68, 0.10);
-  --bg-info:    rgba( 59, 130, 246, 0.10);
+  /* Status backgrounds (10% tints, used on banners + toasts) —
+     same accent tint across all four, matching app/semantics.css */
+  --bg-success: rgba(75, 52, 245, 0.10);
+  --bg-warning: rgba(75, 52, 245, 0.10);
+  --bg-error:   rgba(75, 52, 245, 0.10);
+  --bg-info:    rgba(75, 52, 245, 0.10);
 
   /* Spacing scale */
   --space-1:  4px;
@@ -54,17 +82,21 @@
   /* Radii */
   --radius-none: 0;
   --radius-sm:   4px;     /* tags, small chips */
-  --radius-md:   8px;     /* inputs, buttons, icon buttons */
+  --radius-md:   4px;     /* was 8px — unified to sharp institutional radius, 2026-08-09 */
   --radius-lg:  16px;     /* cards, modals, large surfaces */
   --radius-pill: 9999px;  /* status pills */
 
-  /* Shadows — 3 levels */
+  /* Shadows — 3 base levels + accent glow set (added with the
+     rebrand, used sparingly for floating/hero elements) */
   --shadow-sm: 0 1px 2px 0 rgba(15, 23, 41, 0.08);
   --shadow-md: 0 4px 6px 0 rgba(15, 23, 41, 0.10), 0 1px 3px 0 rgba(15, 23, 41, 0.06);
   --shadow-lg: 0 10px 15px 0 rgba(15, 23, 41, 0.10), 0 4px 6px 0 rgba(15, 23, 41, 0.05);
+  --shadow-glow-accent:        0 0 10px 1px rgba(75, 52, 245, 0.55), 0 0 28px 6px rgba(75, 52, 245, 0.25);
+  --shadow-glow-accent-strong: 0 0 14px 2px rgba(75, 52, 245, 0.8),  0 0 40px 10px rgba(75, 52, 245, 0.4);
 
   /* ------------------------------------------------------------
      LAYER 2 — SEMANTIC TOKENS
+     Kept light-page appropriate — see file header note above.
      ------------------------------------------------------------ */
 
   /* Surfaces */
@@ -95,6 +127,7 @@
   --text-error:          var(--error-500);
   --text-warning:        var(--warning-500);
   --text-success:        var(--success-500);
+  --text-info:           var(--info-500);
   --text-accent:         var(--accent-500);
 
   /* Borders */
@@ -103,14 +136,15 @@
   --border-focus:      var(--accent-500);
   --border-error:      var(--error-500);
   --border-warning:    var(--warning-500);
+  --border-info:       var(--info-500);
   --border-dark:       var(--gray-700);  /* sidebar dividers (alias → border-app-shell) */
   --border-app-shell:  var(--gray-700);  /* dividers inside AppShell */
 
   /* ------------------------------------------------------------
-     TYPOGRAPHY — Inter
+     TYPOGRAPHY — Geist (rebrand 2026-08-09/10, was Inter)
      ------------------------------------------------------------ */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 
   /* Type scale (size · weight · line-height) */
   --h-3xl-size:  32px; --h-3xl-weight: 600; --h-3xl-lh: 1.25;
@@ -134,7 +168,7 @@ html, body {
   color: var(--text-default);
   background: var(--surface-default);
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: 'ss01', 'cv11'; /* Inter tabular figures off; subtle alts */
+  font-feature-settings: 'ss01', 'cv11';
 }
 
 /* Semantic typography classes */
@@ -147,6 +181,15 @@ html, body {
 .ds-body-xs{ font-family: var(--font-sans); font-size: var(--body-xs-size);font-weight: 400; line-height: var(--body-xs-lh);color: var(--text-muted); }
 .ds-label  { font-family: var(--font-sans); font-size: var(--label-xs-size); font-weight: var(--label-xs-weight); letter-spacing: var(--label-xs-ls); text-transform: uppercase; color: var(--text-muted); }
 .ds-mono   { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* DS/Numeric — for amounts, balances, tickers, wallet addresses,
+   tx hashes, timestamps — anywhere digits sit in a column or
+   update live and must not jump/misalign. Same rule as app. */
+.ds-numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
 
 /* Utility */
 .ds-tabular { font-variant-numeric: tabular-nums; }

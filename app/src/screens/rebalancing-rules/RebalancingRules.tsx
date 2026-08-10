@@ -11,6 +11,9 @@ type TabValue = 'all' | 'active' | 'paused' | 'cross-chain'
 function RuleCard({ rule }: { rule: Rule }) {
   const navigate = useNavigate()
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Pause/Resume would normally submit an on-chain state change (see
+  // rule-detail's handlePauseToggle). Here it just mutates local store state.
   function handleSecondaryAction(e: React.MouseEvent) {
     e.preventDefault()
     toggleRulePause(rule.id)

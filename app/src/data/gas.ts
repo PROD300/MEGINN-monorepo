@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents the smart account's on-chain gas reserve balance. In
+   production this would be read from the chain; here it's a fixed seed
+   value that topUpGasReserve() adds to in local memory. */
+
 export interface GasReserve {
   balanceUsd: number
 }

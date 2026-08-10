@@ -31,6 +31,9 @@ export function NetworkError() {
   const [retrying, setRetrying] = useState(false)
   const [attempted, setAttempted] = useState(false)
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents retrying real RPC/bridge-provider connections. No network
+  // call happens — this is a fake delay before flipping local status.
   function handleRetry() {
     setRetrying(true)
     setTimeout(() => {

@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents cross-chain bridge operations that in production would be
+   submitted to real providers (Li.Fi/Socket) and tracked on-chain.
+   completeBridge()/cancelAllPendingBridges() just mutate local state. */
+
 export type BridgeStatus = 'pending' | 'success' | 'failed'
 
 export interface BridgeOperation {

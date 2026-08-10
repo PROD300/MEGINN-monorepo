@@ -22,6 +22,9 @@ export function EmergencyStop() {
   const activeRulesCount = rules.filter(r => r.secondaryAction === 'Pause').length
   const activeBridgeCount = bridges.filter(b => b.status === 'pending').length
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // The kill switch: in production this would be an on-chain call halting
+  // the automation contract. Here it's a fake delay then local store writes.
   function handleStopAll() {
     setStopping(true)
     setTimeout(() => {

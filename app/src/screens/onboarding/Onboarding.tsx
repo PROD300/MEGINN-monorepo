@@ -56,6 +56,9 @@ export function Onboarding() {
     setStep(s => Math.min(3, s + 1))
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents a real wallet-connect handshake. No wallet provider is
+  // actually invoked — this just flips local state after a fake delay.
   function handleConnectWallet() {
     setConnectingWallet(true)
     setTimeout(() => {
@@ -65,6 +68,9 @@ export function Onboarding() {
     }, 600)
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents deploying/activating a real smart account contract on-chain.
+  // Here it's a fake delay with no contract deployment or backend call.
   function handleActivate() {
     setActivating(true)
     setTimeout(() => {

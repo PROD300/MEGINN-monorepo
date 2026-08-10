@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents a notification feed that in production would be pushed from
+   a backend (webhook/websocket) as rules trigger. Here it's a hardcoded
+   seed list mutated only by markRead()/markAllRead(). */
+
 export type NotificationCategory = 'rebalancing' | 'compliance' | 'system'
 export type NotificationStatus = 'success' | 'info' | 'warning'
 

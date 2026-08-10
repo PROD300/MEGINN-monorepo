@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Stands in for a real compliance audit trail normally sourced from a
+   backend/chain indexer. Rows here are hardcoded seed data plus whatever
+   addAuditEntry() appends to local state. */
+
 export type AuditResultVariant = 'success' | 'warning' | 'error'
 
 export interface AuditRow {

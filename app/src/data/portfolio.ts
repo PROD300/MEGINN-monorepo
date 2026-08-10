@@ -2,6 +2,11 @@ import { createStore } from './store'
 import { getRuleById } from './rules'
 import { formatUsd } from '../lib/format'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents portfolio allocation + activity feed a real product would
+   read from an indexer and mutate via on-chain trades. rebalanceNow()/
+   addAsset() below just recompute local numbers, no real trade happens. */
+
 export interface AllocationEntry {
   asset: string
   valueUsd: number

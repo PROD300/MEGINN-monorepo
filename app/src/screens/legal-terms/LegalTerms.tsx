@@ -37,6 +37,9 @@ export function LegalTerms() {
   const [agreed, setAgreed] = useState(false)
   const [signing, setSigning] = useState(false)
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents submitting an e-signature to a real backend/legal-agreement
+  // service. Here it's a fake delay before flipping local agreement state.
   function handleSign() {
     if (!agreed || agreement.signed || signing) return
     setSigning(true)

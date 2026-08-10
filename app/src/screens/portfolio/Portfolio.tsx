@@ -59,6 +59,9 @@ export function Portfolio() {
       value: formatUsd(a.valueUsd),
     })) as Record<string, unknown>[]
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // "Rebalance Now" would submit a real on-chain swap in production. Here
+  // it's a fake delay before rebalanceNow() recomputes local mock numbers.
   function handleRebalanceNow() {
     setRebalancing(true)
     setTimeout(() => {
@@ -72,6 +75,9 @@ export function Portfolio() {
     }, 700)
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Real download of a CSV, but built from the mock allocation/activity
+  // state below — no backend report-generation service is involved.
   function handleDownloadReport() {
     setDownloading(true)
     setTimeout(() => {
@@ -185,6 +191,9 @@ export function Portfolio() {
                 <span className={styles.secTitle}>Network Status</span>
                 <span className={styles.statusSync}>2 min ago</span>
               </div>
+              {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+                  Represents live RPC/bridge connection status (see data/network.ts).
+                  This block is hardcoded JSX, not even reading that store. */}
               <div className={styles.networkList}>
                 <span className={styles.statusItem}>● ETH — Connected</span>
                 <span className={styles.statusItem}>● Arbitrum — Connected</span>

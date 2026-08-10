@@ -12,6 +12,9 @@ export function Login() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
   const [pendingAction, setPendingAction] = useState<'wallet' | 'email' | null>(null)
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents a real wallet-connect handshake (MetaMask/Ledger/Gnosis Safe).
+  // Here it's just a setTimeout — no wallet provider is actually invoked.
   function handleConnectWallet() {
     setPendingAction('wallet')
     setTimeout(() => {
@@ -20,6 +23,9 @@ export function Login() {
     }, 700)
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents email+password auth against a real auth provider. Only
+  // client-side validation happens; the "sign in" itself is a fake delay.
   function handleSignIn() {
     const nextErrors: { email?: string; password?: string } = {}
     if (!email.trim()) nextErrors.email = 'Work email is required'

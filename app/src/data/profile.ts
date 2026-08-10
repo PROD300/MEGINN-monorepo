@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents the authenticated user's profile, normally owned by an
+   auth/identity provider. Here it's a hardcoded seed record that
+   saveProfile() overwrites in local memory only. */
+
 export interface Profile {
   fullName: string
   workEmail: string

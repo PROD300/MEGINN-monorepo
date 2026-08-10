@@ -7,6 +7,9 @@ import { securityStore, saveSecuritySettings } from '../../data/security'
 import { showToast } from '../../lib/toast'
 import styles from './SmartAccountSetup.module.css'
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Represents the smart account's connected wallets, normally read from
+// chain/wallet-provider state. Hardcoded here; "Disconnect" is a no-op.
 const wallets = [
   {
     icon: Wallet,

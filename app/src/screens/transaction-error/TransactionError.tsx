@@ -28,6 +28,9 @@ export function TransactionError() {
     )
   }
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Represents a real transaction receipt / RPC error payload from a
+  // failed on-chain swap. Derived here purely from local mock rule state.
   const detailRows = [
     { label: 'Rule triggered:', value: rule.name },
     { label: 'Attempted action:', value: `${rule.action} — ${rule.sellFrom} → ${rule.sellInto}` },

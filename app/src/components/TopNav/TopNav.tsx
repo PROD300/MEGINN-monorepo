@@ -65,6 +65,9 @@ export function TopNav({
           <Bell size={16} />
           {showDot && <span className={styles.notifDot} />}
         </button>
+        {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+            "Exit" would normally invalidate a real session/auth token.
+            Here it just navigates to /login — nothing is actually signed out. */}
         <button className={styles.iconBtn} onClick={() => navigate('/login')} aria-label="Exit">
           <LogOut size={16} />
         </button>

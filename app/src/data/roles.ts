@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents the smart account's signer/role registry (who can view,
+   execute, or has full access), normally read from chain or a backend
+   RBAC service. addRole() just appends to local state. */
+
 export interface RoleEntry {
   id: string
   status: 'active'

@@ -14,6 +14,9 @@ const historyColumns = [
   { key: 'result', header: 'Result' },
 ]
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Represents on-chain execution history for this rule, normally sourced
+// from a chain indexer/backend. Hardcoded seed rows, never updated.
 const historyRows = [
   { timestamp: 'Jun 16, 14:22', triggeredAt: 'ETH 32.1%', action: 'Sell ETH → USDC', amount: '$4 200 000', gas: '22 Gwei', result: 'Success' },
   { timestamp: 'Jun 15, 22:10', triggeredAt: 'ETH 32.4%', action: 'Sell ETH → USDC', amount: '$5 100 000', gas: '23 Gwei', result: 'Success' },
@@ -50,6 +53,9 @@ export function RuleDetail() {
   const ruleId = rule.id
   const ruleName = rule.name
 
+  // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+  // Pause/Resume would normally submit an on-chain state change for the
+  // automation contract. toggleRulePause() just mutates local store state.
   function handlePauseToggle() {
     toggleRulePause(ruleId)
     showToast('success', `${ruleName} ${isPaused ? 'resumed' : 'paused'}`)

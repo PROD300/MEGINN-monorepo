@@ -1,5 +1,10 @@
 import { createStore } from './store'
 
+/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+   Represents rebalancing rules that in production would be persisted to a
+   backend and executed by an on-chain automation engine. addRule()/
+   toggleRulePause()/pauseAllRules() only ever touch local state. */
+
 export interface Rule {
   id: string
   name: string

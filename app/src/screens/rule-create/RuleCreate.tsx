@@ -28,6 +28,9 @@ const actionOptions = [
   { value: 'Buy to rebalance', label: 'Buy to rebalance' },
 ]
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Represents live per-asset allocation %, normally read from the
+// portfolio indexer. Hardcoded here for the "Current X: Y%" helper text.
 const currentAllocation: Record<string, number> = {
   ETH: 32, stETH: 18.3, USDT: 6.6, RWA: 45, USDC: 43.1,
 }
@@ -122,6 +125,9 @@ export function RuleCreate() {
 
     setPendingAction(asDraft ? 'draft' : 'activate')
 
+    // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+    // Represents persisting the rule to a backend and deploying it as an
+    // on-chain automation. Here it's a fake delay before a local store write.
     const ruleName = form.ruleName.trim()
     setTimeout(() => {
       addRule({

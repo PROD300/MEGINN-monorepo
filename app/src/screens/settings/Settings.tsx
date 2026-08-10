@@ -11,6 +11,9 @@ const settingsTabs = [
   { label: 'Security', value: 'security' },
 ]
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Notification preferences a real product would persist server-side per
+// user. Toggle below is uncontrolled (defaultChecked) — nothing saves.
 const notificationToggles = [
   { label: 'Notify after each rebalancing execution', on: true },
   { label: 'Notify if rule is paused automatically', on: true },
@@ -19,6 +22,9 @@ const notificationToggles = [
   { label: 'Weekly summary digest', on: false },
 ]
 
+// [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+// Represents the account's connected wallets (same pattern as
+// smart-account-setup). Hardcoded; "Manage Wallets" below is a no-op.
 const wallets = [
   { address: '0x4aB2...c1F8', badgeLabel: 'Primary' },
   { address: '0x9eC1...a3D2', badgeLabel: 'Backup' },
@@ -55,6 +61,9 @@ export function Settings() {
       showToast('error', 'Please fix the highlighted fields')
       return
     }
+    // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+    // Represents a real profile-update API call (or auth-provider write).
+    // Here it's a fake delay before saveProfile() writes to local state.
     setSaving(true)
     setTimeout(() => {
       saveProfile(draft)
@@ -179,6 +188,7 @@ export function Settings() {
                     <Badge variant="success">{w.badgeLabel}</Badge>
                   </div>
                 ))}
+                {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND] No onClick — would open wallet management against the real wallet provider. */}
                 <Button variant="primary" size="sm" className={styles.fullWidthBtn}>
                   Manage Wallets →
                 </Button>
@@ -190,6 +200,7 @@ export function Settings() {
                 <span className={styles.dangerDescription}>
                   Deactivating your account will halt all automation and disconnect all wallets.
                 </span>
+                {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND] No onClick — would trigger real account deactivation/wallet disconnect. */}
                 <Button variant="primary" size="sm" className={styles.fullWidthBtn}>
                   Deactivate Account
                 </Button>
