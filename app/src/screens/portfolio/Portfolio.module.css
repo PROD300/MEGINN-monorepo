@@ -1,8 +1,8 @@
 .screen {
   /* Accent palette and functional colors promoted to primitives.css /
      semantics.css as the sitewide default, 2026-08-09 — no longer scoped
-     here. The neon-glow layer (shadow-glow-accent, surface-card-grid, and
-     the text-shadow/box-shadow glows on hover) was removed 2026-08-10. */
+     here. The neon-glow layer, the card grid pattern, and border-hairline
+     were all removed 2026-08-10 in favor of a flat, minimal look. */
 
   display: flex;
   flex-direction: column;
@@ -95,7 +95,7 @@
 /* Shared "floating tile" card frame — same treatment as StatCard, built locally
    so we don't have to touch the shared component files for this draft. */
 .tile {
-  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-float);

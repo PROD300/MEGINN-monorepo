@@ -1,5 +1,5 @@
 .card {
-  background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-float);

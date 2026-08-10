@@ -44,7 +44,7 @@
   --border-error:   var(--error-500);
   --border-warning: var(--warning-500);
   --border-info:    var(--info-500);
-  --border-hairline: rgba(75, 52, 245, 0.32); /* glass-edge stroke for floating cards — accent-tinted, promoted 2026-08-09 */
+  --border-hairline: transparent; /* card border removed 2026-08-10 (outdated) — kept as a token, resolving to invisible, so consumers don't need individual edits */
 
   /* === Status backgrounds (solid) === */
   --bg-success: var(--success-500);
@@ -64,11 +64,9 @@
   --surface-positive: var(--success-500);
   --surface-warning:  var(--warning-500);
 
-  /* === Floating card treatment ===
-     Sheen (top highlight) stays. The grid pattern is removed as of
-     2026-08-10 (outdated) — kept as a token, resolving to none, so
-     the ~25 files still referencing it in a 3-layer background don't
-     need individual edits. */
+  /* === Row treatment ===
+     Sheen (top highlight) — used on Table rows/header and RuleCard rows
+     only, not on card containers (those went flat, see Card/StatCard/
+     Table's own frame etc. — plain surface-elevated, 2026-08-10). */
   --surface-card-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 55%);
-  --surface-card-grid: none;
 }
