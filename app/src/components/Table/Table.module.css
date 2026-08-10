@@ -9,8 +9,10 @@
   font-size: var(--size-sm);
 }
 
+/* Same per-row sheen as tbody rows, so the header reads as the
+   same row pattern instead of a separate flat band on top. */
 .thead tr {
-  background: transparent;
+  background: var(--surface-card-sheen), var(--surface-default);
   border-bottom: 1px solid var(--border-hairline);
 }
 
@@ -23,10 +25,12 @@
   text-transform: uppercase;
 }
 
-/* Density: default */
+/* Density: default — padding matches RuleCard's row rhythm
+   (Rebalancing Rules) so table rows read as the same list-row
+   pattern used elsewhere in the product. */
 .default .th,
 .default .td {
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-4) var(--space-5);
 }
 
 /* Density: compact */
@@ -35,8 +39,12 @@
   padding: var(--space-2) var(--space-3);
 }
 
+/* Per-row sheen matches RuleCard's row background (Rebalancing
+   Rules) — each row gets its own top highlight instead of one
+   sheen shared across the whole table, which faded out after the
+   first couple of rows. */
 .tbody tr {
-  background: transparent;
+  background: var(--surface-card-sheen), var(--surface-default);
   border-top: 1px solid var(--border-hairline);
   transition: background 0.1s;
 }
