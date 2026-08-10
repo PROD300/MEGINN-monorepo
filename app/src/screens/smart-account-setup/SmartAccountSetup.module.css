@@ -38,25 +38,6 @@
   color: var(--text-default);
 }
 
-/* ─── InfoBanner ─── */
-.infoBanner {
-  composes: pageBlock from '../../tokens/layout.module.css';
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-5);
-  background: var(--bg-info-subtle);
-  border-bottom: 1px solid var(--border-default);
-  font-size: var(--size-xs);
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.infoIcon {
-  color: var(--text-accent);
-  flex-shrink: 0;
-}
-
 /* ─── Section ─── */
 .section {
   composes: pageBlock from '../../tokens/layout.module.css';

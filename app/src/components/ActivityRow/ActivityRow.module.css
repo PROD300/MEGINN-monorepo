@@ -8,9 +8,9 @@
   position: relative;
 }
 
-/* info variant: left border 3px border-focus */
+/* info variant: left border 3px */
 .info {
-  border-left: 3px solid var(--border-focus);
+  border-left: 3px solid var(--border-info);
   padding-left: calc(var(--space-4) - 3px);
 }
 
@@ -29,4 +29,4 @@
 .time { color: var(--text-muted); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .status.success { color: var(--text-success); }
 .status.warning { color: var(--text-warning); }
-.status.info    { color: var(--text-accent); }
+.status.info    { color: var(--text-info); }

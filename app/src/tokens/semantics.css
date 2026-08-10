@@ -34,6 +34,7 @@
   --text-error:     var(--error-500);
   --text-warning:   var(--warning-500);
   --text-success:   var(--success-500);
+  --text-info:      var(--info-500);
   --text-accent:    var(--accent-300);
 
   /* === Borders === */
@@ -42,6 +43,7 @@
   --border-focus:   var(--accent-500);
   --border-error:   var(--error-500);
   --border-warning: var(--warning-500);
+  --border-info:    var(--info-500);
   --border-hairline: rgba(75, 52, 245, 0.32); /* glass-edge stroke for floating cards — accent-tinted, promoted 2026-08-09 */
 
   /* === Status backgrounds (solid) === */
@@ -50,11 +52,12 @@
   --bg-error:   var(--error-500);
   --bg-info:    var(--info-500);
 
-  /* === Status backgrounds (subtle @ 10% opacity) === */
+  /* === Status backgrounds (subtle @ 10% opacity) — same accent tint across
+     all four, 2026-08-10: status reads by icon/copy, not by background hue. */
   --bg-success-subtle: rgba(75, 52, 245, 0.10);
   --bg-warning-subtle: rgba(75, 52, 245, 0.10);
   --bg-error-subtle:   rgba(75, 52, 245, 0.10);
-  --bg-info-subtle:    rgba(56, 189, 248, 0.10);
+  --bg-info-subtle:    rgba(75, 52, 245, 0.10);
 
   /* === Extended accent aliases === */
   --surface-accent:   var(--accent-500);

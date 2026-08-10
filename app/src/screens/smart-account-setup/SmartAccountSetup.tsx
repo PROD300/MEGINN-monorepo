@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Wallet, HardDrive, Plus, ShieldCheck, Fingerprint } from 'lucide-react'
-import { TopNav, Button, Badge, RoleRow, Input, Select, Toggle, Modal } from '../../components'
+import { Wallet, HardDrive, Plus, Fingerprint } from 'lucide-react'
+import { TopNav, Banner, Button, Badge, RoleRow, Input, Select, Toggle, Modal } from '../../components'
 import { registerScreen } from '../registry'
 import { rolesStore, addRole, roleAddressExists } from '../../data/roles'
 import { securityStore, saveSecuritySettings } from '../../data/security'
@@ -100,13 +100,9 @@ export function SmartAccountSetup() {
           </div>
 
           {/* InfoBanner */}
-          <div className={styles.infoBanner}>
-            <ShieldCheck size={14} className={styles.infoIcon} />
-            <span>
-              Smart Account — self-custody wallet with role-based automation. Your funds are
-              always under your control.
-            </span>
-          </div>
+          <Banner variant="info">
+            Smart Account — self-custody wallet with role-based automation. Your funds are always under your control.
+          </Banner>
 
           {/* WalletsSection */}
           <div className={styles.section}>

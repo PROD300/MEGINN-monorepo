@@ -24,13 +24,14 @@
   --gray-900: #0F172A;
   --gray-950: #020617;
 
-  /* === Functional — converge on the accent per approval notes: warning =
-     accent contrast tone, success/error = same glowing accent as Stop All.
-     Promoted from Portfolio draft to global, 2026-08-09. === */
+  /* === Functional — fully converged on the single accent, 2026-08-10:
+     success/warning/error/info are now visually identical (#4B34F5). Status
+     is communicated only by icon shape and copy, never by hue — this is a
+     deliberate one-accent system, not four semantic colors. === */
   --success-500: #4B34F5;
-  --warning-500: #9C8DFA;
+  --warning-500: #4B34F5;
   --error-500:   #4B34F5;
-  --info-500:    #38BDF8;
+  --info-500:    #4B34F5;
 
   /* === Typography === */
   /* Rebrand 2026-08-09: Inter → Geist + Geist Mono, approved — see

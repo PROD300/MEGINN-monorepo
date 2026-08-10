@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { TopNav, Badge, Table, Button } from '../../components'
+import { TopNav, Banner, Badge, Table, Button } from '../../components'
 import { registerScreen } from '../registry'
 import { bridgeStore, completeBridge, isWithin24h, type BridgeOperation, type BridgeStatus } from '../../data/bridge'
 import { showToast } from '../../lib/toast'
@@ -110,11 +110,9 @@ export function CrossChainBridge() {
           </div>
 
           {/* InfoBanner */}
-          <div className={styles.f20Banner}>
-            <span className={styles.f20Title}>Cross-chain Bridge</span>
-            <span className={styles.f20Subtitle}>— required dependency of AI Auto-Rebalancing. Provides cross-chain access across all supported networks.</span>
-            <span className={styles.f20Subtitle}>Providers: Li.Fi (Primary) · Socket (Fallback) · Across (Fallback)</span>
-          </div>
+          <Banner variant="info">
+            Cross-chain Bridge — required dependency of AI Auto-Rebalancing. Providers: Li.Fi (Primary) · Socket (Fallback) · Across (Fallback)
+          </Banner>
 
           {/* BridgeProviders */}
           <div className={styles.section}>

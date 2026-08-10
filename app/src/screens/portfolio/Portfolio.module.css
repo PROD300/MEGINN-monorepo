@@ -26,24 +26,31 @@
   min-width: 0;
 }
 
-/* ─── Bento grid — top margin now comes straight after TopNav ───
+/* ─── AlertBanner slot — Portfolio is the only Banner user with no PageHeader
+   in front of it (Banner sits directly under TopNav here), so this wrapper
+   carries the space-8 gap that PageHeader provides on every other screen.
+   Padding-top only — doesn't touch Banner's own full-bleed width. */
+.bannerSlot {
+  padding-top: var(--space-8);
+}
+
+/* ─── Bento grid — top gap comes straight after TopNav (via padding-top,
+   not margin, since margin-top would conflict with pageBlock's own
+   `margin: 0 auto` and get zeroed out) ───
    12-col base grid so the right column can be a clean 1/3 (cols 9-12)
    against a 2/3 left side (cols 1-8), while the top stat row still
-   divides evenly into 4 equal cards (3 cols each). flex:1 + the 1fr
-   row lets the grid stretch to fill the viewport height instead of
-   leaving empty space below the actions bar. */
+   divides evenly into 4 equal cards (3 cols each). Rows are content-height
+   (not stretched to fill the viewport) — grid ends where its content ends,
+   same as every other screen. */
 .bento {
   composes: pageBlock from '../../tokens/layout.module.css';
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  /* row1 (stats) +1/3, row2 (Network Status) x2, row4 (actions bar) x2 —
-     measured naturals were 108px / 164px / 75px */
-  grid-template-rows: 144px 328px 1fr 150px;
+  /* row1 (stats), row2 (Network Status), row4 (actions bar) — measured
+     naturals were 108px / 164px / 75px */
+  grid-template-rows: 144px 328px auto 150px;
   gap: var(--space-4);
-  margin-top: var(--space-8);
-  padding: 0 var(--space-5) var(--space-8);
-  flex: 1;
-  min-height: 0;
+  padding: var(--space-4) var(--space-5) var(--space-8);
 }
 
 .tileStat1 { grid-column: 1 / 4;   grid-row: 1; display: flex; }

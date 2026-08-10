@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { OctagonAlert } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { TopNav, Button, Input } from '../../components'
+import { TopNav, Banner, Button, Input } from '../../components'
 import { registerScreen } from '../registry'
 import { rulesStore, pauseAllRules } from '../../data/rules'
 import { bridgeStore, cancelAllPendingBridges } from '../../data/bridge'
@@ -45,12 +45,9 @@ export function EmergencyStop() {
           </div>
 
           {/* WarningBanner */}
-          <div className={styles.warningBanner}>
-            <span className={styles.warningIcon} />
-            <span className={styles.warningText}>
-              This action will immediately halt ALL automated operations: rebalancing rules, bridge transactions, and scheduled checks.
-            </span>
-          </div>
+          <Banner variant="error">
+            This action will immediately halt ALL automated operations: rebalancing rules, bridge transactions, and scheduled checks.
+          </Banner>
 
           {/* StopContentArea */}
           <div className={styles.contentArea}>

@@ -12,6 +12,7 @@ interface TopNavProps {
   initials?: string
   hasNotification?: boolean
   onStopAll?: () => void
+  glow?: 'default' | 'subtle'
 }
 
 const primaryNav = [
@@ -27,6 +28,7 @@ export function TopNav({
   initials,
   hasNotification,
   onStopAll,
+  glow = 'subtle',
 }: TopNavProps) {
   const navigate = useNavigate()
   const location = useLocation()
@@ -39,7 +41,7 @@ export function TopNav({
 
   return (
     <div className={styles.topnavWrap}>
-      <header className={styles.topnav}>
+      <header className={[styles.topnav, glow === 'subtle' ? styles.subtleGlow : ''].join(' ')}>
         <span className={styles.logo} onClick={() => navigate('/portfolio')}>OBSIDIAN</span>
 
         <nav className={styles.nav}>

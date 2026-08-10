@@ -42,34 +42,6 @@
   color: var(--text-default);
 }
 
-/* ─── WarningBanner ─── */
-.warningBanner {
-  composes: pageBlock from '../../tokens/layout.module.css';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-5);
-  background: var(--bg-error-subtle);
-  border-top: 1px solid var(--border-error);
-  border-bottom: 1px solid var(--border-error);
-  flex-shrink: 0;
-}
-
-.warningIcon {
-  width: 20px;
-  height: 20px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-error);
-  flex-shrink: 0;
-}
-
-.warningText {
-  flex: 1;
-  font-size: var(--size-sm);
-  color: var(--text-error);
-}
-
 /* ─── StopContentArea ─── */
 .contentArea {
   composes: pageBlock from '../../tokens/layout.module.css';
@@ -164,9 +136,9 @@
   width: 100%;
   padding: var(--space-6);
   background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
-  border: 2px solid var(--border-error);
+  border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-glow-accent-strong);
+  box-shadow: var(--shadow-float);
 }
 
 .stopIcon {

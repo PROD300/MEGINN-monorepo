@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TopNav, StatCard, ActivityRow, Table, Button, Modal, Input, Select } from '../../components'
+import { TopNav, Banner, StatCard, ActivityRow, Table, Button, Modal, Input, Select } from '../../components'
 import { registerScreen } from '../registry'
 import { allocationStore, activityStore, getTotalAUM, rebalanceNow, addAsset } from '../../data/portfolio'
 import { rulesStore, getRuleById } from '../../data/rules'
@@ -138,6 +138,15 @@ export function Portfolio() {
 
       <div className={styles.body}>
         <main className={styles.main}>
+          {/* AlertBanner */}
+          <div className={styles.bannerSlot}>
+            {onTarget ? (
+              <Banner variant="success">All allocations within target</Banner>
+            ) : (
+              <Banner variant="warning">Next rebalance trigger: ETH allocation +{formatPct(ethOverBy)} above target</Banner>
+            )}
+          </div>
+
           {/* Bento grid — asymmetric, Asset Allocation as the large central tile */}
           <div className={styles.bento}>
             <div className={styles.tileStat1}>

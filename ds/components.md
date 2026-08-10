@@ -228,6 +228,23 @@
 - **Used in:** screens/smart-account-setup, screens/settings
 - **Status:** соответствует инстансу `Toggle` (44×24) из дизайна SmartAccountSetup (node 243:91) — спецификация размеров взята оттуда
 
+## Новые компоненты — 2026-08-10
+
+### Banner
+- **Node ID:** `423:6`
+- **Тип:** ComponentSet (4 варианта)
+- **Матрица:** `Variant=info|success|warning|error`
+- **Location:** страница Components (26:2), фрейм «UI Kit — extended» (59:2), под ActivityRow
+- **Структура:** full-bleed обёртка (без composes pageBlock — растягивается от края до края вьюпорта, игнорируя max-width/паддинги страницы) → внутренний ряд (composes pageBlock, выравнивает контент по общей сетке) с lucide-иконкой (Info/CheckCircle/AlertTriangle/XCircle по варианту) + текст
+- **Цвет — единый по всем 4 вариантам, 2026-08-10:** fill `bg-*-subtle`, border `border-*`/`text-*`, текст/иконка — все резолвятся в один и тот же индиго (`#4B34F5`, см. `ds/foundation.md` → Функциональные). Info/Success/Warning/Error визуально неотличимы по цвету — различие только по форме иконки и по тексту сообщения. Не баг, осознанное решение (см. флаг в `primitives.css`/`semantics.css`).
+- **Fills:** info → `bg-info-subtle` · success → `bg-success-subtle` · warning → `bg-warning-subtle` · error → `bg-error-subtle`
+- **Border:** только top/bottom 1px, без radius (не карточка) — info → `border-info` · success → `text-success` · warning → `border-warning` · error → `border-error`
+- **Text/Icon color:** info → `text-info` · success → `text-success` · warning → `text-warning` · error → `text-error`
+- **Padding:** внутренний ряд — space-3 V / space-5 H
+- **Used in:** screens/portfolio (Rebalance alert), screens/emergency-stop (Warning), screens/cross-chain-bridge (F20 dependency notice), screens/smart-account-setup (self-custody notice)
+- **Не используется для:** контекстных уведомлений внутри формы/колонки (RuleCreate gas-баннер, TransactionError auto-paused, Onboarding info/success) — те остаются скруглёнными inline-блоками внутри контента, это отдельный паттерн, не full-bleed Banner
+- **Status:** роллаут завершён на всех page-level баннерах проекта, 2026-08-10
+
 ## Как добавить новый компонент
 
 1. Открыть страницу Components (26:2) в файле Obsidian-MCP
