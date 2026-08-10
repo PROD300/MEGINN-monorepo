@@ -1,55 +1,23 @@
 /* Two-layer structure — same pattern as TopNav (topnavWrap/topnav): the outer
    wrapper composes pageBlock and carries the space-5 side padding, so the
-   VISIBLE bordered panel sits inset by space-5 from the pageBlock edge —
-   matching where TopNav's pill and the bento tiles actually land. A single
-   layer with the border directly on the pageBlock box would sit space-5
-   wider than everything else (this was that exact bug). */
+   text sits inset by space-5 from the pageBlock edge — matching where
+   TopNav's pill and the bento tiles actually land. */
 .bannerWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
   padding: 0 var(--space-5);
   flex-shrink: 0;
 }
 
+/* Pattern lifted directly from Onboarding step 1's .infoBanner, 2026-08-11:
+   border-focus border + bg-{variant}-subtle fill, no shadow, no icon. */
 .banner {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--border-focus);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-hairline);
-  box-shadow: var(--shadow-float);
-}
-
-.icon {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.text {
-  flex: 1;
   font-size: var(--size-sm);
 }
 
-.info {
-  background: var(--bg-info-subtle);
-}
-.icon.info,
-.text.info { color: var(--text-info); }
-
-.success {
-  background: var(--bg-success-subtle);
-}
-.icon.success,
-.text.success { color: var(--text-success); }
-
-.warning {
-  background: var(--bg-warning-subtle);
-}
-.icon.warning,
-.text.warning { color: var(--text-warning); }
-
-.error {
-  background: var(--bg-error-subtle);
-}
-.icon.error,
-.text.error { color: var(--text-error); }
+.info    { background: var(--bg-info-subtle);    color: var(--text-info); }
+.success { background: var(--bg-success-subtle); color: var(--text-success); }
+.warning { background: var(--bg-warning-subtle); color: var(--text-warning); }
+.error   { background: var(--bg-error-subtle);   color: var(--text-error); }

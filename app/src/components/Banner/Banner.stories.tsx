@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Banner } from './Banner'
 
-/** Banner — floating panel notice, sits directly under TopNav. Same floating-tile
- * recipe as the rest of the kit (border-hairline + shadow-float, radius-md), aligned
- * to the page's max-width container — not full-bleed. Variants: info / success / warning / error. */
+/** Banner — aligned to the page's max-width container, styled after
+ * Onboarding step 1's .infoBanner pattern (2026-08-11): border-focus
+ * outline + bg-{variant}-subtle fill, no shadow, no icon.
+ * Variants: info / success / warning / error. */
 const meta = {
   title: 'Components/Banner',
   component: Banner,
