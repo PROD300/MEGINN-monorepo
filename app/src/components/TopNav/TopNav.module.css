@@ -17,10 +17,9 @@
   gap: var(--space-6);
 }
 
-/* Same background as Table's row/header treatment — flat surface-default
-   with a top sheen highlight, no accent tint. */
+/* Same flat background as card containers (Card, StatCard, Table frame, etc.) */
 .subtleGlow {
-  background: var(--surface-card-sheen), var(--surface-default);
+  background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
 }
 
