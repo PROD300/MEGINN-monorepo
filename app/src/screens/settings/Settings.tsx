@@ -75,8 +75,10 @@ export function Settings() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <span className={styles.pageTitle}>Account Settings</span>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <span className={styles.pageTitle}>Account Settings</span>
+            </div>
           </div>
 
           {/* SettingsTabs */}

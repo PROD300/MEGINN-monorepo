@@ -94,9 +94,11 @@ export function SmartAccountSetup() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <span className={styles.pageTitle}>Smart Account Setup</span>
-            <Button variant="primary" size="sm" onClick={openAddRole}>+ Add Role</Button>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <span className={styles.pageTitle}>Smart Account Setup</span>
+              <Button variant="primary" size="sm" onClick={openAddRole}>+ Add Role</Button>
+            </div>
           </div>
 
           {/* InfoBanner */}

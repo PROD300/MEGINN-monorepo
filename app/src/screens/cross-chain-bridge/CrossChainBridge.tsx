@@ -100,13 +100,15 @@ export function CrossChainBridge() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <div className={styles.breadcrumb}>
-              <a href="#" className={styles.breadcrumbAccent} onClick={e => { e.preventDefault(); navigate('/rebalancing-rules') }}>Rebalancing Rules</a>
-              <span className={styles.breadcrumbMuted}>/</span>
-              <span className={styles.breadcrumbMuted}>Cross-chain Bridge</span>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <div className={styles.breadcrumb}>
+                <a href="#" className={styles.breadcrumbAccent} onClick={e => { e.preventDefault(); navigate('/rebalancing-rules') }}>Rebalancing Rules</a>
+                <span className={styles.breadcrumbMuted}>/</span>
+                <span className={styles.breadcrumbMuted}>Cross-chain Bridge</span>
+              </div>
+              <span className={styles.pageTitle}>Cross-chain Bridge</span>
             </div>
-            <span className={styles.pageTitle}>Cross-chain Bridge</span>
           </div>
 
           {/* InfoBanner */}

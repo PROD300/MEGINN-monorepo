@@ -157,13 +157,15 @@ export function RuleCreate() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <div className={styles.breadcrumb}>
-              <a href="#" className={styles.breadcrumbAccent} onClick={e => { e.preventDefault(); navigate('/rebalancing-rules') }}>Rebalancing Rules</a>
-              <span className={styles.breadcrumbMuted}>/</span>
-              <span className={styles.breadcrumbMuted}>Create Rule</span>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <div className={styles.breadcrumb}>
+                <a href="#" className={styles.breadcrumbAccent} onClick={e => { e.preventDefault(); navigate('/rebalancing-rules') }}>Rebalancing Rules</a>
+                <span className={styles.breadcrumbMuted}>/</span>
+                <span className={styles.breadcrumbMuted}>Create Rule</span>
+              </div>
+              <span className={styles.pageTitle}>Create Rebalancing Rule</span>
             </div>
-            <span className={styles.pageTitle}>Create Rebalancing Rule</span>
           </div>
 
           {/* ContentArea */}

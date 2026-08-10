@@ -31,11 +31,13 @@ export function Notifications() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <span className={styles.pageTitle}>Notifications</span>
-            <Button variant="primary" size="sm" onClick={handleMarkAllRead} disabled={unreadCount === 0}>
-              {unreadCount === 0 ? 'All read' : 'Mark all read'}
-            </Button>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <span className={styles.pageTitle}>Notifications</span>
+              <Button variant="primary" size="sm" onClick={handleMarkAllRead} disabled={unreadCount === 0}>
+                {unreadCount === 0 ? 'All read' : 'Mark all read'}
+              </Button>
+            </div>
           </div>
 
           {/* FilterTabs */}

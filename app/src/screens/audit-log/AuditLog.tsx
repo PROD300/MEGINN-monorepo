@@ -156,11 +156,13 @@ export function AuditLog() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <span className={styles.pageTitle}>Audit Log</span>
-            <div className={styles.exportRow}>
-              <Button variant="primary" size="sm" onClick={handleExportCsv} loading={exportingCsv}>Export CSV</Button>
-              <Button variant="primary" size="sm" onClick={handleExportPdf} loading={exportingPdf}>Export PDF</Button>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <span className={styles.pageTitle}>Audit Log</span>
+              <div className={styles.exportRow}>
+                <Button variant="primary" size="sm" onClick={handleExportCsv} loading={exportingCsv}>Export CSV</Button>
+                <Button variant="primary" size="sm" onClick={handleExportPdf} loading={exportingPdf}>Export PDF</Button>
+              </div>
             </div>
           </div>
 

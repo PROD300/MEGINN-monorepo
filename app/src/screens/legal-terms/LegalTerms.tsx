@@ -54,13 +54,15 @@ export function LegalTerms() {
       <div className={styles.body}>
         <main className={styles.main}>
           {/* PageHeader */}
-          <div className={styles.pageHeader}>
-            <div className={styles.breadcrumb}>
-              <span className={styles.breadcrumbAccent} onClick={() => navigate('/liability-dashboard')} style={{ cursor: 'pointer' }}>Liability &amp; Compliance</span>
-              <span className={styles.breadcrumbMuted}>›</span>
-              <span className={styles.breadcrumbMuted}>Legal Agreement</span>
+          <div className={styles.pageHeaderWrap}>
+            <div className={styles.pageHeader}>
+              <div className={styles.breadcrumb}>
+                <span className={styles.breadcrumbAccent} onClick={() => navigate('/liability-dashboard')} style={{ cursor: 'pointer' }}>Liability &amp; Compliance</span>
+                <span className={styles.breadcrumbMuted}>›</span>
+                <span className={styles.breadcrumbMuted}>Legal Agreement</span>
+              </div>
+              <span className={styles.pageTitle}>Legal Agreement &amp; Liability Terms</span>
             </div>
-            <span className={styles.pageTitle}>Legal Agreement &amp; Liability Terms</span>
           </div>
 
           {/* ContentArea */}
