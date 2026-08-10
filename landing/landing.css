@@ -1283,11 +1283,21 @@ html[data-how="cards"] .steps {
   color: var(--text-default);
   margin: 0;
 }
+.wcard__quote {
+  position: relative;
+}
+.wcard__mark {
+  font: 600 64px/0.5 Georgia, serif;
+  color: var(--accent-300);
+  position: absolute;
+  top: 12px; left: -4px;
+}
 .wcard__q {
   font: 500 16px/1.5 var(--font-sans);
   letter-spacing: -0.005em;
   color: var(--text-default);
   margin: 0;
+  padding-left: 36px;
   text-wrap: balance;
 }
 .anti-pos {
