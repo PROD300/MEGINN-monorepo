@@ -1,10 +1,16 @@
-/* Floating panel banner — same recipe as every other floating tile (border-
-   hairline + shadow-float, radius-md), composes pageBlock directly so it
-   aligns edge-to-edge with the rest of the page content instead of the
-   viewport. Deliberately quieter than TopNav: no accent glow, just the
-   neutral elevation shadow every card already uses. */
-.banner {
+/* Two-layer structure — same pattern as TopNav (topnavWrap/topnav): the outer
+   wrapper composes pageBlock and carries the space-5 side padding, so the
+   VISIBLE bordered panel sits inset by space-5 from the pageBlock edge —
+   matching where TopNav's pill and the bento tiles actually land. A single
+   layer with the border directly on the pageBlock box would sit space-5
+   wider than everything else (this was that exact bug). */
+.bannerWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.banner {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -12,7 +18,6 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-hairline);
   box-shadow: var(--shadow-float);
-  flex-shrink: 0;
 }
 
 .icon {
