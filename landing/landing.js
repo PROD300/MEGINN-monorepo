@@ -350,7 +350,7 @@
   if (howdemo) {
     var tabs = Array.prototype.slice.call(howdemo.querySelectorAll('.howtab'));
     var panels = Array.prototype.slice.call(howdemo.querySelectorAll('.howpanel'));
-    var DURATION = 4000; // halved per Daria's request, was 8000
+    var DURATION = 3200; // per Daria's request (was 8000, then 4000)
     var active = 0;
     var raf = null;
     var startTs = 0;

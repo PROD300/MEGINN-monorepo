@@ -447,7 +447,7 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 .bar > i {
   position: absolute; left: 0; top: 0; bottom: 0;
   background: var(--accent-500); border-radius: var(--radius-pill);
-  transition: width 2000ms cubic-bezier(.2,.8,.2,1);
+  transition: width 2500ms cubic-bezier(.2,.8,.2,1);
 }
 @media (prefers-reduced-motion: reduce) {
   .bar > i { transition: none; }
