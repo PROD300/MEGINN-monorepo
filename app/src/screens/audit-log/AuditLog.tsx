@@ -197,7 +197,7 @@ export function AuditLog() {
           {/* AuditTable */}
           <div className={styles.tableSection}>
             {visibleRows.length > 0 ? (
-              <Table density="default" columns={auditColumns} rows={visibleRows as unknown as Record<string, unknown>[]} />
+              <Table density="default" rowStyle="sheen" columns={auditColumns} rows={visibleRows as unknown as Record<string, unknown>[]} />
             ) : (
               <div className={styles.emptyState} data-track="audit-log-empty-state">
                 Nothing found for these filters. Try widening the date range or clearing a filter.

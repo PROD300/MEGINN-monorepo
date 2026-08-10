@@ -9,11 +9,8 @@
   font-size: var(--size-sm);
 }
 
-/* Same per-row sheen as tbody rows, so the header reads as the
-   same row pattern instead of a separate flat band on top. */
 .thead tr {
-  background: var(--surface-card-sheen), var(--surface-default);
-  border-bottom: 1px solid var(--border-hairline);
+  background: transparent;
 }
 
 .th {
@@ -39,21 +36,29 @@
   padding: var(--space-2) var(--space-3);
 }
 
-/* Per-row sheen matches RuleCard's row background (Rebalancing
-   Rules) — each row gets its own top highlight instead of one
-   sheen shared across the whole table, which faded out after the
-   first couple of rows. */
 .tbody tr {
-  background: var(--surface-card-sheen), var(--surface-default);
-  border-top: 1px solid var(--border-hairline);
-  transition: background 0.1s;
-}
-
-.tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
 }
 
 .td {
   color: var(--text-default);
   vertical-align: middle;
+}
+
+/* Legacy row treatment — Audit Log only, already approved (Kati),
+   kept out of the 2026-08-10 flat-rows pass. Same sheen+divider+hover
+   this component used to have everywhere. */
+.sheenRows .thead tr {
+  background: var(--surface-card-sheen), var(--surface-default);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.sheenRows .tbody tr {
+  background: var(--surface-card-sheen), var(--surface-default);
+  border-top: 1px solid var(--border-hairline);
+  transition: background 0.1s;
+}
+
+.sheenRows .tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
 }
