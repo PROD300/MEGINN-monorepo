@@ -96,7 +96,7 @@
   padding: var(--space-4);
   background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-float);
 }
 
@@ -165,7 +165,7 @@
   padding: var(--space-6);
   background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
   border: 2px solid var(--border-error);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-glow-accent-strong);
 }
 

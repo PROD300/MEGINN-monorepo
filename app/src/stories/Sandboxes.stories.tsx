@@ -69,7 +69,7 @@ function FormSandbox() {
   const amountError = submitted && !amount ? 'Amount is required' : ''
 
   return (
-    <div style={{ width: 360, padding: 24, background: 'var(--surface-elevated)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-default)', boxShadow: 'var(--shadow-sm)' }}>
+    <div style={{ width: 360, padding: 24, background: 'var(--surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-default)', boxShadow: 'var(--shadow-sm)' }}>
       <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 600, color: 'var(--text-default)', marginBottom: 20 }}>
         Rebalancing Rule
       </h2>

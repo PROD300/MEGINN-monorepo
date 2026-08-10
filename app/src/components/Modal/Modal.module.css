@@ -11,7 +11,7 @@
 .modal {
   background: var(--surface-card-sheen), var(--surface-card-grid), var(--surface-elevated);
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   width: 480px;
   max-width: 90vw;
   box-shadow: var(--shadow-float);
@@ -58,5 +58,5 @@
   padding: var(--space-4) var(--space-6);
   background: var(--surface-level-2);
   border-top: 1px solid var(--border-default);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
