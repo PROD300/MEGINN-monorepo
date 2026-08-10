@@ -44,6 +44,8 @@
   box-shadow: var(--shadow-glow-accent);
 }
 .primary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--surface-hover);
   box-shadow: var(--shadow-glow-accent-strong);
 }
 .primary:disabled {
@@ -58,7 +60,7 @@
 }
 .secondary:hover:not(:disabled) {
   border-color: var(--border-strong);
-  background: var(--surface-action-ghost-hover);
+  background: var(--surface-hover);
 }
 
 /* Type: ghost */
@@ -68,7 +70,7 @@
   border-color: transparent;
 }
 .ghost:hover:not(:disabled) {
-  background: var(--surface-action-ghost-hover);
+  background: var(--surface-hover);
 }
 
 /* Loading state */

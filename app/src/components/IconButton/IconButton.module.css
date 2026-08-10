@@ -13,7 +13,7 @@
 }
 
 .iconBtn:hover {
-  background: var(--surface-level-2);
+  background: var(--surface-hover);
 }
 
 .iconBtn:disabled {

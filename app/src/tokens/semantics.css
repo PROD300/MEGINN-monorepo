@@ -11,6 +11,7 @@
   --surface-action-primary:        var(--accent-500);
   --surface-action-primary-hover:  var(--accent-700);
   --surface-action-ghost-hover:    var(--accent-900);
+  --surface-hover:                 var(--gray-300); /* button hover background, 2026-08-10 */
 
   /* === Surface Levels === */
   --surface-level-1: var(--gray-950);
