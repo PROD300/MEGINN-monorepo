@@ -423,10 +423,9 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
     rgba(75, 52, 245, calc(var(--row-tint, 0) + 0.16)) 50%,
     rgba(75, 52, 245, var(--row-tint, 0)) 100%);
 }
-.dash__rebalanced td:first-child { padding-left: 8px; transition: padding 600ms ease-out; }
-.dash__rebalanced.is-on td:first-child {
-  box-shadow: inset 2px 0 0 var(--accent-500);
-}
+.dash__rebalanced td:first-child { padding-left: 8px; }
+/* Accent-blue left border on the active/is-on row removed per Daria —
+   the row-tint heatmap fill above is the only "active" signal now. */
 
 .dash__activity {
   margin: 14px -24px -20px;
@@ -1726,7 +1725,6 @@ html[data-rhythm="bold"] #trust .tlist__c {
 html[data-rhythm="bold"] #trust .quote {
   background: rgba(255,255,255,0.04);
   border-color: rgba(255,255,255,0.08);
-  border-left-color: var(--accent-300);
 }
 html[data-rhythm="bold"] #trust .quote__t { color: var(--gray-00); }
 html[data-rhythm="bold"] #trust .quote__t b { color: var(--accent-300); }
