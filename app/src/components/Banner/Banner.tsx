@@ -19,10 +19,8 @@ const icons = {
 export function Banner({ variant, children }: BannerProps) {
   return (
     <div className={[styles.banner, styles[variant]].join(' ')}>
-      <div className={styles.inner}>
-        <span className={[styles.icon, styles[variant]].join(' ')}>{icons[variant]}</span>
-        <span className={[styles.text, styles[variant]].join(' ')}>{children}</span>
-      </div>
+      <span className={[styles.icon, styles[variant]].join(' ')}>{icons[variant]}</span>
+      <span className={[styles.text, styles[variant]].join(' ')}>{children}</span>
     </div>
   )
 }
