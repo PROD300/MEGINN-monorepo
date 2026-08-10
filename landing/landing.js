@@ -7,6 +7,44 @@
 
   document.documentElement.classList.add('js');
 
+  /* ----- 0. Shared: animated tick counters -----
+     Used by the Hero stat card and the "How It Works" report
+     panel. Reads data-from/data-to/data-decimals (existing
+     contract) plus optional data-prefix/data-suffix/data-thousands
+     (added for the Hero numbers — $ signs, "%", "M", comma
+     grouping) on any .tick element inside `container`. */
+  function runTicks(container) {
+    container.querySelectorAll('.tick').forEach(function (el) {
+      var from = parseFloat(el.dataset.from || '0');
+      var to   = parseFloat(el.dataset.to   || '0');
+      var dec  = parseInt(el.dataset.decimals || '0', 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var thousands = el.dataset.thousands === 'true';
+
+      function format(v) {
+        var s = dec ? v.toFixed(dec) : Math.round(v).toString();
+        if (thousands) {
+          var parts = s.split('.');
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          s = parts.join('.');
+        }
+        return prefix + s + suffix;
+      }
+
+      if (from === to) { el.textContent = format(to); return; }
+      var dur = 1400;
+      var t0 = performance.now();
+      function step(now) {
+        var p = Math.min(1, (now - t0) / dur);
+        p = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = format(from + (to - from) * p);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
   /* ----- 1. Mobile nav toggle ----- */
   var burger = document.getElementById('navBurger');
   var navMobile = document.getElementById('navMobile');
@@ -58,34 +96,134 @@
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ----- 3. Hero "Rebalanced by AI" animation loop ----- */
+  /* ----- 3. Hero interactions -----
+     Entrance choreography, live tick numbers + bar growth, ambient
+     cursor spotlight, magnetic CTAs, 3D tilt on the dashboard mock,
+     and a cycling "AI activity" simulation across table rows. All
+     of this is animation/visual polish only — it doesn't imply a
+     real backend any more than the rest of the hero mock does (see
+     the [LOGICAL SCHEMA] comments elsewhere in this file). */
   var dash = document.getElementById('dash');
+  var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var hasHover = !!(window.matchMedia && window.matchMedia('(hover: hover)').matches);
+
+  /* 3a/3b. Entrance choreography, then kick tick numbers + bars
+     once the hero card has faded in. */
+  var heroRevealEls = Array.prototype.slice.call(document.querySelectorAll('.hero__reveal'));
+  if (heroRevealEls.length) {
+    setTimeout(function () {
+      heroRevealEls.forEach(function (el) { el.classList.add('is-in'); });
+      if (dash) {
+        runTicks(dash);
+        dash.querySelectorAll('.bar > i[data-target-width]').forEach(function (bar) {
+          requestAnimationFrame(function () { bar.style.width = bar.dataset.targetWidth; });
+        });
+      }
+    }, 80);
+  }
+
+  /* 3c. Ambient cursor spotlight — desktop/hover only */
+  var heroEl = document.querySelector('.hero');
+  var spotlight = document.getElementById('heroSpotlight');
+  if (heroEl && spotlight && !reduceMotion && hasHover) {
+    heroEl.addEventListener('mousemove', function (e) {
+      var r = heroEl.getBoundingClientRect();
+      spotlight.style.setProperty('--spot-x', (((e.clientX - r.left) / r.width) * 100) + '%');
+      spotlight.style.setProperty('--spot-y', (((e.clientY - r.top) / r.height) * 100) + '%');
+      spotlight.classList.add('is-on');
+    });
+    heroEl.addEventListener('mouseleave', function () { spotlight.classList.remove('is-on'); });
+  }
+
+  /* 3d. Magnetic CTAs — nudge toward the cursor within a small radius */
+  if (!reduceMotion && hasHover) {
+    document.querySelectorAll('.btn--magnetic').forEach(function (btn) {
+      var strength = 0.3, max = 10;
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = Math.max(-max, Math.min(max, (e.clientX - (r.left + r.width / 2)) * strength));
+        var dy = Math.max(-max, Math.min(max, (e.clientY - (r.top + r.height / 2)) * strength));
+        btn.classList.add('is-dragging');
+        btn.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () {
+        btn.classList.remove('is-dragging');
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  /* 3e. 3D tilt on the dashboard mock — desktop/hover only */
+  var vizWrap = document.querySelector('.hero__viz');
+  if (dash && vizWrap && !reduceMotion && hasHover) {
+    var maxTilt = 7;
+    vizWrap.addEventListener('mousemove', function (e) {
+      var r = vizWrap.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width;
+      var py = (e.clientY - r.top) / r.height;
+      var rotY = (px - 0.5) * 2 * maxTilt;
+      var rotX = (0.5 - py) * 2 * maxTilt;
+      dash.classList.add('is-tilting');
+      dash.style.transform = 'translateZ(0) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg)';
+    });
+    vizWrap.addEventListener('mouseleave', function () {
+      dash.classList.remove('is-tilting');
+      dash.style.transform = 'translateZ(0)';
+    });
+  }
+
+  /* 3f. Cycling "AI activity" scenarios — different table row +
+     activity line every ~6s. [LOGICAL SCHEMA — NOT WIRED TO A
+     BACKEND]: purely decorative, sells "your portfolio runs
+     itself" from the H1; see index.html markup comment. */
   var callout = document.getElementById('callout');
+  var calloutText = document.getElementById('calloutText');
+  var activityTitle = document.getElementById('activityTitle');
+  var activityMeta = document.getElementById('activityMeta');
   if (dash && callout) {
-    var row = dash.querySelector('[data-row="1"]');
-    function position() {
-      if (!row) return;
+    var SCENARIOS = [
+      { row: 1, text: 'Rebalanced by AI', title: 'Auto-rebalance: ETH → USDC', meta: 'Rule: <span class="mono">stable_floor &gt;= 20%</span> · gas $4.21 · 0x9a…f3c2' },
+      { row: 0, text: 'Threshold checked', title: 'Threshold check: ETH ceiling', meta: 'Rule: <span class="mono">ceiling_ETH &le; 30%</span> · no action needed · 12ms' },
+      { row: 2, text: 'Route optimized', title: 'Gas route optimized: Arbitrum', meta: 'Saved <span class="mono">$2.10</span> vs baseline route · Li.Fi' },
+      { row: 3, text: 'Cross-chain synced', title: 'Cross-chain sync: Ethereum ↔ Arbitrum', meta: 'Bridge check · Li.Fi · <span class="mono">42 sec</span> · all clear' }
+    ];
+    var scenarioIdx = 0;
+    var activeRow = null;
+
+    function positionCallout(row) {
       var dRect = dash.getBoundingClientRect();
       var rRect = row.getBoundingClientRect();
       callout.style.top = (rRect.top - dRect.top - 18) + 'px';
       callout.style.left = (rRect.right - dRect.left - callout.offsetWidth - 8) + 'px';
     }
-    function playOnce() {
+
+    function playScenario() {
+      var s = SCENARIOS[scenarioIdx];
+      scenarioIdx = (scenarioIdx + 1) % SCENARIOS.length;
+      var row = dash.querySelector('[data-row="' + s.row + '"]');
       if (!row) return;
+      activeRow = row;
+
+      if (activityTitle) activityTitle.textContent = s.title;
+      if (activityMeta) activityMeta.innerHTML = s.meta;
+      if (calloutText) calloutText.textContent = s.text;
+
       row.classList.add('is-on');
       callout.hidden = false;
-      position();
+      positionCallout(row);
       setTimeout(function () {
         callout.hidden = true;
         row.classList.remove('is-on');
       }, 2800);
     }
-    // Wait a beat after load, then loop every 6s
+
     setTimeout(function () {
-      playOnce();
-      setInterval(playOnce, 6000);
+      playScenario();
+      setInterval(playScenario, 6000);
     }, 1400);
-    window.addEventListener('resize', position);
+    window.addEventListener('resize', function () {
+      if (activeRow && !callout.hidden) positionCallout(activeRow);
+    });
   }
 
   /* ----- 4. Form -----
@@ -285,26 +423,8 @@
     howdemo.addEventListener('mouseenter', function () { paused = true; stop(); });
     howdemo.addEventListener('mouseleave', function () { paused = false; play(); });
 
-    // Tick counters within active panel
-    function runTicks(panel) {
-      panel.querySelectorAll('.tick').forEach(function (el) {
-        var from = parseFloat(el.dataset.from || '0');
-        var to   = parseFloat(el.dataset.to   || '0');
-        var dec  = parseInt(el.dataset.decimals || '0', 10);
-        if (from === to) { el.textContent = to.toFixed(dec); return; }
-        var dur = 1400;
-        var t0 = performance.now();
-        function step(now) {
-          var p = Math.min(1, (now - t0) / dur);
-          // ease-out cubic
-          p = 1 - Math.pow(1 - p, 3);
-          var v = from + (to - from) * p;
-          el.textContent = dec ? v.toFixed(dec) : Math.round(v).toString();
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    }
+    // Tick counters within active panel — uses the shared
+    // runTicks() defined at the top of this file (§0).
 
     // Only animate when in viewport
     if ('IntersectionObserver' in window) {

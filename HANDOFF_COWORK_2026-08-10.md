@@ -62,6 +62,21 @@ Daria сняла ограничение «`landing/` дорабатываетс�
 
 ---
 
+## Добавление (та же сессия, позже) — Hero-интеракшн лендинга
+
+По запросу Daria усилила интерактивность Hero-секции (`landing/index.html`, `landing.css`, `landing.js`). Все изменения — только в этих трёх файлах, чистая фронтенд-анимация, не требует сборки (см. её вопрос про "статика без билда" — CDN-теги/plain JS работают на статическом деплое без изменений). Новое:
+
+- Хореография появления контента Hero при загрузке (`.hero__reveal` + `--d`-задержки).
+- Живые тикающие цифры в дашборд-моке (AUM, delta, allocation %, value) — обобщила `runTicks()` в общую shared-функцию (раньше была локальной только для панели "How It Works"), добавила поддержку `data-prefix`/`data-suffix`/`data-thousands`.
+- Рост баров аллокации от 0 при загрузке.
+- Ambient cursor spotlight за курсором по тёмному фону Hero (`#heroSpotlight`).
+- Magnetic-кнопки в Hero CTA (`.btn--magnetic`).
+- 3D-tilt дашборд-карточки по курсору (`perspective` на `.hero__viz`, `rotateX/rotateY` на `.dash`).
+- Вместо одного статичного callout "Rebalanced by AI" на фиксированной строке — 4 чередующихся AI-сценария (rebalance / threshold check / gas route / cross-chain sync), каждый подсвечивает свою строку таблицы.
+- Все mouse-driven эффекты (spotlight/magnetic/tilt) отключаются на touch-устройствах (`hover: hover` media query) и при `prefers-reduced-motion: reduce`.
+
+Задеплоенный URL для проверки: https://obsidian-monorepo-landing.vercel.app/ (Daria уже создала отдельный Vercel-проект, Root Directory `landing`) — эти правки в нём ещё не отражены, пока не запушены.
+
 ## Связанные файлы
 - `HANDOFF_COWORK_2026-08-09.md` — общий хэндовер, обновлён в этой сессии (снятие ограничения на `landing/`)
 - `HANDOFF_COWORK_TYPOGRAPHY_2026-08-09.md` — обоснование Geist, ограничение Google Fonts CDN
