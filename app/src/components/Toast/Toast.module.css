@@ -14,15 +14,15 @@
 }
 
 .success {
-  background: var(--surface-card-sheen), var(--bg-success-subtle), var(--surface-elevated);
+  background: var(--surface-elevated);
   border-color: var(--border-default);
 }
 .warning {
-  background: var(--surface-card-sheen), var(--bg-warning-subtle), var(--surface-elevated);
+  background: var(--surface-elevated);
   border-color: var(--border-warning);
 }
 .error {
-  background: var(--surface-card-sheen), var(--bg-error-subtle), var(--surface-elevated);
+  background: var(--surface-elevated);
   border-color: var(--border-error);
 }
 
