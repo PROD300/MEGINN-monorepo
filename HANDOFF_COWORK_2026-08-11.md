@@ -70,12 +70,18 @@ Daria попросила: когда работа перейдёт на этап
 
 **Это не задача на выполнение сейчас** — явно отложена Daria до этапа v1.1. Если следующая сессия (любой агент) видит, что работа сдвинулась в scope v1.1 (Basic Reporting / Solana / Light Theme UI) — стоит поднять эту тему с Daria, а не молчать в ожидании отдельного запроса. Рекомендованный старт при переходе к задаче: сначала брейкпоинт-токены в `ds/foundation.md`/`ds/CONTRACT.md` (по образцу тиров лендинга), затем экраны приоритизированно, не все 17 разом.
 
+**Обновление (Claude Code, та же дата) — reminder зафиксирован в roadmap, ещё не в работе.** По прямой команде Daria («в четвёртый пункт V1.1») этот пункт перенесён из reminder-заметки в официальный scope v1.1 — теперь значится как отдельный пункт наравне с Basic Reporting / Solana / Light Theme UI, а не только как «напомнить потом»:
+- `prd/prd.md` → «6. Roadmap» → строка v1.1 дополнена пунктом «Responsive App Layout», с тем же обоснованием (6 vs ~26 медиа-запросов, отсутствие breakpoint-токенов), что и в reminder выше.
+- `summary/product_summary_ru.md` / `product_summary_en.md` → раздел 4 (v1.1) дополнен пунктом «адаптивная вёрстка приложения» / «responsive app layout».
+
+**Важно: это по-прежнему НЕ означает, что задача взята в работу** — сам объём (какие экраны первыми, брейкпоинты, приоритизация) не согласован с Daria, только зафиксирован как строка в roadmap-документах. Рекомендованный порядок работы из reminder выше (сначала токены, потом экраны приоритизированно) остаётся в силе, когда до этой задачи дойдёт очередь.
+
 ---
 
 ## Связанные файлы
-- `prd/prd.md` — Roadmap, v1.1 обновлён с добавлением Light Theme UI
+- `prd/prd.md` — Roadmap, v1.1 обновлён с добавлением Light Theme UI и Responsive App Layout
 - `ds/foundation.md`, `ds/CONTRACT.md` — текущие (тёмные) токены, основа для проектирования светлого набора; также пока без брейкпоинт-токенов (см. reminder выше)
-- `summary/product_summary_ru.md`, `summary/product_summary_en.md` — краткое резюме продукта для внешней аудитории
+- `summary/product_summary_ru.md`, `summary/product_summary_en.md` — краткое резюме продукта для внешней аудитории, v1.1 синхронизирован с PRD (Light Theme UI + Responsive App Layout)
 - `landing/assets/3D-icons/*-rgb.mp4`, `*-alpha.mp4` — luma-matte пары для Safari-канваса, заменили старые плоские `.mp4`
 - `landing/landing.js` — `createAlphaCanvasIcon` (§3g), `setupFeaturesScrollJack` (§3h)
 - `HANDOFF_COWORK_2026-08-10.md` — процесс дев-превью/аппрув/коммит, история перехода на тёмную тему

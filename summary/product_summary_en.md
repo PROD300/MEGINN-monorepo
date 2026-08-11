@@ -1,4 +1,6 @@
-# OBSIDIAN — Project Summary
+# OBSIDIAN
+
+*desktop-first web app*
 
 An institutional AI-native platform for autonomous digital asset management, built for Family Office CIOs and Corporate Treasury Managers. The goal is to take manual DeFi portfolio management — and the personal legal liability that comes with automated operations — off the client's plate.
 
@@ -24,5 +26,5 @@ An institutional AI-native platform for autonomous digital asset management, bui
 
 The product is currently in active development. It's in the final stage of v1.0 (Lean MVP) per the PRD roadmap: all 17 screens and the design system are built and deployed, with final technical polish underway.
 
-- **v1.1** — basic reporting, additional network support, light theme UI
+- **v1.1** — basic reporting, additional network support, light theme UI, responsive app layout
 - **v2.0** — full AI analytics, advanced privacy, support for 7+ networks

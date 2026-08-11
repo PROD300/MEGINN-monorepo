@@ -71,6 +71,7 @@
 
 ## 6. Roadmap
 - **v1.0 (Lean MVP)**: Smart Accounts, Cross-chain Bridge (F20), Auto-rebalancing (F21), Legal Framework.
-- **v1.1**: Basic Reporting, Extra Network Support (Solana), Light Theme UI.
+- **v1.1**: Basic Reporting, Extra Network Support (Solana), Light Theme UI, Responsive App Layout.
   - *Light Theme UI — open questions deferred to v1.1 kickoff*: toggle mechanism (UI toggle vs. `prefers-color-scheme` vs. manual user choice) and the light semantic token layer (Surfaces/Text/Borders in `ds/foundation.md`) are not decided yet — resolve directly with Daria when work on this milestone starts, not before. See `HANDOFF_COWORK_2026-08-11.md` for full context.
+  - *Responsive App Layout — flagged by Daria, not yet scoped*: `app/` (17 screens) has almost no responsive styling today (6 media queries total, all in one `App.css`, single 1024px breakpoint for sidebar collapse only — `landing/` by comparison has ~26 media queries across 5 tiers). Daria confirmed the app visibly breaks on mobile. No breakpoint tokens exist yet in `ds/foundation.md`/`ds/CONTRACT.md`. See `HANDOFF_COWORK_2026-08-11.md` for full context and recommended starting point.
 - **v2.0**: Full AI Analytics, Advanced Privacy, 7+ chain support.
