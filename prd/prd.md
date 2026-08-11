@@ -72,4 +72,5 @@
 ## 6. Roadmap
 - **v1.0 (Lean MVP)**: Smart Accounts, Cross-chain Bridge (F20), Auto-rebalancing (F21), Legal Framework.
 - **v1.1**: Basic Reporting, Extra Network Support (Solana), Light Theme UI.
+  - *Light Theme UI — open questions deferred to v1.1 kickoff*: toggle mechanism (UI toggle vs. `prefers-color-scheme` vs. manual user choice) and the light semantic token layer (Surfaces/Text/Borders in `ds/foundation.md`) are not decided yet — resolve directly with Daria when work on this milestone starts, not before. See `HANDOFF_COWORK_2026-08-11.md` for full context.
 - **v2.0**: Full AI Analytics, Advanced Privacy, 7+ chain support.
