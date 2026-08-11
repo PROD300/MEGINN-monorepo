@@ -71,5 +71,5 @@
 
 ## 6. Roadmap
 - **v1.0 (Lean MVP)**: Smart Accounts, Cross-chain Bridge (F20), Auto-rebalancing (F21), Legal Framework.
-- **v1.1**: Basic Reporting, Extra Network Support (Solana).
+- **v1.1**: Basic Reporting, Extra Network Support (Solana), Light Theme UI.
 - **v2.0**: Full AI Analytics, Advanced Privacy, 7+ chain support.
