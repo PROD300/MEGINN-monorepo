@@ -233,12 +233,14 @@
   }
 
   /* 3g. Problem-section cards (S2) — 3D icon videos (.pcard__icon3d):
-     paused on frame 0 by default (static), play while the card is
-     hovered, pause + rewind to frame 0 on mouseleave. No spotlight/
-     shadow on the card itself anymore (removed per Daria) — the video
-     is the only hover "interest" now. Runs regardless of hasHover so
-     touch users still get the static first frame; only the hover
-     play/pause wiring is skipped without a real pointer. */
+     on pointer devices, paused on frame 0 by default and plays while
+     the card is hovered (pause + rewind on mouseleave) — the video is
+     the only hover "interest" on the card. On touch (tablet/mobile,
+     !hasHover — no reliable hover to trigger it), there's no tap
+     gesture wired up per Daria: it just autoplays on load and loops
+     continuously instead, since a static/tap-gated icon reads as
+     broken on touch. Muted + playsinline (already on the <video> tag)
+     is what makes autoplay allowed without a user gesture. */
   document.querySelectorAll('.pcard').forEach(function (card) {
     var vid = card.querySelector('.pcard__icon3d');
     if (!vid) return;
@@ -247,18 +249,20 @@
       if (webmSource) webmSource.remove();
       vid.load();
     }
-    /* No explicit currentTime=0 here on init — a freshly loaded <video>
-       already sits at frame 0, and setting currentTime before metadata
-       has loaded (readyState 0) hangs the element in Safari, which was
-       showing nothing at all for these icons (not just no hover-play —
-       no frame ever rendered). Same guard applied to the mouseleave
-       rewind below. */
     if (hasHover) {
+      /* No explicit currentTime=0 here on init — a freshly loaded
+         <video> already sits at frame 0, and setting currentTime
+         before metadata has loaded (readyState 0) hangs the element
+         in Safari, which was showing nothing at all for these icons
+         (not just no hover-play — no frame ever rendered). Same
+         guard applied to the mouseleave rewind below. */
       card.addEventListener('mouseenter', function () { vid.play(); });
       card.addEventListener('mouseleave', function () {
         vid.pause();
         if (vid.readyState >= 1) vid.currentTime = 0;
       });
+    } else if (!reduceMotion) {
+      vid.play().catch(function () { /* autoplay blocked — static frame 0 is an acceptable fallback */ });
     }
   });
 
