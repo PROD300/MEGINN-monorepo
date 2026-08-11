@@ -261,6 +261,12 @@
 
     function makeVideo(src) {
       var v = document.createElement('video');
+      /* crossOrigin — Safari can taint a canvas that a <video> was
+         drawn onto (getImageData then throws SecurityError) even for
+         same-origin video served via Range requests, which is how
+         all browsers stream video. Explicit crossOrigin + the server
+         already sending Access-Control-Allow-Origin avoids that. */
+      v.crossOrigin = 'anonymous';
       v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
       v.src = src;
       return v;
@@ -275,15 +281,24 @@
         var w = vw * scale, h = rgbVideo.videoHeight * scale;
         var x = ((canvas.width - w) / 2) | 0, y = ((canvas.height - h) / 2) | 0;
         w = Math.ceil(w); h = Math.ceil(h);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(rgbVideo, x, y, w, h);
-        maskCtx.clearRect(0, 0, canvas.width, canvas.height);
-        maskCtx.drawImage(alphaVideo, x, y, w, h);
-        var frame = ctx.getImageData(x, y, w, h);
-        var mask = maskCtx.getImageData(x, y, w, h);
-        var d = frame.data, m = mask.data;
-        for (var i = 0; i < d.length; i += 4) d[i + 3] = m[i];
-        ctx.putImageData(frame, x, y);
+        try {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(rgbVideo, x, y, w, h);
+          maskCtx.clearRect(0, 0, canvas.width, canvas.height);
+          maskCtx.drawImage(alphaVideo, x, y, w, h);
+          var frame = ctx.getImageData(x, y, w, h);
+          var mask = maskCtx.getImageData(x, y, w, h);
+          var d = frame.data, m = mask.data;
+          for (var i = 0; i < d.length; i += 4) d[i + 3] = m[i];
+          ctx.putImageData(frame, x, y);
+        } catch (e) {
+          /* Never let a single bad frame (tainted canvas, decode
+             hiccup) permanently kill the loop — without this, the
+             rAF chain below never re-arms and the icon freezes on
+             whatever was last drawn (usually the opaque RGB frame
+             with its own background still showing, i.e. the exact
+             seam bug this rewrite exists to fix). */
+        }
       }
       requestAnimationFrame(draw);
     }
