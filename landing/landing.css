@@ -5,7 +5,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--gray-50);
+  background: var(--surface-default);
   color: var(--text-default);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "ss01", "cv11";
@@ -107,8 +107,8 @@ a { color: inherit; text-decoration: none; }
 .btn--pri { background: var(--accent-500); color: #FFF; }
 .btn--pri:hover { background: var(--accent-700); }
 
-.btn--sec { background: var(--gray-00); color: var(--accent-500); border-color: var(--border-default); }
-.btn--sec:hover { background: var(--accent-50); border-color: var(--border-strong); }
+.btn--sec { background: rgba(255, 255, 255, 0.04); color: var(--accent-300); border-color: var(--border-default); } /* was gray-00/accent-500 — dark site, 2026-08-11 */
+.btn--sec:hover { background: rgba(75, 52, 245, 0.15); border-color: var(--border-strong); }
 
 .btn--ghost { background: transparent; color: var(--accent-500); }
 .btn--ghost:hover { background: var(--accent-50); }
@@ -177,8 +177,15 @@ a { color: inherit; text-decoration: none; }
   padding: var(--section-y) 0;
   position: relative;
 }
-.section--light  { background: var(--gray-00); }
-.section--subtle { background: var(--gray-50); }
+/* Dark site by default (2026-08-11, per Daria — "dark site, like the
+   dark app"). Names kept as-is (light/subtle/dark) to avoid touching
+   every section's class in the HTML — they now just mean two tones of
+   dark instead of two tones of light: base (gray-950, matches body)
+   and elevated (gray-900), plus the original --dark for sections that
+   also carry the ambient accent-glow overlay (.section--dark::before,
+   below — Access, Trust, and now anything else that wants the glow). */
+.section--light  { background: var(--gray-950); }
+.section--subtle { background: var(--gray-900); }
 .section--dark   { background: var(--gray-900); color: var(--gray-00); }
 
 .section__head {
@@ -480,17 +487,17 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 
 .pcard {
   position: relative;
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.03); /* was solid white — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md); /* was radius-lg (16px) — card/panel components use radius-md (4px) per ds/components.md */
   padding: 32px 28px;
-  transition: border-color 200ms ease-out, transform 200ms ease-out;
+  transition: background 200ms ease-out, border-color 200ms ease-out, transform 200ms ease-out;
 }
-.section--subtle .pcard { background: var(--gray-00); }
 /* Hover: thin accent hairline only — no shadow, no glow, no spotlight
    (all removed per Daria). Once the animated 3D icon assets land, they
    carry the hover "interest" instead of card-level chrome. */
 .pcard:hover {
+  background: rgba(255, 255, 255, 0.05);
   border-color: rgba(75, 52, 245, 0.45);
   transform: translateY(-1px);
 }
@@ -559,18 +566,18 @@ html[data-how="demo"] .howdemo { display: grid; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.03); /* was solid white — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   overflow: hidden;
 }
 .howdemo__tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .howtab {
   position: relative;
@@ -578,7 +585,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   padding: 18px 22px 22px;
   background: transparent;
   border: none;
-  border-right: 1px solid var(--border-default);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   text-align: left;
   cursor: pointer;
   transition: background 150ms ease-out;
@@ -586,7 +593,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   color: var(--text-default);
 }
 .howtab:last-child { border-right: none; }
-.howtab:hover { background: var(--gray-100); }
+.howtab:hover { background: rgba(255, 255, 255, 0.04); }
 .howtab__no {
   font: 600 18px/1 var(--font-mono);
   letter-spacing: 0.04em;
@@ -606,7 +613,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 .howtab__bar {
   position: absolute; left: 0; right: 0; bottom: -1px;
   height: 2px;
-  background: var(--border-default);
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 .howtab__bar i {
@@ -614,14 +621,14 @@ html[data-how="demo"] .howdemo { display: grid; }
   background: var(--accent-500);
   transform-origin: left center;
 }
-.howtab.is-active .howtab__no { color: var(--accent-500); }
+.howtab.is-active .howtab__no { color: var(--accent-300); }
 .howtab.is-active .howtab__t { color: var(--text-default); }
-.howtab.is-active { background: var(--gray-00); }
+.howtab.is-active { background: rgba(255, 255, 255, 0.04); }
 .howtab.is-done .howtab__bar i { width: 100%; }
 
 @media (max-width: 800px) {
   .howdemo__tabs { grid-template-columns: 1fr; }
-  .howtab { border-right: none; border-bottom: 1px solid var(--border-default); padding: 14px 18px; }
+  .howtab { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 14px 18px; }
 }
 
 /* Stage */
@@ -629,7 +636,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   position: relative;
   min-height: 460px;
   padding: 36px 32px;
-  background: var(--gray-00);
+  background: transparent;
 }
 .howpanel {
   display: none;
@@ -654,7 +661,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   font: 500 11px/1 var(--font-sans);
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: var(--accent-500);
+  color: var(--accent-300);
   margin-bottom: 12px;
 }
 .howpanel__h {
@@ -758,11 +765,11 @@ html[data-how="demo"] .howdemo { display: grid; }
 
 /* --- Monitor visual --- */
 .monitor {
-  border: 1px solid var(--border-default);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* was solid white — dark site, 2026-08-11 */
   border-radius: var(--radius-md);
-  background: var(--gray-00);
+  background: rgba(255, 255, 255, 0.03);
   padding: 20px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -771,7 +778,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   grid-template-columns: 1.3fr 1fr 1fr;
   gap: 18px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-default);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 14px;
 }
 .monitor__stat { display: flex; flex-direction: column; gap: 4px; }
@@ -797,12 +804,12 @@ html[data-how="demo"] .howdemo { display: grid; }
 .liveblob {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--success-500);
-  box-shadow: 0 0 0 0 rgba(16,185,129,0.5);
+  box-shadow: 0 0 0 0 rgba(75, 52, 245, 0.5); /* was rgba(16,185,129,...) — old success-green leftover, fixed 2026-08-11 */
   animation: liveblob 1.8s ease-out infinite;
 }
 @keyframes liveblob {
-  0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.45); }
-  100% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+  0% { box-shadow: 0 0 0 0 rgba(75, 52, 245, 0.45); }
+  100% { box-shadow: 0 0 0 10px rgba(75, 52, 245, 0); }
 }
 
 .monitor__chart svg { display: block; }
@@ -827,7 +834,7 @@ html[data-how="demo"] .howdemo { display: grid; }
   display: flex; align-items: center; gap: 12px;
   padding: 12px 14px;
   background: var(--bg-success);
-  border: 1px solid rgba(16,185,129,0.20);
+  border: 1px solid rgba(75, 52, 245, 0.25); /* was rgba(16,185,129,...) — old success-green, pre-convergence leftover, fixed 2026-08-11 */
   border-radius: var(--radius-md);
   opacity: 0; transform: translateY(8px);
 }
@@ -848,16 +855,16 @@ html[data-how="demo"] .howdemo { display: grid; }
 
 /* --- Report visual --- */
 .report {
-  border: 1px solid var(--border-default);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* was solid white — dark site, 2026-08-11 */
   border-radius: var(--radius-md);
-  background: var(--gray-00);
+  background: rgba(255, 255, 255, 0.03);
   padding: 20px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 .report__head {
   display: flex; align-items: center; justify-content: space-between;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--border-default);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 16px;
 }
 .report__lbl {
@@ -878,7 +885,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 .report__stat {
   display: flex; flex-direction: column; gap: 4px;
   padding: 12px 14px;
-  background: var(--gray-50);
+  background: rgba(255, 255, 255, 0.04); /* was gray-50 — dark site, 2026-08-11 */
   border-radius: var(--radius-md);
 }
 .report__k {
@@ -928,7 +935,7 @@ html[data-how="demo"] .howdemo { display: grid; }
 .howline__node {
   width: 56px; height: 56px;
   border-radius: 50%;
-  background: var(--gray-00);
+  background: rgba(255, 255, 255, 0.04); /* was gray-00 — dark site, 2026-08-11 */
   border: 2px solid var(--border-default);
   display: inline-flex; align-items: center; justify-content: center;
   font: 600 16px/1 var(--font-mono);
@@ -985,14 +992,14 @@ html[data-how="demo"] .howdemo { display: grid; }
 }
 .howline__b .mono {
   color: var(--text-default);
-  background: var(--gray-100);
+  background: rgba(255, 255, 255, 0.08); /* was gray-100 — dark site, 2026-08-11 */
   padding: 1px 6px;
   border-radius: var(--radius-md);
   font-size: 13px;
 }
 .howline__chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .howline__chips .chip {
-  background: var(--gray-00);
+  background: rgba(255, 255, 255, 0.03); /* was gray-00 — dark site, 2026-08-11 */
   border: 1px solid var(--border-default);
   color: var(--text-default);
   font-family: var(--font-sans);
@@ -1042,7 +1049,7 @@ html[data-how="cards"] .steps {
   content: "";
   width: 24px; height: 24px;
   border-radius: 50%;
-  background: var(--gray-00);
+  background: rgba(255, 255, 255, 0.03); /* was gray-00 — dark site, 2026-08-11 */
   border: 1px solid var(--accent-500);
   display: inline-block;
 }
@@ -1072,7 +1079,7 @@ html[data-how="cards"] .steps {
   color: var(--text-muted);
   margin: 0;
 }
-.step__b .mono { color: var(--text-default); background: var(--gray-100); padding: 1px 6px; border-radius: var(--radius-md); font-size: 13px; }
+.step__b .mono { color: var(--text-default); background: rgba(255, 255, 255, 0.08); padding: 1px 6px; border-radius: var(--radius-md); font-size: 13px; } /* was gray-100 — dark site, 2026-08-11 */
 .step__foot {
   margin-top: 16px;
   font: 400 12px/1 var(--font-sans);
@@ -1093,14 +1100,14 @@ html[data-how="cards"] .steps {
 @media (max-width: 720px)  { .features { grid-template-columns: 1fr; } }
 
 .fcard {
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.03); /* was solid white — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 28px 28px 32px;
-  transition: border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
+  transition: background 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
   position: relative;
 }
-.fcard:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.fcard:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.14); box-shadow: none; transform: translateY(-1px); }
 .fcard__head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 24px;
@@ -1111,15 +1118,15 @@ html[data-how="cards"] .steps {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
-  background: var(--gray-100);
+  background: rgba(255, 255, 255, 0.06); /* was gray-100 — dark site, 2026-08-11 */
   padding: 4px 8px;
   border-radius: var(--radius-sm);
 }
-.fcard__id--accent { background: var(--accent-50); color: var(--accent-700); }
+.fcard__id--accent { background: rgba(75, 52, 245, 0.18); color: var(--accent-300); } /* was accent-50/accent-700 — light tint doesn't read on dark */
 .fcard__ic {
   width: 36px; height: 36px;
   border-radius: var(--radius-md);
-  background: var(--gray-100);
+  background: rgba(255, 255, 255, 0.06); /* was gray-100 — dark site, 2026-08-11 */
   color: var(--text-default);
   display: inline-flex; align-items: center; justify-content: center;
 }
@@ -1140,10 +1147,10 @@ html[data-how="cards"] .steps {
 /* Highlighted differentiator card spans 1 col but visually pops */
 .fcard--hero {
   background:
-    linear-gradient(180deg, rgba(79,70,229,0.04) 0%, transparent 60%),
-    var(--gray-00);
+    linear-gradient(180deg, rgba(75, 52, 245, 0.10) 0%, transparent 60%), /* was rgba(79,70,229,...) — old accent leftover, fixed 2026-08-11 */
+    rgba(255, 255, 255, 0.03); /* was gray-00 — dark site, 2026-08-11 */
   border-color: var(--accent-300);
-  box-shadow: 0 4px 16px -8px rgba(79,70,229,0.25);
+  box-shadow: 0 4px 16px -8px rgba(75, 52, 245, 0.35); /* was rgba(79,70,229,...) — old accent leftover, fixed 2026-08-11 */
 }
 .fcard--hero:hover { border-color: var(--accent-500); }
 .fcard__legal {
@@ -1213,6 +1220,46 @@ html[data-how="cards"] .steps {
 .tlist li b { color: var(--text-default); font-weight: 600; }
 .tlist li .m { color: var(--text-muted); }
 
+/* #trust now runs on the dark section pattern (section--dark, same as
+   Access) per Daria — was section--subtle/light. These were previously
+   an opt-in dev-tweaks variant (html[data-rhythm="bold"] #trust ...);
+   promoted to the permanent default here. Two stale hardcoded colors
+   fixed while promoting: .tcol__ic was on the pre-rebrand accent hex
+   (79,70,229 = old #4F46E5), .tlist__c was still on the old distinct
+   success-green (16,185,129 / #6EE7B7) instead of the converged
+   single accent. */
+#trust .ds-label { color: var(--accent-300); }
+#trust .sub { color: var(--gray-300); }
+#trust .tcol {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--gray-00);
+}
+#trust .tcol:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.14);
+}
+#trust .tcol__head { border-bottom-color: rgba(255,255,255,0.08); }
+#trust .tcol__ic {
+  background: rgba(75, 52, 245, 0.15);
+  color: var(--accent-300);
+}
+#trust .tcol__h { color: var(--gray-00); }
+#trust .tlist li b { color: var(--gray-00); }
+#trust .tlist li .m { color: var(--gray-300); }
+#trust .tlist__c {
+  background: rgba(75, 52, 245, 0.18);
+  color: var(--accent-300);
+}
+#trust .quote {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+}
+#trust .quote__t { color: var(--gray-00); }
+#trust .quote__t b { color: var(--accent-300); }
+#trust .quote__src { color: var(--gray-300); }
+#trust .quote__mark { color: var(--accent-300); }
+
 .quote {
   margin-top: 48px;
   background: var(--gray-00);
@@ -1251,13 +1298,13 @@ html[data-how="cards"] .steps {
 @media (max-width: 960px) { .cards-2 { grid-template-columns: 1fr; } }
 
 .wcard {
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.03); /* was solid white — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 40px;
   display: flex; flex-direction: column;
 }
-.wcard__role .ds-label { color: var(--accent-500); margin-bottom: 10px; }
+.wcard__role .ds-label { color: var(--accent-300); margin-bottom: 10px; }
 .wcard__h {
   font: 600 24px/1.25 var(--font-sans);
   letter-spacing: -0.01em;
@@ -1303,7 +1350,7 @@ html[data-how="cards"] .steps {
 .anti-pos {
   margin-top: 40px;
   padding: 18px 24px;
-  background: var(--gray-50);
+  background: rgba(255, 255, 255, 0.03); /* was gray-50 — dark site, 2026-08-11 */
   border: 1px dashed var(--border-default);
   border-radius: var(--radius-md);
   font: 400 14px/1.55 var(--font-sans);
@@ -1312,14 +1359,16 @@ html[data-how="cards"] .steps {
 }
 .anti-pos b { color: var(--text-default); font-weight: 600; }
 
-/* ============================================================ S7 — Access */
+/* ============================================================ S7 — Access
+   (.section--dark is shared with #trust — Security & Compliance also
+   runs on this pattern now, see the S5 block above) */
 .section--dark { position: relative; overflow: hidden; }
 .section--dark::before {
   content: "";
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(79,70,229,0.20), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(79,70,229,0.10), transparent 70%);
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(75,52,245,0.20), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(75,52,245,0.10), transparent 70%);
   pointer-events: none;
 }
 .section--dark > .container { position: relative; }
@@ -1351,8 +1400,8 @@ html[data-how="cards"] .steps {
 .access__alt a:hover { text-decoration-color: var(--accent-300); }
 
 .access__form {
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.04); /* was gray-00 — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: var(--radius-md);
   padding: 32px 32px 28px;
   color: var(--text-default);
@@ -1384,8 +1433,8 @@ html[data-how="cards"] .steps {
 .input, .select {
   height: 40px;
   border-radius: var(--radius-md);
-  background: var(--gray-00);
-  border: 1px solid var(--border-default);
+  background: rgba(255, 255, 255, 0.04); /* was gray-00 — dark site, 2026-08-11 */
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 0 12px;
   font: 400 14px/1 var(--font-sans);
   color: var(--text-default);
@@ -1394,13 +1443,13 @@ html[data-how="cards"] .steps {
 }
 .input:focus, .select:focus {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+  box-shadow: 0 0 0 3px rgba(75, 52, 245, 0.25); /* was rgba(79,70,229,...) — old accent leftover, fixed 2026-08-11 */
 }
 .input--error { border-color: var(--border-error); }
 .select {
   appearance: none;
   padding-right: 32px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1l4 4 4-4' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1l4 4 4-4' stroke='%23CBD5E1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>"); /* chevron was #64748B (gray-500, invisible on dark) — now gray-300 */
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
@@ -1413,7 +1462,7 @@ html[data-how="cards"] .steps {
 
 .form__success {
   position: absolute; inset: 0;
-  background: var(--gray-00);
+  background: var(--gray-900); /* was gray-00 — dark site, 2026-08-11; solid (not translucent) so it fully covers the form fields underneath */
   border-radius: var(--radius-md);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
@@ -1709,57 +1758,21 @@ html[data-rhythm="editorial"] .wcard:hover {
 html[data-rhythm="editorial"] .cards-3,
 html[data-rhythm="editorial"] .features,
 html[data-rhythm="editorial"] .cards-2 { gap: 56px; }
-html[data-rhythm="editorial"] .fcard--hero { background: var(--gray-50); padding: 28px; border-radius: var(--radius-md); }
+html[data-rhythm="editorial"] .fcard--hero { background: rgba(255, 255, 255, 0.04); padding: 28px; border-radius: var(--radius-md); } /* was gray-50 — dark site, 2026-08-11 */
 html[data-rhythm="editorial"] .tcol { padding: 0; }
 html[data-rhythm="editorial"] .tcol__head { padding-bottom: 24px; }
 html[data-rhythm="editorial"] .quote { background: var(--gray-50); }
 
-/* ---- Rhythm: bold islands (S2 + S5 inverted dark) ---- */
-html[data-rhythm="bold"] #problem,
-html[data-rhythm="bold"] #trust {
-  background: var(--gray-900);
-  color: var(--gray-00);
-}
-html[data-rhythm="bold"] #problem .h2,
-html[data-rhythm="bold"] #trust .h2 { color: var(--gray-00); }
-html[data-rhythm="bold"] #problem .sub,
-html[data-rhythm="bold"] #trust .sub { color: var(--gray-300); }
-html[data-rhythm="bold"] #problem .ds-label,
-html[data-rhythm="bold"] #trust .ds-label { color: var(--accent-300); }
-
-html[data-rhythm="bold"] #problem .pcard,
-html[data-rhythm="bold"] #trust .tcol {
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.08);
-  color: var(--gray-00);
-}
-html[data-rhythm="bold"] #problem .pcard:hover,
-html[data-rhythm="bold"] #trust .tcol:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.14);
-}
-html[data-rhythm="bold"] #problem .pcard__h,
-html[data-rhythm="bold"] #trust .tcol__h { color: var(--gray-00); }
-html[data-rhythm="bold"] #problem .pcard__b { color: var(--gray-300); }
-html[data-rhythm="bold"] #trust .tcol__ic {
-  background: rgba(79,70,229,0.15);
-  color: var(--accent-300);
-}
-html[data-rhythm="bold"] #trust .tcol__head { border-bottom-color: rgba(255,255,255,0.08); }
-html[data-rhythm="bold"] #trust .tlist li b { color: var(--gray-00); }
-html[data-rhythm="bold"] #trust .tlist li .m { color: var(--gray-300); }
-html[data-rhythm="bold"] #trust .tlist__c {
-  background: rgba(16,185,129,0.18);
-  color: #6EE7B7;
-}
-html[data-rhythm="bold"] #trust .quote {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
-}
-html[data-rhythm="bold"] #trust .quote__t { color: var(--gray-00); }
-html[data-rhythm="bold"] #trust .quote__t b { color: var(--accent-300); }
-html[data-rhythm="bold"] #trust .quote__src { color: var(--gray-300); }
-html[data-rhythm="bold"] #trust .quote__mark { color: var(--accent-300); }
+/* ---- Rhythm: bold islands (S2 inverted dark) ----
+   Was "S2 + S5" — the #trust half is gone: Security & Compliance runs
+   permanently dark now (section--dark, see S5 block above), so toggling
+   this dev variant no longer needs to do anything to it. #problem stays
+   as the only section this preview toggle affects. */
+/* html[data-rhythm="bold"] #problem block removed 2026-08-11 — the whole
+   site is dark by default now (see .section--light/.pcard above), so this
+   preview variant's #problem treatment is identical to the permanent
+   default and no longer does anything. Same cleanup already done for
+   #trust when Security & Compliance went permanently dark. */
 
 /* ---- Density ---- */
 html[data-density="compact"]  { --section-y: 80px; --container: 1120px; }

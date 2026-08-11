@@ -7,16 +7,14 @@
    (2026-08-09/10). This file mirrors those PRIMITIVE values so
    landing and app share one brand system.
 
-   Semantic tokens below are intentionally NOT a 1:1 copy of the
-   app's semantics.css. The app went fully dark-by-default
-   (surface-default → gray-950, text-default → gray-00). Landing
-   keeps its own light-page structure (light body, dark Hero/
-   Access sections via .section--dark) — copying the app's dark
-   semantics here would make body text white-on-white in the
-   light sections. So: primitives/font/radius/shadows are synced
-   exactly; semantic surface/text/border mappings stay light-page
-   appropriate, same as before. Flag to Daria if this should
-   change.
+   Updated 2026-08-11: semantic tokens are now a full 1:1 copy of
+   the app's semantics.css — landing went fully dark-by-default too
+   (surface-default → gray-950, text-default → gray-00), per Daria:
+   "dark site, like the dark app". This supersedes the previous
+   light-page policy noted here (landing used to keep its own light
+   semantic layer deliberately; that's gone now — see
+   HANDOFF_COWORK_2026-08-10.md for the full section-by-section
+   conversion log).
    ============================================================ */
 
 /* Geist, self-hosted — 2026-08-10, closes the CDN gap noted above.
@@ -109,27 +107,30 @@
 
   /* ------------------------------------------------------------
      LAYER 2 — SEMANTIC TOKENS
-     Kept light-page appropriate — see file header note above.
+     Dark by default, 1:1 with app/src/tokens/semantics.css — see
+     file header note above (changed 2026-08-11, was light-page).
      ------------------------------------------------------------ */
 
   /* Surfaces */
-  --surface-default:               var(--gray-50);   /* app background (page-level) */
-  --surface-subtle:                var(--gray-50);   /* section bg, alternating */
-  --surface-elevated:              var(--gray-00);   /* cards, modals */
-  --surface-level-1:               var(--gray-50);   /* body / page background */
-  --surface-level-2:               var(--gray-100);  /* sidebar / nav rail */
-  --surface-level-3:               var(--gray-200);  /* dividers, input borders */
-  --surface-level-4:               var(--gray-300);  /* disabled, inactive tabs */
+  --surface-default:               var(--gray-950);  /* page background */
+  --surface-subtle:                var(--gray-900);  /* section bg, alternating */
+  --surface-elevated:              var(--gray-900);  /* cards, modals */
+  --surface-level-1:               var(--gray-950);
+  --surface-level-2:               var(--gray-900);
+  --surface-level-3:               var(--gray-700);
+  --surface-level-4:               var(--gray-500);
   --surface-action-primary:        var(--accent-500);
   --surface-action-primary-hover:  var(--accent-700);
-  --surface-action-ghost-hover:    var(--accent-50);
-  --surface-dark:                  var(--gray-900);  /* alias → surface-app-shell */
-  --surface-app-shell:             var(--gray-900);  /* TopBar + Sidebar background */
+  --surface-action-ghost-hover:    var(--accent-900);
+  --surface-hover:                 var(--gray-300);
+  --surface-dark:                  var(--gray-950);  /* alias → surface-app-shell */
+  --surface-app-shell:             var(--gray-950);  /* TopBar + Sidebar background */
 
   /* Text */
-  --text-default:        var(--gray-900);
-  --text-muted:          var(--gray-500);
-  --text-disabled:       var(--gray-300);
+  --text-default:        var(--gray-00);
+  --text-muted:          var(--gray-300);
+  --text-subtle:         var(--gray-500);
+  --text-disabled:       var(--gray-700);
   --text-on-action:      var(--gray-00);
   --text-on-dark:        var(--gray-00);
   --text-on-dark-muted:  var(--gray-300);
@@ -141,15 +142,17 @@
   --text-warning:        var(--warning-500);
   --text-success:        var(--success-500);
   --text-info:           var(--info-500);
-  --text-accent:         var(--accent-500);
+  --text-accent:         var(--accent-300); /* was accent-500 — insufficient contrast on dark */
+  --text-accent-hover:   var(--accent-700);
 
   /* Borders */
-  --border-default:    var(--gray-200);
-  --border-strong:     var(--gray-300);
+  --border-default:    var(--gray-700);
+  --border-strong:     var(--gray-500);
   --border-focus:      var(--accent-500);
   --border-error:      var(--error-500);
   --border-warning:    var(--warning-500);
   --border-info:       var(--info-500);
+  --border-hairline:   transparent;
   --border-dark:       var(--gray-700);  /* sidebar dividers (alias → border-app-shell) */
   --border-app-shell:  var(--gray-700);  /* dividers inside AppShell */
 
