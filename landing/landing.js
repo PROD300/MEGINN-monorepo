@@ -106,6 +106,14 @@
   var dash = document.getElementById('dash');
   var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var hasHover = !!(window.matchMedia && window.matchMedia('(hover: hover)').matches);
+  /* Safari (desktop + iOS) claims to support video/webm via
+     canPlayType but its alpha-channel VP9 decode is unreliable —
+     it can select the WebM <source>, fail mid-decode, and never
+     fall through to the MP4 <source> per spec, leaving the
+     .pcard__icon3d videos permanently blank (readyState stuck at 0).
+     Cheaper and more reliable than feature-detecting alpha decode:
+     just strip the WebM source for Safari so it never attempts it. */
+  var isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
 
   /* 3a/3b. Entrance choreography, then kick tick numbers
      once the hero card has faded in. (Allocation bars removed
@@ -234,12 +242,22 @@
   document.querySelectorAll('.pcard').forEach(function (card) {
     var vid = card.querySelector('.pcard__icon3d');
     if (!vid) return;
-    vid.currentTime = 0;
+    if (isSafari) {
+      var webmSource = vid.querySelector('source[type="video/webm"]');
+      if (webmSource) webmSource.remove();
+      vid.load();
+    }
+    /* No explicit currentTime=0 here on init — a freshly loaded <video>
+       already sits at frame 0, and setting currentTime before metadata
+       has loaded (readyState 0) hangs the element in Safari, which was
+       showing nothing at all for these icons (not just no hover-play —
+       no frame ever rendered). Same guard applied to the mouseleave
+       rewind below. */
     if (hasHover) {
       card.addEventListener('mouseenter', function () { vid.play(); });
       card.addEventListener('mouseleave', function () {
         vid.pause();
-        vid.currentTime = 0;
+        if (vid.readyState >= 1) vid.currentTime = 0;
       });
     }
   });
