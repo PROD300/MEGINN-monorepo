@@ -232,6 +232,80 @@
     });
   }
 
+  /* Safari can't reliably play the alpha-channel WebM (see isSafari
+     definition above), and a solid-color-baked MP4 fallback leaves a
+     visible seam the moment the card's own background changes (e.g.
+     the hover tint) — the video's baked background stops matching
+     what's actually behind it. Real fix: composite true alpha in the
+     browser from a "luma matte" pair — one plain H.264 video carrying
+     color (`-rgb.mp4`), one carrying the alpha channel as grayscale
+     luminance (`-alpha.mp4`, white = opaque, black = transparent),
+     both universally playable. Drawn to an offscreen canvas each
+     frame; the matte's red channel (grayscale, so R=G=B) becomes the
+     alpha byte of the color frame. No special codec support needed
+     anywhere — this is what makes it work in Safari at all. */
+  function createAlphaCanvasIcon(sourceVideo) {
+    var baseSrc = sourceVideo.querySelector('source[type="video/webm"]').getAttribute('src').replace(/\.webm$/, '');
+    var canvas = document.createElement('canvas');
+    canvas.className = sourceVideo.className;
+    canvas.setAttribute('aria-hidden', 'true');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var displaySize = 176; // matches .pcard__icon3d CSS width/height
+    canvas.width = displaySize * dpr;
+    canvas.height = displaySize * dpr;
+    var ctx = canvas.getContext('2d');
+    var maskCanvas = document.createElement('canvas');
+    maskCanvas.width = canvas.width;
+    maskCanvas.height = canvas.height;
+    var maskCtx = maskCanvas.getContext('2d');
+
+    function makeVideo(src) {
+      var v = document.createElement('video');
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+      v.src = src;
+      return v;
+    }
+    var rgbVideo = makeVideo(baseSrc + '-rgb.mp4');
+    var alphaVideo = makeVideo(baseSrc + '-alpha.mp4');
+
+    function draw() {
+      var vw = rgbVideo.videoWidth;
+      if (rgbVideo.readyState >= 2 && alphaVideo.readyState >= 2 && vw) {
+        var scale = Math.min(canvas.width / vw, canvas.height / rgbVideo.videoHeight);
+        var w = vw * scale, h = rgbVideo.videoHeight * scale;
+        var x = ((canvas.width - w) / 2) | 0, y = ((canvas.height - h) / 2) | 0;
+        w = Math.ceil(w); h = Math.ceil(h);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(rgbVideo, x, y, w, h);
+        maskCtx.clearRect(0, 0, canvas.width, canvas.height);
+        maskCtx.drawImage(alphaVideo, x, y, w, h);
+        var frame = ctx.getImageData(x, y, w, h);
+        var mask = maskCtx.getImageData(x, y, w, h);
+        var d = frame.data, m = mask.data;
+        for (var i = 0; i < d.length; i += 4) d[i + 3] = m[i];
+        ctx.putImageData(frame, x, y);
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+
+    return {
+      canvas: canvas,
+      play: function () {
+        rgbVideo.play().catch(function () {});
+        alphaVideo.play().catch(function () {});
+      },
+      pause: function () {
+        rgbVideo.pause();
+        alphaVideo.pause();
+      },
+      rewind: function () {
+        if (rgbVideo.readyState >= 1) rgbVideo.currentTime = 0;
+        if (alphaVideo.readyState >= 1) alphaVideo.currentTime = 0;
+      }
+    };
+  }
+
   /* 3g. Problem-section cards (S2) — 3D icon videos (.pcard__icon3d):
      on pointer devices, paused on frame 0 by default and plays while
      the card is hovered (pause + rewind on mouseleave) — the video is
@@ -244,25 +318,31 @@
   document.querySelectorAll('.pcard').forEach(function (card) {
     var vid = card.querySelector('.pcard__icon3d');
     if (!vid) return;
+    var player;
     if (isSafari) {
-      var webmSource = vid.querySelector('source[type="video/webm"]');
-      if (webmSource) webmSource.remove();
-      vid.load();
+      var icon = createAlphaCanvasIcon(vid);
+      vid.replaceWith(icon.canvas);
+      player = { play: icon.play, pause: icon.pause, rewind: icon.rewind };
+    } else {
+      player = {
+        play: function () { vid.play(); },
+        pause: function () { vid.pause(); },
+        /* No explicit currentTime=0 on init — a freshly loaded <video>
+           already sits at frame 0, and setting currentTime before
+           metadata has loaded (readyState 0) hangs the element in
+           Safari (handled separately above; guarded here too in case
+           this path ever runs before metadata is ready elsewhere). */
+        rewind: function () { if (vid.readyState >= 1) vid.currentTime = 0; }
+      };
     }
     if (hasHover) {
-      /* No explicit currentTime=0 here on init — a freshly loaded
-         <video> already sits at frame 0, and setting currentTime
-         before metadata has loaded (readyState 0) hangs the element
-         in Safari, which was showing nothing at all for these icons
-         (not just no hover-play — no frame ever rendered). Same
-         guard applied to the mouseleave rewind below. */
-      card.addEventListener('mouseenter', function () { vid.play(); });
+      card.addEventListener('mouseenter', function () { player.play(); });
       card.addEventListener('mouseleave', function () {
-        vid.pause();
-        if (vid.readyState >= 1) vid.currentTime = 0;
+        player.pause();
+        player.rewind();
       });
     } else if (!reduceMotion) {
-      vid.play().catch(function () { /* autoplay blocked — static frame 0 is an acceptable fallback */ });
+      player.play();
     }
   });
 

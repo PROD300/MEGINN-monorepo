@@ -181,14 +181,16 @@
 
     <div class="cards-3">
       <!-- 3D icon videos: static on first frame by default, play on card
-           hover (see landing.js §3g), pause + reset to frame 0 on
-           mouseleave. WebM/VP9+alpha primary, MP4/H.264 fallback (baked
-           on white to match the card surface — no alpha needed there,
-           see HANDOFF for the ffmpeg conversion step). -->
+           hover / autoplay+loop on touch (see landing.js §3g), pause +
+           reset to frame 0 on mouseleave. WebM/VP9+alpha for browsers
+           that support it. Safari can't decode that reliably, so
+           landing.js replaces the <video> with a <canvas> there and
+           composites true alpha at runtime from the `-rgb.mp4` /
+           `-alpha.mp4` (luma matte) pair sitting next to each .webm —
+           see the createAlphaCanvasIcon comment in landing.js for why. -->
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
           <source src="assets/3D-icons/obsidian-icon-sparks.webm" type="video/webm">
-          <source src="assets/3D-icons/obsidian-icon-sparks.mp4" type="video/mp4">
         </video>
         <h3 class="pcard__h">Manual management eats time.</h3>
         <p class="pcard__b">You're approving every rebalance transaction manually. A $40M crypto allocation shouldn't require daily attention.</p>
@@ -197,7 +199,6 @@
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
           <source src="assets/3D-icons/obsidian-icon-stack.webm" type="video/webm">
-          <source src="assets/3D-icons/obsidian-icon-stack.mp4" type="video/mp4">
         </video>
         <h3 class="pcard__h">Personal liability is unclear.</h3>
         <p class="pcard__b">When an automated trade goes wrong — who is responsible? Most platforms leave that question unanswered.</p>
@@ -206,7 +207,6 @@
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
           <source src="assets/3D-icons/obsidian-icon-tooling.webm" type="video/webm">
-          <source src="assets/3D-icons/obsidian-icon-tooling.mp4" type="video/mp4">
         </video>
         <h3 class="pcard__h">Five tools, zero coherence.</h3>
         <p class="pcard__b">Ledger for custody, Excel for tracking, email for approvals, phone calls to the bank. Institutional management deserves better.</p>
