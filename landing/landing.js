@@ -361,6 +361,101 @@
     }
   });
 
+  /* 3h. Features section (S4) — scroll-jacked horizontal rail.
+     Vertical scroll through a tall spacer drives translateX on the
+     card track while the section is pinned (position: sticky). Pure
+     scroll-position math, no external library.
+
+     Math: the spacer's height above what the viewport already shows
+     (spacer height − 100vh) is the vertical distance available to
+     "spend" scrolling the track horizontally. At progress p (0→1),
+     translateX = -p * trackScrollDistance, where trackScrollDistance
+     is how far the track can move (its full width minus the visible
+     viewport width). Progress is derived from the sticky wrapper's
+     position: while it's pinned, the spacer's top has scrolled past
+     0 by some amount — that amount, divided by the total "spend"
+     distance, is p.
+
+     Skipped entirely (falls back to the plain CSS overflow-x strip
+     already defined in landing.css) when: JS reduced-motion is on,
+     the viewport is narrow enough that the CSS fallback breakpoint
+     applies (≤900px — phones/small tablets scroll this by touch
+     instead, pinning a page-height section for a swipe gesture is a
+     worse experience there), or required elements are missing. */
+  (function setupFeaturesScrollJack() {
+    var section = document.querySelector('.features-pin');
+    var spacer = document.querySelector('.features-pin__spacer');
+    var sticky = document.querySelector('.features-pin__sticky');
+    var track = document.getElementById('featuresTrack');
+    if (!section || !spacer || !sticky || !track) return;
+    if (reduceMotion) return; // CSS fallback (html:not(.scrolljack)) covers this
+    if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) return;
+
+    var HOLD_VH = 0.4; // fraction of viewport height held at start/end so the
+                        // pin doesn't feel like it grabs the page instantly
+    var trackDistance = 0; // how far the track can translate (px)
+    var spendDistance = 0; // vertical scroll distance mapped to that (px)
+
+    function measure() {
+      // Bail back to the CSS fallback if a resize crossed the 900px
+      // breakpoint after load (e.g. rotating a tablet, or a desktop
+      // window dragged narrow) — re-check every measure(), not just once.
+      if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) {
+        document.documentElement.classList.remove('scrolljack');
+        spacer.style.height = '';
+        track.style.transform = '';
+        return false;
+      }
+      var vh = window.innerHeight;
+      trackDistance = Math.max(0, track.scrollWidth - track.clientWidth);
+      if (trackDistance <= 0) {
+        // Cards fit without scrolling (very wide viewport) — nothing to jack.
+        document.documentElement.classList.remove('scrolljack');
+        spacer.style.height = '';
+        return false;
+      }
+      // Fixed scroll "cost" (~1 viewport of vertical scroll, plus hold
+      // slack) regardless of trackDistance/card count — deliberate, not
+      // a placeholder: keeps the vertical-scroll-to-horizontal-motion
+      // pace constant no matter how many feature cards ship later,
+      // rather than making the page longer every time a card is added.
+      spendDistance = vh * (1 + HOLD_VH);
+      spacer.style.height = (vh + spendDistance) + 'px';
+      document.documentElement.classList.add('scrolljack');
+      return true;
+    }
+
+    function onScroll() {
+      if (!document.documentElement.classList.contains('scrolljack')) return;
+      var rect = spacer.getBoundingClientRect();
+      // rect.top is 0 the instant the spacer's top hits the viewport top
+      // (pin engages) and goes negative as the user keeps scrolling down
+      // through the spacer. Progress is how far into that negative range
+      // we are, normalized 0→1, with HOLD_VH slack at each end.
+      var holdPx = window.innerHeight * HOLD_VH;
+      var raw = -rect.top - holdPx;
+      var p = raw / (spendDistance - holdPx);
+      p = Math.max(0, Math.min(1, p));
+      track.style.transform = 'translate3d(' + (-p * trackDistance) + 'px, 0, 0)';
+    }
+
+    if (!measure()) return;
+    onScroll();
+
+    var scrollTicking = false;
+    window.addEventListener('scroll', function () {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(function () { onScroll(); scrollTicking = false; });
+    }, { passive: true });
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { if (measure()) onScroll(); }, 150);
+    });
+  })();
+
   /* ----- 4. Form -----
      [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
      This block is a portfolio/demo prototype, not a production

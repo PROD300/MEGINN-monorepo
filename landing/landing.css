@@ -1091,16 +1091,91 @@ html[data-how="cards"] .steps {
 .step__foot a { color: var(--accent-500); text-decoration: underline; text-decoration-color: transparent; transition: text-decoration-color 150ms ease-out; }
 .step__foot a:hover { text-decoration-color: var(--accent-500); }
 
-/* ============================================================ S4 — Features */
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+/* ============================================================ S4 — Features
+   Scroll-jacked horizontal rail. Structure:
+   .features-pin (section)
+     .features-pin__spacer   — tall box, its height = scroll distance
+       .features-pin__sticky — position: sticky, pins for the spacer's height
+         .features-pin__head-wrap  (static, container-width heading)
+         .features-track           (horizontal flex strip, cards fixed width)
+         .features-pin__foot-wrap  (static, CTA link)
+   JS (landing.js §3h) measures the track's scrollable distance and maps
+   window scroll progress through the spacer to `translateX` on the track.
+   Falls back to a plain horizontal-scroll strip — no pin, no transform —
+   when JS doesn't run, `prefers-reduced-motion: reduce` is set, or the
+   viewport is ≤900px (see the `html:not(.scrolljack)` rules below); the
+   fallback needs no separate markup, it's the same .features-track with
+   overflow-x instead of a transform. */
+
+.features-pin__spacer {
+  /* JS sets an explicit height (scroll distance) via inline style once the
+     track's overflow is measured; this is a sane pre-JS/no-JS fallback so
+     the section isn't collapsed to 0 before the script runs. */
+  height: 220vh;
 }
-@media (max-width: 1100px) { .features { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 720px)  { .features { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .features-pin__spacer { height: auto; } }
+
+.features-pin__sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--section-y) 0;
+}
+@media (max-width: 900px) {
+  .features-pin__sticky { position: static; min-height: 0; overflow: visible; }
+}
+
+.features-pin__head-wrap { margin-bottom: 0; }
+.features-pin__head { margin: 0 0 48px; }
+
+.features-track {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  will-change: transform;
+}
+/* No-JS / reduced-motion / narrow-viewport fallback: an ordinary
+   horizontal-scroll strip, user-driven, no pin and no JS transform.
+   JS only adds .scrolljack to <html> once it has measured the track
+   and committed to running the pin — see landing.js §3h. Absence of
+   that class (JS disabled, or JS explicitly opted out for reduced
+   motion) means these rules apply instead. */
+html:not(.scrolljack) .features-pin__spacer { height: auto !important; }
+html:not(.scrolljack) .features-pin__sticky { position: static !important; min-height: 0; overflow: visible; padding-top: 0; }
+html:not(.scrolljack) .features-track {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px; /* room for the scrollbar so it doesn't clip card shadows */
+}
+html:not(.scrolljack) .features-track .fcard { scroll-snap-align: start; }
+
+/* Belt-and-suspenders: even if .scrolljack somehow got added while the
+   user has reduced-motion on, never actually transform the track. JS
+   checks reduceMotion before adding the class (primary guard); this
+   is the CSS-level backstop. */
+@media (prefers-reduced-motion: reduce) {
+  .features-track { transform: none !important; }
+}
+
+.features-track__pad {
+  flex: 0 0 max(0px, calc((100vw - var(--container)) / 2 - 32px));
+}
+@media (max-width: 1264px) { .features-track__pad { flex-basis: 32px; } }
+
+.features-pin__foot-wrap { margin-top: 48px; }
+
+@media (max-width: 900px) {
+  .features-track__pad { display: none; }
+}
 
 .fcard {
+  flex: 0 0 360px;
   background: rgba(255, 255, 255, 0.03); /* was solid white — dark site, 2026-08-11 */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
@@ -1108,6 +1183,7 @@ html[data-how="cards"] .steps {
   transition: background 150ms ease-out, border-color 150ms ease-out, box-shadow 150ms ease-out, transform 150ms ease-out;
   position: relative;
 }
+@media (max-width: 720px) { .fcard { flex-basis: 82vw; } }
 .fcard:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.14); box-shadow: none; transform: translateY(-1px); }
 .fcard__head {
   display: flex; align-items: center; justify-content: space-between;
@@ -1550,6 +1626,17 @@ html[data-how="cards"] .steps {
    Activated only after JS adds .js to <html>. */
 html.js .reveal { opacity: 0; transform: translateY(12px); transition: opacity 480ms ease-out, transform 480ms ease-out; }
 html.js .reveal.is-in { opacity: 1; transform: none; }
+/* Cards inside the Features scroll-jack track sit in one flex row —
+   most are off to the right of the viewport at load, not below it, so
+   the vertical translateY(12px)/fade reveal doesn't read correctly
+   against horizontal motion and can fire on cards still off-screen
+   (IntersectionObserver's default root ignores the track's overflow
+   clipping). Show them immediately instead; the scroll-jack motion
+   itself is the "reveal" for this section. */
+html.js .scrolljack .features-track .reveal,
+html:not(.js) .features-track .reveal {
+  opacity: 1; transform: none; transition: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal { opacity: 1; transform: none; transition: none; }
@@ -1757,8 +1844,8 @@ html[data-rhythm="editorial"] .wcard:hover {
   box-shadow: none;
 }
 html[data-rhythm="editorial"] .cards-3,
-html[data-rhythm="editorial"] .features,
 html[data-rhythm="editorial"] .cards-2 { gap: 56px; }
+html[data-rhythm="editorial"] .features-track { gap: 32px; } /* was .features (grid gap) — replaced by scroll-jack track 2026-08-11, editorial rhythm widens the horizontal gap between cards instead */
 html[data-rhythm="editorial"] .fcard--hero { background: rgba(255, 255, 255, 0.04); padding: 28px; border-radius: var(--radius-md); } /* was gray-50 — dark site, 2026-08-11 */
 html[data-rhythm="editorial"] .tcol { padding: 0; }
 html[data-rhythm="editorial"] .tcol__head { padding-bottom: 24px; }

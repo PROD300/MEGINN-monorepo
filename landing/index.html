@@ -471,85 +471,104 @@
   </div>
 </section>
 
-<!-- ====================================================== S4 — FEATURES -->
-<section class="section section--light" id="features" data-screen-label="04 Features">
-  <div class="container">
-    <div class="section__head">
-      <div class="ds-label">Features</div>
-      <h2 class="h2">Built for institutional requirements.</h2>
-      <p class="sub">The capabilities your compliance and risk teams will ask about.</p>
-    </div>
-
-    <div class="features">
-      <article class="fcard reveal">
-        <div class="fcard__head">
-          <span class="fcard__ic">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.6-7.2"/><path d="M21 3v6h-6"/></svg>
-          </span>
+<!-- ====================================================== S4 — FEATURES
+     Scroll-jacked horizontal rail: vertical scroll through the pin
+     zone drives horizontal translateX on .features-track. JS pins
+     the section (position: sticky) for a tall spacer and maps scroll
+     progress 0→1 to track translateX — see landing.js §3h. Falls back
+     to a plain user-driven horizontal-scroll strip (no pin, no JS
+     transform) when JS doesn't run, prefers-reduced-motion is set, or
+     viewport ≤900px — see the `html:not(.scrolljack)` rules in
+     landing.css right above `.fcard`. No separate fallback markup:
+     it's the same .features-track, CSS just switches its behavior. -->
+<section class="section section--light features-pin" id="features" data-screen-label="04 Features">
+  <div class="features-pin__spacer">
+    <div class="features-pin__sticky">
+      <div class="container features-pin__head-wrap">
+        <div class="section__head features-pin__head">
+          <div class="ds-label">Features</div>
+          <h2 class="h2">Built for institutional requirements.</h2>
+          <p class="sub">The capabilities your compliance and risk teams will ask about.</p>
         </div>
-        <h3 class="fcard__h">AI auto-rebalancing</h3>
-        <p class="fcard__b">Rule-based automation maintains your target allocation across Ethereum and Arbitrum — no transaction approval required.</p>
-      </article>
+      </div>
 
-      <article class="fcard fcard--hero reveal">
-        <div class="fcard__head">
-          <span class="fcard__id fcard__id--accent">Differentiator</span>
-          <span class="fcard__ic fcard__ic--accent">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
-          </span>
-        </div>
-        <h3 class="fcard__h">Legal &amp; custodian coverage</h3>
-        <p class="fcard__b">Explicit liability framework: OBSIDIAN's role, custodian's role, and your role — documented and signed before any automation runs.</p>
-        <div class="fcard__legal">
-          <div class="legal-row"><span class="legal-row__k">OBSIDIAN</span><span class="legal-row__v">Rule execution &amp; audit</span></div>
-          <div class="legal-row"><span class="legal-row__k">Custodian</span><span class="legal-row__v">Asset safekeeping</span></div>
-          <div class="legal-row"><span class="legal-row__k">You</span><span class="legal-row__v">Strategy &amp; approvals</span></div>
-        </div>
-      </article>
+      <div class="features-track" id="featuresTrack">
+        <div class="features-track__pad" aria-hidden="true"></div>
 
-      <article class="fcard reveal">
-        <div class="fcard__head">
-          <span class="fcard__ic">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 0 0-8 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg>
-          </span>
-        </div>
-        <h3 class="fcard__h">Smart accounts &amp; RBAC</h3>
-        <p class="fcard__b">Role-based permissions: CIO, Operator, Auditor. Institutional-grade access control with hardware key support.</p>
-      </article>
+        <article class="fcard reveal">
+          <div class="fcard__head">
+            <span class="fcard__ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.6-7.2"/><path d="M21 3v6h-6"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">AI auto-rebalancing</h3>
+          <p class="fcard__b">Rule-based automation maintains your target allocation across Ethereum and Arbitrum — no transaction approval required.</p>
+        </article>
 
-      <article class="fcard reveal">
-        <div class="fcard__head">
-          <span class="fcard__ic">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>
-          </span>
-        </div>
-        <h3 class="fcard__h">Immutable audit log</h3>
-        <p class="fcard__b">Every automated action is logged: timestamp, rule triggered, transaction hash, gas cost. Tamper-proof history for compliance teams.</p>
-      </article>
+        <article class="fcard fcard--hero reveal">
+          <div class="fcard__head">
+            <span class="fcard__id fcard__id--accent">Differentiator</span>
+            <span class="fcard__ic fcard__ic--accent">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">Legal &amp; custodian coverage</h3>
+          <p class="fcard__b">Explicit liability framework: OBSIDIAN's role, custodian's role, and your role — documented and signed before any automation runs.</p>
+          <div class="fcard__legal">
+            <div class="legal-row"><span class="legal-row__k">OBSIDIAN</span><span class="legal-row__v">Rule execution &amp; audit</span></div>
+            <div class="legal-row"><span class="legal-row__k">Custodian</span><span class="legal-row__v">Asset safekeeping</span></div>
+            <div class="legal-row"><span class="legal-row__k">You</span><span class="legal-row__v">Strategy &amp; approvals</span></div>
+          </div>
+        </article>
 
-      <article class="fcard reveal">
-        <div class="fcard__head">
-          <span class="fcard__ic fcard__ic--danger">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
-          </span>
-        </div>
-        <h3 class="fcard__h">Emergency Stop</h3>
-        <p class="fcard__b">One-click kill switch halts all automated processes instantly — available from every screen, 24/7.</p>
-      </article>
+        <article class="fcard reveal">
+          <div class="fcard__head">
+            <span class="fcard__ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 0 0-8 0v4"/><rect x="5" y="11" width="14" height="10" rx="2"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">Smart accounts &amp; RBAC</h3>
+          <p class="fcard__b">Role-based permissions: CIO, Operator, Auditor. Institutional-grade access control with hardware key support.</p>
+        </article>
 
-      <article class="fcard reveal">
-        <div class="fcard__head">
-          <span class="fcard__ic">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 1 0-7l3-3a5 5 0 0 1 7 7l-1.5 1.5"/><path d="M14 10a5 5 0 0 1 0 7l-3 3a5 5 0 0 1-7-7l1.5-1.5"/></svg>
-          </span>
-        </div>
-        <h3 class="fcard__h">Cross-chain bridge</h3>
-        <p class="fcard__b">Unified bridging between Ethereum and Arbitrum via Li.Fi/Socket. Auto-rebalancing works across both networks seamlessly.</p>
-      </article>
-    </div>
+        <article class="fcard reveal">
+          <div class="fcard__head">
+            <span class="fcard__ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">Immutable audit log</h3>
+          <p class="fcard__b">Every automated action is logged: timestamp, rule triggered, transaction hash, gas cost. Tamper-proof history for compliance teams.</p>
+        </article>
 
-    <div class="section__foot">
-      <a href="#access" class="btn btn--ghost" data-evt="demo_link_clicked">Book a demo to see every feature →</a>
+        <article class="fcard reveal">
+          <div class="fcard__head">
+            <span class="fcard__ic fcard__ic--danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">Emergency Stop</h3>
+          <p class="fcard__b">One-click kill switch halts all automated processes instantly — available from every screen, 24/7.</p>
+        </article>
+
+        <article class="fcard reveal">
+          <div class="fcard__head">
+            <span class="fcard__ic">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 1 0-7l3-3a5 5 0 0 1 7 7l-1.5 1.5"/><path d="M14 10a5 5 0 0 1 0 7l-3 3a5 5 0 0 1-7-7l1.5-1.5"/></svg>
+            </span>
+          </div>
+          <h3 class="fcard__h">Cross-chain bridge</h3>
+          <p class="fcard__b">Unified bridging between Ethereum and Arbitrum via Li.Fi/Socket. Auto-rebalancing works across both networks seamlessly.</p>
+        </article>
+
+        <div class="features-track__pad" aria-hidden="true"></div>
+      </div>
+
+      <div class="container features-pin__foot-wrap">
+        <div class="section__foot">
+          <a href="#access" class="btn btn--ghost" data-evt="demo_link_clicked">Book a demo to see every feature →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
