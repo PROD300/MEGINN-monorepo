@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TopNav, Tabs, Badge, Input, Select, Button, Toggle } from '../../components'
 import { registerScreen } from '../registry'
 import { profileStore, saveProfile, type Profile } from '../../data/profile'
@@ -24,7 +25,8 @@ const notificationToggles = [
 
 // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
 // Represents the account's connected wallets (same pattern as
-// smart-account-setup). Hardcoded; "Manage Wallets" below is a no-op.
+// smart-account-setup). Hardcoded read-only preview; "Manage Wallets"
+// below routes to the full smart-account-setup screen for editing.
 const wallets = [
   { address: '0x4aB2...c1F8', badgeLabel: 'Primary' },
   { address: '0x9eC1...a3D2', badgeLabel: 'Backup' },
@@ -44,6 +46,7 @@ function validateProfile(profile: Profile): ProfileErrors {
 type SettingsTab = 'profile' | 'notifications' | 'security'
 
 export function Settings() {
+  const navigate = useNavigate()
   const savedProfile = profileStore.useStore()
   const [draft, setDraft] = useState<Profile>(savedProfile)
   const [errors, setErrors] = useState<ProfileErrors>({})
@@ -188,8 +191,7 @@ export function Settings() {
                     <Badge variant="success">{w.badgeLabel}</Badge>
                   </div>
                 ))}
-                {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND] No onClick — would open wallet management against the real wallet provider. */}
-                <Button variant="primary" size="sm" className={styles.fullWidthBtn}>
+                <Button variant="primary" size="sm" className={styles.fullWidthBtn} onClick={() => navigate('/smart-account-setup')}>
                   Manage Wallets →
                 </Button>
               </div>
