@@ -17,7 +17,7 @@ export function IndexPage() {
       <div className={styles.header}>
         <h1 className={styles.title}>OBSIDIAN — экраны</h1>
         <p className={styles.subtitle}>
-          Статичные экраны, собранные из дизайн-системы. Логика и данные — отдельный шаг.
+          Static screens assembled from the design system. Logic and data are a separate step.
         </p>
       </div>
       <div className={styles.grid}>
