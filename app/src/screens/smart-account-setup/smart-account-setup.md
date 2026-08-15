@@ -29,7 +29,7 @@
 
 - Wallets: Primary Wallet (0x4aB2...c1F8, Ethereum · Arbitrum), Hardware Wallet Ledger (0x9eC1...a3D2, Ethereum)
 - Roles: James Harrington / CIO · Full access; DeFi Operator / Execute only; Emergency Contact / View only
-- Security: "10,000 USD" lимит на мультисиг, toggle "Hardware wallet confirmation" включён (visual on)
+- Security: "10,000 USD" lимит на мультисиг, toggle "Hardware wallet confirmation" по умолчанию выключен (visual off)
 - Иконки — плейсхолдеры из lucide-react (Wallet, HardDrive, Plus, ShieldCheck, Fingerprint)
 
 ## Кандидаты на вынос в базу

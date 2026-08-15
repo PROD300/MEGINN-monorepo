@@ -12,7 +12,7 @@ export interface SecuritySettings {
 
 const initialSecurity: SecuritySettings = {
   multiSigThreshold: 10000,
-  hardwareConfirmRequired: true,
+  hardwareConfirmRequired: false,
 }
 
 export const securityStore = createStore<SecuritySettings>(initialSecurity)
