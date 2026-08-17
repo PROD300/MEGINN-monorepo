@@ -132,13 +132,14 @@
 
 ## AppShell и экранные компоненты (6) — final_screens, 2026-05-06
 
-### AppTopBar
-- **Node ID:** `128:2`
+### AppTopBar (в коде — `TopNav`, `app/src/components/TopNav/`)
+- **Node ID:** `128:2` ⚠ Figma component ещё называется/выглядит как до этой правки — не синхронизирован с изменениями ниже
 - **Тип:** Component (одиночный)
 - **Fill:** `surface-app-shell` (gray-900)
-- **Структура:** Logo (text-on-dark-accent) · Spacer · StopAll button (bg-error) · Notifications (bell + badge) · UserName · Avatar
-- **Size:** FILL × FIXED 64px
-- **Used in:** screens/portfolio, screens/rebalancing-rules, screens/rule-create, screens/cross-chain-bridge
+- **Структура:** Brand (лого-марк + wordmark, кликабельно → `/portfolio`) · NavItems · Spacer · Stop All button (bg-error) · Notifications (bell + badge) · Exit · UserName + Avatar
+- **Обновлено 2026-08-17 — лого-марк добавлен (второй агент, нейминг/лого MEGINN):** Brand теперь `<button>` с двумя частями — `<img>` 22×22 (`app/src/assets/meginn-mark.svg`, многогранный геометрический марк в оттенках Petrol) + wordmark-текст. Wordmark: `font-mono`, `size-sm`, `weight-semibold`, `letter-spacing 0.06em`, uppercase, цвет `text-brand-wordmark` (новый токен → `gray-350`, см. `ds/foundation.md` → AppShell) — раньше был `text-on-dark-accent`/`size-lg` без марка рядом.
+- **Size:** FILL × FIXED 64px (обёртка), марк 22×22px
+- **Used in:** все экраны с шапкой — `app/src/screens/{portfolio,rebalancing-rules,liability-dashboard,audit-log,notifications,cross-chain-bridge,rule-create,rule-detail,settings,smart-account-setup,legal-terms,emergency-stop}` (12 экранов, один общий компонент — правки `TopNav.tsx`/`TopNav.module.css` каскадируются автоматически, отдельно на местах использования ничего не дублируется)
 
 ### AppSidebar
 - **Node ID:** `128:10`

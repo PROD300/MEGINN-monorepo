@@ -2,6 +2,7 @@ import { Bell, LogOut } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { profileStore, getInitials } from '../../data/profile'
 import { notificationsStore, getUnreadCount } from '../../data/notifications'
+import meginnMark from '../../assets/meginn-mark.svg'
 import styles from './TopNav.module.css'
 
 export type NavItemId = 'portfolio' | 'rebalancing' | 'liability' | 'audit' | 'settings'
@@ -42,7 +43,10 @@ export function TopNav({
   return (
     <div className={styles.topnavWrap}>
       <header className={[styles.topnav, glow === 'subtle' ? styles.subtleGlow : ''].join(' ')}>
-        <span className={styles.logo} onClick={() => navigate('/portfolio')}>MEGINN</span>
+        <button className={styles.brand} onClick={() => navigate('/portfolio')} aria-label="MEGINN — Portfolio">
+          <img className={styles.mark} src={meginnMark} alt="" aria-hidden="true" />
+          <span className={styles.logo}>MEGINN</span>
+        </button>
 
         <nav className={styles.nav}>
           {primaryNav.map(item => (

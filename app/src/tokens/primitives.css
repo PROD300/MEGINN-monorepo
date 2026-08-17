@@ -21,6 +21,11 @@
   --gray-100: #F1F5F9;
   --gray-200: #E2E8F0;
   --gray-300: #CBD5E1;
+  --gray-350: #9FB0C2; /* added 2026-08-17 — TopNav wordmark only. Sits between
+    gray-300 and gray-500; approved after a side-by-side brightness comparison
+    (gray-00 read as too stark next to the flat-matte logo mark, gray-300 was
+    the first muted step tried and still read brighter than wanted). Not a
+    general-purpose token — reach for gray-300/text-muted for anything else. */
   --gray-500: #64748B;
   --gray-700: #334155;
   --gray-900: #0F172A;

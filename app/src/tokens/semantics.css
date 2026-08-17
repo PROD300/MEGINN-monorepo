@@ -24,6 +24,9 @@
   --text-nav-item:        var(--gray-300);
   --text-nav-active:      var(--gray-00);
   --text-on-dark-accent:  var(--accent-300);
+  --text-brand-wordmark:  var(--gray-350); /* added 2026-08-17 — MEGINN TopNav
+    wordmark color, muted intentionally so the text doesn't outshine the flat
+    matte logo mark next to it (see gray-350 in primitives.css) */
   --border-app-shell:     var(--gray-700);
 
   /* === Text === */

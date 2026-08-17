@@ -27,12 +27,13 @@ obsidian.md (узнаваемый градиент-логотип, hue прим�
 соседние hex того ряда (#F0EEFF/#DEDAFF/#9C8DFA/#2E1FB8/#180F5C), это
 остаток доребрендингового состояния.
 
-**Нейтралы (Cool Gray — 9 ступеней), без изменений:**
+**Нейтралы (Cool Gray — 9 ступеней) + 1 точечный шаг, 2026-08-17:**
 - gray-00  = #FFFFFF
 - gray-50  = #F8FAFC
 - gray-100 = #F1F5F9
 - gray-200 = #E2E8F0
 - gray-300 = #CBD5E1
+- gray-350 = #9FB0C2  ← добавлено 2026-08-17, второй агент (лого/нейминг MEGINN). Только для `text-brand-wordmark` (см. AppShell ниже) — gray-00 рядом с новым лого-марком читался слишком ярко, gray-300 первый приглушённый вариант всё ещё был ярче задуманного. Не общего назначения — для остального текста brать gray-300/text-muted, не этот шаг.
 - gray-500 = #64748B
 - gray-700 = #334155
 - gray-900 = #0F172A
@@ -180,6 +181,7 @@ obsidian.md (узнаваемый градиент-логотип, hue прим�
 - text-nav-item       → gray-300   ← неактивный пункт навигации на тёмном фоне (= text-on-dark-muted)
 - text-nav-active     → gray-00    ← активный пункт навигации на тёмном фоне (= text-on-dark)
 - text-on-dark-accent → accent-300 ← акцентный цвет на тёмном фоне (= text-on-dark-brand)
+- text-brand-wordmark → gray-350   ← добавлено 2026-08-17, второй агент. Цвет текста «MEGINN» в TopNav рядом с новым лого-марком (`app/src/assets/meginn-mark.svg`) — приглушённее text-on-dark-accent/gray-00, чтобы не спорить с плоским матовым марком. Только для этого места, не общий алиас
 - border-app-shell    → gray-700   ← разделители внутри AppShell (= border-dark)
 - TopNav icon-кнопки (Bell/Exit) hover → `accent-300` напрямую (не через семантический токен) — фон не меняется, только цвет иконки, 2026-08-10
 
@@ -191,4 +193,4 @@ obsidian.md (узнаваемый градиент-логотип, hue прим�
 
 **Figma-файл:** https://www.figma.com/design/PcpLlKJqePv7h5acIUEgfd/Obsidian-MCP  
 **Страница:** Foundation (18:2) → фрейм «Foundation-Tokens» (35:2)  
-**Дата:** 2026-08-17 | **Версия:** 1.2 — accent-ramp заменён на Petrol (ребрендинг OBSIDIAN → MEGINN), синхронизировано с кодом (`primitives.css`, `semantics.css`, `Foundation.stories.tsx`). ⚠ Figma-фрейм `Foundation-Tokens` (35:2) на момент этой правки **ещё не обновлён** — Variables там всё ещё указывают на старую индиго-шкалу, синхронизация отдельным шагом.
+**Дата:** 2026-08-17 | **Версия:** 1.3 — accent-ramp заменён на Petrol (ребрендинг OBSIDIAN → MEGINN), синхронизировано с кодом (`primitives.css`, `semantics.css`, `Foundation.stories.tsx`); добавлены `gray-350` и `text-brand-wordmark` для нового TopNav-лого (см. `ds/components.md` → TopNav). ⚠ Figma-фрейм `Foundation-Tokens` (35:2) на момент этой правки **ещё не обновлён** ни на Petrol, ни на новые нейтральные/wordmark-токены — Variables там всё ещё указывают на старую индиго-шкалу, синхронизация отдельным шагом.
