@@ -47,6 +47,7 @@
   --border-error:   var(--error-500);
   --border-warning: var(--warning-500);
   --border-info:    var(--info-500);
+  --border-info-subtle: rgba(28, 126, 160, 0.5); /* added 2026-08-17 — Badge outline-pill border (thinner/quieter than solid border-info). Was hardcoded as rgba(75, 52, 245, 0.5) directly in Badge.module.css, bypassing tokens entirely — that's the bug fixed here: a real semantic token now exists so accent changes cascade instead of needing a manual find-and-replace per component. RGB must be kept in sync with accent-500's decimal RGB (currently Petrol #1C7EA0 = 28,126,160) since rgba() can't reference a hex custom property's channels directly. */
   --border-hairline: transparent; /* card border removed 2026-08-10 (outdated) — kept as a token, resolving to invisible, so consumers don't need individual edits */
 
   /* === Status backgrounds (solid) === */

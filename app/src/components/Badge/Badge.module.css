@@ -3,7 +3,13 @@
    info-500 measures ~2.6-3.0:1, a real improvement though still under
    4.5:1 AA for small text). Status reads by copy alone now (matches the
    rest of the DS's single-accent system); variant classes stay for the
-   prop contract but carry no variant-specific styling anymore. */
+   prop contract but carry no variant-specific styling anymore.
+
+   Border fixed 2026-08-17 — was hardcoded `rgba(75, 52, 245, 0.5)`
+   (the old indigo accent), bypassing the token system entirely, so it
+   silently stayed on the retired accent through the Petrol rebrand.
+   Now bound to `--border-info-subtle`, which cascades with the rest of
+   the accent ramp. */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -12,7 +18,7 @@
   font-weight: var(--weight-regular);
   padding: 2px var(--space-2);
   border-radius: var(--radius-pill);
-  border: 0.5px solid rgba(75, 52, 245, 0.5);
+  border: 0.5px solid var(--border-info-subtle);
   background: transparent;
   color: var(--text-info);
   white-space: nowrap;

@@ -200,6 +200,7 @@ function FoundationPage() {
         <SemanticRow name="border-error"    prim="error-500"   value="#1C7EA0" />
         <SemanticRow name="border-warning"  prim="warning-500" value="#1C7EA0" />
         <SemanticRow name="border-info"     prim="info-500"    value="#1C7EA0" />
+        <SemanticRow name="border-info-subtle" prim="accent-500 @ 50%" value="rgba(28,126,160,.5)" />
         <SemanticRow name="border-hairline" prim="transparent" value="removed 2026-08-10 — card border is gone, kept as a token" />
       </Section>
 
