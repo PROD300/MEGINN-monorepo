@@ -56,11 +56,12 @@
   --bg-info:    var(--info-500);
 
   /* === Status backgrounds (subtle @ 10% opacity) — same accent tint across
-     all four, 2026-08-10: status reads by icon/copy, not by background hue. */
-  --bg-success-subtle: rgba(75, 52, 245, 0.10);
-  --bg-warning-subtle: rgba(75, 52, 245, 0.10);
-  --bg-error-subtle:   rgba(75, 52, 245, 0.10);
-  --bg-info-subtle:    rgba(75, 52, 245, 0.10);
+     all four, 2026-08-10: status reads by icon/copy, not by background hue.
+     RGB updated 2026-08-17 for the Petrol accent (rebrand OBSIDIAN → MEGINN). */
+  --bg-success-subtle: rgba(28, 126, 160, 0.10);
+  --bg-warning-subtle: rgba(28, 126, 160, 0.10);
+  --bg-error-subtle:   rgba(28, 126, 160, 0.10);
+  --bg-info-subtle:    rgba(28, 126, 160, 0.10);
 
   /* === Extended accent aliases === */
   --surface-accent:   var(--accent-500);

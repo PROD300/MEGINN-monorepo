@@ -240,7 +240,7 @@
 - **Fill:** info → `bg-info-subtle` · success → `bg-success-subtle` · warning → `bg-warning-subtle` · error → `bg-error-subtle`
 - **Border:** `1px solid var(--border-focus)` — фиксированный акцент на всех 4 вариантах (не меняется по варианту, как и в исходном Onboarding-паттерне)
 - **Shadow:** нет · **Icon:** нет
-- **Text color:** info → `text-info` · success → `text-success` · warning → `text-warning` · error → `text-error`. Все четыре резолвятся в один и тот же индиго (`#4B34F5`), см. `ds/foundation.md` → Функциональные
+- **Text color:** info → `text-info` · success → `text-success` · warning → `text-warning` · error → `text-error`. Все четыре резолвятся в один и тот же petrol (`#1C7EA0`, обновлено 2026-08-17 — ребрендинг OBSIDIAN → MEGINN, было `#4B34F5`), см. `ds/foundation.md` → Функциональные. Контраст текста на `surface-elevated`/`gray-900` (`#0F172A`) — расчётно ≈3.9:1, лучше прежнего индиго (~2.6–3.0:1, подтверждённого Daria как приемлемый для тонкого label-текста), но не переверено вручную на реальном экране — стоит перепроверить при вёрстке.
 - **Padding:** space-3 V / space-5 H · **Radius:** `radius-md`
 - **Used in:** screens/portfolio (Rebalance alert), screens/emergency-stop (Warning), screens/cross-chain-bridge (F20 dependency notice), screens/smart-account-setup (self-custody notice)
 - **Не используется для:** контекстных уведомлений внутри формы/колонки (RuleCreate gas-баннер, TransactionError auto-paused) — те остаются отдельными inline-блоками, не Banner. Onboarding's `.infoBanner`/`.successBanner` тоже остаются собственной локальной вёрсткой (не заменены на `<Banner>`) — Banner лишь скопировал их визуальный паттерн, не сами инстансы

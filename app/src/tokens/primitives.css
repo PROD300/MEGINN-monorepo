@@ -2,16 +2,18 @@
 /* Source: ds/foundation.md — Слой 1 */
 
 :root {
-  /* === Accent ("Ice Blue" pilot) — promoted from Portfolio draft to global,
-     2026-08-09. Replaces the Sky-blue version from the first dark-theme pass —
-     that one is gone now, this single-hue (~247°) purple-blue ramp is the
-     real accent everywhere. === */
-  --accent-50:  #F0EEFF;
-  --accent-100: #DEDAFF;
-  --accent-300: #9C8DFA;
-  --accent-500: #4B34F5;
-  --accent-700: #2E1FB8;
-  --accent-900: #180F5C;
+  /* === Accent ("Petrol") — rebrand 2026-08-17: OBSIDIAN → MEGINN. Replaces
+     the Ice Blue indigo/violet ramp (hue ~247°, #4B34F5), which sat too close
+     to the real obsidian.md app's brand hue (~260-280° violet gem logo) to
+     keep once the product carried a near-identical former name. Stays in the
+     blue family (hue ~198°) — a green accent direction was explored and
+     rejected first. === */
+  --accent-50:  #E8F3F6;
+  --accent-100: #CDE7EC;
+  --accent-300: #6FBBCB;
+  --accent-500: #1C7EA0;
+  --accent-700: #145C77;
+  --accent-900: #0B3546;
 
   /* === Neutrals (Cool Gray) === */
   --gray-00:  #FFFFFF;
@@ -24,14 +26,17 @@
   --gray-900: #0F172A;
   --gray-950: #020617;
 
-  /* === Functional — fully converged on the single accent, 2026-08-10:
-     success/warning/error/info are now visually identical (#4B34F5). Status
-     is communicated only by icon shape and copy, never by hue — this is a
-     deliberate one-accent system, not four semantic colors. === */
-  --success-500: #4B34F5;
-  --warning-500: #4B34F5;
-  --error-500:   #4B34F5;
-  --info-500:    #4B34F5;
+  /* === Functional — still converged on the single accent (unchanged
+     convention from 2026-08-10), now following the Petrol rebrand:
+     success/warning/error/info are visually identical to accent-500
+     (#1C7EA0). Status is communicated only by icon shape and copy, never by
+     hue. Splitting these back into distinct hues was raised as an open
+     question during the Petrol exploration but not decided — still one
+     accent for all four, pending a separate call. === */
+  --success-500: #1C7EA0;
+  --warning-500: #1C7EA0;
+  --error-500:   #1C7EA0;
+  --info-500:    #1C7EA0;
 
   /* === Typography === */
   /* Rebrand 2026-08-09: Inter → Geist + Geist Mono, approved — see
