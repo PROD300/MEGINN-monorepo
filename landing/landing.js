@@ -277,6 +277,21 @@
     function draw() {
       var vw = rgbVideo.videoWidth;
       if (rgbVideo.readyState >= 2 && alphaVideo.readyState >= 2 && vw) {
+        /* rgbVideo and alphaVideo are two independent <video loop> elements —
+           native looping doesn't guarantee both wrap on the same rendered
+           frame, so right at the loop restart they can go out of phase for
+           a frame or two. When that happens the alpha silhouette no longer
+           lines up with where the rgb frame actually has content, and the
+           rgb source's own unmatted dark backdrop (everything outside the
+           gear/spark/stack shapes) briefly shows through as if it were
+           opaque — a flash of black. Locking alphaVideo to rgbVideo's
+           timeline whenever they drift apart (not just at the loop point —
+           the same race can in principle happen mid-clip) fixes it; small
+           jitter under the threshold is left alone so this isn't seeking
+           every frame during normal in-sync playback. */
+        if (Math.abs(alphaVideo.currentTime - rgbVideo.currentTime) > 0.05) {
+          alphaVideo.currentTime = rgbVideo.currentTime;
+        }
         var scale = Math.min(canvas.width / vw, canvas.height / rgbVideo.videoHeight);
         var w = vw * scale, h = rgbVideo.videoHeight * scale;
         var x = ((canvas.width - w) / 2) | 0, y = ((canvas.height - h) / 2) | 0;
