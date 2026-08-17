@@ -1601,10 +1601,23 @@ html:not(.scrolljack) .features-track .fcard { scroll-snap-align: start; }
   .foot__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .foot__brand { grid-column: 1 / -1; }
 }
+.foot__marklockup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
 .foot__mark {
-  font: 600 18px/1 var(--font-sans);
-  letter-spacing: 0.18em;
-  color: var(--gray-00);
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+.foot__wordmark {
+  font: 600 15px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-brand-wordmark);
 }
 .foot__tag {
   font: 400 13px/1.5 var(--font-sans);
