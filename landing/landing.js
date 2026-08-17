@@ -288,17 +288,31 @@
        jitter between two independently decoding videos routinely crosses
        small thresholds, so it was re-seeking (and stuttering) constantly,
        not just at the loop point.
-       Fix instead: don't use native loop on either video. Treat rgbVideo
-       as the leader — when it ends, snap both videos back to 0 and start
-       them again in the same synchronous handler, so there's exactly one
-       sync point per loop instead of continuous correction. */
+       Fix instead: don't use native loop on either video. Snap both
+       videos back to 0 and restart them together in one synchronous
+       handler — one sync point per loop instead of continuous correction.
+       Listening only on rgbVideo's 'ended' (treating it as the sole
+       "leader") wasn't enough on its own: same-length, same-timestamp
+       source files can still decode at different real-world speed
+       depending on content complexity (Sparks' fast particle motion vs.
+       Stack/Tooling's slower shapes), so whichever of the two videos is
+       cheaper to decode can reach its own end well before the other —
+       sitting frozen on its last frame, out of sync with the one still
+       playing, until the slower one finally catches up. Listening on
+       both and letting whichever finishes first trigger the restart
+       fixes that regardless of which direction the mismatch runs. */
+    var restarting = false;
     function restartTogether() {
+      if (restarting) return;
+      restarting = true;
       rgbVideo.currentTime = 0;
       alphaVideo.currentTime = 0;
       rgbVideo.play().catch(function () {});
       alphaVideo.play().catch(function () {});
+      setTimeout(function () { restarting = false; }, 0);
     }
     rgbVideo.addEventListener('ended', restartTogether);
+    alphaVideo.addEventListener('ended', restartTogether);
 
     function draw() {
       var vw = rgbVideo.videoWidth;
