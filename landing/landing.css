@@ -511,11 +511,29 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
 }
 /* Hover: thin accent hairline only — no shadow, no glow, no spotlight
    (all removed per Daria). Once the animated 3D icon assets land, they
-   carry the hover "interest" instead of card-level chrome. */
-.pcard:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(28, 126, 160, 0.45);
-  transform: translateY(-1px);
+   carry the hover "interest" instead of card-level chrome.
+   (hover: hover) scopes this to devices with a real pointer — touch
+   has no reliable hover (a tap can leave :hover "stuck" until the user
+   taps elsewhere), so it's handled separately below instead of relying
+   on :hover firing there at all. */
+@media (hover: hover) {
+  .pcard:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(28, 126, 160, 0.45);
+    transform: translateY(-1px);
+  }
+}
+
+/* Touch: no hover to trigger the treatment above, so the card just
+   shows it by default instead — background tint, accent border, and
+   the icon's scaled-up state (see .pcard:hover .pcard__icon3d below)
+   are always-on rather than gated behind an interaction that doesn't
+   reliably exist on these devices. */
+@media (hover: none) {
+  .pcard {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(28, 126, 160, 0.45);
+  }
 }
 
 /* 3D icon video — static on frame 0 by default, plays on card hover
@@ -534,8 +552,13 @@ html.js .hero__reveal.is-in { opacity: 1; transform: none; }
   transform: scale(1);
   transition: transform 320ms cubic-bezier(.2,.8,.2,1);
 }
-.pcard:hover .pcard__icon3d {
-  transform: scale(1.12);
+@media (hover: hover) {
+  .pcard:hover .pcard__icon3d {
+    transform: scale(1.12);
+  }
+}
+@media (hover: none) {
+  .pcard__icon3d { transform: scale(1.12); }
 }
 @media (prefers-reduced-motion: reduce) {
   .pcard__icon3d { transition: none; }
