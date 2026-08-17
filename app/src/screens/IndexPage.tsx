@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { getScreens } from './registry'
+import meginnMark from '../assets/meginn-mark.svg'
 import styles from './IndexPage.module.css'
 
 // Route patterns with dynamic segments aren't valid links as-is — resolve them
@@ -15,7 +16,11 @@ export function IndexPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>MEGINN — экраны</h1>
+        <h1 className={styles.title}>
+          <img className={styles.mark} src={meginnMark} alt="" aria-hidden="true" />
+          <span className={styles.wordmark}>MEGINN</span>
+          <span className={styles.suffix}>— Screens</span>
+        </h1>
         <p className={styles.subtitle}>
           Static screens assembled from the design system. Logic and data are a separate step.
         </p>

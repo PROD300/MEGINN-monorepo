@@ -10,11 +10,36 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--size-3xl);
   font-weight: var(--weight-semibold);
   color: var(--text-default);
   line-height: var(--line-height-tight);
   margin-bottom: var(--space-2);
+}
+
+/* Brand lockup — same recipe as TopNav (mark + mono wordmark), scaled up
+   for a page heading. Mark sized against the wordmark's cap-height like
+   TopNav's 22px-mark/14px-wordmark pair (~1.6x). */
+.mark {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.wordmark {
+  font-family: var(--font-mono);
+  color: var(--text-brand-wordmark);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.suffix {
+  color: var(--text-default);
 }
 
 .subtitle {
