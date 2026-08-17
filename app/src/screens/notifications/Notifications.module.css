@@ -62,7 +62,7 @@
   composes: pageBlock from '../../tokens/layout.module.css';
   display: flex;
   flex-direction: column;
-  padding-bottom: var(--space-8);
+  padding: 0 var(--space-5) var(--space-8);
   flex-shrink: 0;
 }
 
