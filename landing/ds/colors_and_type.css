@@ -59,12 +59,13 @@
   --accent-700: #145C77;  /* primary action hover */
   --accent-900: #0B3546;
 
-  /* Gray — Cool (9-step), unchanged */
+  /* Gray — Cool (9-step) + 1 point step, 2026-08-17 */
   --gray-00:  #FFFFFF;
   --gray-50:  #F8FAFC;    /* page background */
   --gray-100: #F1F5F9;
   --gray-200: #E2E8F0;
   --gray-300: #CBD5E1;
+  --gray-350: #9FB0C2;    /* synced from app 2026-08-17 — brand wordmark only, see --text-brand-wordmark below */
   --gray-500: #64748B;    /* muted text */
   --gray-700: #334155;
   --gray-900: #0F172A;    /* primary text + dark chrome */
@@ -143,6 +144,7 @@
   --text-on-dark:        var(--gray-00);
   --text-on-dark-muted:  var(--gray-300);
   --text-on-dark-brand:  var(--accent-300);
+  --text-brand-wordmark: var(--gray-350);   /* synced from app 2026-08-17 — MEGINN nav wordmark, muted so it doesn't outshine the flat matte logo mark next to it */
   --text-nav-active:     var(--gray-00);    /* active nav item on dark bg */
   --text-nav-item:       var(--gray-300);   /* inactive nav item on dark bg */
   --text-on-dark-accent: var(--accent-300); /* accent on dark bg (alias → text-on-dark-brand) */

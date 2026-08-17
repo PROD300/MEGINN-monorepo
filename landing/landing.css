@@ -133,9 +133,24 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; gap: 32px;
 }
 .nav__brand {
-  font: 600 16px/1 var(--font-sans);
-  letter-spacing: 0.18em;
-  color: var(--gray-00);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav__mark {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+.nav__wordmark {
+  font: 600 14px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-brand-wordmark);
 }
 .nav__links {
   display: flex; align-items: center; gap: 28px;
@@ -1817,7 +1832,7 @@ html[data-hero="light"] .nav {
   background: rgba(255,255,255,0.82);
   border-bottom-color: var(--border-default);
 }
-html[data-hero="light"] .nav__brand { color: var(--text-default); }
+html[data-hero="light"] .nav__wordmark { color: var(--text-default); }
 html[data-hero="light"] .nav__links a { color: var(--text-muted); }
 html[data-hero="light"] .nav__links a:hover { color: var(--text-default); }
 html[data-hero="light"] .nav__burger span { background: var(--text-default); }
