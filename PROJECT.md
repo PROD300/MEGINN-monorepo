@@ -1,8 +1,8 @@
-# OBSIDIAN — Project Environment
+# MEGINN — Project Environment
 
 ## GitHub Repository
 
-- **URL:** https://github.com/PROD300/OBSIDIAN-monorepo
+- **URL:** https://github.com/PROD300/MEGINN-monorepo ← репозиторий переименован (был `OBSIDIAN-monorepo`, ребрендинг 2026-08-17, см. `HANDOFF_COWORK_2026-08-17.md`). Старый URL продолжает работать через редирект GitHub, но не полагайтесь на это бессрочно — обновите `git remote` (`git remote set-url origin https://github.com/PROD300/MEGINN-monorepo.git`), если клонировали по старому адресу.
 - **Branch:** main
 - **Content:** Монорепо — документы проекта (briefs/prd/ia/ux/ds/research/landing/.claude) + `app/`
   (полный прототип — дизайн-система + 17 экранов), история `app/` сохранена целиком через
