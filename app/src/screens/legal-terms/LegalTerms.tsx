@@ -14,7 +14,7 @@ const sections = [
   },
   {
     title: '2. Bridge Operations',
-    body: 'Cross-chain bridge operations via Li.Fi, Socket, and Across protocols are governed by their respective terms. OBSIDIAN provides routing and monitoring but is not responsible for bridge provider failures.',
+    body: 'Cross-chain bridge operations via Li.Fi, Socket, and Across protocols are governed by their respective terms. MEGINN provides routing and monitoring but is not responsible for bridge provider failures.',
   },
   {
     title: '3. Emergency Stop',
@@ -73,7 +73,7 @@ export function LegalTerms() {
             {/* DocumentColumn */}
             <div className={styles.documentColumn}>
               <div className={styles.documentCard}>
-                <span className={styles.docTitle}>OBSIDIAN Platform — Custodial Liability Agreement</span>
+                <span className={styles.docTitle}>MEGINN Platform — Custodial Liability Agreement</span>
                 <span className={styles.docMeta}>Version 1.0 · Effective May 2026 · English</span>
                 <div className={styles.divider} />
                 {sections.map(section => (

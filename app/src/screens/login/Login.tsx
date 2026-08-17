@@ -50,7 +50,7 @@ export function Login() {
       <div className={styles.card}>
         {/* LogoBlock */}
         <div className={styles.logoBlock}>
-          <span className={styles.logo}>OBSIDIAN</span>
+          <span className={styles.logo}>MEGINN</span>
           <span className={styles.tagline}>Institutional Portfolio Management</span>
         </div>
 

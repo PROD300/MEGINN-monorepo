@@ -1,10 +1,10 @@
-# OBSIDIAN: SWOT Analysis — Конкуренты
+# MEGINN: SWOT Analysis — Конкуренты
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Дата | 2026-04-16 |
 | Версия | 1.0 |
 
@@ -26,13 +26,13 @@
 - Retail/institutional mix creates UX conflicts
 - No direct enterprise sales motion
 
-### O — Opportunities (возможности для OBSIDIAN)
+### O — Opportunities (возможности для MEGINN)
 - Enterprise clients seeking AI-powered alternatives
 - Institutional DeFi adoption tripling (24% → 75%)
 - Gap in AI-native asset management platforms
 - Compliance-ready positioning
 
-### T — Threats (угрозы для OBSIDIAN)
+### T — Threats (угрозы для MEGINN)
 - Yearn could add AI features
 - Large war chest for development
 - Brand recognition advantage
@@ -56,13 +56,13 @@
 - No formal RBAC for enterprise teams
 - No compliance/GDPR-ready features
 
-### O — Opportunities (возможности для OBSIDIAN)
+### O — Opportunities (возможности для MEGINN)
 - Enterprise customers frustrated with complexity
 - AI-powered simplification of DeFi
 - Team-based access controls
 - Audit trail requirements
 
-### T — Threats (угрозы для OBSIDIAN)
+### T — Threats (угрозы для MEGINN)
 - Instadapp could simplify UX
 - Could add AI features
 - Strong relationships with protocols
@@ -86,13 +86,13 @@
 - Not suitable for enterprise clients
 - No tokenization capabilities
 
-### O — Opportunities (возможности для OBSIDIAN)
+### O — Opportunities (возможности для MEGINN)
 - Broader protocol coverage (not just lending)
 - AI-enhanced automation
 - Multi-chain positioning
 - Enterprise-grade features
 
-### T — Threats (угрозы для OBSIDIAN)
+### T — Threats (угрозы для MEGINN)
 - Could expand beyond lending
 - Could add multi-chain support
 - Strong automation reputation
@@ -115,13 +115,13 @@
 - No RBAC or enterprise features
 - Still relatively small TVL
 
-### O — Opportunities (возможности для OBSIDIAN)
+### O — Opportunities (возможности для MEGINN)
 - Real-world asset tokenization (beyond yield)
 - AI-powered tokenization workflows
 - Enterprise-friendly onboarding
 - Broader asset coverage
 
-### T — Threats (угрозы для OBSIDIAN)
+### T — Threats (угрозы для MEGINN)
 - Could expand to real-world assets
 - Could add AI features
 - First-mover advantage in tokenization
@@ -144,13 +144,13 @@
 - Retail-focused, not enterprise
 - No RBAC or compliance
 
-### O — Opportunities (возможности для OBSIDIAN)
+### O — Opportunities (возможности для MEGINN)
 - Enterprise users seeking more control
 - AI-powered insights
 - Institutional-grade security
 - Team management features
 
-### T — Threats (угрозы для OBSIDIAN)
+### T — Threats (угрозы для MEGINN)
 - Could add enterprise tier
 - Could partner with compliance providers
 - Large retail user base
@@ -174,7 +174,7 @@
 - Нет compliance-ready positioning
 - Фокус на retail DeFi
 
-**OBSIDIAN opportunity:**
+**MEGINN opportunity:**
 - First-mover в AI-native enterprise DeFi
 - Enterprise RBAC как killer feature
 - Compliance-ready differentiation

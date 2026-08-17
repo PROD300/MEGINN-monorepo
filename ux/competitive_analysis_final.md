@@ -1,8 +1,8 @@
-# OBSIDIAN: Competitive Analysis — Final Report
+# MEGINN: Competitive Analysis — Final Report
 
 ## Executive Summary
 
-OBSIDIAN — AI-native enterprise платформа для управления цифровыми активами в блокчейн-среде. Целевая аудитория: корпоративные клиенты, family offices, институциональные инвесторы.
+MEGINN — AI-native enterprise платформа для управления цифровыми активами в блокчейн-среде. Целевая аудитория: корпоративные клиенты, family offices, институциональные инвесторы.
 
 **5 ключевых выводов:**
 
@@ -20,7 +20,7 @@ OBSIDIAN — AI-native enterprise платформа для управления
 
 ## Feature Matrix Summary
 
-| Category | OBSIDIAN | vs Competition |
+| Category | MEGINN | vs Competition |
 |----------|----------|----------------|
 | AI Portfolio Analysis | ✅ MVP | **Whitespace** |
 | AI Risk Prediction | ✅ MVP | **Whitespace** |
@@ -76,7 +76,7 @@ OBSIDIAN — AI-native enterprise платформа для управления
 - Dashboard with stats + charts
 - Sortable vault/asset lists
 
-### Recommended для OBSIDIAN
+### Recommended для MEGINN
 - AI Insights sidebar (persistent)
 - Role-based dashboard views
 - Multi-level approval workflow
@@ -167,7 +167,7 @@ OBSIDIAN — AI-native enterprise платформа для управления
 
 ## Conclusion
 
-OBSIDIAN has a clear path to differentiation in a market where:
+MEGINN has a clear path to differentiation in a market where:
 - All competitors are retail-focused
 - No one has AI
 - Enterprise features are absent

@@ -1,19 +1,19 @@
-# OBSIDIAN: Конкурентный анализ
+# MEGINN: Конкурентный анализ
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Дата | 2026-04-16 |
 | Версия | 1.0 |
-| Основание | OBSIDIAN_brief.md |
+| Основание | MEGINN_brief.md |
 
 ---
 
 ## Выбор конкурентов
 
-Для OBSIDIAN (система управления капиталом с AI + токенизация + multi-chain) выбраны 5 конкурентов:
+Для MEGINN (система управления капиталом с AI + токенизация + multi-chain) выбраны 5 конкурентов:
 
 | # | Конкурент | Почему закрывает нашу задачу |
 |---|-----------|-----------------------------|
@@ -222,9 +222,9 @@
 
 ---
 
-## Gap-анализ: где OBSIDIAN уникален
+## Gap-анализ: где MEGINN уникален
 
-| Функция | Yearn | Instadapp | DeFi Saver | Pendle | OBSIDIAN |
+| Функция | Yearn | Instadapp | DeFi Saver | Pendle | MEGINN |
 |---------|-------|-----------|------------|--------|----------|
 | AI Portfolio Analysis | ❌ | ❌ | ❌ | ❌ | **✅** |
 | AI Risk Prediction | ❌ | ❌ | ❌ | ❌ | **✅** |
@@ -264,16 +264,16 @@
 
 ---
 
-## Niche OBSIDIAN: где мы сильнее
+## Niche MEGINN: где мы сильнее
 
 ### 1. AI-first подход
-**Ни один конкурент** не имеет AI-ассистента. OBSIDIAN может стать первым платформой где:
+**Ни один конкурент** не имеет AI-ассистента. MEGINN может стать первым платформой где:
 - AI анализирует портфель в реальном времени
 - AI предсказывает риски до их наступления
 - AI предлагает actions на естественном языке
 
 ### 2. Enterprise-ready architecture
-Все конкуренты — DeFi-native, retail-focused. OBSIDIAN может закрыть:
+Все конкуренты — DeFi-native, retail-focused. MEGINN может закрыть:
 - RBAC с NFT-based permissions
 - Compliance-ready (GDPR, SOC2)
 - Multi-level approval для high-risk operations
@@ -292,7 +292,7 @@ Pendle делает yield tokenization, но никто не делает securi
 
 ---
 
-## UX-паттерны для OBSIDIAN
+## UX-паттерны для MEGINN
 
 ### Онбординг
 ```
@@ -303,10 +303,10 @@ Pendle делает yield tokenization, но никто не делает securi
 5. Quick actions → AI-suggested first steps
 ```
 
-### Dashboard (obsidian-style)
+### Dashboard (meginn-style)
 ```
 ┌─────────────────────────────────────────────────┐
-│ OBSIDIAN                    [AI] [Notifications] │
+│ MEGINN                    [AI] [Notifications] │
 ├─────────────┬───────────────────────────────────┤
 │ Dashboard   │ Portfolio Value: $X,XXX,XXX       │
 │ Wallets     │ ┌─────────────────────────────┐   │
@@ -341,7 +341,7 @@ Pendle делает yield tokenization, но никто не делает securi
 4. **AI — whitespace** — никто не делает, но все ждут
 5. **Enterprise — gap** — все конкуренты retail-focused
 
-### Рекомендации для OBSIDIAN
+### Рекомендации для MEGINN
 1. **Взять ERC-4626** как core vault standard (как Yearn)
 2. **Добавить automation** (rule-based как DeFi Saver)
 3. **Улучшить AI** — стать первым AI-native платформой
@@ -349,7 +349,7 @@ Pendle делает yield tokenization, но никто не делает securi
 5. **Agent NFT** — уникальная value proposition
 
 ### MVP differentiation
-| Компетенция | Конкуренты сильны | OBSIDIAN должен быть |
+| Компетенция | Конкуренты сильны | MEGINN должен быть |
 |-------------|-------------------|---------------------|
 | Yield aggregation | Yearn, Beefy | Равный или лучше |
 | Automation | DeFi Saver | AI-enhanced |
@@ -363,5 +363,5 @@ Pendle делает yield tokenization, но никто не делает securi
 
 | Файл | Назначение |
 |------|------------|
-| `OBSIDIAN_brief.md` | Бриф проекта |
+| `MEGINN_brief.md` | Бриф проекта |
 | `competitive_analysis.md` | Этот файл |

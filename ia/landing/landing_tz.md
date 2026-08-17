@@ -1,4 +1,4 @@
-# OBSIDIAN Landing Page — Техническое задание
+# MEGINN Landing Page — Техническое задание
 
 **Версия:** 1.0  
 **Дата:** 2026-05-14  
@@ -38,7 +38,7 @@
 ## 3. Позиционирование и ключевое сообщение
 
 **Главный тезис:**  
-> "Set your rules once. OBSIDIAN manages your portfolio autonomously — with full legal coverage."
+> "Set your rules once. MEGINN manages your portfolio autonomously — with full legal coverage."
 
 **Расшифровка для каждой персоны:**
 - CIO: меньше 10 минут в месяц, AI следит за аллокацией, вы получаете post-factum уведомления
@@ -85,7 +85,7 @@
 |---------|-------|
 | **Eyebrow** | Institutional Portfolio Automation |
 | **H1** | Your portfolio runs itself. You just review. |
-| **Subhead** | OBSIDIAN is an AI-native platform for Family Offices and Corporate Treasuries that manages digital asset portfolios autonomously — within your rules, with full legal coverage. |
+| **Subhead** | MEGINN is an AI-native platform for Family Offices and Corporate Treasuries that manages digital asset portfolios autonomously — within your rules, with full legal coverage. |
 | **Primary CTA** | Request Early Access |
 | **Secondary CTA** | See How It Works ↓ |
 | **Trust signal под CTA** | Built for $10M+ AUM · Ethereum & Arbitrum · Legal/Custodian Framework |
@@ -127,8 +127,8 @@
 
 | Шаг | Заголовок | Текст |
 |-----|-----------|-------|
-| 1. Set Your Rules | Define your allocation strategy | Tell OBSIDIAN: "Keep RWA at 50%, ETH below 30%." Set risk thresholds, networks, and approval delegation. One-time setup. |
-| 2. OBSIDIAN Runs Automatically | AI monitors and rebalances 24/7 | The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed. |
+| 1. Set Your Rules | Define your allocation strategy | Tell MEGINN: "Keep RWA at 50%, ETH below 30%." Set risk thresholds, networks, and approval delegation. One-time setup. |
+| 2. MEGINN Runs Automatically | AI monitors and rebalances 24/7 | The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed. |
 | 3. You Review, Not Manage | Post-factum notifications and one-click reports | Get notified after each automated action. Quarterly report for the family council or board — generated in one click. |
 
 **Визуал под stepper:** Тонкая линия соединяет шаги. Под шагом 2 — маленькая подпись "Protected by Emergency Stop" со ссылкой на S4.
@@ -146,7 +146,7 @@
 | Feature | Название | Описание |
 |---------|----------|----------|
 | F21 | AI Auto-Rebalancing | Rule-based automation maintains your target allocation across Ethereum and Arbitrum — no transaction approval required. |
-| F17 | Legal & Custodian Coverage | Explicit liability framework: OBSIDIAN's role, custodian's role, and your role — documented and signed before any automation runs. |
+| F17 | Legal & Custodian Coverage | Explicit liability framework: MEGINN's role, custodian's role, and your role — documented and signed before any automation runs. |
 | F01 | Smart Accounts & RBAC | Role-based permissions: CIO, Operator, Auditor. Institutional-grade access control with hardware key support. |
 | F15 | Immutable Audit Log | Every automated action is logged: timestamp, rule triggered, transaction hash, gas cost. Tamper-proof history for compliance teams. |
 | F22 | Emergency Stop | One-click kill switch halts all automated processes instantly — available from every screen, 24/7. |
@@ -177,7 +177,7 @@
 - Designed for board-level reporting
 
 **Ниже:** Баннер с фактом из market research:
-> "Institutional DeFi engagement projected to grow from 24% to 75% by 2027. OBSIDIAN is infrastructure for what comes next."
+> "Institutional DeFi engagement projected to grow from 24% to 75% by 2027. MEGINN is infrastructure for what comes next."
 > — Source: [Research Report, 2026]
 
 **Логика:** Treasury Manager читает compliance-список и думает "это можно показать аудиторам". CIO читает self-custody и думает "даже если стартап закроется, мои деньги в безопасности".
@@ -196,7 +196,7 @@
 - AUM: $100M–$2B total, $10M–$100M in digital assets
 - Use case: Set and forget allocation. Quarterly report for family council.
 - Time commitment: < 10 minutes per month
-- "OBSIDIAN handles the execution. I handle the strategy."
+- "MEGINN handles the execution. I handle the strategy."
 
 **Карточка 2: Corporate Treasury Manager**
 - AUM: $20M–$100M in digital assets
@@ -204,7 +204,7 @@
 - Time commitment: Dashboard review 2–3× per week
 - "Every automated transaction is logged and auditable. Exactly what the board requires."
 
-**Под карточками:** "Not a fit: retail investors, trading desks, yield farmers. OBSIDIAN is built for governance-heavy institutional environments with $10M+ in digital assets."
+**Под карточками:** "Not a fit: retail investors, trading desks, yield farmers. MEGINN is built for governance-heavy institutional environments with $10M+ in digital assets."
 
 **Логика:** Явный anti-positioning — отсекаем неподходящих лидов сразу, экономим время sales.
 
@@ -216,7 +216,7 @@
 
 **Заголовок:** Join institutional-grade portfolio automation.
 
-**Подзаголовок:** OBSIDIAN is currently in closed early access. We onboard a limited number of family offices and corporate treasuries per quarter.
+**Подзаголовок:** MEGINN is currently in closed early access. We onboard a limited number of family offices and corporate treasuries per quarter.
 
 **Форма (минимальная):**
 - Full name
@@ -244,10 +244,10 @@
 
 | Колонка 1 | Колонка 2 | Колонка 3 |
 |-----------|-----------|-----------|
-| **OBSIDIAN** логотип + tagline: "Institutional portfolio automation." | **Platform** — Features / How It Works / Security | **Legal** — Privacy Policy / Terms of Service / Cookie Policy |
+| **MEGINN** логотип + tagline: "Institutional portfolio automation." | **Platform** — Features / How It Works / Security | **Legal** — Privacy Policy / Terms of Service / Cookie Policy |
 | | **Company** — Contact / LinkedIn | |
 
-**Нижняя строка:** © 2026 OBSIDIAN. All rights reserved. · "Smart Accounts secured by account abstraction. OBSIDIAN does not hold custody of user assets."
+**Нижняя строка:** © 2026 MEGINN. All rights reserved. · "Smart Accounts secured by account abstraction. MEGINN does not hold custody of user assets."
 
 ---
 
@@ -287,12 +287,12 @@
 
 | Поле | Значение |
 |------|----------|
-| **Title** | OBSIDIAN — Institutional Digital Asset Portfolio Automation |
+| **Title** | MEGINN — Institutional Digital Asset Portfolio Automation |
 | **Meta description** | AI-native platform for Family Offices and Corporate Treasuries. Autonomous portfolio rebalancing with full legal coverage. Built for $10M+ AUM. |
-| **OG title** | OBSIDIAN: Set your rules. We manage the rest. |
+| **OG title** | MEGINN: Set your rules. We manage the rest. |
 | **OG description** | Institutional portfolio automation for Family Offices and Corporate Treasuries. Ethereum & Arbitrum. Legal/Custodian Framework included. |
 | **OG image** | Dark-background dashboard preview, 1200×630 |
-| **Canonical** | https://obsidian.finance/ (placeholder) |
+| **Canonical** | https://meginn.finance/ (placeholder) |
 
 **Target keywords (информационный, не транзакционный трафик):**
 - "institutional DeFi platform"
@@ -362,7 +362,7 @@ landing_viewed → hero_cta_clicked → form_started → form_submitted
 
 | # | Вопрос | Критичность | Кто отвечает |
 |---|--------|------------|--------------|
-| 1 | Домен — obsidian.finance или другой? | Высокая | Founder |
+| 1 | Домен — meginn.finance или другой? | Высокая | Founder |
 | 2 | Есть ли уже реальные клиенты для case study / логотипов? | Средняя | BD |
 | 3 | Calendly подключён или нужен другой инструмент для встреч? | Средняя | Ops |
 | 4 | Какой CRM получает лиды из формы? | Средняя | Ops |

@@ -1,10 +1,10 @@
-# OBSIDIAN: Product Requirements Document (PRD) v2.0 (Optimized Budget)
+# MEGINN: Product Requirements Document (PRD) v2.0 (Optimized Budget)
 
 ## Executive Summary
-**OBSIDIAN** — The Lean AI-native enterprise platform for institutional digital asset management.
+**MEGINN** — The Lean AI-native enterprise platform for institutional digital asset management.
 
 - **Problem**: Family Offices and Corporate Treasuries face high operational risks and time costs managing DeFi portfolios.
-- **Key Insight**: Security and automation are not "features" but "survival requirements". In a constrained budget environment, OBSIDIAN focuses on **Autonomous Rebalancing** and **Legal Risk Distribution**.
+- **Key Insight**: Security and automation are not "features" but "survival requirements". In a constrained budget environment, MEGINN focuses on **Autonomous Rebalancing** and **Legal Risk Distribution**.
 - **Solution**: A lean platform built on Smart Accounts that automates portfolio maintenance while providing clear legal/custodial liability frameworks.
 - **Primary Persona**: **Family Office CIO** whose primary pain is manual management time and personal liability risk.
 

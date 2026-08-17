@@ -31,7 +31,7 @@ Background: surface-app-shell (gray-900) — тёмная, premium fintech то�
 
 #### LogoBlock
 - FILL × HUG, vertical, gap space-1, align center, padding space-2 V
-- «OBSIDIAN» DS/Heading/2xl text-default letter-spacing-tight
+- «MEGINN» DS/Heading/2xl text-default letter-spacing-tight
 - «Institutional Portfolio Management» DS/Body/sm text-muted
 
 #### Divider

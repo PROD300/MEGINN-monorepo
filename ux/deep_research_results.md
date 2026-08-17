@@ -1,10 +1,10 @@
-# Deep Research Report: OBSIDIAN
+# Deep Research Report: MEGINN
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Дата | 2026-04-16 |
 | Версия | 1.0 |
 | Основание | Gemini Deep Research (internal) |
@@ -32,7 +32,7 @@
 - Arbitrage detection
 - Backtesting
 
-### Gap для OBSIDIAN
+### Gap для MEGINN
 **Все текущие AI-решения — retail-focused**. Нет enterprise AI-native платформ для управления цифровыми активами.
 
 ---
@@ -85,7 +85,7 @@
 - Более предсказуемые условия для institutional capital
 - 2025 = first full year under unified compliance globally
 
-### Implications для OBSIDIAN
+### Implications для MEGINN
 - Compliance-ready architecture — **competitive advantage**
 - MiCA compliance = entry point в EU
 - SEC framework = US market access
@@ -178,7 +178,7 @@ Tiered 2/20:
 - First-mover advantage available
 - Pattern: agent = token = governance
 
-### Для OBSIDIAN
+### Для MEGINN
 **Agent NFT** — уникальная концепция:
 - Он-чейн AI agent identity
 - Transparent execution logs
@@ -215,7 +215,7 @@ Tiered 2/20:
 
 ---
 
-## 8. Key Insights for OBSIDIAN
+## 8. Key Insights for MEGINN
 
 ### Timing is perfect
 1. **DeFi engagement will triple** from 24% to 75% — massive user base incoming
@@ -236,7 +236,7 @@ Tiered 2/20:
 **"AI-native enterprise platform for institutional digital asset management"**
 
 ### Revenue potential (Tier-1 aligned)
-Based on comparable platforms and OBSIDIAN metrics:
+Based on comparable platforms and MEGINN metrics:
 - Этап 1: $50M AUM × 1-3% = $500K-1.5M/year
 - Этап 2: $250M AUM × 1-3% = $2.5M-7.5M/year
 - Comparable: DeFi Technologies $218.6M annualized (2025)

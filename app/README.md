@@ -1,4 +1,4 @@
-# OBSIDIAN — React Base
+# MEGINN — React Base
 
 Institutional portfolio management platform for Family Office CIO / Corporate Treasury Manager.  
 B2B fintech web app · TypeScript · React · Vite · Storybook.

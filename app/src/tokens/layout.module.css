@@ -1,4 +1,4 @@
-/* OBSIDIAN DS — Shared page-layout composition */
+/* MEGINN DS — Shared page-layout composition */
 /* Every top-level content block on a screen (page header, content area,
    filter bars, footers, etc.) composes this so the page's max-width and
    centering stay identical everywhere by construction, not by copy-paste

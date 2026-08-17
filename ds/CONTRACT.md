@@ -1,4 +1,4 @@
-# DS Contract — правила работы с дизайн-системой в проекте OBSIDIAN
+# DS Contract — правила работы с дизайн-системой в проекте MEGINN
 
 **Источник ДС:** ds_baseline (стартовая, поставлена с нуля)  
 **Figma-файл:** https://www.figma.com/design/PcpLlKJqePv7h5acIUEgfd/Obsidian-MCP  

@@ -1,4 +1,4 @@
-# DS Components — каталог UI-кита OBSIDIAN
+# DS Components — каталог UI-кита MEGINN
 
 **Figma-файл:** https://www.figma.com/design/PcpLlKJqePv7h5acIUEgfd/Obsidian-MCP  
 **Страница:** Components (26:2) → фрейм «Components-Doc» (45:46)  

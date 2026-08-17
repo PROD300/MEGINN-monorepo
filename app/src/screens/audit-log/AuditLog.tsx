@@ -62,7 +62,7 @@ function applyFilters(rows: AuditRow[], filters: Filters): AuditRow[] {
 }
 
 function exportFilename(ext: string) {
-  return `obsidian-audit-log-${new Date().toISOString().slice(0, 10)}.${ext}`
+  return `meginn-audit-log-${new Date().toISOString().slice(0, 10)}.${ext}`
 }
 
 function downloadBlob(content: string, mime: string, filename: string) {
@@ -89,14 +89,14 @@ function rowsToCsv(rows: AuditRow[]) {
 
 function rowsToPrintableHtml(rows: AuditRow[]) {
   const body = rows.map(r => `<tr><td>${r.timestamp}</td><td>${r.type}</td><td>${r.rule}</td><td>${r.asset}</td><td>${r.amount}</td><td>${r.network}</td><td>${r.provider}</td><td>${r.result}</td></tr>`).join('')
-  return `<!doctype html><html><head><title>OBSIDIAN — Audit Log</title><style>
+  return `<!doctype html><html><head><title>MEGINN — Audit Log</title><style>
     body { font-family: Arial, sans-serif; padding: 24px; color: #111; }
     h1 { font-size: 18px; }
     table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
     th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
     th { background: #f5f5f5; }
   </style></head><body>
-    <h1>OBSIDIAN — Audit Log</h1>
+    <h1>MEGINN — Audit Log</h1>
     <div>Generated: ${new Date().toLocaleString()} · ${rows.length} event${rows.length === 1 ? '' : 's'}</div>
     <table><thead><tr><th>Timestamp</th><th>Type</th><th>Rule</th><th>Asset</th><th>Amount</th><th>Network</th><th>Provider</th><th>Result</th></tr></thead>
     <tbody>${body}</tbody></table>

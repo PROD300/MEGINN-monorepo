@@ -1,10 +1,10 @@
-# OBSIDIAN: Product Brief (v2.2 - Budget Optimized)
+# MEGINN: Product Brief (v2.2 - Budget Optimized)
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Версия | 2.1 |
 | Дата | 2026-04-17 |
 | Зрелость | Tier-1 Institutional Grade |

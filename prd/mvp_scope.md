@@ -1,7 +1,7 @@
-# OBSIDIAN: MVP Scope (v2.0 - Optimized Budget)
+# MEGINN: MVP Scope (v2.0 - Optimized Budget)
 
 ## MVP Definition
-**OBSIDIAN MVP** is a "Lean Institutional Automation" platform. Due to budget constraints, the focus is shifted from a broad feature set to a narrow, high-value core: **Autonomous Rebalancing** and **Legal Risk Management** for Family Offices.
+**MEGINN MVP** is a "Lean Institutional Automation" platform. Due to budget constraints, the focus is shifted from a broad feature set to a narrow, high-value core: **Autonomous Rebalancing** and **Legal Risk Management** for Family Offices.
 
 ## MVP Feature List (Absolute Minimum)
 

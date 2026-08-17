@@ -1,4 +1,4 @@
-// OBSIDIAN DS — Component Library
+// MEGINN DS — Component Library
 // Source: ds/components.md
 
 export * from './Button/Button'

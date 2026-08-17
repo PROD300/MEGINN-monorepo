@@ -54,7 +54,7 @@ export function LiabilityDashboard() {
     setDownloading(true)
     setTimeout(() => {
       const lines: string[] = []
-      lines.push('OBSIDIAN — Liability & Compliance Report')
+      lines.push('MEGINN — Liability & Compliance Report')
       lines.push(`Generated: ${new Date().toLocaleString()}`)
       lines.push('')
       lines.push('Platform Status,Operational')
@@ -84,7 +84,7 @@ export function LiabilityDashboard() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `obsidian-liability-report-${new Date().toISOString().slice(0, 10)}.csv`
+      link.download = `meginn-liability-report-${new Date().toISOString().slice(0, 10)}.csv`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)

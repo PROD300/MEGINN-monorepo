@@ -75,7 +75,7 @@ export function Onboarding() {
     setActivating(true)
     setTimeout(() => {
       setActivating(false)
-      showToast('success', 'Smart Account activated — welcome to OBSIDIAN')
+      showToast('success', 'Smart Account activated — welcome to MEGINN')
       navigate('/portfolio')
     }, 800)
   }
@@ -189,7 +189,7 @@ export function Onboarding() {
             </div>
 
             <div className={styles.successBanner}>
-              Once activated, OBSIDIAN will begin monitoring your portfolio. No funds move until you create rebalancing rules.
+              Once activated, MEGINN will begin monitoring your portfolio. No funds move until you create rebalancing rules.
             </div>
 
             <div className={styles.stepCta}>

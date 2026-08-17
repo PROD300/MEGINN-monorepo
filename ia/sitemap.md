@@ -1,13 +1,13 @@
-# Sitemap — OBSIDIAN v1.0 MVP
+# Sitemap — MEGINN v1.0 MVP
 
 > Зеркало этой структуры добавлено в Figma (файл Obsidian-MCP, страница «Sitemap», node `0:1`), 2026-08-09 — визуальная IA-диаграмма с теми же ветками и тегами `[core]`/`[core] F20`/`[v2]`.
 
 ```
 Landing_page [core] — публичная маркетинговая страница (pre-auth)
-  Navbar — OBSIDIAN logo + Features | Security | Who It's For | Request Access
+  Navbar — MEGINN logo + Features | Security | Who It's For | Request Access
   S1 Hero — "Your portfolio runs itself. You just review." + dashboard mockup
   S2 Problem — 3 карточки: ручное управление / личная ответственность / фрагментация инструментов
-  S3 How It Works — 3-tab demo: Set rules → OBSIDIAN runs → You review
+  S3 How It Works — 3-tab demo: Set rules → MEGINN runs → You review
   S4 Features — 6 карточек: F21, F01, F17, F15, F22, F20
   S5 Trust — Security & Compliance (2 колонки) + quote banner
   S6 Who — 2 persona-карточки: Family Office CIO / Corporate Treasury Manager

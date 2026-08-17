@@ -1,4 +1,4 @@
-# OBSIDIAN: Full Features List
+# MEGINN: Full Features List
 
 This list compiles all requirements and features identified across project artifacts.
 

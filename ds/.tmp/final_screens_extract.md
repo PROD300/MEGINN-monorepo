@@ -8,7 +8,7 @@
 **Назначение:** Глобальная шапка приложения — присутствует на всех экранах.
 
 **Анатомия:**
-- Logo (text «OBSIDIAN», DS/Body/sm Medium, text-on-dark-accent)
+- Logo (text «MEGINN», DS/Body/sm Medium, text-on-dark-accent)
 - Spacer (FILL)
 - StopAll (Button/primary/md instance — override цвет на red/error?)
 - Notifications (IconButton instance + Badge/info overlay)

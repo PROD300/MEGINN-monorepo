@@ -1,8 +1,8 @@
-# OBSIDIAN: Прото-персоны
+# MEGINN: Прото-персоны
 
 ## Источники данных
 
-- Бриф: `briefs/obsidian/brief.md` (v2.0)
+- Бриф: `briefs/meginn/brief.md` (v2.0)
 - Конкурентный анализ: `competitive_analysis_final.md` (v1.4)
 - UX-аудит: `audit/audit_report.md`
 

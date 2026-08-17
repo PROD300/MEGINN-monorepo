@@ -1,5 +1,5 @@
 /* ============================================================
-   OBSIDIAN Landing — behavior
+   MEGINN Landing — behavior
    ============================================================ */
 
 (function () {
@@ -545,9 +545,9 @@
     try {
       if (window.dataLayer) window.dataLayer.push({ event: name, props: props || {} });
     } catch (_) {}
-    console.log('[obsidian.track]', name, props || {});
+    console.log('[meginn.track]', name, props || {});
   }
-  window.__obsidianTrack = track;
+  window.__meginnTrack = track;
 
   // Bind explicit click events
   document.querySelectorAll('[data-evt]').forEach(function (el) {
@@ -567,7 +567,7 @@
   if (cal) {
     cal.addEventListener('click', function (e) {
       e.preventDefault();
-      alert('[Logical schema] Calendly popup would open here — integrate calendly.com/obsidian-team/30min');
+      alert('[Logical schema] Calendly popup would open here — integrate calendly.com/meginn-team/30min');
     });
   }
 

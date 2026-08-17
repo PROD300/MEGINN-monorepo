@@ -34,7 +34,7 @@ Standard AppShell: AppTopBar + AppSidebar + Main.
 
   **DocumentCard (Card/default instance 89:6, FILL, shadow-sm)**
   - Padding space-6 inside
-  - DocTitle: «OBSIDIAN Platform — Custodial Liability Agreement» DS/Heading/lg text-default
+  - DocTitle: «MEGINN Platform — Custodial Liability Agreement» DS/Heading/lg text-default
   - DocMeta: «Version 1.0 · Effective May 2026 · English» DS/Body/xs text-muted
   - Divider H-1 border-default
   
@@ -44,7 +44,7 @@ Standard AppShell: AppTopBar + AppSidebar + Main.
     
   - Section:
     - H3: «2. Bridge Operations (F20)»
-    - Text: «Cross-chain bridge operations via Li.Fi, Socket, and Across protocols are governed by their respective terms. OBSIDIAN provides routing and monitoring but is not responsible for bridge provider failures.»
+    - Text: «Cross-chain bridge operations via Li.Fi, Socket, and Across protocols are governed by their respective terms. MEGINN provides routing and monitoring but is not responsible for bridge provider failures.»
     
   - Section:
     - H3: «3. Emergency Stop (F22)»

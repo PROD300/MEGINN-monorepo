@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-/** Foundation — все переменные дизайн-системы OBSIDIAN. Primitive + Semantic + Typography. */
+/** Foundation — все переменные дизайн-системы MEGINN. Primitive + Semantic + Typography. */
 const meta = {
   title: 'Foundation/Tokens',
   tags: ['autodocs'],
@@ -77,7 +77,7 @@ function FoundationPage() {
         Foundation — Design Tokens
       </h1>
       <p style={{ fontFamily: 'var(--font-sans)', fontSize: 14, color: 'var(--text-muted)', marginBottom: 40 }}>
-        OBSIDIAN DS · Primitive + Semantic variables · All values sourced from <code>src/tokens/</code>
+        MEGINN DS · Primitive + Semantic variables · All values sourced from <code>src/tokens/</code>
       </p>
 
       {/* ── PRIMITIVE ─── */}

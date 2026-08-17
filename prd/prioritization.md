@@ -1,4 +1,4 @@
-# OBSIDIAN: MoSCoW Prioritization
+# MEGINN: MoSCoW Prioritization
 
 | Feature ID | Feature Name | Priority | Rationale |
 |------------|--------------|----------|-----------|

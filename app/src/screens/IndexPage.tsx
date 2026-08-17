@@ -15,7 +15,7 @@ export function IndexPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>OBSIDIAN — экраны</h1>
+        <h1 className={styles.title}>MEGINN — экраны</h1>
         <p className={styles.subtitle}>
           Static screens assembled from the design system. Logic and data are a separate step.
         </p>

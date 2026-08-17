@@ -8,7 +8,7 @@
 
 | Компонент | Откуда | Использование |
 |-----------|--------|---------------|
-| `AppTopBar` | base | Верхняя панель (OBSIDIAN, StopAll, user) |
+| `AppTopBar` | base | Верхняя панель (MEGINN, StopAll, user) |
 | `AppSidebar` | base | Боковое меню, `active="portfolio"` |
 | `StatCard` | base | ×3 — Total AUM, Active Rules, Last Rebalance |
 | `Table` | base | Asset Allocation: Asset / Allocation / Value |

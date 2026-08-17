@@ -1,4 +1,4 @@
-# OBSIDIAN: Tier-1 Metrics System
+# MEGINN: Tier-1 Metrics System
 
 ## Единый источник истины (Single Source of Truth)
 
@@ -202,7 +202,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ OBSIDIAN Dashboard — Institutional Grade              [Admin] │
+│ MEGINN Dashboard — Institutional Grade              [Admin] │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │ CORE METRICS                    CONTROL & COMPLIANCE        │
@@ -269,5 +269,5 @@
 
 ---
 
-*Этот документ — единый источник истины для метрик OBSIDIAN.*
+*Этот документ — единый источник истины для метрик MEGINN.*
 *Все последующие документы должны ссылаться на эту версию.*

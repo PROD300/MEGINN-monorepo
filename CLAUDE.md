@@ -1,9 +1,9 @@
-# OBSIDIAN — Project Context for Claude Code
+# MEGINN — Project Context for Claude Code
 
 Институциональная платформа автономного управления портфелем для Family Office CIO / Corporate Treasury Manager. B2B fintech, web, en.
 
 **Ключевые документы:**
-- `briefs/obsidian/brief.md` — продуктовый бриф v2.2
+- `briefs/meginn/brief.md` — продуктовый бриф v2.2
 - `prd/prd.md` — PRD
 - `prd/mvp_scope.md` — MVP scope
 - `ia/sitemap.md` — IA / sitemap

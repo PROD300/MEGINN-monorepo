@@ -1,4 +1,4 @@
-# Brand Brief — OBSIDIAN
+# Brand Brief — MEGINN
 
 | # | Вопрос | Ответ |
 |---|--------|-------|
@@ -8,7 +8,7 @@
 | 4 | Платформа | web |
 | 5 | Локаль | en |
 
-**Источник:** выведен автоматически из `briefs/obsidian/brief.md`, `ux/personas.md`, `ia/sitemap.md`.
+**Источник:** выведен автоматически из `briefs/meginn/brief.md`, `ux/personas.md`, `ia/sitemap.md`.
 
 **Продуктовый контекст:**  
 Институциональная платформа автономного управления портфелем ($40M–$500M AUM) для Family Office CIO и Corporate Treasury Manager. Конкурирует с Fireblocks, Goldman Sachs PM. Ключевые ценности: доверие, прозрачность, автоматизация, compliance.

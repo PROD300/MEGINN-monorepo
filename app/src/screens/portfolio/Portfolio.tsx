@@ -82,7 +82,7 @@ export function Portfolio() {
     setDownloading(true)
     setTimeout(() => {
       const lines: string[] = []
-      lines.push('OBSIDIAN — Portfolio Report')
+      lines.push('MEGINN — Portfolio Report')
       lines.push(`Generated: ${new Date().toLocaleString()}`)
       lines.push('')
       lines.push(`Total AUM,${formatUsd(totalAUM)}`)
@@ -104,7 +104,7 @@ export function Portfolio() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = `obsidian-portfolio-report-${new Date().toISOString().slice(0, 10)}.csv`
+      link.download = `meginn-portfolio-report-${new Date().toISOString().slice(0, 10)}.csv`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)

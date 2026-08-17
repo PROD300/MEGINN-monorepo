@@ -1,10 +1,10 @@
-# OBSIDIAN: UX Patterns — Конкуренты
+# MEGINN: UX Patterns — Конкуренты
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Дата | 2026-04-16 |
 | Версия | 1.0 |
 
@@ -22,7 +22,7 @@ All competitors:
 3. Deposit/start using
 ```
 
-**OBSIDIAN:** То же, но добавить:
+**MEGINN:** То же, но добавить:
 - Role selection (Admin/Operator/Investor/Auditor)
 - AI welcome ("Your portfolio has $X across Y chains...")
 - Guided first action
@@ -42,7 +42,7 @@ Common pattern:
 └─────────┴───────────────────────────┘
 ```
 
-**OBSIDIAN:** Добавить AI Insights panel справа
+**MEGINN:** Добавить AI Insights panel справа
 
 ### Navigation Structure
 ```
@@ -54,7 +54,7 @@ Common: Sidebar navigation
 - Settings
 ```
 
-**OBSIDIAN:** Добавить:
+**MEGINN:** Добавить:
 - AI Assistant (persistent)
 - Team Management (для enterprise)
 - Audit Logs (для compliance)
@@ -73,7 +73,7 @@ Common: Sidebar navigation
 | Pendle | Market-first, yield visualization |
 | Superform | Comparison table, auto-highlight best |
 
-**OBSIDIAN recommendation:** Combo approach
+**MEGINN recommendation:** Combo approach
 - Sortable list view (Yearn)
 - Quick compare toggle (Superform)
 - AI "recommended" badge
@@ -87,7 +87,7 @@ Common: Sidebar navigation
 | DeFi Saver | Multiple steps, safety warnings |
 | Pendle | Show PT/YT split upfront |
 
-**OBSIDIAN recommendation:**
+**MEGINN recommendation:**
 ```
 1. Action summary with AI risk score
 2. Multi-level approval (if enterprise)
@@ -105,7 +105,7 @@ Common: Sidebar navigation
 | Pendle | Yield breakdown, PT/YT split |
 | Superform | Cross-chain aggregate |
 
-**OBSIDIAN recommendation:**
+**MEGINN recommendation:**
 - Unified multi-chain view
 - AI-generated insights sidebar
 - Risk distribution visualization
@@ -113,9 +113,9 @@ Common: Sidebar navigation
 
 ---
 
-## 3. Recommended Patterns для OBSIDIAN
+## 3. Recommended Patterns для MEGINN
 
-### Onboarding (от Yearn + OBSIDIAN twist)
+### Onboarding (от Yearn + MEGINN twist)
 
 ```
 Step 1: Connect Wallet(s)
@@ -138,7 +138,7 @@ Step 5: AI First Action
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│ OBSIDIAN           [AI 💬] [🔔] [👤 Admin ▼]              │
+│ MEGINN           [AI 💬] [🔔] [👤 Admin ▼]              │
 ├─────────────┬──────────────────────────────────────────────┤
 │ Dashboard   │ ┌─────────────────┬──────────────────────────┐ │
 │ Wallets    │ │ Portfolio Value │ ▲ +12.4% (30d)          │ │
@@ -179,9 +179,9 @@ Step 5: AI First Action
 │                                         │
 │ ┌─────────────────────────────────────┐ │
 │ │ ✓✓ Approval Required (2 of 3)        │ │
-│ │ [✓] admin@obsidian.xyz — Approved    │ │
-│ │ [○] operator@obsidian.xyz — Pending  │ │
-│ │ [○] trader@obsidian.xyz — Pending    │ │
+│ │ [✓] admin@meginn.xyz — Approved    │ │
+│ │ [○] operator@meginn.xyz — Pending  │ │
+│ │ [○] trader@meginn.xyz — Pending    │ │
 │ └─────────────────────────────────────┘ │
 │                                         │
 │ [Cancel]                    [Approve]  │
@@ -225,7 +225,7 @@ Step 5: AI First Action
 3. **Yearn DeFi-only** — no enterprise features
 4. **Pendle complexity** — PT/YT confusing for newcomers
 
-### OBSIDIAN的不同 (differentiation):
+### MEGINN的不同 (differentiation):
 1. **AI-first** — AI is persistent, not optional
 2. **Role-based** — different views for different roles
 3. **Compliance-visible** — audit trail always visible
@@ -269,7 +269,7 @@ Step 5: AI First Action
 
 ---
 
-## 7. Key UX Differentiators для OBSIDIAN
+## 7. Key UX Differentiators для MEGINN
 
 | Feature | How It Works | Why It Matters |
 |---------|--------------|----------------|

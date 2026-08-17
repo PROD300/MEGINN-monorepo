@@ -9,7 +9,7 @@
 
 ### Header (64px высота, full-width)
 Идентичен Portfolio:
-- Logo «OBSIDIAN» (левый край)
+- Logo «MEGINN» (левый край)
 - Кнопка Emergency Stop — «⚠ Stop All» (центр-правее)
 - Иконка уведомлений с бейджем «3» (правый край)
 - Avatar 36×36 + «James Harrington» (правый край)

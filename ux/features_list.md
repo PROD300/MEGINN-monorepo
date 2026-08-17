@@ -1,4 +1,4 @@
-# OBSIDIAN: Полный список фич
+# MEGINN: Полный список фич
 
 **Дата:** 2026-04-17  
 **Версия:** 1.0  
@@ -71,7 +71,7 @@
 
 | # | Фича | Описание | Источник | Для персоны |
 |---|------|---------|---------|-------------|
-| F14 | OBSIDIAN Token | Simplified utility token. |brief | — |
+| F14 | MEGINN Token | Simplified utility token. |brief | — |
 | F15 | Structured Products | Tranches, risk layers. |brief | P2 |
 | **F26** | Avalanche Network | Structural products, subnets. |interview | P2 |
 | **Routing Aggregation** | Best price routing. |personas (P3) | P3 |

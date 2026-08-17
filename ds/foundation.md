@@ -1,4 +1,4 @@
-# Foundation — OBSIDIAN Design System
+# Foundation — MEGINN Design System
 
 **Бриф:** финтех · b2b · строгий, надёжный · web · en
 

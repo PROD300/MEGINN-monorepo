@@ -1,4 +1,4 @@
-# OBSIDIAN
+# MEGINN
 
 *desktop-first web app*
 

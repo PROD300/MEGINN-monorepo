@@ -1,10 +1,10 @@
-# Gemini Deep Research Prompt: OBSIDIAN
+# Gemini Deep Research Prompt: MEGINN
 
 ---
 
 ## Контекст продукта
 
-**OBSIDIAN** — система интеллектуального управления капиталом в блокчейн-среде. Специализированная платформа для крупных клиентов и инвестиционных структур (B2B).
+**MEGINN** — система интеллектуального управления капиталом в блокчейн-среде. Специализированная платформа для крупных клиентов и инвестиционных структур (B2B).
 
 **Ключевые компетенции:**
 1. AI-ассистент (анализ портфеля, предсказание рисков, предложения на естественном языке)
@@ -41,7 +41,7 @@
 
 ### 3. Регуляторный ландшафт 2025-2026
 
-**Вопрос:** Какие регуляторные изменения ожидаются для security tokens и tokenized assets в EU (MiCA), US (SEC), UAE, Singapore в 2025-2026? Как это влияет на compliance-требования для платформ типа OBSIDIAN?
+**Вопрос:** Какие регуляторные изменения ожидаются для security tokens и tokenized assets в EU (MiCA), US (SEC), UAE, Singapore в 2025-2026? Как это влияет на compliance-требования для платформ типа MEGINN?
 
 Ищи: security token regulation 2025, MiCA compliance, tokenized securities regulation, SEC crypto framework
 
@@ -84,7 +84,7 @@
 Верни структурированный отчёт со ссылками на источники:
 
 ```
-# Deep Research Report: OBSIDIAN
+# Deep Research Report: MEGINN
 
 ## 1. AI in DeFi Market
 [Статистика, ключевые игроки, funding, trends]
@@ -107,7 +107,7 @@
 ## 7. ERC-4626 & RWA Standards
 [Adoption stats, emerging standards, market size]
 
-## 8. Key Insights for OBSIDIAN
+## 8. Key Insights for MEGINN
 [Как полученные данные влияют на нашу стратегию]
 
 ## Sources

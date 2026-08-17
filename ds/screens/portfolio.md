@@ -10,7 +10,7 @@
 ### AppTopBar
 - Component instance (new A)
 - FILL × FIXED 64px
-- Content: OBSIDIAN logo · Spacer · Stop All button (Button/primary/md, error-red override) · Bell icon (Lucide/bell 20px) + Badge/info «3» · «James Harrington» text · Avatar placeholder 36×36
+- Content: MEGINN logo · Spacer · Stop All button (Button/primary/md, error-red override) · Bell icon (Lucide/bell 20px) + Badge/info «3» · «James Harrington» text · Avatar placeholder 36×36
 
 ### AppSidebar
 - Component instance (new B)

@@ -15,7 +15,7 @@
 
 | Блок | Описание |
 |------|----------|
-| `LogoBlock` | OBSIDIAN + tagline "Institutional Portfolio Management" |
+| `LogoBlock` | MEGINN + tagline "Institutional Portfolio Management" |
 | `WalletSection` | hint + Connect Wallet button + supported wallets caption |
 | `OrDiv` | разделитель "or" между секциями входа |
 | `EmailSection` | hint + 2 Input + Sign In button |
@@ -29,7 +29,7 @@
 
 ## Статика (контент из макета)
 
-- OBSIDIAN / Institutional Portfolio Management
+- MEGINN / Institutional Portfolio Management
 - Connect Wallet / MetaMask · Ledger · Gnosis Safe
 - Work email / Password placeholders, Sign In
 - Forgot password? / Request Access →

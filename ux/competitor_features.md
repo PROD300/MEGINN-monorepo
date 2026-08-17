@@ -1,10 +1,10 @@
-# OBSIDIAN: Feature Matrix — Конкуренты
+# MEGINN: Feature Matrix — Конкуренты
 
 ## Метаданные
 
 | Параметр | Значение |
 |----------|----------|
-| Инициатива | OBSIDIAN |
+| Инициатива | MEGINN |
 | Дата | 2026-04-17 |
 | Версия | 1.2 |
 | Статус | v2.1 (Interview Insights) |
@@ -13,7 +13,7 @@
 
 ## Сравнительная таблица фич
 
-| Фича | OBSIDIAN | Yearn | Instadapp | DeFi Saver | Pendle | Superform |
+| Фича | MEGINN | Yearn | Instadapp | DeFi Saver | Pendle | Superform |
 |------|----------|-------|-----------|------------|--------|-----------|
 | **Core Platform** |
 | Multi-chain support | ✅ | ⚠️ | ✅ | ❌ | ⚠️ | ✅ |
@@ -74,7 +74,7 @@
 
 ---
 
-## Уникальные фичи OBSIDIAN
+## Уникальные фичи MEGINN
 
 ### Фичи, которых нет ни у одного конкурента
 
@@ -107,7 +107,7 @@
 
 ### Must Have (M) — Industry Standard
 
-| Фича | Готовность OBSIDIAN | Конкуренты |
+| Фича | Готовность MEGINN | Конкуренты |
 |------|---------------------|------------|
 | Multi-chain support | ✅ MVP | ✅ Все (кроме DeFi Saver) |
 | ERC-4626 vaults | ✅ MVP | ✅ Yearn, Superform |
@@ -117,7 +117,7 @@
 
 ### Should Have (S) — Competitive Differentiation
 
-| Фича | Готовность OBSIDIAN | Конкуренты |
+| Фича | Готовность MEGINN | Конкуренты |
 |------|---------------------|------------|
 | AI Portfolio Analysis | ✅ MVP | ❌ **Whitespace** |
 | AI Risk Prediction | ✅ MVP | ❌ **Whitespace** |
@@ -129,7 +129,7 @@
 
 ### Could Have (C) — Future Moonshots
 
-| Фича | Готовность OBSIDIAN | Конкуренты |
+| Фича | Готовность MEGINN | Конкуренты |
 |------|---------------------|------------|
 | Agent NFT | ✅ MVP | ❌ **Whitespace** |
 | Real-world asset tokenization | ✅ MVP | ❌ **Whitespace** |

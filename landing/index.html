@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OBSIDIAN — Institutional Digital Asset Portfolio Automation</title>
+  <title>MEGINN — Institutional Digital Asset Portfolio Automation</title>
   <meta name="description" content="AI-native platform for Family Offices and Corporate Treasuries. Autonomous portfolio rebalancing with full legal coverage. Built for $10M+ AUM." />
-  <meta property="og:title" content="OBSIDIAN: Set your rules. We manage the rest." />
+  <meta property="og:title" content="MEGINN: Set your rules. We manage the rest." />
   <meta property="og:description" content="Institutional portfolio automation for Family Offices and Corporate Treasuries. Ethereum & Arbitrum. Legal/Custodian Framework included." />
 
   <link rel="stylesheet" href="ds/colors_and_type.css" />
@@ -36,7 +36,7 @@
 <!-- ====================================================== HEADER -->
 <header class="nav" id="nav">
   <div class="nav__inner">
-    <a href="#top" class="nav__brand" aria-label="OBSIDIAN home">OBSIDIAN</a>
+    <a href="#top" class="nav__brand" aria-label="MEGINN home">MEGINN</a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#features">Features</a>
       <a href="#trust">Security</a>
@@ -74,7 +74,7 @@
         <span class="h1__muted">You just review.</span>
       </h1>
       <p class="lede hero__reveal" style="--d:180ms">
-        OBSIDIAN is an AI-native platform for Family Offices and Corporate
+        MEGINN is an AI-native platform for Family Offices and Corporate
         Treasuries that manages digital asset portfolios autonomously —
         within your rules, with full legal coverage.
       </p>
@@ -190,7 +190,7 @@
            see the createAlphaCanvasIcon comment in landing.js for why. -->
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="assets/3D-icons/obsidian-icon-sparks.webm" type="video/webm">
+          <source src="assets/3D-icons/meginn-icon-sparks.webm" type="video/webm">
         </video>
         <h3 class="pcard__h">Manual management eats time.</h3>
         <p class="pcard__b">You're approving every rebalance transaction manually. A $40M crypto allocation shouldn't require daily attention.</p>
@@ -198,7 +198,7 @@
 
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="assets/3D-icons/obsidian-icon-stack.webm" type="video/webm">
+          <source src="assets/3D-icons/meginn-icon-stack.webm" type="video/webm">
         </video>
         <h3 class="pcard__h">Personal liability is unclear.</h3>
         <p class="pcard__b">When an automated trade goes wrong — who is responsible? Most platforms leave that question unanswered.</p>
@@ -206,7 +206,7 @@
 
       <article class="pcard reveal">
         <video class="pcard__icon3d" muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="assets/3D-icons/obsidian-icon-tooling.webm" type="video/webm">
+          <source src="assets/3D-icons/meginn-icon-tooling.webm" type="video/webm">
         </video>
         <h3 class="pcard__h">Five tools, zero coherence.</h3>
         <p class="pcard__b">Ledger for custody, Excel for tracking, email for approvals, phone calls to the bank. Institutional management deserves better.</p>
@@ -238,7 +238,7 @@
         <button class="howtab" role="tab" data-step="1">
           <span class="howtab__no">02</span>
           <span class="howtab__txt">
-            <span class="howtab__t">OBSIDIAN runs it</span>
+            <span class="howtab__t">MEGINN runs it</span>
             <span class="howtab__s">AI monitors 24/7</span>
           </span>
           <span class="howtab__bar"><i></i></span>
@@ -258,7 +258,7 @@
         <article class="howpanel is-active" data-step="0" role="tabpanel" aria-labelledby="howtab-0">
           <div class="howpanel__copy">
             <div class="howpanel__eyebrow">Step 01 · Once</div>
-            <h3 class="howpanel__h">Tell OBSIDIAN how your capital should sit.</h3>
+            <h3 class="howpanel__h">Tell MEGINN how your capital should sit.</h3>
             <p class="howpanel__b">Allocation targets, ceilings, floors, slippage tolerance, approval delegation. Signed once — by you and your custodian — and the rules are live.</p>
             <ul class="howpanel__list">
               <li><span class="ok">✓</span> Plain-language allocation policy</li>
@@ -272,7 +272,7 @@
               <div class="ruleed__chrome">
                 <span class="ruleed__dots"><i></i><i></i><i></i></span>
                 <span class="ruleed__file">allocation.policy</span>
-                <span class="ruleed__lang">·obsidian-dsl</span>
+                <span class="ruleed__lang">·meginn-dsl</span>
               </div>
               <pre class="ruleed__code"><span class="ln" style="--d:0ms"><span class="ln__n">1</span><span class="cmt">// Allocation policy — Carmichael FO</span></span><span class="ln" style="--d:280ms"><span class="ln__n">2</span><span class="kw">target</span>  RWA   <span class="op">=</span> <span class="num">50.0%</span></span><span class="ln" style="--d:520ms"><span class="ln__n">3</span><span class="kw">ceiling</span> ETH   <span class="op">≤</span> <span class="num">30.0%</span></span><span class="ln" style="--d:760ms"><span class="ln__n">4</span><span class="kw">floor</span>   USDC  <span class="op">≥</span> <span class="num">20.0%</span></span><span class="ln" style="--d:1000ms"><span class="ln__n">5</span><span class="kw">risk</span>    slippage <span class="op">≤</span> <span class="num">0.50%</span></span><span class="ln" style="--d:1240ms"><span class="ln__n">6</span><span class="kw">exec</span>    networks <span class="op">=</span> [<span class="str">ETH</span>, <span class="str">ARB</span>]</span><span class="ln" style="--d:1480ms"><span class="ln__n">7</span><span class="kw">delegate</span> approval <span class="op">=</span> <span class="str">CIO</span></span><span class="ln" style="--d:1720ms"><span class="ln__n">8</span><span class="cur">▎</span></span></pre>
               <div class="ruleed__foot">
@@ -288,7 +288,7 @@
           <div class="howpanel__copy">
             <div class="howpanel__eyebrow">Step 02 · Continuous</div>
             <h3 class="howpanel__h">The system rebalances inside your rules.</h3>
-            <p class="howpanel__b">Markets move. Allocations drift. OBSIDIAN watches every block on both networks — when a threshold is crossed it executes, no approval required.</p>
+            <p class="howpanel__b">Markets move. Allocations drift. MEGINN watches every block on both networks — when a threshold is crossed it executes, no approval required.</p>
             <ul class="howpanel__list">
               <li><span class="ok">✓</span> Block-level monitoring, every chain</li>
               <li><span class="ok">✓</span> Slippage guard aborts unsafe trades</li>
@@ -406,7 +406,7 @@
           <div class="howline__eyebrow">Once</div>
           <h3 class="howline__h">Set your rules.</h3>
           <p class="howline__lede">Define your allocation strategy in plain language.</p>
-          <p class="howline__b">Tell OBSIDIAN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup, counter-signed by your custodian.</p>
+          <p class="howline__b">Tell MEGINN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup, counter-signed by your custodian.</p>
           <div class="howline__chips">
             <span class="chip chip--ghost">Plain-language DSL</span>
             <span class="chip chip--ghost">Slippage caps</span>
@@ -420,7 +420,7 @@
         </div>
         <div class="howline__body">
           <div class="howline__eyebrow">Continuous</div>
-          <h3 class="howline__h">OBSIDIAN runs automatically.</h3>
+          <h3 class="howline__h">MEGINN runs automatically.</h3>
           <p class="howline__lede">AI monitors and rebalances 24/7.</p>
           <p class="howline__b">The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed.</p>
           <p class="howline__foot"><span class="bullet">●</span> Protected by <a href="#features">Emergency Stop</a> · Slippage guard aborts unsafe trades</p>
@@ -447,12 +447,12 @@
         <div class="step__line" aria-hidden="true"></div>
         <h3 class="step__h">Set your rules.</h3>
         <p class="step__lede">Define your allocation strategy.</p>
-        <p class="step__b">Tell OBSIDIAN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup.</p>
+        <p class="step__b">Tell MEGINN: <span class="mono">"Keep RWA at 50%, ETH below 30%."</span> Set risk thresholds, networks, and approval delegation. One-time setup.</p>
       </li>
       <li class="step reveal">
         <div class="step__no">02</div>
         <div class="step__line" aria-hidden="true"></div>
-        <h3 class="step__h">OBSIDIAN runs automatically.</h3>
+        <h3 class="step__h">MEGINN runs automatically.</h3>
         <p class="step__lede">AI monitors and rebalances 24/7.</p>
         <p class="step__b">The system continuously tracks your portfolio across Ethereum and Arbitrum. When a threshold is crossed, it rebalances — no manual approval needed.</p>
         <p class="step__foot"><span class="bullet">●</span> Protected by <a href="#features">Emergency Stop</a></p>
@@ -513,9 +513,9 @@
             </span>
           </div>
           <h3 class="fcard__h">Legal &amp; custodian coverage</h3>
-          <p class="fcard__b">Explicit liability framework: OBSIDIAN's role, custodian's role, and your role — documented and signed before any automation runs.</p>
+          <p class="fcard__b">Explicit liability framework: MEGINN's role, custodian's role, and your role — documented and signed before any automation runs.</p>
           <div class="fcard__legal">
-            <div class="legal-row"><span class="legal-row__k">OBSIDIAN</span><span class="legal-row__v">Rule execution &amp; audit</span></div>
+            <div class="legal-row"><span class="legal-row__k">MEGINN</span><span class="legal-row__v">Rule execution &amp; audit</span></div>
             <div class="legal-row"><span class="legal-row__k">Custodian</span><span class="legal-row__v">Asset safekeeping</span></div>
             <div class="legal-row"><span class="legal-row__k">You</span><span class="legal-row__v">Strategy &amp; approvals</span></div>
           </div>
@@ -616,7 +616,7 @@
 
     <div class="quote">
       <div class="quote__mark">“</div>
-      <p class="quote__t">Institutional DeFi engagement projected to grow from <b>24%</b> to <b>75%</b> by 2027. OBSIDIAN is infrastructure for what comes next.</p>
+      <p class="quote__t">Institutional DeFi engagement projected to grow from <b>24%</b> to <b>75%</b> by 2027. MEGINN is infrastructure for what comes next.</p>
       <div class="quote__src">— Source: Institutional Digital Asset Report, 2026</div>
     </div>
   </div>
@@ -644,7 +644,7 @@
         </dl>
         <div class="wcard__quote">
           <div class="wcard__mark">&ldquo;</div>
-          <p class="wcard__q">OBSIDIAN handles the execution. I handle the strategy.</p>
+          <p class="wcard__q">MEGINN handles the execution. I handle the strategy.</p>
         </div>
       </article>
 
@@ -666,7 +666,7 @@
     </div>
 
     <p class="anti-pos">
-      <b>Not a fit:</b> retail investors, trading desks, yield farmers. OBSIDIAN is built for
+      <b>Not a fit:</b> retail investors, trading desks, yield farmers. MEGINN is built for
       governance-heavy institutional environments with $10M+ in digital assets.
     </p>
   </div>
@@ -680,7 +680,7 @@
         <div class="ds-label" style="color:var(--accent-300)">Early Access · 2026 Q3</div>
         <h2 class="h2 h2--inverse">Join institutional-grade portfolio automation.</h2>
         <p class="sub sub--inverse">
-          OBSIDIAN is currently in closed early access. We onboard a limited number of
+          MEGINN is currently in closed early access. We onboard a limited number of
           family offices and corporate treasuries per quarter.
         </p>
         <ul class="access__ticks">
@@ -745,7 +745,7 @@
   <div class="container">
     <div class="foot__grid">
       <div class="foot__brand">
-        <div class="foot__mark">OBSIDIAN</div>
+        <div class="foot__mark">MEGINN</div>
         <p class="foot__tag">Institutional portfolio automation.</p>
       </div>
       <div class="foot__col">
@@ -767,8 +767,8 @@
       </div>
     </div>
     <div class="foot__bottom">
-      <span>© 2026 OBSIDIAN. All rights reserved.</span>
-      <span>Smart Accounts secured by account abstraction. OBSIDIAN does not hold custody of user assets.</span>
+      <span>© 2026 MEGINN. All rights reserved.</span>
+      <span>Smart Accounts secured by account abstraction. MEGINN does not hold custody of user assets.</span>
     </div>
   </div>
 </footer>

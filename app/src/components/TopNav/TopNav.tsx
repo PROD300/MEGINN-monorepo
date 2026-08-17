@@ -42,7 +42,7 @@ export function TopNav({
   return (
     <div className={styles.topnavWrap}>
       <header className={[styles.topnav, glow === 'subtle' ? styles.subtleGlow : ''].join(' ')}>
-        <span className={styles.logo} onClick={() => navigate('/portfolio')}>OBSIDIAN</span>
+        <span className={styles.logo} onClick={() => navigate('/portfolio')}>MEGINN</span>
 
         <nav className={styles.nav}>
           {primaryNav.map(item => (

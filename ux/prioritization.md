@@ -1,4 +1,4 @@
-# OBSIDIAN: Приоритизация по MoSCoW
+# MEGINN: Приоритизация по MoSCoW
 
 **Дата:** 2026-04-17  
 **Версия:** 1.0
@@ -55,7 +55,7 @@
 
 | # | Фича | Для кого |
 |---|------|---------|
-| F14 | OBSIDIAN Token | — |
+| F14 | MEGINN Token | — |
 | F15 | Structured Products | P2 |
 | **F26** | Avalanche Network | P2 |
 | Welcome/Onboarding | P2 | |
@@ -91,7 +91,7 @@ Must Have фичи без дополнительных маркировок — 
 ### Post-MVP v1.2 (Sprint 5-6)
 
 - F11 (RWA tokenization)
-- F14 (OBSIDIAN Token)
+- F14 (MEGINN Token)
 - Welcome/Onboarding
 - F15 (Structured Products)
 
