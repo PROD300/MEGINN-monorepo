@@ -7,6 +7,14 @@
    (2026-08-09/10). This file mirrors those PRIMITIVE values so
    landing and app share one brand system.
 
+   Synced again 2026-08-17 — accent ramp replaced with Petrol
+   (#1C7EA0, was indigo/violet #4B34F5) for the OBSIDIAN → MEGINN
+   rebrand. This mirror had been missed in that pass — the app's
+   tokens changed but this file (and the hardcoded rgba(75,52,245,…)
+   glow/shadow literals throughout landing.css) still pointed at the
+   old accent, which is why the landing page kept showing the old
+   color after the app was already updated.
+
    Updated 2026-08-11: semantic tokens are now a full 1:1 copy of
    the app's semantics.css — landing went fully dark-by-default too
    (surface-default → gray-950, text-default → gray-00), per Daria:
@@ -43,13 +51,13 @@
      LAYER 1 — PRIMITIVE TOKENS
      ------------------------------------------------------------ */
 
-  /* Accent — synced to app's "Ice Blue" pilot ramp, 2026-08-09/10 */
-  --accent-50:  #F0EEFF;
-  --accent-100: #DEDAFF;
-  --accent-300: #9C8DFA;
-  --accent-500: #4B34F5;  /* primary action */
-  --accent-700: #2E1FB8;  /* primary action hover */
-  --accent-900: #180F5C;
+  /* Accent — synced to app's Petrol ramp, 2026-08-17 (was Ice Blue indigo/violet) */
+  --accent-50:  #E8F3F6;
+  --accent-100: #CDE7EC;
+  --accent-300: #6FBBCB;
+  --accent-500: #1C7EA0;  /* primary action */
+  --accent-700: #145C77;  /* primary action hover */
+  --accent-900: #0B3546;
 
   /* Gray — Cool (9-step), unchanged */
   --gray-00:  #FFFFFF;
@@ -65,17 +73,17 @@
   /* Functional — converged on the single accent, 2026-08-10.
      Status is read by icon + copy, not by hue, across the whole
      product now. See ds/foundation.md. */
-  --success-500: #4B34F5;
-  --warning-500: #4B34F5;
-  --error-500:   #4B34F5;
-  --info-500:    #4B34F5;
+  --success-500: #1C7EA0;
+  --warning-500: #1C7EA0;
+  --error-500:   #1C7EA0;
+  --info-500:    #1C7EA0;
 
   /* Status backgrounds (10% tints, used on banners + toasts) —
      same accent tint across all four, matching app/semantics.css */
-  --bg-success: rgba(75, 52, 245, 0.10);
-  --bg-warning: rgba(75, 52, 245, 0.10);
-  --bg-error:   rgba(75, 52, 245, 0.10);
-  --bg-info:    rgba(75, 52, 245, 0.10);
+  --bg-success: rgba(28, 126, 160, 0.10);
+  --bg-warning: rgba(28, 126, 160, 0.10);
+  --bg-error:   rgba(28, 126, 160, 0.10);
+  --bg-info:    rgba(28, 126, 160, 0.10);
 
   /* Spacing scale */
   --space-1:  4px;
