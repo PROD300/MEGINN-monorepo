@@ -154,13 +154,20 @@
 }
 
 /* ─── FooterStats ─── */
-.footerStats {
+/* Two-layer, same pattern as pageHeaderWrap/pageHeader — see the identical
+   fix/comment in RebalancingRules.module.css for why border-top needs its
+   own wrap instead of sitting on the pageBlock-composed element directly. */
+.footerStatsWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.footerStats {
   display: flex;
   align-items: center;
-  padding: var(--space-3) var(--space-5) var(--space-8);
+  padding: var(--space-3) 0 var(--space-8);
   font-size: var(--size-sm);
   color: var(--text-muted);
   border-top: 1px solid var(--border-default);
-  flex-shrink: 0;
 }

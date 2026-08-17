@@ -142,15 +142,24 @@
 }
 
 /* ─── FooterStats ─── */
-.footerStats {
+/* Two-layer, same pattern as pageHeaderWrap/pageHeader: border-top (and the
+   tinted background) need to sit inset by space-5 to align with the rest of
+   the page, not on the raw pageBlock box — a border/background on the same
+   element as the pageBlock composition ignores that element's own padding
+   and ends up wider than everything else. */
+.footerStatsWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.footerStats {
   display: flex;
   gap: var(--space-8);
-  padding: var(--space-3) var(--space-5) var(--space-8);
+  padding: var(--space-3) 0 var(--space-8);
   background: var(--surface-subtle);
   border-top: 1px solid var(--border-default);
   font-size: var(--size-xs);
   color: var(--text-muted);
-  flex-shrink: 0;
   flex-wrap: wrap;
 }

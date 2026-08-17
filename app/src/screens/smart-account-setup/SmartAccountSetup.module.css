@@ -43,14 +43,23 @@
 }
 
 /* ─── Section ─── */
-.section {
+/* Two-layer, same pattern as pageHeaderWrap/pageHeader: border-bottom needs
+   to sit inset by space-5 to align with the title/banner above it, not on
+   the raw pageBlock box (border draws at the outer edge regardless of the
+   element's own padding, so a border on the same element as the pageBlock
+   composition ends up wider than everything else on the page). */
+.sectionWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.section {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-4) 0;
   border-bottom: 1px solid var(--border-default);
-  flex-shrink: 0;
 }
 
 .secTitle {
@@ -140,13 +149,20 @@
 }
 
 /* ─── SecuritySection ─── */
-.secSection {
+/* Same two-layer split as .sectionWrap/.section above — kept consistent
+   even though this element has no border of its own today, so it doesn't
+   silently reintroduce the same bug if one gets added later. */
+.secSectionWrap {
   composes: pageBlock from '../../tokens/layout.module.css';
+  padding: 0 var(--space-5);
+  flex-shrink: 0;
+}
+
+.secSection {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-4) var(--space-5) var(--space-8);
-  flex-shrink: 0;
+  padding: var(--space-4) 0 var(--space-8);
 }
 
 .secRow {

@@ -133,8 +133,10 @@ export function RuleDetail() {
           </div>
 
           {/* FooterStats */}
-          <div className={styles.footerStats}>
-            Total executed: 4 times · Total volume: $20.6M · Avg execution: 40 sec
+          <div className={styles.footerStatsWrap}>
+            <div className={styles.footerStats}>
+              Total executed: 4 times · Total volume: $20.6M · Avg execution: 40 sec
+            </div>
           </div>
         </main>
       </div>

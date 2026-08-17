@@ -95,9 +95,11 @@ export function RebalancingRules() {
           </div>
 
           {/* FooterStats */}
-          <div className={styles.footerStats}>
-            <span>Automation volume: $6 000 000 managed in last 24h</span>
-            <span>Cross-chain: $2 100 000 bridged · Bridge: Li.Fi | Next check: in 14 min</span>
+          <div className={styles.footerStatsWrap}>
+            <div className={styles.footerStats}>
+              <span>Automation volume: $6 000 000 managed in last 24h</span>
+              <span>Cross-chain: $2 100 000 bridged · Bridge: Li.Fi | Next check: in 14 min</span>
+            </div>
           </div>
         </main>
       </div>

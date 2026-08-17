@@ -110,78 +110,84 @@ export function SmartAccountSetup() {
           </Banner>
 
           {/* WalletsSection */}
-          <div className={styles.section}>
-            <span className={styles.secTitle}>Connected Wallets</span>
-            <div className={styles.walletList}>
-              {wallets.map((w) => (
-                <div className={styles.walletRow} key={w.name}>
-                  <span className={styles.walletIcon}>
-                    <w.icon size={20} />
-                  </span>
-                  <div className={styles.walletMid}>
-                    <span className={styles.walletName}>{w.name}</span>
-                    <span className={[styles.walletMeta, styles.walletAddress].join(' ')}>{w.address}</span>
-                    <span className={styles.walletMeta}>{w.networks}</span>
+          <div className={styles.sectionWrap}>
+            <div className={styles.section}>
+              <span className={styles.secTitle}>Connected Wallets</span>
+              <div className={styles.walletList}>
+                {wallets.map((w) => (
+                  <div className={styles.walletRow} key={w.name}>
+                    <span className={styles.walletIcon}>
+                      <w.icon size={20} />
+                    </span>
+                    <div className={styles.walletMid}>
+                      <span className={styles.walletName}>{w.name}</span>
+                      <span className={[styles.walletMeta, styles.walletAddress].join(' ')}>{w.address}</span>
+                      <span className={styles.walletMeta}>{w.networks}</span>
+                    </div>
+                    <div className={styles.walletActions}>
+                      <Badge variant="success">{w.badgeLabel}</Badge>
+                      <Button variant="primary" size="sm">Disconnect</Button>
+                    </div>
                   </div>
-                  <div className={styles.walletActions}>
-                    <Badge variant="success">{w.badgeLabel}</Badge>
-                    <Button variant="primary" size="sm">Disconnect</Button>
-                  </div>
+                ))}
+                <div className={styles.addWalletRow}>
+                  <Plus size={16} className={styles.addWalletIcon} />
+                  <span>Connect another wallet</span>
                 </div>
-              ))}
-              <div className={styles.addWalletRow}>
-                <Plus size={16} className={styles.addWalletIcon} />
-                <span>Connect another wallet</span>
               </div>
             </div>
           </div>
 
           {/* RolesSection */}
-          <div className={styles.section}>
-            <span className={styles.secTitle}>Roles &amp; Permissions</span>
-            <div className={styles.roleList}>
-              {roles.map((r) => (
-                <RoleRow
-                  key={r.id}
-                  status={r.status}
-                  name={r.name}
-                  role={r.role}
-                  address={r.address}
-                  badge={<Badge variant="success">Active</Badge>}
-                />
-              ))}
+          <div className={styles.sectionWrap}>
+            <div className={styles.section}>
+              <span className={styles.secTitle}>Roles &amp; Permissions</span>
+              <div className={styles.roleList}>
+                {roles.map((r) => (
+                  <RoleRow
+                    key={r.id}
+                    status={r.status}
+                    name={r.name}
+                    role={r.role}
+                    address={r.address}
+                    badge={<Badge variant="success">Active</Badge>}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* SecuritySection */}
-          <div className={styles.secSection}>
-            <span className={styles.secTitle}>Security Settings</span>
-            <div className={styles.secRow}>
-              <Fingerprint size={16} className={styles.secRowIcon} />
-              <div className={styles.secRowText}>
-                <span className={styles.secRowLabel}>Multi-sig required for amounts above</span>
-                <span className={styles.secRowCaption}>
-                  Transactions above this amount require approval from a second signer before executing.
+          <div className={styles.secSectionWrap}>
+            <div className={styles.secSection}>
+              <span className={styles.secTitle}>Security Settings</span>
+              <div className={styles.secRow}>
+                <Fingerprint size={16} className={styles.secRowIcon} />
+                <div className={styles.secRowText}>
+                  <span className={styles.secRowLabel}>Multi-sig required for amounts above</span>
+                  <span className={styles.secRowCaption}>
+                    Transactions above this amount require approval from a second signer before executing.
+                  </span>
+                </div>
+                <div className={styles.secInputWrap}>
+                  <Input
+                    value={thresholdInput}
+                    onChange={e => setThresholdInput(e.target.value)}
+                    variant={thresholdError ? 'error' : 'default'}
+                    errorMessage={thresholdError}
+                  />
+                </div>
+              </div>
+              <div className={styles.secRow}>
+                <Fingerprint size={16} className={styles.secRowIcon} />
+                <span className={styles.secRowLabel}>
+                  Hardware wallet confirmation for critical actions
                 </span>
+                <Toggle checked={hardwareConfirm} onChange={setHardwareConfirm} />
               </div>
-              <div className={styles.secInputWrap}>
-                <Input
-                  value={thresholdInput}
-                  onChange={e => setThresholdInput(e.target.value)}
-                  variant={thresholdError ? 'error' : 'default'}
-                  errorMessage={thresholdError}
-                />
+              <div className={styles.secCta}>
+                <Button variant="primary" size="sm" onClick={handleSaveSecurity}>Save Security Settings</Button>
               </div>
-            </div>
-            <div className={styles.secRow}>
-              <Fingerprint size={16} className={styles.secRowIcon} />
-              <span className={styles.secRowLabel}>
-                Hardware wallet confirmation for critical actions
-              </span>
-              <Toggle checked={hardwareConfirm} onChange={setHardwareConfirm} />
-            </div>
-            <div className={styles.secCta}>
-              <Button variant="primary" size="sm" onClick={handleSaveSecurity}>Save Security Settings</Button>
             </div>
           </div>
         </main>
