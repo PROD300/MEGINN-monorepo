@@ -627,6 +627,13 @@
     var paused = false;
     var inView = false;
 
+    // translateZ(0) alongside scaleX keeps this bar on its own compositor
+    // layer in Safari/WebKit, which otherwise can fall back to repainting
+    // this 2px-tall element on every write instead of compositing it.
+    function setBar(bar, pct) {
+      if (bar) bar.style.transform = 'translateZ(0) scaleX(' + pct + ')';
+    }
+
     function setActive(i, fromUser) {
       active = i;
       howdemo.setAttribute('data-active', String(i));
@@ -634,11 +641,9 @@
         t.classList.toggle('is-active', idx === i);
         t.classList.toggle('is-done', idx < i);
         var bar = t.querySelector('.howtab__bar i');
-        if (bar) {
-          if (idx < i) bar.style.transform = 'scaleX(1)';
-          else if (idx > i) bar.style.transform = 'scaleX(0)';
-          // bar for idx === i is animated by the raf loop
-        }
+        if (idx < i) setBar(bar, 1);
+        else if (idx > i) setBar(bar, 0);
+        // bar for idx === i is animated by the raf loop
       });
       // Re-trigger panel animations
       panels.forEach(function (p, idx) {
@@ -660,8 +665,7 @@
       if (!startTs) startTs = ts;
       var dt = ts - startTs;
       var pct = Math.min(1, dt / DURATION);
-      var bar = tabs[active] && tabs[active].querySelector('.howtab__bar i');
-      if (bar) bar.style.transform = 'scaleX(' + pct + ')';
+      setBar(tabs[active] && tabs[active].querySelector('.howtab__bar i'), pct);
       if (pct >= 1) {
         startTs = 0;
         setActive((active + 1) % tabs.length, false);
@@ -672,8 +676,7 @@
     function restartTimer() {
       if (raf) cancelAnimationFrame(raf);
       startTs = 0;
-      var bar = tabs[active] && tabs[active].querySelector('.howtab__bar i');
-      if (bar) bar.style.transform = 'scaleX(0)';
+      setBar(tabs[active] && tabs[active].querySelector('.howtab__bar i'), 0);
       if (inView && !paused) raf = requestAnimationFrame(tick);
     }
 
