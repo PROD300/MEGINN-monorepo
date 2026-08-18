@@ -183,6 +183,7 @@ obsidian.md (узнаваемый градиент-логотип, hue прим�
 - text-on-dark-accent → accent-300 ← акцентный цвет на тёмном фоне (= text-on-dark-brand)
 - text-brand-wordmark → gray-350   ← добавлено 2026-08-17, второй агент. Цвет текста «MEGINN» в TopNav рядом с новым лого-марком (`app/src/assets/meginn-mark.svg`) — приглушённее text-on-dark-accent/gray-00, чтобы не спорить с плоским матовым марком. Только для этого места, не общий алиас
 - border-app-shell    → gray-700   ← разделители внутри AppShell (= border-dark)
+- Brand gap (марк ↔ wordmark) → `--space-1` = 4px ← уменьшено 2026-08-17, второй агент, тот же день. `.brand`/`.nav__brand` (TopNav + Landing nav) — марк и wordmark читаются как один плотный лого-блок. Подробности и история значения см. `ds/components.md` → AppTopBar.
 - TopNav icon-кнопки (Bell/Exit) hover → `accent-300` напрямую (не через семантический токен) — фон не меняется, только цвет иконки, 2026-08-10
 
 ## Слой 3 — компонентные токены
