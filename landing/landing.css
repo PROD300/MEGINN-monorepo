@@ -656,14 +656,16 @@ html[data-how="demo"] .howdemo { display: grid; }
   overflow: hidden;
 }
 .howtab__bar i {
-  display: block; height: 100%; width: 0;
+  display: block; height: 100%; width: 100%;
   background: var(--accent-500);
+  transform: scaleX(0);
   transform-origin: left center;
+  will-change: transform;
 }
 .howtab.is-active .howtab__no { color: var(--accent-300); }
 .howtab.is-active .howtab__t { color: var(--text-default); }
 .howtab.is-active { background: rgba(255, 255, 255, 0.04); }
-.howtab.is-done .howtab__bar i { width: 100%; }
+.howtab.is-done .howtab__bar i { transform: scaleX(1); }
 
 @media (max-width: 800px) {
   .howdemo__tabs { grid-template-columns: 1fr; }

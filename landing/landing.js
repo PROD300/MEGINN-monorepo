@@ -635,8 +635,8 @@
         t.classList.toggle('is-done', idx < i);
         var bar = t.querySelector('.howtab__bar i');
         if (bar) {
-          if (idx < i) bar.style.width = '100%';
-          else if (idx > i) bar.style.width = '0%';
+          if (idx < i) bar.style.transform = 'scaleX(1)';
+          else if (idx > i) bar.style.transform = 'scaleX(0)';
           // bar for idx === i is animated by the raf loop
         }
       });
@@ -661,7 +661,7 @@
       var dt = ts - startTs;
       var pct = Math.min(1, dt / DURATION);
       var bar = tabs[active] && tabs[active].querySelector('.howtab__bar i');
-      if (bar) bar.style.width = (pct * 100) + '%';
+      if (bar) bar.style.transform = 'scaleX(' + pct + ')';
       if (pct >= 1) {
         startTs = 0;
         setActive((active + 1) % tabs.length, false);
@@ -673,7 +673,7 @@
       if (raf) cancelAnimationFrame(raf);
       startTs = 0;
       var bar = tabs[active] && tabs[active].querySelector('.howtab__bar i');
-      if (bar) bar.style.width = '0%';
+      if (bar) bar.style.transform = 'scaleX(0)';
       if (inView && !paused) raf = requestAnimationFrame(tick);
     }
 
