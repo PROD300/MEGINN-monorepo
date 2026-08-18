@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Input } from '../../components'
 import { registerScreen } from '../registry'
 import { showToast } from '../../lib/toast'
+import meginnMark from '../../assets/meginn-mark.svg'
 import styles from './Login.module.css'
 
 export function Login() {
@@ -50,7 +51,10 @@ export function Login() {
       <div className={styles.card}>
         {/* LogoBlock */}
         <div className={styles.logoBlock}>
-          <span className={styles.logo}>MEGINN</span>
+          <div className={styles.brandRow}>
+            <img className={styles.mark} src={meginnMark} alt="" aria-hidden="true" />
+            <span className={styles.logo}>MEGINN</span>
+          </div>
           <span className={styles.tagline}>Institutional Portfolio Management</span>
         </div>
 
