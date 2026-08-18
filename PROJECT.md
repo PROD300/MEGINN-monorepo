@@ -2,7 +2,7 @@
 
 ## GitHub Repository
 
-- **URL:** https://github.com/PROD300/MEGINN-monorepo ← репозиторий переименован (был `OBSIDIAN-monorepo`, ребрендинг 2026-08-17, см. `HANDOFF_COWORK_2026-08-17.md`). Старый URL продолжает работать через редирект GitHub, но не полагайтесь на это бессрочно — обновите `git remote` (`git remote set-url origin https://github.com/PROD300/MEGINN-monorepo.git`), если клонировали по старому адресу.
+- **URL:** https://github.com/PROD300/MEGINN-monorepo (переименовано 2026-08-17, было `OBSIDIAN-monorepo` — GitHub-редирект со старого URL действует, но `git remote` на рабочих копиях уже обновлён на новый)
 - **Branch:** main
 - **Content:** Монорепо — документы проекта (briefs/prd/ia/ux/ds/research/landing/.claude) + `app/`
   (полный прототип — дизайн-система + 17 экранов), история `app/` сохранена целиком через
@@ -21,9 +21,12 @@ Migrated to monorepo: 2026-08-10 (см. `MONOREPO_MIGRATION.md`).
 ## Deploy
 
 - **Путь:** готовый сервис — Vercel
-- **Живая ссылка:** https://obsidian-monorepo.vercel.app/ (Vercel-проект собран из монорепо,
-  Root Directory = `app/`; технически подтверждено идентичен предыдущему проду —
-  побайтово одинаковый HTML-шелл и MD5 JS-бандла)
+- **Живая ссылка:** https://meginn-monorepo.vercel.app/ (переименовано 2026-08-17 вместе с
+  Project Name на Vercel; Vercel-проект собран из монорепо, Root Directory = `app/`)
+- **Старый домен (оставлен намеренно как рабочий алиас):** https://obsidian-monorepo.vercel.app/
+  — ведёт на тот же проект, не удалён из Vercel на случай, если ссылка на него осталась
+  где-то во внешних материалах (письма, презентации) вне контроля этого репозитория.
+  Оба URL всегда показывают одну и ту же живую версию.
 - **Архивная ссылка (не обновляется дальше):** https://obsidian-peach-sigma.vercel.app/
 - **SPA-маршрутизация:** настроена через `app/vercel.json` (rewrite всех путей на `/index.html`), внутренние экраны открываются по прямой ссылке без 404
 - **Примечание:** у проекта есть второй авто-домен `obsidian-obsidian-team.vercel.app` — он всё ещё за стеной Vercel Authentication, не используйте его как публичную ссылку
@@ -31,6 +34,19 @@ Migrated to monorepo: 2026-08-10 (см. `MONOREPO_MIGRATION.md`).
 - Авто-пересборка на каждый пуш в `main` (~2–3 мин)
 - Последний пуш: 2026-06-21 (коммит `a70c53f`) — Portfolio оживлён (allocation store, Rebalance Now, Add Asset, Download Report); подтверждено на проде
 - Пуш 2026-06-21 (коммит `195b637`) — оживлены Cross-Chain Bridge, Notifications, Emergency Stop, Audit Log export, Settings вкладки, Network Error, Transaction Error (live mock data, без статики)
+
+### Лендинг (`landing/`) — отдельный Vercel-проект
+
+- **Vercel Project Name:** `meginn-landing` (переименован 2026-08-17, было `obsidian-monorepo-landing`)
+  — это отдельный от `app/` Vercel-проект в той же команде (`obsidian-team`), со своим Root
+  Directory = `landing/`. Preview-деплои по PR продолжают идентифицироваться в комментарии
+  Vercel-бота по этому Project Name — если он упоминается в старых заметках/скриптах как
+  `obsidian-monorepo-landing`, это теперь устаревшее имя.
+- **Живая ссылка:** https://meginn-landing.vercel.app/
+- Старый домен лендинга (если существовал отдельно от `obsidian-monorepo.vercel.app`) не
+  проверялся отдельно в этой сессии — при следующей правке лендинга стоит свериться в Vercel
+  Settings → Domains, не остался ли там старый алиас, который тоже стоит либо сохранить, либо
+  осознанно убрать (см. решение по `app/`-домену выше — оставили старый как рабочий алиас).
 
 ## ⚠️ Открытый follow-up после миграции
 
