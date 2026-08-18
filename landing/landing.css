@@ -654,16 +654,22 @@ html[data-how="demo"] .howdemo { display: grid; }
   height: 2px;
   background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
+  isolation: isolate; /* own stacking context: Safari sometimes falls back
+    to software-painting a transformed child otherwise, at this element's
+    height (2px) that read as a jerky, non-composited fill */
 }
 .howtab__bar i {
-  display: block; height: 100%; width: 0;
+  display: block; height: 100%; width: 100%;
   background: var(--accent-500);
+  transform: translateZ(0) scaleX(0);
   transform-origin: left center;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .howtab.is-active .howtab__no { color: var(--accent-300); }
 .howtab.is-active .howtab__t { color: var(--text-default); }
 .howtab.is-active { background: rgba(255, 255, 255, 0.04); }
-.howtab.is-done .howtab__bar i { width: 100%; }
+.howtab.is-done .howtab__bar i { transform: scaleX(1); }
 
 @media (max-width: 800px) {
   .howdemo__tabs { grid-template-columns: 1fr; }
