@@ -155,8 +155,10 @@
 
 .footerStats {
   display: flex;
+  align-items: center;
   gap: var(--space-8);
-  padding: var(--space-3) 0 var(--space-8);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-8);
   background: var(--surface-subtle);
   border-top: 1px solid var(--border-default);
   font-size: var(--size-xs);
