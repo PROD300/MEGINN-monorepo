@@ -78,6 +78,7 @@ export function Settings() {
   function handleCancel() {
     setDraft(savedProfile)
     setErrors({})
+    navigate('/portfolio')
   }
 
   return (
