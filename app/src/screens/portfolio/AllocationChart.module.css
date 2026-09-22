@@ -1,9 +1,14 @@
+/* Fixed, generous height — this is what makes the chart tall, not the tile
+   around it. The tile (.tileAllocation in Portfolio.module.css) just hugs
+   whatever height this ends up needing; it no longer stretches to match
+   Recent Activity's column, which is what kept squashing this back down
+   every time that column's own height changed for unrelated reasons. */
 .wrap {
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
+  width: 100%;
+  height: 520px;
 }
 
 .row {

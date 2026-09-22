@@ -141,80 +141,83 @@ export function Portfolio() {
             )}
           </div>
 
-          {/* Bento grid — asymmetric, Asset Allocation as the large central tile */}
+          {/* Bento — stats row, then a two-column content row where each
+              column is a plain flex stack sized by its own content, so the
+              shorter column (Network Status) never leaves a gap above its
+              neighbor the way a shared grid row would. */}
           <div className={styles.bento}>
-            <div className={styles.tileStat1}>
+            <div className={styles.statsRow}>
               <StatCard variant="neutral" label="Total AUM" value={formatUsd(totalAUM)} subtitle="across 2 networks" />
-            </div>
-            <div className={styles.tileStat2}>
-              <StatCard variant="success" label="Active Rules" value={String(activeRulesCount)} subtitle="auto-rebalancing enabled" />
-            </div>
-            <div className={styles.tileStat3}>
+              <StatCard variant="neutral" label="Active Rules" value={String(activeRulesCount)} subtitle="auto-rebalancing enabled" />
               <StatCard variant="neutral" label="Last Rebalance" value={lastRebalanceActivity?.time ?? '—'} subtitle={lastRebalanceFlow ?? 'No rebalances yet'} />
-            </div>
-            <div className={styles.tileStat4}>
               <StatCard
-                variant={onTarget ? 'success' : 'warning'}
+                variant="neutral"
                 label="Rebalance Trigger"
                 value={onTarget ? 'On target' : `+${formatPct(ethOverBy)}`}
                 subtitle={onTarget ? 'All allocations within target' : 'ETH allocation above target'}
               />
             </div>
 
-            <div className={[styles.tile, styles.tileAllocation].join(' ')}>
-              <div className={styles.secHeader}>
-                <span className={styles.secTitle}>Asset Allocation</span>
-              </div>
-              <div className={styles.tableWrap}>
-                {allocation.length > 0 ? (
-                  <AllocationChart entries={allocation} totalAUM={totalAUM} />
-                ) : (
-                  <div className={styles.emptyState}>No assets in portfolio yet.</div>
-                )}
-              </div>
-            </div>
+            <div className={styles.contentRow}>
+              <div className={styles.leftCol}>
+                <div className={[styles.tile, styles.tileAllocation].join(' ')}>
+                  <div className={styles.secHeader}>
+                    <span className={styles.secTitle}>Asset Allocation</span>
+                  </div>
+                  <div className={styles.tableWrap}>
+                    {allocation.length > 0 ? (
+                      <AllocationChart entries={allocation} totalAUM={totalAUM} />
+                    ) : (
+                      <div className={styles.emptyState}>No assets in portfolio yet.</div>
+                    )}
+                  </div>
+                </div>
 
-            <div className={[styles.tile, styles.tileNetwork].join(' ')}>
-              <div className={styles.secHeader}>
-                <span className={styles.secTitle}>Network Status</span>
-                <span className={styles.statusSync}>2 min ago</span>
+                <div className={[styles.tile, styles.tileActions].join(' ')}>
+                  <div className={styles.quickActions}>
+                    <button className={styles.primaryCta} onClick={handleRebalanceNow} disabled={rebalancing}>
+                      {rebalancing ? 'Rebalancing…' : 'Rebalance Now'}
+                    </button>
+                    <button className={styles.linkAction} onClick={() => setModalOpen(true)}>Add Asset</button>
+                    <button className={styles.linkAction} onClick={() => navigate('/cross-chain-bridge')} data-track="bridge-funds-cta">Bridge Funds</button>
+                    <button className={styles.linkAction} onClick={handleDownloadReport} disabled={downloading}>
+                      {downloading ? 'Preparing…' : 'Download Report'}
+                    </button>
+                  </div>
+                </div>
               </div>
-              {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
-                  Represents live RPC/bridge connection status (see data/network.ts).
-                  This block is hardcoded JSX, not even reading that store. */}
-              <div className={styles.networkList}>
-                <span className={styles.statusItem}>● ETH — Connected</span>
-                <span className={styles.statusItem}>● Arbitrum — Connected</span>
-                <span className={styles.statusItemAccent}>● Bridge — Active (Li.Fi · avg 42 sec)</span>
-              </div>
-            </div>
 
-            <div className={[styles.tile, styles.tileActivity].join(' ')}>
-              <div className={styles.secHeader}>
-                <span className={styles.secTitle}>Recent Activity</span>
-                <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View log →</a>
-              </div>
-              <div className={styles.activityList}>
-                {activity.length > 0 ? (
-                  activity.slice(0, 6).map(item => (
-                    <ActivityRow key={item.id} status={item.status} description={item.description} time={item.time} statusLabel={item.statusLabel} />
-                  ))
-                ) : (
-                  <div className={styles.emptyState}>No automation activity yet.</div>
-                )}
-              </div>
-            </div>
+              <div className={styles.rightCol}>
+                <div className={[styles.tile, styles.tileNetwork].join(' ')}>
+                  <div className={styles.secHeader}>
+                    <span className={styles.secTitle}>Network Status</span>
+                    <span className={styles.statusSync}>2 min ago</span>
+                  </div>
+                  {/* [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
+                      Represents live RPC/bridge connection status (see data/network.ts).
+                      This block is hardcoded JSX, not even reading that store. */}
+                  <div className={styles.networkList}>
+                    <span className={styles.statusItem}>● ETH — Connected</span>
+                    <span className={styles.statusItem}>● Arbitrum — Connected</span>
+                    <span className={styles.statusItemAccent}>● Bridge — Active (Li.Fi · avg 42 sec)</span>
+                  </div>
+                </div>
 
-            <div className={[styles.tile, styles.tileActions].join(' ')}>
-              <div className={styles.quickActions}>
-                <button className={styles.primaryCta} onClick={handleRebalanceNow} disabled={rebalancing}>
-                  {rebalancing ? 'Rebalancing…' : 'Rebalance Now'}
-                </button>
-                <button className={styles.linkAction} onClick={() => setModalOpen(true)}>Add Asset</button>
-                <button className={styles.linkAction} onClick={() => navigate('/cross-chain-bridge')} data-track="bridge-funds-cta">Bridge Funds</button>
-                <button className={styles.linkAction} onClick={handleDownloadReport} disabled={downloading}>
-                  {downloading ? 'Preparing…' : 'Download Report'}
-                </button>
+                <div className={[styles.tile, styles.tileActivity].join(' ')}>
+                  <div className={styles.secHeader}>
+                    <span className={styles.secTitle}>Recent Activity</span>
+                    <a href="#" className={styles.secLink} onClick={e => { e.preventDefault(); navigate('/audit-log') }}>View log →</a>
+                  </div>
+                  <div className={styles.activityList}>
+                    {activity.length > 0 ? (
+                      activity.slice(0, 6).map(item => (
+                        <ActivityRow key={item.id} status={item.status} description={item.description} time={item.time} statusLabel={item.statusLabel} />
+                      ))
+                    ) : (
+                      <div className={styles.emptyState}>No automation activity yet.</div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

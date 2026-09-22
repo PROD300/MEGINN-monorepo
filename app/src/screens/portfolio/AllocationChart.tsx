@@ -15,6 +15,13 @@ const PAD_TOP = 14
 const PAD_BOTTOM = 8
 const PAD_LEFT = 2
 const PAD_RIGHT = 6
+// Fraction of maxPct reserved as scale headroom *below* 0% — keeps the
+// smallest allocation's curve from reading as pinned to the baseline.
+// Kept small on purpose: it scales with the chart's own pixel height, so
+// the same fraction that was a subtle margin at ~430px read as a big dead
+// band once the chart got taller — this only needs to be big enough that
+// the lowest curve visibly clears the very bottom edge, not a large gap.
+const BOTTOM_HEADROOM = 0.08
 
 function hashSeed(seed: string) {
   let h = 0
@@ -96,16 +103,25 @@ function seriesOpacity(rank: number) {
   return rank === 0 ? 1 : Math.max(0.35, 0.8 - rank * 0.15)
 }
 
-// Vertical clearance (viewBox units) a two-line end label needs to fully
-// clear its neighbor's — the ceiling this dodge eases *toward*, not a flat
-// minimum it snaps every close pair to (that would make a 1%-apart pair and
-// a 4%-apart pair land the same distance apart, which reads as wrong once
-// you notice it).
-const MIN_LABEL_GAP_PX = 22
-// Even two identical values still get at least this fraction of the full
-// gap, so their dots/labels stay just barely distinguishable instead of
-// sitting exactly on top of each other.
-const DODGE_FLOOR_RATIO = 0.3
+// Vertical clearance a two-line end label needs, in viewBox Y-units — the
+// ceiling this dodge eases *toward*, not a flat minimum it snaps every close
+// pair to (that would make a 1%-apart pair and a 4%-apart pair land the same
+// distance apart, which reads as wrong once you notice it).
+const MIN_LABEL_GAP_UNITS = 22
+// The floor even two identical values still get, so their labels stay just
+// barely distinguishable instead of sitting on top of each other. This is a
+// units count, not a ratio of the ceiling — the two-line label's own height
+// is a fixed ~23 real CSS px regardless of the chart's rendered size, so the
+// floor has to clear that in the *worst-case* render height (the chart's own
+// CSS min-height), not shrink along with a smaller ceiling.
+const MIN_LABEL_GAP_FLOOR_UNITS = 15
+// The lowest a *shifted* trend point is ever allowed to sit. Kept as a
+// floor on the per-series offset itself (below), never as a clamp on the
+// resulting points — clamping points after the fact is what caused the
+// "pinned flat at zero" look in the first place: several consecutive days
+// of a small allocation's real wiggle would all get flattened to the same
+// clamped value once a big enough offset pushed them past it.
+const DISPLAY_FLOOR = 0.3
 
 // When two assets' allocations are close enough that their labels would
 // crowd together, shift each affected series' whole trend up/down by a
@@ -114,31 +130,45 @@ const DODGE_FLOOR_RATIO = 0.3
 // nearly-equal values are eased apart just enough to stay legible; values
 // already a comfortable distance apart are left at their true position.
 // Order is highest-to-lowest todayPct; the top one never moves.
-function dodgeSeries<T extends { todayPct: number; trend: number[] }>(sortedDesc: T[], pxPerPct: number) {
-  const minGapPct = MIN_LABEL_GAP_PX / pxPerPct
-  const displayPct = sortedDesc.map(s => s.todayPct)
-  for (let i = 1; i < displayPct.length; i++) {
+function dodgeSeries<T extends { todayPct: number; trend: number[] }>(sortedDesc: T[], unitsPerPct: number) {
+  const ceilGapPct = MIN_LABEL_GAP_UNITS / unitsPerPct
+  const floorGapPct = MIN_LABEL_GAP_FLOOR_UNITS / unitsPerPct
+  const idealPct = sortedDesc.map(s => s.todayPct)
+  for (let i = 1; i < idealPct.length; i++) {
     const realGap = sortedDesc[i - 1].todayPct - sortedDesc[i].todayPct
-    if (realGap < minGapPct) {
-      const closeness = 1 - Math.max(0, realGap) / minGapPct // 0 (at the ceiling) .. 1 (identical values)
-      const requiredGap = minGapPct * (1 - closeness * (1 - DODGE_FLOOR_RATIO))
-      displayPct[i] = Math.min(displayPct[i], displayPct[i - 1] - requiredGap)
+    if (realGap < ceilGapPct) {
+      const closeness = 1 - Math.max(0, realGap) / ceilGapPct // 0 (at the ceiling) .. 1 (identical values)
+      const requiredGap = ceilGapPct - closeness * (ceilGapPct - floorGapPct)
+      idealPct[i] = Math.min(idealPct[i], idealPct[i - 1] - requiredGap)
     }
   }
-  // Keep the lowest one from being dodged below the baseline — shift the
-  // whole chain back up by however far it overshot.
-  const floor = 0.4
-  const last = displayPct[displayPct.length - 1]
-  if (last !== undefined && last < floor) {
-    const shift = floor - last
-    for (let i = 0; i < displayPct.length; i++) displayPct[i] += shift
+  // Cap how far down each series' own offset can go, given its own real
+  // trend's low point — a small allocation right next to a much bigger one
+  // can be asked for more clearance than its own value can absorb; when
+  // that happens, dodge it less rather than let the curve go under.
+  const actualPct = sortedDesc.map((s, i) => {
+    const idealOffset = idealPct[i] - s.todayPct
+    const safeOffset = Math.max(idealOffset, DISPLAY_FLOOR - Math.min(...s.trend))
+    return s.todayPct + safeOffset
+  })
+  // A series capped by the line above can leave the gap *below* it too
+  // short (the series under it still needs its own clearance, but nothing
+  // pushed it away to make room). Sweep bottom-to-top and pull each series
+  // up to clear the one under it — moving a bigger series up has nowhere
+  // near the same risk of running it into its own floor that moving a
+  // smaller one down does.
+  for (let i = actualPct.length - 2; i >= 0; i--) {
+    const realGap = sortedDesc[i].todayPct - sortedDesc[i + 1].todayPct
+    if (realGap >= ceilGapPct) continue
+    const closeness = 1 - Math.max(0, realGap) / ceilGapPct
+    const requiredGap = ceilGapPct - closeness * (ceilGapPct - floorGapPct)
+    if (actualPct[i] - actualPct[i + 1] < requiredGap) {
+      actualPct[i] = actualPct[i + 1] + requiredGap
+    }
   }
   return sortedDesc.map((s, i) => {
-    const offset = displayPct[i] - s.todayPct
-    // Safety floor on the *display* copy only — dodging a small allocation
-    // down for label clearance could otherwise carry an already-low day of
-    // its (unshifted, accurate) trend below the visible baseline.
-    return { displayPct: displayPct[i], displayTrend: s.trend.map(v => Math.max(0.3, v + offset)) }
+    const offset = actualPct[i] - s.todayPct
+    return { displayPct: actualPct[i], displayTrend: s.trend.map(v => v + offset) }
   })
 }
 
@@ -156,17 +186,29 @@ export function AllocationChart({ entries, totalAUM }: AllocationChartProps) {
       return { asset: entry.asset, valueUsd: entry.valueUsd, todayPct, rank, trend: buildTrend(entry.asset, todayPct, TREND_DAYS) }
     })
 
-  // Rough pre-dodge scale, just to convert the label's pixel clearance
-  // requirement into a pct gap — see dodgeSeries().
+  // Rough pre-dodge scale (viewBox Y-units per pct point), just to convert
+  // the label's viewBox-unit clearance requirement into a pct gap — see
+  // dodgeSeries(). Has to divide by the *domain* span (maxPct scaled up by
+  // the same BOTTOM_HEADROOM the real yAt uses below), not maxPct alone —
+  // otherwise this assumes more pixels per pct than the chart actually
+  // renders once the headroom domain is applied, and the dodge ends up
+  // under-shooting the real gap it needs (labels crowd together again).
   const prelimMaxPct = rawSeries.length > 0 ? Math.max(...rawSeries.flatMap(s => s.trend)) * 1.18 : 100
-  const dodged = dodgeSeries(rawSeries, plotH / prelimMaxPct)
+  const dodged = dodgeSeries(rawSeries, plotH / (prelimMaxPct * (1 + BOTTOM_HEADROOM)))
   const series = rawSeries.map((s, i) => ({ ...s, ...dodged[i] }))
 
   // Final scale accounts for however far dodging pushed the lowest curves.
   const maxPct = series.length > 0 ? Math.max(...series.flatMap(s => s.displayTrend)) * 1.18 : 100
+  // The y-domain's floor sits a bit *below* true 0, not at it — mapping 0%
+  // straight to the plot's bottom pixel is what made a small allocation's
+  // curve (which only ever wiggles a point or two above its own value) read
+  // as glued to the baseline. This is headroom on the scale, same idea as
+  // maxPct's own *1.18 margin at the top, just at the other end.
+  const domainMin = -maxPct * BOTTOM_HEADROOM
+  const domainSpan = maxPct - domainMin
 
   const xAt = (i: number) => PAD_LEFT + (i / TREND_DAYS) * plotW
-  const yAt = (pct: number) => PAD_TOP + plotH - Math.min(1, pct / maxPct) * plotH
+  const yAt = (pct: number) => PAD_TOP + plotH - Math.min(1, (pct - domainMin) / domainSpan) * plotH
 
   // End-of-line labels — the dot sits exactly across from the curve's
   // (possibly dodged) endpoint; the printed % is always the real value.
@@ -211,12 +253,15 @@ export function AllocationChart({ entries, totalAUM }: AllocationChartProps) {
               ))}
             </defs>
 
-            {/* Gridlines — recessive hairlines at 0/50/100% of the plotted max */}
+            {/* Gridlines — recessive hairlines at 0/50/100% of the plotted
+                max, via yAt so they land on the same (headroom-adjusted)
+                domain as everything else instead of the old 0-to-maxPct-
+                only assumption. */}
             {[0, 0.5, 1].map(f => (
               <line
                 key={f}
                 x1={PAD_LEFT} x2={VIEW_W - PAD_RIGHT}
-                y1={PAD_TOP + plotH * (1 - f)} y2={PAD_TOP + plotH * (1 - f)}
+                y1={yAt(f * maxPct)} y2={yAt(f * maxPct)}
                 className={styles.gridline}
               />
             ))}
