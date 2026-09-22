@@ -3,8 +3,9 @@
 **Источник ДС:** ds_baseline (стартовая, поставлена с нуля)  
 **Figma-файл:** https://www.figma.com/design/PcpLlKJqePv7h5acIUEgfd/Obsidian-MCP  
 **Структура файла:**
-- Страница **Foundation** (18:2) → фрейм «Foundation-Tokens» (35:2) — токены, TextStyles
-- Страница **Components** (26:2) → фрейм «Components-Doc» (45:46) — компоненты  
+- Страница **Foundation** (18:2) → фрейм «Foundation-Tokens» (35:2) — токены, TextStyles. Заголовок фрейма — «MEGINN Design System», v1.3 · 2026-09-14
+- Страница **Components** (26:2) → фрейм «Components-Doc» (45:46) — компоненты
+- Страница **MEGINN — Production Screens (Petrol)** (485:2) — 18 экранов после ребрендинга, заливки и обводки привязаны к Variables. Доребрендинговая **Production-ready Screens (Pre-version)** (452:611) оставлена нетронутой для сравнения  
 **Icon library:** Lucide (MIT, рендерится через `figma.createNodeFromSvg()`)  
 **Дата постановки:** 2026-05-05
 
@@ -32,17 +33,24 @@
 
 ## Коллекции Variables (Figma Local Variables)
 
-### Primitive (47 токенов)
-- **Цвета:** accent-50…900 (6), gray-00…950 (9), success/warning/error/info-500 (4) = 19 цветов
-- **Числа:** размеры шрифтов (8), веса (4), line-height (2), letter-spacing (1), radii (4), spacing (8) = 27 чисел
-- **Строки:** font-sans = "Inter" = 1
+Актуальный состав — `ds/foundation.md`. Ниже пересчитано 2026-09-14, когда Figma
+догнали до кода.
 
-### Semantic (28 токенов, все — алиасы к Primitive)
-- **Surfaces:** surface-default, surface-subtle, surface-elevated, surface-action-primary, surface-action-primary-hover, surface-action-ghost-hover
-- **Text:** text-default, text-muted, text-disabled, text-on-action, text-on-dark, text-error, text-warning, text-success, text-accent
-- **Borders:** border-default, border-strong, border-focus, border-error, border-warning
-- **Status:** bg-success, bg-warning, bg-error, bg-info
+### Primitive (53 токена)
+- **Цвета:** accent-50…900 (6), gray-00…950 включая точечные gray-350 и gray-400 (11), success/warning/error/info-500 (4), syntax-number/syntax-string (2) = 23 цвета
+- **Числа:** размеры шрифтов (8), веса (4), line-height (2), letter-spacing (1), radii (4), spacing (9, вместе с space-5) = 28 чисел
+- **Строки:** font-sans = "Geist", font-mono = "Geist Mono" = 2
+
+### Semantic (54 токена, почти все — алиасы к Primitive)
+- **Surfaces:** surface-default, surface-subtle, surface-elevated, surface-action-primary, surface-action-primary-hover, surface-action-ghost-hover, surface-hover, surface-accent, surface-positive, surface-warning, surface-app-shell
+- **Text:** text-default, text-muted, text-subtle, text-disabled, text-on-action, text-on-dark, text-error, text-warning, text-success, text-info, text-accent, text-accent-hover, text-brand-wordmark, text-placeholder, text-nav-item, text-nav-active, text-on-dark-accent
+- **Code syntax:** text-code-keyword, text-code-number, text-code-string, text-code-punct, text-code-comment
+- **Borders:** border-default, border-strong, border-focus, border-error, border-warning, border-info, border-info-subtle, border-hairline, border-app-shell
+- **Status:** bg-success, bg-warning, bg-error, bg-info + четыре «-subtle» варианта на 10 % акцента
 - **Levels:** surface-level-1, surface-level-2, surface-level-3, surface-level-4
+
+Не алиасы, а литералы: `border-hairline` (прозрачный), `border-info-subtle`
+и `bg-*-subtle` — у них своя альфа, которой в примитивах нет.
 
 ---
 

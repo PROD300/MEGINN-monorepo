@@ -42,6 +42,20 @@
   --text-info:      var(--info-500);
   --text-accent:    var(--accent-300);
   --text-accent-hover: var(--accent-700); /* secondary/ghost/icon-button text on hover — surface-hover (gray-300) is a light bg, accent-300 loses contrast there */
+  --text-placeholder: var(--gray-400); /* added 2026-09-14 — input placeholders,
+    app and landing. Previously there was no token: the landing left ::placeholder
+    unset and inherited the browser default (#757575, off-system and below AA),
+    while Input.module.css pointed placeholders at text-muted — the same value as
+    the input's own text, so an empty field looked filled. Use only for
+    placeholder/ghost text inside form controls; hint text under a field is
+    text-subtle. */
+
+  /* === Code syntax === */
+  --text-code-keyword: var(--accent-300);
+  --text-code-number:  var(--syntax-number);
+  --text-code-string:  var(--syntax-string);
+  --text-code-punct:   var(--gray-300);
+  --text-code-comment: var(--text-muted);
 
   /* === Borders === */
   --border-default: var(--gray-700);

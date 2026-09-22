@@ -1,0 +1,265 @@
+From a6b9c7b7f3cad3cdd3d24625278fc9f8236cc0cc Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 14 Sep 2026 19:12:04 +0000
+Subject: [PATCH 1/2] ds: add text-placeholder and tokenise code-block syntax
+ colours
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Two holes where colours lived outside the design system, both of which the
+2026-08-17 Petrol rebrand walked straight past because nothing named them.
+
+Placeholders had no token at all. The landing never set ::placeholder, so every
+form field rendered the browser default #757575 — off-system, and the weakest
+contrast on the page. Input.module.css pointed placeholders at --text-muted,
+which is the same value as the input's own text colour, so an empty field was
+indistinguishable from a filled one.
+
+Adds --gray-400 #8496AC -> --text-placeholder. A new ramp step is needed because
+none of the existing ones work: gray-500 measures 3.97:1 against the input
+surface (rgba(255,255,255,0.04) over gray-950) and fails AA for normal text;
+gray-300 is the input's value colour; gray-350 is reserved for the brand
+wordmark and reads too bright. The new step measures 6.25:1 on the landing input
+and 6.76:1 on a bare gray-950 surface.
+
+Also names the two code-block syntax hues that were raw hex literals in
+landing.css (.num #6EE7B7, .str #FBBF24) as --syntax-number / --syntax-string
+plus --text-code-* semantics. Values are unchanged; this is naming only, so a
+future accent change can reason about them instead of missing them. They
+deliberately do not converge on the accent the way status colours do: inside a
+code block hue is the only thing separating a number from a string, with no
+icon or label to carry that distinction.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01JMU8aeiUk4zVXFtYHwEcN4
+---
+ app/src/components/Input/Input.module.css |  4 +++-
+ app/src/tokens/primitives.css             | 20 +++++++++++++++++
+ app/src/tokens/semantics.css              | 14 ++++++++++++
+ ds/foundation.md                          | 26 ++++++++++++++++++++++
+ landing/ds/colors_and_type.css            | 19 ++++++++++++++++
+ landing/landing.css                       | 27 ++++++++++++++++++-----
+ 6 files changed, 104 insertions(+), 6 deletions(-)
+
+diff --git a/app/src/components/Input/Input.module.css b/app/src/components/Input/Input.module.css
+index f0746e7..e45cee5 100644
+--- a/app/src/components/Input/Input.module.css
++++ b/app/src/components/Input/Input.module.css
+@@ -21,7 +21,9 @@
+ }
+ 
+ .input::placeholder {
+-  color: var(--text-muted);
++  color: var(--text-placeholder); /* was text-muted, i.e. identical to the
++    input's own colour — an empty field was indistinguishable from a filled one.
++    2026-09-14 */
+ }
+ 
+ .input:hover {
+diff --git a/app/src/tokens/primitives.css b/app/src/tokens/primitives.css
+index e39cdff..128b81e 100644
+--- a/app/src/tokens/primitives.css
++++ b/app/src/tokens/primitives.css
+@@ -26,6 +26,15 @@
+     (gray-00 read as too stark next to the flat-matte logo mark, gray-300 was
+     the first muted step tried and still read brighter than wanted). Not a
+     general-purpose token — reach for gray-300/text-muted for anything else. */
++  --gray-400: #8496AC; /* added 2026-09-14 — placeholder text only (see
++    --text-placeholder in semantics.css). Reason it exists at all: the ramp had
++    no step that clears WCAG AA on our dark input surface while still reading as
++    "not yet filled in". gray-500 measures 3.97:1 against the input background
++    (rgba(255,255,255,0.04) over gray-950) — fails AA for normal text. gray-300
++    is what the app was using, but it is the same token as the input's own value
++    colour, so placeholder and typed text were indistinguishable. gray-350 is
++    reserved for the brand wordmark and reads too bright here. This step measures
++    6.25:1 on the landing input and 6.76:1 on a bare gray-950 surface. */
+   --gray-500: #64748B;
+   --gray-700: #334155;
+   --gray-900: #0F172A;
+@@ -43,6 +52,17 @@
+   --error-500:   #1C7EA0;
+   --info-500:    #1C7EA0;
+ 
++  /* === Code syntax — the one sanctioned exception to accent convergence,
++     tokenised 2026-09-14. These two hues were sitting as raw hex literals in
++     landing.css (.num / .str), i.e. outside the system entirely, which is what
++     ds/CONTRACT.md forbids. Values are unchanged — this only gives them names so
++     a future accent change can reason about them instead of missing them. They
++     deliberately do NOT converge on the accent: inside a code block hue is the
++     only thing separating a number from a string, and there is no icon or label
++     to carry that distinction the way there is for status. === */
++  --syntax-number: #6EE7B7;
++  --syntax-string: #FBBF24;
++
+   /* === Typography === */
+   /* Rebrand 2026-08-09: Inter → Geist + Geist Mono, approved — see
+      HANDOFF_COWORK_TYPOGRAPHY_2026-08-09.md for rationale and sourcing. */
+diff --git a/app/src/tokens/semantics.css b/app/src/tokens/semantics.css
+index d0373ec..027e8ea 100644
+--- a/app/src/tokens/semantics.css
++++ b/app/src/tokens/semantics.css
+@@ -42,6 +42,20 @@
+   --text-info:      var(--info-500);
+   --text-accent:    var(--accent-300);
+   --text-accent-hover: var(--accent-700); /* secondary/ghost/icon-button text on hover — surface-hover (gray-300) is a light bg, accent-300 loses contrast there */
++  --text-placeholder: var(--gray-400); /* added 2026-09-14 — input placeholders,
++    app and landing. Previously there was no token: the landing left ::placeholder
++    unset and inherited the browser default (#757575, off-system and below AA),
++    while Input.module.css pointed placeholders at text-muted — the same value as
++    the input's own text, so an empty field looked filled. Use only for
++    placeholder/ghost text inside form controls; hint text under a field is
++    text-subtle. */
++
++  /* === Code syntax === */
++  --text-code-keyword: var(--accent-300);
++  --text-code-number:  var(--syntax-number);
++  --text-code-string:  var(--syntax-string);
++  --text-code-punct:   var(--gray-300);
++  --text-code-comment: var(--text-muted);
+ 
+   /* === Borders === */
+   --border-default: var(--gray-700);
+diff --git a/ds/foundation.md b/ds/foundation.md
+index f670a58..d0e4245 100644
+--- a/ds/foundation.md
++++ b/ds/foundation.md
+@@ -33,6 +33,7 @@ obsidian.md (узнаваемый градиент-логотип, hue прим
+ - gray-100 = #F1F5F9
+ - gray-200 = #E2E8F0
+ - gray-300 = #CBD5E1
++- gray-400 = #8496AC  ← добавлено 2026-09-14, второй точечный шаг. Только для `text-placeholder` (см. Слой 2). Появился потому, что в шкале не было ступени, которая одновременно проходит WCAG AA на нашей тёмной инпут-подложке и при этом читается как «поле ещё не заполнено»: gray-500 на подложке инпута (`rgba(255,255,255,0.04)` поверх gray-950) даёт 3.97:1 — AA для обычного текста не проходит; gray-300 приложение использовало для плейсхолдеров, но это тот же токен, что и цвет самого значения инпута, поэтому пустое поле выглядело заполненным; gray-350 занят вордмарком и здесь слишком яркий. Замер новой ступени: 6.25:1 на лендинговом инпуте, 6.76:1 на голом gray-950.
+ - gray-350 = #9FB0C2  ← добавлено 2026-08-17, второй агент (лого/нейминг MEGINN). Только для `text-brand-wordmark` (см. AppShell ниже) — gray-00 рядом с новым лого-марком читался слишком ярко, gray-300 первый приглушённый вариант всё ещё был ярче задуманного. Не общего назначения — для остального текста brать gray-300/text-muted, не этот шаг.
+ - gray-500 = #64748B
+ - gray-700 = #334155
+@@ -57,6 +58,19 @@ obsidian.md (узнаваемый градиент-логотип, hue прим
+ синий, риск ниже), но осталось нерешённым — единый акцент по-прежнему
+ действует для всех четырёх.
+ 
++**Синтаксис кода — единственное санкционированное исключение из конвергенции на accent, 2026-09-14:**
++- syntax-number = #6EE7B7
++- syntax-string = #FBBF24
++
++До этого оба значения стояли прибитыми хексами прямо в `landing/landing.css`
++(`.num`, `.str`) — то есть вне системы, что прямо запрещено `ds/CONTRACT.md`.
++Значения не менялись, им только дали имена, чтобы следующая смена палитры их
++увидела, а не пропустила (ровно так их пропустил ребрендинг 2026-08-17).
++На accent они намеренно **не** сводятся: внутри блока кода оттенок — это
++единственное, что отличает число от строки, там нет ни иконки, ни подписи,
++которые несут это различие у статусов. Семантика: `text-code-keyword`,
++`text-code-number`, `text-code-string`, `text-code-punct`, `text-code-comment`.
++
+ **Тени — 3 базовых уровня + accent-glow (deprecated):**
+ - shadow-sm = 0 1px 2px rgba(15,23,42,0.08)
+ - shadow-md = 0 4px 6px rgba(15,23,42,0.10), 0 1px 3px rgba(15,23,42,0.06)
+@@ -152,6 +166,18 @@ obsidian.md (узнаваемый градиент-логотип, hue прим
+ - text-info         → info-500      ← добавлено 2026-08-10, было пропущено при первой конвергенции функциональных цветов
+ - text-accent       → accent-300    ← было accent-500 (недостаточный контраст на тёмном фоне)
+ - text-accent-hover → accent-700      ← добавлено 2026-08-10, hover-текст для текстовых кнопок (primary/secondary/ghost) — правило: hover = surface-hover фон + text-accent-hover текст. Icon-only кнопки пока не входят, см. surface-hover выше
++- text-placeholder  → gray-400      ← добавлено 2026-09-14. Закрывает дыру, из-за которой плейсхолдеры вообще не были в системе: на лендинге правило `::placeholder` не задавалось — браузер рисовал свой дефолт `#757575` (вне палитры и самый низкоконтрастный текст на странице), а в `Input.module.css` плейсхолдер указывал на `text-muted`, то есть на тот же цвет, что и значение инпута, — пустое поле было не отличить от заполненного. Применять только к плейсхолдерам и ghost-тексту внутри полей ввода; подсказка под полем — `text-subtle`.
++
++### Синтаксис кода
++
++Добавлено 2026-09-14 вместе с примитивами `syntax-*` (см. Слой 1). Применяется
++только внутри блоков кода (сейчас — мок `allocation.policy` на лендинге).
++
++- text-code-keyword → accent-300
++- text-code-number  → syntax-number
++- text-code-string  → syntax-string
++- text-code-punct   → gray-300
++- text-code-comment → text-muted
+ 
+ ### Обводки
+ 
+diff --git a/landing/ds/colors_and_type.css b/landing/ds/colors_and_type.css
+index 9606ae5..9250318 100644
+--- a/landing/ds/colors_and_type.css
++++ b/landing/ds/colors_and_type.css
+@@ -66,6 +66,7 @@
+   --gray-200: #E2E8F0;
+   --gray-300: #CBD5E1;
+   --gray-350: #9FB0C2;    /* synced from app 2026-08-17 — brand wordmark only, see --text-brand-wordmark below */
++  --gray-400: #8496AC;    /* synced from app 2026-09-14 — placeholder text only, see --text-placeholder below. 6.25:1 on our input surface; gray-500 measured 3.97:1 and fails AA */
+   --gray-500: #64748B;    /* muted text */
+   --gray-700: #334155;
+   --gray-900: #0F172A;    /* primary text + dark chrome */
+@@ -86,6 +87,13 @@
+   --bg-error:   rgba(28, 126, 160, 0.10);
+   --bg-info:    rgba(28, 126, 160, 0.10);
+ 
++  /* Code syntax — synced from app 2026-09-14. Were raw hex literals in
++     landing.css (.num / .str); values unchanged, only named. Deliberately not
++     converged on the accent: in a code block hue is the only cue separating a
++     number from a string. */
++  --syntax-number: #6EE7B7;
++  --syntax-string: #FBBF24;
++
+   /* Spacing scale */
+   --space-1:  4px;
+   --space-2:  8px;
+@@ -154,6 +162,17 @@
+   --text-info:           var(--info-500);
+   --text-accent:         var(--accent-300); /* was accent-500 — insufficient contrast on dark */
+   --text-accent-hover:   var(--accent-700);
++  --text-placeholder:    var(--gray-400); /* added 2026-09-14 — form placeholders.
++     Before this the landing simply never set ::placeholder and inherited the
++     browser default #757575: off-system, and the lowest-contrast text anywhere
++     on the page. */
++
++  /* Code syntax */
++  --text-code-keyword:   var(--accent-300);
++  --text-code-number:    var(--syntax-number);
++  --text-code-string:    var(--syntax-string);
++  --text-code-punct:     var(--gray-300);
++  --text-code-comment:   var(--text-muted);
+ 
+   /* Borders */
+   --border-default:    var(--gray-700);
+diff --git a/landing/landing.css b/landing/landing.css
+index ba9bae9..1ad890a 100644
+--- a/landing/landing.css
++++ b/landing/landing.css
+@@ -789,11 +789,14 @@ html[data-how="demo"] .howdemo { display: grid; }
+   margin-right: 14px;
+   user-select: none;
+ }
+-.kw  { color: var(--accent-300); }
+-.op  { color: var(--gray-300); }
+-.num { color: #6EE7B7; }
+-.str { color: #FBBF24; }
+-.cmt { color: var(--text-muted); font-style: italic; }
++/* Code-block syntax — moved onto tokens 2026-09-14. .num and .str were raw
++   hex literals, the last two colours on the landing page living outside the
++   system; values unchanged, see --syntax-* in ds/colors_and_type.css. */
++.kw  { color: var(--text-code-keyword); }
++.op  { color: var(--text-code-punct); }
++.num { color: var(--text-code-number); }
++.str { color: var(--text-code-string); }
++.cmt { color: var(--text-code-comment); font-style: italic; }
+ .cur { display: inline-block; color: var(--accent-300); animation: blink 1s steps(2) infinite; }
+ @keyframes blink { 50% { opacity: 0; } }
+ 
+@@ -1562,6 +1565,20 @@ html:not(.scrolljack) .features-track .fcard { scroll-snap-align: start; }
+   outline: none;
+   transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+ }
++/* Added 2026-09-14 — the form had no ::placeholder rule at all, so every
++   placeholder rendered in the browser default grey (#757575), off-system and
++   the weakest contrast on the page. See --text-placeholder. */
++.input::placeholder {
++  color: var(--text-placeholder);
++}
++
++/* Same idea for the AUM select while its empty prompt option is still the
++   selected one — :invalid holds because the control is `required` and the
++   prompt option has value="". Cleared as soon as a real range is picked. */
++.select:invalid {
++  color: var(--text-placeholder);
++}
++
+ .input:focus, .select:focus {
+   border-color: var(--border-focus);
+   box-shadow: 0 0 0 3px rgba(28, 126, 160, 0.25); /* was rgba(28,126,160,...) — old accent leftover, fixed 2026-08-11 */
+-- 
+2.43.0
+

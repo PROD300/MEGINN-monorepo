@@ -66,6 +66,7 @@
   --gray-200: #E2E8F0;
   --gray-300: #CBD5E1;
   --gray-350: #9FB0C2;    /* synced from app 2026-08-17 — brand wordmark only, see --text-brand-wordmark below */
+  --gray-400: #8496AC;    /* synced from app 2026-09-14 — placeholder text only, see --text-placeholder below. 6.25:1 on our input surface; gray-500 measured 3.97:1 and fails AA */
   --gray-500: #64748B;    /* muted text */
   --gray-700: #334155;
   --gray-900: #0F172A;    /* primary text + dark chrome */
@@ -85,6 +86,13 @@
   --bg-warning: rgba(28, 126, 160, 0.10);
   --bg-error:   rgba(28, 126, 160, 0.10);
   --bg-info:    rgba(28, 126, 160, 0.10);
+
+  /* Code syntax — synced from app 2026-09-14. Were raw hex literals in
+     landing.css (.num / .str); values unchanged, only named. Deliberately not
+     converged on the accent: in a code block hue is the only cue separating a
+     number from a string. */
+  --syntax-number: #6EE7B7;
+  --syntax-string: #FBBF24;
 
   /* Spacing scale */
   --space-1:  4px;
@@ -154,6 +162,17 @@
   --text-info:           var(--info-500);
   --text-accent:         var(--accent-300); /* was accent-500 — insufficient contrast on dark */
   --text-accent-hover:   var(--accent-700);
+  --text-placeholder:    var(--gray-400); /* added 2026-09-14 — form placeholders.
+     Before this the landing simply never set ::placeholder and inherited the
+     browser default #757575: off-system, and the lowest-contrast text anywhere
+     on the page. */
+
+  /* Code syntax */
+  --text-code-keyword:   var(--accent-300);
+  --text-code-number:    var(--syntax-number);
+  --text-code-string:    var(--syntax-string);
+  --text-code-punct:     var(--gray-300);
+  --text-code-comment:   var(--text-muted);
 
   /* Borders */
   --border-default:    var(--gray-700);

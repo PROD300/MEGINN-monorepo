@@ -789,11 +789,14 @@ html[data-how="demo"] .howdemo { display: grid; }
   margin-right: 14px;
   user-select: none;
 }
-.kw  { color: var(--accent-300); }
-.op  { color: var(--gray-300); }
-.num { color: #6EE7B7; }
-.str { color: #FBBF24; }
-.cmt { color: var(--text-muted); font-style: italic; }
+/* Code-block syntax — moved onto tokens 2026-09-14. .num and .str were raw
+   hex literals, the last two colours on the landing page living outside the
+   system; values unchanged, see --syntax-* in ds/colors_and_type.css. */
+.kw  { color: var(--text-code-keyword); }
+.op  { color: var(--text-code-punct); }
+.num { color: var(--text-code-number); }
+.str { color: var(--text-code-string); }
+.cmt { color: var(--text-code-comment); font-style: italic; }
 .cur { display: inline-block; color: var(--accent-300); animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -1562,6 +1565,20 @@ html:not(.scrolljack) .features-track .fcard { scroll-snap-align: start; }
   outline: none;
   transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
+/* Added 2026-09-14 — the form had no ::placeholder rule at all, so every
+   placeholder rendered in the browser default grey (#757575), off-system and
+   the weakest contrast on the page. See --text-placeholder. */
+.input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Same idea for the AUM select while its empty prompt option is still the
+   selected one — :invalid holds because the control is `required` and the
+   prompt option has value="". Cleared as soon as a real range is picked. */
+.select:invalid {
+  color: var(--text-placeholder);
+}
+
 .input:focus, .select:focus {
   border-color: var(--border-focus);
   box-shadow: 0 0 0 3px rgba(28, 126, 160, 0.25); /* was rgba(28,126,160,...) — old accent leftover, fixed 2026-08-11 */

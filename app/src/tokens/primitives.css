@@ -26,6 +26,15 @@
     (gray-00 read as too stark next to the flat-matte logo mark, gray-300 was
     the first muted step tried and still read brighter than wanted). Not a
     general-purpose token — reach for gray-300/text-muted for anything else. */
+  --gray-400: #8496AC; /* added 2026-09-14 — placeholder text only (see
+    --text-placeholder in semantics.css). Reason it exists at all: the ramp had
+    no step that clears WCAG AA on our dark input surface while still reading as
+    "not yet filled in". gray-500 measures 3.97:1 against the input background
+    (rgba(255,255,255,0.04) over gray-950) — fails AA for normal text. gray-300
+    is what the app was using, but it is the same token as the input's own value
+    colour, so placeholder and typed text were indistinguishable. gray-350 is
+    reserved for the brand wordmark and reads too bright here. This step measures
+    6.25:1 on the landing input and 6.76:1 on a bare gray-950 surface. */
   --gray-500: #64748B;
   --gray-700: #334155;
   --gray-900: #0F172A;
@@ -42,6 +51,17 @@
   --warning-500: #1C7EA0;
   --error-500:   #1C7EA0;
   --info-500:    #1C7EA0;
+
+  /* === Code syntax — the one sanctioned exception to accent convergence,
+     tokenised 2026-09-14. These two hues were sitting as raw hex literals in
+     landing.css (.num / .str), i.e. outside the system entirely, which is what
+     ds/CONTRACT.md forbids. Values are unchanged — this only gives them names so
+     a future accent change can reason about them instead of missing them. They
+     deliberately do NOT converge on the accent: inside a code block hue is the
+     only thing separating a number from a string, and there is no icon or label
+     to carry that distinction the way there is for status. === */
+  --syntax-number: #6EE7B7;
+  --syntax-string: #FBBF24;
 
   /* === Typography === */
   /* Rebrand 2026-08-09: Inter → Geist + Geist Mono, approved — see

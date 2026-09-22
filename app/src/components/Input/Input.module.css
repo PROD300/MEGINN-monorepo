@@ -21,7 +21,9 @@
 }
 
 .input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-placeholder); /* was text-muted, i.e. identical to the
+    input's own colour — an empty field was indistinguishable from a filled one.
+    2026-09-14 */
 }
 
 .input:hover {
