@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TopNav, Banner, StatCard, ActivityRow, Table, Button, Modal, Input, Select } from '../../components'
+import { TopNav, Banner, StatCard, ActivityRow, Button, Modal, Input, Select } from '../../components'
 import { registerScreen } from '../registry'
 import { allocationStore, activityStore, getTotalAUM, rebalanceNow, addAsset } from '../../data/portfolio'
 import { rulesStore, getRuleById } from '../../data/rules'
 import { showToast } from '../../lib/toast'
 import { formatUsd, formatPct } from '../../lib/format'
+import { AllocationChart } from './AllocationChart'
 import styles from './Portfolio.module.css'
-
-const allocationColumns = [
-  { key: 'asset', header: 'Asset' },
-  { key: 'allocation', header: 'Allocation', render: (row: Record<string, unknown>) => <span className={styles.mono}>{String(row.allocation)}</span> },
-  { key: 'value', header: 'Value', render: (row: Record<string, unknown>) => <span className={styles.mono}>{String(row.value)}</span> },
-]
 
 const assetOptions = [
   { value: 'ETH', label: 'ETH' },
@@ -51,13 +46,6 @@ export function Portfolio() {
   const ethRule = getRuleById('eth-balance-guard')
   const ethAllocationPct = totalAUM > 0 && eth ? (eth.valueUsd / totalAUM) * 100 : 0
   const ethOverBy = ethRule ? ethAllocationPct - ethRule.threshold : 0
-
-  const allocationRows = allocation
-    .map(a => ({
-      asset: a.asset,
-      allocation: formatPct(totalAUM > 0 ? (a.valueUsd / totalAUM) * 100 : 0),
-      value: formatUsd(a.valueUsd),
-    })) as Record<string, unknown>[]
 
   // [LOGICAL SCHEMA — NOT WIRED TO A BACKEND]
   // "Rebalance Now" would submit a real on-chain swap in production. Here
@@ -178,8 +166,8 @@ export function Portfolio() {
                 <span className={styles.secTitle}>Asset Allocation</span>
               </div>
               <div className={styles.tableWrap}>
-                {allocationRows.length > 0 ? (
-                  <Table columns={allocationColumns} rows={allocationRows} />
+                {allocation.length > 0 ? (
+                  <AllocationChart entries={allocation} totalAUM={totalAUM} />
                 ) : (
                   <div className={styles.emptyState}>No assets in portfolio yet.</div>
                 )}

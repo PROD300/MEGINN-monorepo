@@ -123,6 +123,8 @@
 
 .tableWrap {
   flex: 1;
+  display: flex;
+  min-height: 0;
 }
 
 /* ─── QuickActions — now its own bento tile, no more edge-to-edge bar ─── */
@@ -187,11 +189,6 @@
 .activityList :global([class*="_row_"]) {
   padding-top: 15px;
   padding-bottom: 15px;
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
 }
 
 .emptyState {
