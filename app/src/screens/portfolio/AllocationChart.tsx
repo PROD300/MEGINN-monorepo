@@ -13,7 +13,12 @@ const VIEW_W = 560
 const VIEW_H = 220
 const PAD_TOP = 14
 const PAD_BOTTOM = 8
-const PAD_LEFT = 2
+// 0, not a few units of breathing room — the curve's leftmost point needs
+// to land exactly on the tile's own content edge, flush with the section
+// title above it and every other tile's text. Any left pad here reads as
+// the chart starting further right than its neighbors once you're
+// checking pixel-for-pixel instead of eyeballing it.
+const PAD_LEFT = 0
 const PAD_RIGHT = 6
 // Fraction of maxPct reserved as scale headroom *below* 0% — keeps the
 // smallest allocation's curve from reading as pinned to the baseline.

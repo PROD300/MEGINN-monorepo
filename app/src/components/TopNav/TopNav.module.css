@@ -9,7 +9,10 @@
   align-items: center;
   height: 56px;
   width: 100%;
-  padding: 0 var(--space-5);
+  /* space-6 (was space-5) — matches the bump made to Card/StatCard/.tile's
+     own inner padding, so the logo sits the same distance off the pill's
+     border as page content sits off a card's. */
+  padding: 0 var(--space-6);
   border-radius: var(--radius-md);
   background: var(--bg-info-subtle, rgba(28, 126, 160, 0.08));
   border: 1px solid var(--accent-700);

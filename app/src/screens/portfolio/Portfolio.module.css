@@ -130,13 +130,18 @@
 }
 
 /* Shared "floating tile" card frame — same treatment as StatCard, built locally
-   so we don't have to touch the shared component files for this draft. */
+   so we don't have to touch the shared component files for this draft.
+   Horizontal padding bumped to space-6 (was space-5, same as vertical) —
+   at space-5 the chart/title content sat only ~21px off the tile's own
+   border, tighter than it read once the chart itself got taller; space-6
+   matches the bump made to TopNav's own inner padding so cards and the
+   navbar pill inset their content by the same amount. */
 .tile {
   background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-float);
-  padding: var(--space-5);
+  padding: var(--space-5) var(--space-6);
 }
 
 .secHeader {

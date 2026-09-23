@@ -9,9 +9,12 @@
 }
 
 /* Pattern lifted directly from Onboarding step 1's .infoBanner, 2026-08-11:
-   border-focus border + bg-{variant}-subtle fill, no shadow, no icon. */
+   border-focus border + bg-{variant}-subtle fill, no shadow, no icon.
+   Horizontal padding bumped to space-6 (was space-5) — missed in the
+   earlier pass that aligned TopNav/.tile/Card/StatCard's inner padding;
+   without this the banner text sat 4px left of everything else. */
 .banner {
-  padding: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-6);
   border: 1px solid var(--border-focus);
   border-radius: var(--radius-md);
   font-size: var(--size-sm);

@@ -2,7 +2,10 @@
   background: var(--surface-elevated);
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
-  padding: var(--space-5);
+  /* Horizontal padding bumped to space-6 (was space-5, matching vertical)
+     for the same reason as the local .tile pattern in Portfolio — content
+     sat too close to the card's own border at space-5. */
+  padding: var(--space-5) var(--space-6);
   box-shadow: var(--shadow-float);
   transition: border-color 0.15s, box-shadow 0.15s;
 }
