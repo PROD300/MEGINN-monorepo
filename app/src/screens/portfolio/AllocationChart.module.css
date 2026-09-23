@@ -55,9 +55,14 @@
   pointer-events: none;
 }
 
+/* Width is the tight fit for the widest label ("stETH"/"USDC" at 10px,
+   ~28px measured) plus the dot and its gap — not a round number. That
+   used to be a flat 78px, which left ~30px of dead space nothing used;
+   .plotCol (flex: 1) picks up exactly what this gives back, so shrinking
+   it is what stretches the chart itself to the tile's true right edge. */
 .labelCol {
   position: relative;
-  width: 78px;
+  width: 48px;
   flex-shrink: 0;
   padding-left: var(--space-2);
 }
@@ -83,9 +88,16 @@
   flex-shrink: 0;
 }
 
+/* flex: 1 + align-items: flex-end — right-aligns every label's text to
+   .endLabel's own right edge (labelCol's right edge, i.e. the tile's true
+   content edge), not just whichever label happens to be widest. Ragged
+   left edges here read fine; a ragged *right* edge against the tile's
+   border is what looked unfinished. */
 .endText {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  flex: 1;
   line-height: 1.15;
 }
 
